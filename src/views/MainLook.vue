@@ -22,7 +22,7 @@
 						v-card(flat )
 							v-toolbar(color="orange" dense)
 								v-btn-toggle(v-model='toggle_none' )
-									v-btn(v-if="ishide!==false" small color="primary" dark @click="loadData('sto')") 100
+									v-btn(v-if="ishide" small color="primary" dark @click="loadData('sto')") 100
 									v-btn(small color="primary" dark @click="loadData('year')") 365
 									v-btn(small color="primary" dark @click="loadData('intra')") Intra
 								v-btn(class="ma-2 white--text" :loading="loading" :disabled="loading" color="blue-grey"  @click="initData('data.json')") Crypto
@@ -439,7 +439,7 @@ export default {
 			
 				//console.log(vm.crypto.length)
 			});
-			this.ishide="true"
+			this.ishide=true
 		},
 		getChart(id) {
 			let flt=(val)=>this.$options.filters.toExponentialFree(val)
