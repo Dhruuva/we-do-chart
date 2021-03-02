@@ -1,10 +1,12 @@
 module.exports = {
-  publicPath: '/pub-wechart',
-  parallel: false,
-  "devServer": {
-    "port": 8282
-  },
-  	chainWebpack: config => {
+    publicPath: '/pub-wechart',
+    parallel: false,
+
+    "devServer": {
+      "port": 8282
+    },
+
+    chainWebpack: config => {
 		const sRule = config.module.rule('stylus');
 		//console.log("--------------->",sRule);
 		sRule.uses.clear();
@@ -17,6 +19,9 @@ module.exports = {
 					.options( {stylusOptions: { sourceMap: false,preferPathResolver: 'webpack' }})
 					.end()
 			.end()		
-	}
+	},
 
+    transpileDependencies: [
+      'vuetify'
+    ]
 }
