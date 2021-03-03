@@ -9,9 +9,9 @@
 					v-tab-item 
 						v-card(height="500")
 							v-card-text
-								p.display-1.text--primary.text-left weChart
+								p.display-1.text--primary.text-left weChart 
 									span.float-right
-										v-btn.mx-2(small color="primary" dark @click="loadData('sto')") Load Data  
+										v-btn.mx-2(  small color="primary" dark @click="loadData('sto')") Load Data  
 								p.body-1.text-left.pa-2 
 									|  This is a brief interactive guide help You in quick its implementation in Web pages with all your requirements.Let's go to load some sample data in the component and look it.
 									| Resize this panel size using thumb or resize browser window. The 
@@ -22,11 +22,11 @@
 						v-card(flat )
 							v-toolbar(color="orange" dense)
 								v-btn-toggle(v-model='toggle_none' )
-									v-btn(v-if="ishide" small color="primary" dark @click="loadData('sto')") 100
+									v-btn(small color="primary" dark @click="loadData('sto')") 100
 									v-btn(small color="primary" dark @click="loadData('year')") 365
 									v-btn(small color="primary" dark @click="loadData('intra')") Intra
 								v-btn(class="ma-2 white--text" :loading="loading" :disabled="loading" color="blue-grey"  @click="initData('data.json')") Crypto
-								v-select( color="snow" :items="symbols" label="code" item-value='id' item-text='code' dense  v-model="sid" )
+								v-select.mt-6(v-if="ishide" color="snow" :items="symbols" label="code" item-value='id' item-text='code' dense  v-model="sid" )
 									template(v-slot:item='{ item }')
 										v-card(fixed dense)
 											table.myTable(v-if="item.id==212")
@@ -69,7 +69,7 @@
 								v-slider( v-model="tkz" :tick-labels="dcml"   max="4" ticks="always" tick-size="4")
 					v-tab-item 
 						v-card.pa-2(height="700") 
-							h1.text-left  fsz
+							h1.text-left  fs
 							p.body-1.text-left.pa-2 Use this property to set appropriate font-size for axis labels and chart legend. 
 							v-slider( v-model="fsz" thumb-size="20" thumb-label="always" min="10" max="18" ticks="always" tick-size="4" step="1")
 							p.body-1.text-left.pa-2
@@ -139,8 +139,8 @@
 			.thumbUp(@mousedown='startUpDrug()' @mouseenter='upDrug=!upDrug' @mouseleave='upDrug=!upDrug')
 			v-row
 				v-col.text-h2( cols="12" md="12" )
-					div.scrollTabel(:style="styleScroll")
-						v-data-table.pa-2(dense :headers='headers', :items='dataTable', :items-per-page='10')
+					div.scrollTabel(:style="styleScrolLeft")
+						v-data-table.myTable.pa-2(dense :headers='headers', :items='dataTable', :items-per-page='10')
 		.split.down.right.border( :style='downRightStyle')
 			v-card(flat)
 				v-toolbar(color="orange" dense)
@@ -154,7 +154,7 @@
 					v-col( cols="12" md="6" )
 						h1.text-left Style
 							p.body-1.text-left.pa-2 Default styles maybe overridden with !important. You can also create custom style follow example in right panel or take look in theme.styl file. Then your style be ready just set its name in theme attribute of
-								span.d-inline.green--text.font-weight-bold   weChart
+								span.d-inline.green--text.font-weight-bold   weChart 
 								|  component.
 						v-textarea#aria(:style='visible' no-resize rows='1' :value='txt' ref='aria')
 					v-col( cols="12" md="6" dark)
@@ -221,9 +221,10 @@ export default {
 		scl:0.49,
 		fmts:['yyyy-mm-dd','m/d/yy','mmm-dd','dd','HH:MM','HH:MM:ss'],
 		lmt:10,
-		themes:["default","monaco","usa"],
+		themes:["default","monaco","berry"],
 		thm:"default",
 		scrollHeight:"200px",
+		scrollHeight2:"200px",
 		fsz:14,
 		visible:"visibility: hidden;",
 		txt:" Ha Ha copy me",
@@ -275,6 +276,9 @@ export default {
 		styleScroll () {
 		 return 'height: ' + this.scrollHeight + ';' 
 		},
+		styleScrolLeft () {
+		 return 'height: ' + this.scrollHeight2 + ';' 
+		},
 		dataTable () {
 		 return  (this.data.length>0)? this.data[0].data:[]
 		}
@@ -290,6 +294,7 @@ export default {
 		},
 		sid(id){
 			console.log ("id " ,id);
+			this.toggle_none=null
 			this.getChart(id);
 		},
 		tkz(val){
@@ -408,6 +413,7 @@ export default {
 			while( this.data.length>0) this.data.pop()
 				//this.data.push(arr)
 				this.data=[...arr]
+				this.sid=null
 			// for (var i = 0; i <= arr.length-1; i++) {
 			// 	this.data.push(arr[i]);
 		  //}
@@ -431,6 +437,7 @@ export default {
 
 				if (name=='data.json')  {
 					vm.crypto = JSON.parse(response)
+					vm.ishide=true
 				}
 				else{
 					vm.symbols = JSON.parse(response)	
@@ -439,7 +446,8 @@ export default {
 			
 				//console.log(vm.crypto.length)
 			});
-			this.ishide=true
+			console.log("!!!!!!!!!!!>>>>>>>>>>>>>>>  initData" ,this.ishide)
+		//	
 		},
 		getChart(id) {
 			let flt=(val)=>this.$options.filters.toExponentialFree(val)
@@ -467,10 +475,14 @@ export default {
 			this.timeFotmat='HH:MM:ss'
 		},
 		calcHeight(){
-			let element = document.getElementsByClassName("split down left border")[0];
-			let computedStyle = window.getComputedStyle(element, null);
-			this.scrollHeight =  (parseInt(computedStyle['height'], 10)-80)+'px';
+			let element = document.getElementsByClassName("split down left border")[0]
+			let computedStyle = window.getComputedStyle(element, null)
+			let h = parseInt(computedStyle['height'], 10)
+			this.scrollHeight2 =  (h-30)+'px'
+			this.scrollHeight =  (h-80)+'px'
+
 		},
+
 		copyText(){
 			this.visible="visibility: visible;"
 			let textToCopy = this.$refs.StyleBox.txt
@@ -516,14 +528,13 @@ export default {
 		white-space nowrap
 		margin-top -5px
 		min-height 70px
-		
 		background-color #F0F0F0
 	.scrollTabel
-		overflow-y scroll 
+		overflow-y auto 
 		white-space nowrap
 		margin-top -5px
-		min-height 70px
-		background-color azure	
+		min-height 100px
+		background-color snow	
 	.split
 		width 50%
 		height  100%

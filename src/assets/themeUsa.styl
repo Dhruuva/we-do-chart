@@ -1,10 +1,11 @@
-[theme="usa"]
+[theme="berry"]
 	// box-shadow -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf
 	// background-color red
 	// background-image linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%)
 	// background-size 3em 3em
 	// background-origin content-box
-	
+	-webkit-font-smoothing antialiased
+	-moz-osx-font-smoothing grayscale
 	& .leftThumb
 		cursor ew-resize
 		fill  DarkRed
@@ -20,29 +21,25 @@
 		&:hover
 			cursor move
 	& .axislabelx	
-		stroke-width 2.1
 		fill MediumVioletRed
 		text-anchor middle
-		font-family  Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-		font-style italic
+		font-family  Lucida Sans Typewriter, Lucida Console, monospace;
 	& .axislabely	
-		stroke-width 2.1
 		fill MediumVioletRed 
-		alignment-baseline middle
-		font-family  Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-		font-style italic
+		alignment-baseline auto
+		font-family   Lucida Sans Typewriter, Lucida Console, monospace;
 	& .chartSheet
 		stroke MediumVioletRed
 		stroke-width 3.5
 		fill snow	
 	& .titles
 		stroke-width 2.1
-		font-family system-ui
-		fill crimson
+		font-family Lucida Sans Typewriter, Lucida Console, monospace;
+		fill DarkOliveGreen
 		text-anchor middle
 	& .legend
 		stroke-width 2.1
-		font-family system-ui
+		font-family Lucida Sans Typewriter, Lucida Console, monospace;
 		fill crimson
 	& .titlesDot
 		stroke-width 2.1
@@ -56,10 +53,11 @@
 	& .cross	
 		stroke DarkGreen 
 		stroke-width 0.5
+		stroke-dasharray 5
 	& .grids
 		stroke-width 0.3
-		stroke MediumVioletRed
-		stroke-dasharray 2
+		stroke DarkOliveGreen
+		stroke-dasharray 0
 	& .ticks
 		stroke-width 1.48
 		stroke DarkGreen
@@ -85,29 +83,25 @@
 	& .axislabelx	
 		stroke-width 0.6
 		fill yellow
-		stroke yellow
 		text-anchor middle
-		font-family  Georgia, serif
-		font-style bold
+		font-family  monaco, Consolas, Lucida Console, monospace;
 	& .axislabely	
 		stroke-width 0.8
 		fill yellow 
-		stroke yellow
 		alignment-baseline middle
-		font-family  Georgia, serif
-		font-style bold
+		font-family  monaco, Consolas, Lucida Console, monospace;
 	& .chartSheet
 		stroke silver
 		fill black	
 	& .titles
 		stroke-width 2.1
-		font-family system-ui
-		fill gold
+		font-family  monaco, Consolas, Lucida Console, monospace;
+		fill yellow
 		text-anchor middle
 	& .legend
 		stroke-width 2.1
-		font-family system-ui
-		fill gold	
+		font-family  monaco, Consolas, Lucida Console, monospace;
+		fill yellow	
 	& .titlesDot
 		stroke-width 2.1
 		fill green	

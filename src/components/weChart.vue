@@ -10,7 +10,7 @@
 		rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height")
 		circle.titlesDot( :cx="axis.x.x1" :cy="axis.y.y2-1-fs/3" :r="fs/3" )
 		text.legend(id="legend" ref="titles" :x="axis.x.x1+1+fs/3" :y="axis.y.y2-1" :font-size="fs" ) {{dPoint.txt}}
-		text.titles(id="title"  :x="axis.x.x1+(axis.x.x2-axis.x.x1)/2+1+fs/3" :y="axis.y.y2-1" :font-size="fs" ) {{title}}	
+		text.titles(id="title"  :x="axis.x.x1+(axis.x.x2-axis.x.x1)/2+1+fs/3" :y="axis.y.y2-1" :font-size="fs*1.2" ) {{title}}	
 		line.axisY(:x1="axis.y.x1" :x2="axis.y.x2" :y1="axis.y.y1" :y2="axis.y.y2" )
 		line.axisX(:x1="axis.x.x1" :x2="axis.x.x2" :y1="axis.x.y1" :y2="axis.x.y2" )
 		g(v-if="!cross.hide")
@@ -19,7 +19,7 @@
 		g.ticksY(v-for="r in ticksY" :key="r.y")
 			line.grids(v-if="showGrid" :x1="axis.x.x1" :x2="axis.x.x2" :y1="r.y" :y2="r.y")
 			line.ticks( :x1="axis.y.x1" :x2="axis.y.x1+tsz.size" :y1="r.y" :y2="r.y" )
-			text.axislabely( :x="axis.y.x1+tsz.off" :y="r.y" :font-size='fs') {{r.price}}
+			text.axislabely( :x="axis.y.x1+tsz.off" :y="r.y+fs/3" :font-size='fs') {{r.price}}
 		g.ticksX(v-for="n in ticksX" :key="n.id")
 			line.grids(v-if="showGrid" :x1="n.x" :x2="n.x" :y1="axis.y.y1" :y2="axis.y.y2")
 			line.ticks( :x1="n.x" :x2="n.x" :y1="axis.x.y1" :y2="axis.x.y1+tsz.size")
@@ -566,6 +566,8 @@ export default {
 <style scoped lang='stylus'>
 	$colorPlot = #0074d9
 	$colorAxis = #0074d9
+	-webkit-font-smoothing antialiased
+	-moz-osx-font-smoothing grayscale
 	.leftThumb
 		cursor ew-resize
 		fill  blue
@@ -581,35 +583,31 @@ export default {
 		&:hover
 			cursor move
 	.axislabelx	
-		font-family  "Gill Sans", sans-serif
-		stroke-width 2.1
+		font-family  Arial, Helvetica Neue, Helvetica
 		fill red
 		text-anchor middle
 		font-weight 600
 	.axislabely	
-		font-family  "Gill Sans", sans-serif		
-		stroke-width 1.1
+		font-family  Arial, Helvetica Neue, Helvetica
 		fill red 
-		alignment-baseline middle
+		alignment-baseline auto
 		font-weight 600
 	.chartSheet
 		stroke blue
 		stroke-width 2.5
 		fill snow
 	.legend
-		stroke-width 1.1
-		font-family  "Gill Sans", sans-serif
+		font-family  Arial, Helvetica Neue, Helvetica
 		fill $colorPlot
-		font-weight 700
+		font-weight 600
 	.titles
-		stroke-width 1.1
-		font-family  "Gill Sans", sans-serif
+		font-family  Arial, Helvetica Neue, Helvetica
 		fill $colorPlot
-		font-weight 700
+		font-weight 800
 		text-anchor middle	
 	.titlesDot
 		stroke-width 1.1
-		font-family  "Gill Sans", sans-serif
+		font-family  Arial, Helvetica Neue, Helvetica
 		fill $colorPlot
 		font-weight 600	
 	.axisY
