@@ -90,7 +90,7 @@ function DoAxes() {
 					rowx.d = new Date(tms).getDate()
 					rowx.mm =  dateFormat(tms,'mmm')
 					rowx.yy =  dateFormat( tms,'yyyy')
-				}
+				} else rowx.tm = tms
 				
 				nxLbl+=wbox
 				ticksX.push(rowx);
@@ -101,7 +101,7 @@ function DoAxes() {
 					rowx.d = new Date(tms).getDate()
 					rowx.mm =  dateFormat(tms,'mmm')
 					rowx.yy =  dateFormat( tms,'yyyy')
-				}
+				} else rowx.tm = tms
 				ticksX.push(rowx);
 				
 				nxLbl+=wbox

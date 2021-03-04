@@ -448,6 +448,7 @@ export default {
 			if (mxl==0) mxl = (this.points.length>0) ? Math.max.apply(null,this.points[0].data.map(a=> (''+a.tm).length  )):6;
 			if (this.timeFotmat && mxl<3) mxl=3;
 			let boxWidth = mxl*this.fs
+			console.log( "mxl " , mxl, boxWidth, " -boxWidth  calcOffsetX()")
 			return  boxWidth;
 		},
 		calcMiniBottomHight(){

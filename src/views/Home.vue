@@ -7,7 +7,7 @@
 			v-banner(color="pink lighten-6" transition="slide-x-transition")
 				h3.lime--text weCharts - simple and customizable Vue component to plot any line chart.
 			div.chartbox
-				WeChart(:points="data" timeFotmat='dd' tky='7' off='5')
+				WeChart(:points="data"  tky='7' off='5')
 			v-banner(color="pink lighten-6")
 				h3.lime--text weCharts - simple and customizable Vue component to plot a line chart.
 			v-list( dense	transition="fab-transition")
@@ -59,7 +59,7 @@ export default {
 		async loadData(){
 			let arr = bank.getData('equity');
 			while( this.data.length>0) this.data.pop()
-				this.data=[...arr]
+			this.data=[...arr]
 						
 		},
 		

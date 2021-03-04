@@ -402,8 +402,8 @@ export default {
 			}
 			while( this.data.length>0) this.data.pop()
 				
-				this.data=[...arr]
-				this.sid=null
+			this.data=[...arr]
+			this.sid=null
 			
 		
 		},
@@ -570,7 +570,7 @@ export default {
 .myTable
 	table
 		border 1px solid #1C6EA4
-		background-color #EEEEEE
+		background-color snow
 		width 100%
 		text-align left
 		/*border-collapse collapse
