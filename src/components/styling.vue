@@ -89,9 +89,6 @@
 <script>
 /* eslint-disable */
 import { component as VueCodeHighlight } from 'vue-code-highlight';
-import "vue-code-highlight/themes/prism.css";
-// import '/node_modules/vue-code-highlight/themes/prism.css'   
-//@import './node_modules/highlight.js/styles/tomorrow.css' 
 export default {
     name: 'styling',
     components:{
@@ -110,6 +107,3 @@ export default {
 }
 </script>
 
-<style  scoped>
- @import '/node_modules/vue-code-highlight/themes/prism.css' 
-</style>

@@ -122,94 +122,69 @@ export default {
 		window.addEventListener('mouseup', this.stopDrag);
 		window.addEventListener("resize", this.reSize);
 		let el=document.getElementById('sheet')
-		console.log( el,"offsetParent", el.offsetParent)
-		
 		this.svg = this.$refs.sheet
 		this.ds.width=this.$refs.sheet.clientWidth
 		this.ds.height= this.$refs.sheet.clientHeight
-      this.cross.txt=this.ds.width+'X'+this.ds.height  //dev
+      this.cross.txt=' ' //dev
 
 		this.leftDrug = true
 		this.draggingLeft =true
-		
-		//let doAxis = new DoAxis();
+
 		this.initObserver()
 		this.xmapData()
 		this.getDisplayData(this.axis.x.x1,this.axis.x.x2)
 		this.initSlider()
 
-
-		//console.log( " display >>>",this.getDisplayData(400/1.1, 760.80*1.01) )
-	console.log("chartSheet>>>>>>>>>>>>  ",this.$refs.chartSheet.style.stroke);
-		//this.getStyle(document.getElementsByClassName("axislabelx")[0])
-	//	this.getStyle(this.$refs.chartSheet)
 		this.leftDrug = false
 		this.draggingLeft =false
-
-		this.$nextTick(() => {
-	    console.log("chartSheet---------  ",this.$refs.chartSheet.style.stroke);
-	    
-	  })
-
 	
 
 	},
 	watch: {
-		showGrid(val){
-			console.log( " weChart watch showGrid ",val )
-
-		},
 		points(val){
 			
 			if (val.length>0){
 				this.pointsID.x1 = 0
 				this.pointsID.x2 = val[0].data.length
 				this.title = (val[0].name)? val[0].name:''
-				console.log( "@@@@@@@@@@ weChart watch points ",val ,val.length)
 				this.loadChart()
 
 			}
 		},
 		wh(val){
-			console.log( "@@@ weChart watch wh ",val )
+			
 			this.loadChart()
 		},
 		decimals (val){
-			console.log( "watch decimals ",val )
+			
 			this.loadChart()
-			//this.initSlider()
+			
 		},
 		off (val){
-			console.log( "watch off ",val )
+			
 			this.loadChart()
-			//this.initSlider()
+			
 		},
 		tky (val){
-			console.log( "watch tky ",val )
 			this.loadChart()
-			//this.initSlider()
+			
 		},
 		
 		scl (val){
-			console.log( "watch scl ",val )
 			this.loadChart()
-			//this.initSlider()
+		
 		},
 		timeFotmat (val){
-			console.log( "watch timeFotmat ",val )
 			this.loadChart()
-			//this.initSlider()
+			
 		},
 		fs (val){
-			console.log( this.fs,"watch fs ",val )
 			this.loadChart()
-			//this.initSlider()
 		},
 		tsz: {
 	        deep: true,
 	        handler: function(changed)  {
-	          console.log(changed.off, "watch tsz.size__________________________________ ",changed.size )
-	          this.loadChart()
+	            this.loadChart()
 	        },
 	    }
 
@@ -219,13 +194,13 @@ export default {
 			let wd = this.scl*31,lmt =this.thumbs.step*this.limitSize
 			if (this.draggingCenter && !this.rightDrug && !this.leftDrug && this.moveDrug ){
 				let xp = this.pos.x-this.thumbs.left.mp, rx = this.thumbs.right.mp+this.pos.x
-				if(  rx <= this.axis.x.x2) this.getDisplayData(xp, this.thumbs.right.x) //dont't use to avoid double update
+				if(  rx <= this.axis.x.x2) this.getDisplayData(xp, this.thumbs.right.x) 
 				if( xp >= this.axis.x.x1-wd &&  rx <= this.axis.x.x2){
 					this.thumbs.left.x = xp
 					this.wline.left.x2 = ( xp < this.axis.x.x1)? this.axis.x.x1:xp
 					this.wline.middle.x = this.thumbs.left.x + wd
 				} else if ( xp< this.axis.x.x1-wd &&  rx <= this.axis.x.x2){
-					//this.getDisplayData(xp, this.thumbs.right.x)
+					
 					xp=this.axis.x.x1-wd
 					this.thumbs.left.x = xp
 					this.wline.left.x2 = ( xp < this.axis.x.x1)? this.axis.x.x1:xp
@@ -233,11 +208,10 @@ export default {
 				}
 			} else if ((this.leftDrug && this.draggingLeft) || this.wline.left.active){
 				let offset = (this.thumbs.left.off)? this.thumbs.left.off:this.scl*31
-				//console.log("thumbY x  ",this.pos.x ," this.thumbs.left.x  " ,this.thumbs.left.x, " off ",offset);
+				
 				if ( (this.pos.x + wd) > this.axis.x.x1  && (this.thumbs.right.x -this.pos.x - offset)>lmt  ) {
 					this.thumbs.left.x = this.pos.x - offset
-					//this.thumbs.left.y = this.ds.height -this.scl*40
-					 this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
+					this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
 					this.wline.middle.x = this.thumbs.left.x + wd
 					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
 					this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x)
@@ -248,14 +222,13 @@ export default {
 		},
 		thumbYY() {
 			let wd = this.scl*31,lmt =this.thumbs.step*this.limitSize
-			//let pwbox = this.priceDigits*this.fs 
 			let offset = (this.thumbs.right.off)? this.thumbs.right.off:0
 
 			if (this.draggingCenter && !this.rightDrug && !this.leftDrug && this.moveDrug ){
 
 				let xp = this.thumbs.right.mp+this.pos.x ,lx = this.pos.x-this.thumbs.left.mp
 				if (lx >= this.axis.x.x1-wd) this.getDisplayData(this.thumbs.left.x, xp)
-				if (xp <= this.axis.x.x2 && lx >= this.axis.x.x1-wd) { //&& lx >= this.axis.x.x1-wd
+				if (xp <= this.axis.x.x2 && lx >= this.axis.x.x1-wd) { 
 					this.thumbs.right.x = xp
 					this.wline.right.x1 = (xp+wd > this.axis.x.x2)? this.axis.x.x2: xp+wd
 					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x
@@ -271,35 +244,28 @@ export default {
 					xp=this.wline.middle.w+this.thumbs.left.x
 					this.thumbs.right.x = xp
 					this.wline.right.x1 = (xp+wd > this.axis.x.x2)? this.axis.x.x2: xp+wd
-					//this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x
 					this.move = "dont't move";
 				}
 
 			} else if (this.rightDrug && this.draggingRight || this.wline.right.active){
 				if( this.pos.x  < this.axis.x.x2+wd && (this.pos.x - offset -this.thumbs.left.x)>lmt ) {
 					this.thumbs.right.x = this.pos.x - offset
-				//	this.thumbs.right.y = this.ds.height -this.scl*40
+				
 					this.wline.right.x1 = (this.pos.x > this.axis.x.x2 - wd ) ?  this.wline.right.x2:this.thumbs.right.x+wd
 					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x
 					this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x)
 
 				}
-				//console.log(" getDisplayData= ",this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x) )
+				
 			}
 			this.wline.right.active = false 
 			return  `${this.thumbs.right.x} ,  ${this.thumbs.right.y}`;
-		},
-		bv() {
-			//console.log("this.$refs.field  ", this.$refs.field)
-
-			return this.$refs.chartSheet;
 		},
 		viewBoxSet() {
 			return  `0 0 ${this.ds.width } ${this.ds.height }`;
 		},
 				
 		pointsAsPolyline: function() {
-			//return this.points.map((p, i) => `${i * 70} ${p.price}`).join(' ');
 			return this.pointYX.map((p, i) => `${p.x} ${p.y}`).join(' ');
 		},
 		rects() {
@@ -314,21 +280,13 @@ export default {
 			let off = this.ds.height*this.off/100
 			let wbox = this.calcOffsetY() 
 			let lfBox= this.calcOffsetX()
-			//if (wbox < this.scl*31)  wbox = this.scl*31;
 			let hbox = this.calcMiniBottomHight()
 			let tbox = this.calcMiniTopHight()
 			let x = (off) < lfBox/3 ? lfBox/3:off;
 			let y = (off) < hbox ? hbox:off;
             let y2 = (tbox > off ) ? tbox:off;
-           // let wbox = this.thumbs.right.priceDigits*this.fs -- this bad work
             let x2 = (off) < wbox/1.5 ? wbox/1.5:off;
-			//let west =(wbox/2 > )
-				//console.log('axis() this. axis.x2=',  "lfBox - ", lfBox, " wbox ", wbox, ' x2',x2, ' axis.x2=',this.ds.width-x2);
-				//this.pos.x =  this.axis.x.x1 
-			// console.log(this.thumbs.right.priceDigits , " pwbox ", pwbox)
-			// this.thumbs.x = this.pos.x - this.scl*25
-			// this.thumbs.y = this.ds.height -this.scl*40
-			console.log('axis()',x2)
+		
 			return {
 				y: {y1: this.ds.height-y, y2:y2, x1: this.ds.width-x2, x2: this.ds.width-x2},
 				x: {y1: this.ds.height-y, y2:this.ds.height-y, x1:x, x2: this.ds.width-x2},
@@ -337,7 +295,6 @@ export default {
 		grid(){
 			let off = this.ds.height*this.off/100;
 			let step = this.ds.height*this.tky/100;
-			//console.log(" step " , step);
 			let i = off, y=[];
 			while (i <= this.ds.height-off){
 				y.push(i)
@@ -379,7 +336,7 @@ export default {
 			this.pos.x =  this.axis.x.x1 
 			let hf =  (this.ds.height-(this.axis.y.y1 + this.fs*1.18))/2 + (this.scl*40)/2
 			let y = this.ds.height-hf
-		   //console.log( ' init this.axis.x.x2 ',this.axis.x.x2 )
+		 
 			this.thumbs.left.x = this.axis.x.x1 - this.scl*31
 			this.thumbs.left.y = y
 			this.wline.left.x1 = this.axis.x.x1
@@ -401,19 +358,15 @@ export default {
 			this.wline.right.y1 = y + this.scl*40/2
 			this.wline.right.y2 = y + this.scl*40/2
 			this.wline.right.sSize = this.scl*40*0.6
-				//console.log( this.ds.height -this.scl*40, "YYYYYYYYYYYYYYYY ",this.ds.height-hf,' this.axis.x.x2 ',this.axis.x.x2 )
+				
 			return 'ok'
 		},
 		mousemove(e) {
-			 //console.log(e, " -eeee ", this.leftDrug);
-				e.preventDefault();
-
-				this.pos = this.getMousePosition(e);
-				//if ( !this.leftDrug) this.pos = this.getMousePosition(e);
-				//console.log( this.pos, " -x-y", this.leftDrug);
+			e.preventDefault();
+			this.pos = this.getMousePosition(e);
 		},
 		xmapData(){
-			//let arr = bank.getData('mins')
+			
 			let sz = (this.points.length>0)? this.points[0].data.length:0
 			let step = (this.axis.x.x2-this.axis.x.x1)/(sz-1)
 			this.thumbs.step = step  // this need for slider to display last point easy
@@ -421,7 +374,6 @@ export default {
 			this.limitSize = (sz/100)*this.limit
 			if (sz<=15 && sz>0) this.limitSize = sz;
 
-			console.log("###----------->fillData done",this.limitSize)
 			if (this.points.length>0){
 				this.points[0].data.forEach((a,j)=> {
 					 a.x = (j == 0)? i : i = step+i ;
@@ -429,22 +381,13 @@ export default {
 					 aa=a.x
 				})
 			}	
-			//console.log("xmap points=", this.points.length, "x1=" ,this.axis.x.x1 ," x2=" ,this.axis.x.x2,"  >>", aa );
-				
 		},
 		getDisplayData(first,end) {
 			let doAxis = new DoAxis()
-			//let mvMin= doAxis.minMove(arr)
 			let n=this.thumbs.step*0.01
-			let arr =(this.points.length>0)? this.points[0].data.filter(a=>  a.x >= first &&  a.x <= end+n ) :[]//this.thumbs.step*0.5)
-			//console.log("getDisplayData end ",end, arr.slice(-1)[0], 'step' ,this.thumbs.step);
-			
+			let arr =(this.points.length>0)? this.points[0].data.filter(a=>  a.x >= first &&  a.x <= end+n ) :[]
 			this.pointsID.x1= (arr.length>0)? arr[0].id:this.pointsID.x1
 			this.pointsID.x2= (arr.length>0)? arr.slice(-1)[0].id:this.pointsID.x2
-			//console.log("this.pointsID",this.pointsID)
-			//let movMin = doAxis.minMove(arr)
-			//this.thumbs.right.priceDigits = movMin.width
-			//console.log(movMin, " this.priceDigits ",this.thumbs.right.priceDigits, " update",this.axis);
 			if (this.pSize != arr.length){
 				this.pSize = arr.length
 				doAxis.formulaY(arr, this.axis ,this.tky,this.calcOffsetX(),this.decimals,this.timeFotmat) // this.calcOffsetX()=58
@@ -481,15 +424,8 @@ export default {
 	            }
 	         }  
             prevDtm=a.dtm
-            //console.log(" prevDate ",prevDtm, a)
+            
          })
-		},
-		reSize(e) { // dev
-			 //console.log(" we chart reSize ",e);
-			const elem = document.getElementsByClassName(this.parentClass)[0], config = { attributes: true };
-			this.ds.width=elem.clientWidth
-			this.ds.height=elem.clientHeight
-			this.loadChart()
 		},
 		calcOffsetY(){
 			let f = (this.decimals.length<2)? 2 : this.decimals.length
@@ -498,8 +434,6 @@ export default {
 			let mxl = maxInteger + f - 1 ;
 			if ( this.points.length == 0) mxl=6
 			let boxWidth = mxl*this.fs+this.tsz.off
-
-			console.log(maxInteger,"=maxInteger","f=",f, "mxl " , mxl)
 			return  boxWidth;
 		},
 		calcOffsetX(){
@@ -507,7 +441,6 @@ export default {
 			if (mxl==0) mxl = (this.points.length>0) ? Math.max.apply(null,this.points[0].data.map(a=> (''+a.tm).length  )):6;
 			if (this.timeFotmat && mxl<3) mxl=3;
 			let boxWidth = mxl*this.fs
-			//console.log( "mxl " , mxl, boxWidth, " -boxWidth  calcOffsetX()")
 			return  boxWidth;
 		},
 		calcMiniBottomHight(){
@@ -519,28 +452,9 @@ export default {
 			let miniHeight = this.fs*1.18 +this.tsz.off
 			return  miniHeight;
 		},
-		clearTest() {
-			// this.pointYX.splice(...[]);
-			// this.pointYX.splice(0,this.pointYX.length);
-			//console.log('clearTest', this.pointYX.length)
-			let wh = this.$refs.titles.getBoundingClientRect()
-			let el = document.getElementById("legend");
-			console.log('title box width',wh.width," height ", wh.height)
-			let rwh = this.ds.width/this.ds.height;
-			console.log(" Baseval box ",el.getBBox()," fs " ,this.fs, " cHeight ",this.fs*1.18 )
-			
-		},
-		test() {
-			while( this.points.length>0) this.points.pop()
-            console.log( "test");
-		},
 		loadChart() {
-			// this.fillData(arr)
-			this.xmapData()
-			//this.pSize=1;
-			console.log( this.showGrid,  " weChart  data " )
+			this.xmapData()			
 			let arr =(this.points.length>0)? this.points[0].data.filter(a=>  a.id >= this.pointsID.x1 &&  a.id <= this.pointsID.x2 ):[] 
-			//console.log( "loadChart() arr", arr.length, "x1=")
 			let x1 = (arr.length>0)? arr[0].x:this.axis.x.x1
 			let x2 = (arr.length>0)? arr.slice(-1)[0].x:this.axis.x.x2
 			let p = arr.slice(-1)[0]

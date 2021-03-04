@@ -19,9 +19,7 @@
 <script>
 /* eslint-disable */
 import { component as VueCodeHighlight } from 'vue-code-highlight';
-import "vue-code-highlight/themes/prism.css";
-// import '/node_modules/vue-code-highlight/themes/prism.css' 	
-//@import './node_modules/highlight.js/styles/tomorrow.css'	
+
 export default {
 	name: 'codeSample',
 	components:{
@@ -33,7 +31,7 @@ export default {
 	},
 	data () {
 		return {
-			txt: "Copy mme here   "
+			txt: ""
 		}
 	}
 }

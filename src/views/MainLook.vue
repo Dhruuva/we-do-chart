@@ -238,9 +238,8 @@ export default {
 		window.addEventListener('resize', this.reSize);	
 		this.init()
 		this.initData('symbols.json'); 
-		let element = document.getElementsByClassName("split upper left border")[0];
-		console.log( " element ", element)
-		this.getStyle(element)
+		// let element = document.getElementsByClassName("split upper left border")[0];
+		// this.getStyle(element)
 		this.calcHeight()
 	},
 
@@ -266,7 +265,6 @@ export default {
 		},
 		tkzz(){
 			let rtn=this.dcml[this.tkz]
-			console.log(this.tkz,'~~~~~~~~tkzz()',rtn);
 			return rtn
 		},
 		theme(){
@@ -289,16 +287,14 @@ export default {
 		
 		leftY(y){
 			this.calcHeight()
-			//console.log (Math.trunk(computedStyle['height']),"@@@@@@@@@@@@@leftY " ,y)
 
 		},
 		sid(id){
-			console.log ("id " ,id);
 			this.toggle_none=null
 			this.getChart(id);
 		},
 		tkz(val){
-			console.log ("tkz " ,val);
+		
 		}
 
 
@@ -316,7 +312,7 @@ export default {
 			//console.log("########################",prp)
 			}
 			prp =  " prp " + " ==== '" + elementStyle['font-size'] + "' >>> '" + computedStyle['font-size']
-			console.log(prp)
+			//console.log(prp)
 		},
 		initLayout(){
 			let top=(this.$refs.root) ?this.$refs.root.getBoundingClientRect().top: document.getElementById('mainLook_root').getBoundingClientRect().top
@@ -324,14 +320,14 @@ export default {
 			this.wh.height = window.innerHeight
 			this.top = top
 			this.topp =top*100/window.innerHeight
-			//console.log(this.$refs.root.getBoundingClientRect(),'  top ',top)	
+			
 			let upDiv = document.getElementsByClassName('split upper left border')
 			
 			this.divHeight.upDiv=upDiv[0].getBoundingClientRect();
-			//console.log( " ---###----this.divHeight.upDiv ", upDiv[0].getClientRects(),upDiv[0].offsetLeft)
+		
 			let dwDiv = document.getElementsByClassName('split down left border')
 			this.divHeight.dwDiv=dwDiv[0].getBoundingClientRect();
-		//	console.log("---###----dwDiv[0] inner ",dwDiv[0].clientHeight,' offsetTop ',dwDiv[0].offsetTop)
+		
 			this.ds.width=dwDiv[0].clientWidth
 			this.ds.height= dwDiv[0].clientHeight
 			this.divSvg=dwDiv
@@ -354,7 +350,7 @@ export default {
 			  this.init();
 			},20);
 			
-			console.log("resize")
+		
 		},
 		getLocation(e) {
 			e.preventDefault();
@@ -371,10 +367,7 @@ export default {
 			return [xx, yy];
 		},
 		stopDrag() {
-			if (this.moveDrug){
-			console.log( "stopDrag",this.moveDrug, this.xy[0])
 			
-			}
 		  this.moveDrug = false;
 		  this.upDrugMove = false;
 		},
@@ -382,9 +375,8 @@ export default {
 			let elem = document.getElementsByClassName('split upper left border')
 			this.offx =elem[0].offsetWidth-this.xy[0]+7
 			this.leftX = (this.xy[0]+this.offx)*100/(this.wh.width)
-		//console.log( "startLeftDrug--->",this.leftX );
+		
 			if (this.rightDrug){
-				//console.log( "startLeftDrug",this.moveDrug, this.xy[0])
 				this.moveDrug = true;
 			}
 		},
@@ -392,14 +384,12 @@ export default {
 			let elem = document.getElementsByClassName('split down left border')
 			this.offy = elem[0].offsetTop-this.xy[1]
 			this.leftY =-1*this.topp+ (this.xy[1]+this.offy)*100/(this.wh.height)
-			//console.log( this.xy[1], "startUpDrug--->",this.leftY ,this.wh.height);
+			
 			if (this.upDrug){
-				//console.log( "upDrugMove",this.upDrugMove, this.xy[1])
 				this.upDrugMove = true;
 			}
 		},
 		async loadData(val){
-			//console.log("bank  ",bank.getData(val));
 			let arr = bank.getData(val);
 			if (val=='sto') {
 				this.timeFotmat='dd'
@@ -411,12 +401,10 @@ export default {
 				this.timeFotmat='HH:MM'
 			}
 			while( this.data.length>0) this.data.pop()
-				//this.data.push(arr)
+				
 				this.data=[...arr]
 				this.sid=null
-			// for (var i = 0; i <= arr.length-1; i++) {
-			// 	this.data.push(arr[i]);
-		  //}
+			
 		
 		},
 		loadJSON(name,callback) {   
@@ -444,9 +432,9 @@ export default {
 				}
 				vm.loading=false
 			
-				//console.log(vm.crypto.length)
+				
 			});
-			console.log("!!!!!!!!!!!>>>>>>>>>>>>>>>  initData" ,this.ishide)
+			
 		//	
 		},
 		getChart(id) {
@@ -462,16 +450,11 @@ export default {
 				this.dcml.push(mv)
 				nn=4
 			}
-			this.tkz =nn
-			//this.tkz ='0'
-			//console.log('filter',flt("affgfg"))
-			console.log(rows.length,'%%%%%%%%%%%%',this.dcml.indexOf(mv))
+			this.tkz =nn			
 			while( this.data.length>0) this.data.pop()
-			console.log(this.data.length,'~~~~~~~~~~~~~~~~~~~~~~~~~')	
+		
 			this.data=[...toPoints]	
-			// for (var i = 0; i <= rows.length-1; i++) {
-			// 	this.data.push(rows[i]);
-			// }
+		
 			this.timeFotmat='HH:MM:ss'
 		},
 		calcHeight(){

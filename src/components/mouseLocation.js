@@ -1,15 +1,14 @@
 export default {
   methods: {
     getLocation(e) {
-      /* マウスカーソルの位置またはタッチ位置を返す */
+     
       let xx = 0;
       let yy = 0;
       if (e.touches) {
-        /* タッチの場合 */
         xx = e.touches[0].pageX;
         yy = e.touches[0].pageY;
       } else {
-        /* マウスの場合 */
+        
         xx = e.pageX;
         yy = e.pageY;
       }
@@ -43,8 +42,7 @@ export default {
           pt.y = evt.clientY;
           let cursorPt = pt.matrixTransform(this.svg.getScreenCTM().inverse())
           this.thumbs.right.off =   Math.floor(cursorPt.x) - this.thumbs.right.x 
-         // console.log("startDrag this.thumbs.right.off ", Math.floor(cursorPt.x) - this.thumbs.right.x);
-         //this.offset.x -=  this.x
+       
           
       } 
       if (this.draggingCenter ) {
@@ -57,9 +55,7 @@ export default {
         let cursorPt = pt.matrixTransform(this.svg.getScreenCTM().inverse())
          this.thumbs.right.mp = this.thumbs.right.x- Math.floor(cursorPt.x)
          this.thumbs.left.mp =  Math.floor(cursorPt.x) -this.thumbs.left.x
-        // this.rightDrug = true;
-        // this.leftDrug = true;
-        //console.log("  this.draggingCenter ", this.draggingCenter, "this.rightDrug ",this.rightDrug)
+        
       } 
 
     },
