@@ -140,6 +140,9 @@ export default {
 	
 
 	},
+	beforeDestroy() {
+      this.destroy()
+	},
 	watch: {
 		points(val){
 			
@@ -331,6 +334,10 @@ export default {
 		
 	},
 	methods: {
+		destroy: function () {
+         window.removeEventListener('mouseup', this.stopDrag);
+         window.removeEventListener("resize", this.reSize);
+      },
 		
 		initSlider() {
 			this.pos.x =  this.axis.x.x1 
