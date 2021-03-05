@@ -20,7 +20,7 @@
 			line.grids(v-if="showGrid" :x1="axis.x.x1" :x2="axis.x.x2" :y1="r.y" :y2="r.y")
 			line.ticks( :x1="axis.y.x1" :x2="axis.y.x1+tsz.size" :y1="r.y" :y2="r.y" )
 			text.axislabely( :x="axis.y.x1+tsz.off" :y="r.y+fs/3" :font-size='fs') {{r.price}}
-		g.ticksX(v-for="n in ticksX" :key="n.id")
+		g.ticksX(v-for="n in ticksX" :key="n.y")
 			line.grids(v-if="showGrid" :x1="n.x" :x2="n.x" :y1="axis.y.y1" :y2="axis.y.y2")
 			line.ticks( :x1="n.x" :x2="n.x" :y1="axis.x.y1" :y2="axis.x.y1+tsz.size")
 			text.axislabelx( :x="n.x" :y="axis.x.y1+tsz.size+tsz.off+fs/2" :font-size='fs') {{n.tm}}
@@ -448,7 +448,6 @@ export default {
 			if (mxl==0) mxl = (this.points.length>0) ? Math.max.apply(null,this.points[0].data.map(a=> (''+a.tm).length  )):6;
 			if (this.timeFotmat && mxl<3) mxl=3;
 			let boxWidth = mxl*this.fs
-			console.log( "mxl " , mxl, boxWidth, " -boxWidth  calcOffsetX()")
 			return  boxWidth;
 		},
 		calcMiniBottomHight(){

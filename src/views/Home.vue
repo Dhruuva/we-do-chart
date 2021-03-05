@@ -1,21 +1,24 @@
 <template lang="pug">
 	v-container.main( fluid class="grey lighten-1" )
-		#stars
-		#stars2
-		#stars3
+		//-	#stars
+			#stars2
+			#stars3
 		v-card( class="mx-auto" max-width="700")
-			v-banner(color="pink lighten-6" transition="slide-x-transition")
-				h3.lime--text weCharts - simple and customizable Vue component to plot any line chart.
+			v-banner(color="pink lighten-6" )
+				h3.titleNormal
+					span.titleBig  weCharts
+					| - simple and customizable Vue component to plot any line chart.
 			div.chartbox
-				WeChart(:points="data"  tky='7' off='5')
+				WeChart(:points="data"  tky='7' off='5' timeFotmat='dd')
 			v-banner(color="pink lighten-6")
-				h3.lime--text weCharts - simple and customizable Vue component to plot a line chart.
+				h3.titleBig Simplicity produce satisfaction.
+					
 			v-list( dense	transition="fab-transition")
 				v-list-item
 					v-list-item-icon
 						v-icon(  color="red darken-2") mdi-star
 					v-list-item-content
-						v-list-item-title.blue-grey--text.pa-2(class="title") Truly responsive and adaptive. Realy!
+						v-list-item-title.pa-2.itemSay(class="title" ) Truly responsive and adaptive. Realy!
 				v-list-item
 					v-list-item-icon
 						v-icon(  color="red darken-2") mdi-star
@@ -76,6 +79,23 @@ export default {
 		height 100%
 		background radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%)
 		overflow hidden
+	.titleBig
+		text-shadow: 0 -.1em .2em darkgreen;
+		font-size:1.4em	
+		color lime
+		font-stretch: expanded
+		
+	.titleNormal
+		text-shadow: 0 -.1em .2em #ffbac4;
+		font-size 1.2em	
+		color lime
+		font-stretch expanded
+		font-variant small-caps
+	.itemSay
+		text-shadow: 0 .1em .1em green;
+		color blue 
+		font-stretch: expanded
+		
 
 #stars
 		content "e"

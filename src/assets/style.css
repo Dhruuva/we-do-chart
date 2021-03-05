@@ -1,0 +1,224 @@
+-moz-osx-font-smoothing grayscale[data-v-70a9b30a],
+-webkit-font-smoothing antialiased[data-v-70a9b30a],
+.leftThumb[data-v-70a9b30a] {
+    cursor: ew-resize;
+    fill: #00f;
+}
+.rightThumb[data-v-70a9b30a] {
+    cursor: ew-resize;
+    fill: #00f;
+}
+.wline[data-v-70a9b30a] {
+    cursor: pointer;
+    stroke: #0074d9;
+}
+.mbody[data-v-70a9b30a] {
+    cursor: -webkit-grab;
+    cursor: grab;
+    fill: #cfebfd;
+}
+.mbody[data-v-70a9b30a]:hover {
+    cursor: move;
+}
+.axislabelx[data-v-70a9b30a] {
+    text-anchor: middle;
+}
+.axislabelx[data-v-70a9b30a],
+.axislabely[data-v-70a9b30a] {
+    font-family: Arial, Helvetica Neue, Helvetica;
+    fill: red;
+    font-weight: 600;
+}
+.axislabely[data-v-70a9b30a] {
+    alignment-baseline: auto;
+}
+.chartSheet[data-v-70a9b30a] {
+    stroke: #00f;
+    stroke-width: 2.5;
+    fill: snow;
+}
+.legend[data-v-70a9b30a] {
+    font-weight: 600;
+}
+.legend[data-v-70a9b30a],
+.titles[data-v-70a9b30a] {
+    font-family: Arial, Helvetica Neue, Helvetica;
+    fill: #0074d9;
+}
+.titles[data-v-70a9b30a] {
+    font-weight: 800;
+    text-anchor: middle;
+}
+.titlesDot[data-v-70a9b30a] {
+    stroke-width: 1.1;
+    font-family: Arial, Helvetica Neue, Helvetica;
+    fill: #0074d9;
+    font-weight: 600;
+}
+.axisX[data-v-70a9b30a],
+.axisY[data-v-70a9b30a] {
+    stroke: #0074d9;
+    stroke-width: 2;
+}
+.cross[data-v-70a9b30a] {
+    stroke: #0074d9;
+    stroke-width: 0.5;
+}
+.grids[data-v-70a9b30a] {
+    stroke-width: 0.2;
+    stroke: #0074d9;
+    stroke-dasharray: 3;
+}
+.ticks[data-v-70a9b30a] {
+    stroke-width: 1.18;
+    stroke: #0074d9;
+}
+.plot[data-v-70a9b30a] {
+    fill: none;
+    stroke: #0074d9;
+    stroke-width: 2;
+}
+[theme="berry"][data-v-70a9b30a] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+[theme="berry"] .leftThumb[data-v-70a9b30a],
+[theme="berry"] .rightThumb[data-v-70a9b30a] {
+    cursor: ew-resize;
+    fill: #8b0000;
+}
+[theme="berry"] .wline[data-v-70a9b30a] {
+    cursor: pointer;
+    stroke: #556b2f;
+}
+[theme="berry"] .mbody[data-v-70a9b30a] {
+    cursor: -webkit-grab;
+    cursor: grab;
+    fill: #8fbc8f;
+}
+[theme="berry"] .mbody[data-v-70a9b30a]:hover {
+    cursor: move;
+}
+[theme="berry"] .axislabelx[data-v-70a9b30a] {
+    fill: #c71585;
+    text-anchor: middle;
+    font-family: Lucida Sans Typewriter, Lucida Console, monospace;
+}
+[theme="berry"] .axislabely[data-v-70a9b30a] {
+    fill: #c71585;
+    alignment-baseline: auto;
+    font-family: Lucida Sans Typewriter, Lucida Console, monospace;
+}
+[theme="berry"] .chartSheet[data-v-70a9b30a] {
+    stroke: #c71585;
+    stroke-width: 3.5;
+    fill: snow;
+}
+[theme="berry"] .titles[data-v-70a9b30a] {
+    stroke-width: 2.1;
+    font-family: Lucida Sans Typewriter, Lucida Console, monospace;
+    fill: #556b2f;
+    text-anchor: middle;
+}
+[theme="berry"] .legend[data-v-70a9b30a] {
+    stroke-width: 2.1;
+    font-family: Lucida Sans Typewriter, Lucida Console, monospace;
+    fill: #dc143c;
+}
+[theme="berry"] .titlesDot[data-v-70a9b30a] {
+    stroke-width: 2.1;
+    fill: #dc143c;
+}
+[theme="berry"] .axisX[data-v-70a9b30a],
+[theme="berry"] .axisY[data-v-70a9b30a] {
+    stroke: sienna;
+    stroke-width: 1.8;
+}
+[theme="berry"] .cross[data-v-70a9b30a] {
+    stroke: #006400;
+    stroke-width: 0.5;
+    stroke-dasharray: 5;
+}
+[theme="berry"] .grids[data-v-70a9b30a] {
+    stroke-width: 0.3;
+    stroke: #556b2f;
+    stroke-dasharray: 0;
+}
+[theme="berry"] .ticks[data-v-70a9b30a] {
+    stroke-width: 1.48;
+    stroke: #006400;
+}
+[theme="berry"] .plot[data-v-70a9b30a] {
+    fill: none;
+    stroke: #dc143c;
+    stroke-width: 1.8;
+}
+[theme="monaco"] .leftThumb[data-v-70a9b30a],
+[theme="monaco"] .rightThumb[data-v-70a9b30a] {
+    cursor: ew-resize;
+    fill: #7cfc00;
+}
+[theme="monaco"] .wline[data-v-70a9b30a] {
+    cursor: pointer;
+    stroke: green;
+}
+[theme="monaco"] .mbody[data-v-70a9b30a] {
+    cursor: -webkit-grab;
+    cursor: grab;
+    fill: #3cb371;
+}
+[theme="monaco"] .mbody[data-v-70a9b30a]:hover {
+    cursor: move;
+}
+[theme="monaco"] .axislabelx[data-v-70a9b30a] {
+    stroke-width: 0.6;
+    fill: #ff0;
+    text-anchor: middle;
+    font-family: monaco, Consolas, Lucida Console, monospace;
+}
+[theme="monaco"] .axislabely[data-v-70a9b30a] {
+    stroke-width: 0.8;
+    fill: #ff0;
+    alignment-baseline: middle;
+    font-family: monaco, Consolas, Lucida Console, monospace;
+}
+[theme="monaco"] .chartSheet[data-v-70a9b30a] {
+    stroke: silver;
+    fill: #000;
+}
+[theme="monaco"] .titles[data-v-70a9b30a] {
+    text-anchor: middle;
+}
+[theme="monaco"] .legend[data-v-70a9b30a],
+[theme="monaco"] .titles[data-v-70a9b30a] {
+    stroke-width: 2.1;
+    font-family: monaco, Consolas, Lucida Console, monospace;
+    fill: #ff0;
+}
+[theme="monaco"] .titlesDot[data-v-70a9b30a] {
+    stroke-width: 2.1;
+    fill: green;
+}
+[theme="monaco"] .axisX[data-v-70a9b30a],
+[theme="monaco"] .axisY[data-v-70a9b30a] {
+    stroke: gold;
+    stroke-width: 1.8;
+}
+[theme="monaco"] .cross[data-v-70a9b30a] {
+    stroke: gold;
+    stroke-width: 0.5;
+}
+[theme="monaco"] .grids[data-v-70a9b30a] {
+    stroke-width: 0.3;
+    stroke: gold;
+    stroke-dasharray: 7;
+}
+[theme="monaco"] .ticks[data-v-70a9b30a] {
+    stroke-width: 1.48;
+    stroke: gold;
+}
+[theme="monaco"] .plot[data-v-70a9b30a] {
+    fill: none;
+    stroke: green;
+    stroke-width: 2.8;
+}
