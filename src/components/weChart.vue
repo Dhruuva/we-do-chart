@@ -16,6 +16,8 @@
 		g(v-if="!cross.hide")
 			line.cross(:x1="cross.v.x1" :x2="cross.v.x2" :y1="cross.v.y1" :y2="cross.v.y2")
 			line.cross(:x1="cross.h.x1" :x2="cross.h.x2" :y1="cross.h.y1" :y2="cross.h.y2")
+		g(v-if="zero>0")
+			line.zero(:x1="axis.x.x1" :x2="axis.x.x2" :y1="zero" :y2="zero" )
 		g.ticksY(v-for="r in ticksY" :key="r.y")
 			line.grids(v-if="showGrid" :x1="axis.x.x1" :x2="axis.x.x2" :y1="r.y" :y2="r.y")
 			line.ticks( :x1="axis.y.x1" :x2="axis.y.x1+tsz.size" :y1="r.y" :y2="r.y" )
@@ -115,6 +117,7 @@ export default {
 		thumbs: { left:{x:0, y:0}, right:{x:0, y:0, priceDigits:0 },step:0.0001 },
 		wline: { left:{x1:0, x2:0, y1:0, y2:0 }, middle:{x:0,y:0, w:0,h:0}, right:{x1:0, x2:0, y1:0, y2:0 }},
 		title:"",
+		zero:null,
 
 
 	}),
@@ -269,6 +272,7 @@ export default {
 		},
 				
 		pointsAsPolyline: function() {
+			
 			return this.pointYX.map((p, i) => `${p.x} ${p.y}`).join(' ');
 		},
 		rects() {
@@ -289,7 +293,6 @@ export default {
 			let y = (off) < hbox ? hbox:off;
             let y2 = (tbox > off ) ? tbox:off;
             let x2 = (off) < wbox/1.5 ? wbox/1.5:off;
-		
 			return {
 				y: {y1: this.ds.height-y, y2:y2, x1: this.ds.width-x2, x2: this.ds.width-x2},
 				x: {y1: this.ds.height-y, y2:this.ds.height-y, x1:x, x2: this.ds.width-x2},
@@ -337,7 +340,7 @@ export default {
 		destroy: function () {
          window.removeEventListener('mouseup', this.stopDrag);
          window.removeEventListener("resize", this.reSize);
-      },
+      	},
 		
 		initSlider() {
 			this.pos.x =  this.axis.x.x1 
@@ -391,6 +394,7 @@ export default {
 		},
 		getDisplayData(first,end) {
 			let doAxis = new DoAxis()
+
 			let n=this.thumbs.step*0.01
 			let arr =(this.points.length>0)? this.points[0].data.filter(a=>  a.x >= first &&  a.x <= end+n ) :[]
 			this.pointsID.x1= (arr.length>0)? arr[0].id:this.pointsID.x1
@@ -405,7 +409,7 @@ export default {
 				if (this.timeFotmat) this.formatTicksX()
 				this.pointYX.splice(0,this.pointYX.length);// chart data
 				this.pointYX=doAxis.pointYX().map(a=>a);
-			
+				this.zero=doAxis.zero()
 				return 'ok'
 			} else  return 'no'
 		},
@@ -551,5 +555,8 @@ export default {
 		fill none
 		stroke $colorPlot
 		stroke-width 2
+	.zero
+		stroke red 
+		stroke-width 0.5	
 	@import '.././assets/themeUsa.styl'				
 </style>

@@ -5,6 +5,7 @@ const dateFormat = require('dateformat');
 
 function DoAxes() {
 	const  ticksX=[], ticksY=[], ds=[], pointY=[], pointX=[], pointYX=[]
+	let zeroLine=0
 	let movMin=0
 	const dlm =(hl)=> {
 		if (hl<0.10 && hl>=0.01 ){
@@ -29,11 +30,14 @@ function DoAxes() {
         let low = (Math.ceil(hi / d) * d),high=low, arr=[{id:tky,price:Number(high).toFixed(nn), y:f } ], t = high
         	while(low >= lo) low-=d
         let stp =(high-low)/tky 
+    	
         for (let i = tky - 1; i >= 0; i--){
 			let p=Number( t-=stp).toFixed(nn)
 			f+=step
 			arr.push( { id:i,price:p, y:f } );
         }
+        let rate = (a.y.y1-a.y.y2)/(high-low)
+        zeroLine =(hi > 0  & lo < 0)? f-rate*(Math.abs(low)):null;
         let rtn ={ y: arr, high:Number(high).toFixed(nn), low:Number(low).toFixed(nn)}	
    
         return rtn
@@ -66,7 +70,7 @@ function DoAxes() {
        	let scale = yScale(maxi,mini,tky, off )
        	let hl = scale.high - scale.low
        	while (scale.y.length > 0) ticksY.push(scale.y.pop());
-  
+  		
 	    // For  AxisX  & xy calc .........................
 		let w = off.x.x2 - off.x.x1
 		let stepx = w/(ds.length-1);
@@ -121,6 +125,7 @@ function DoAxes() {
     	while (pointX.length > 0) pointX.pop();
     	while (pointX.length > 0) pointX.pop();
     	while (pointYX.length > 0) pointYX.pop();
+    	this.zeroLine=null;
     	return 'ok'
     }
 	let oddTickSize = (points, mayBeSize) => {
@@ -153,6 +158,8 @@ function DoAxes() {
 	this.ticksX=() =>(ticksX);
 	this.pointX=() =>(pointX);
 	this.pointYX=() =>(pointYX);
+	this.zero=() =>(zeroLine);
+
 	this.yScale = (hi,lo,tky,yy) => yScale(hi,lo,tky,yy);
 	this.isValidDate=(value) => isValidDate(value);
 	

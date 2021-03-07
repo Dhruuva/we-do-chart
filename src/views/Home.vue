@@ -18,17 +18,22 @@
 					v-list-item-icon
 						v-icon(  color="red darken-2") mdi-star
 					v-list-item-content
-						v-list-item-title.pa-2.itemSay(class="title" ) Truly responsive and adaptive. Realy!
+						v-list-item-title.pa-2.itemSay(class="title" ) Truly responsive and adaptive. 
 				v-list-item
 					v-list-item-icon
 						v-icon(  color="red darken-2") mdi-star
 					v-list-item-content
-						v-list-item-title.blue-grey--text.pa-2(class="title" ) Easy scale and slide.
+						v-list-item-title.pa-2.itemSay(class="title" ) Easy scale and slide.
 				v-list-item
 					v-list-item-icon
 						v-icon(  color="red darken-2") mdi-star
 					v-list-item-content
-						v-list-item-title.blue-grey--text.pa-2(class="title" ) Crosshair available.		 		
+						v-list-item-title.pa-2.itemSay(class="title" ) Crosshair available.	
+				v-list-item
+					v-list-item-icon
+						v-icon(  color="red darken-2") mdi-star
+					v-list-item-content
+						v-list-item-title.pa-2.itemSay(class="title" ) Lightfull elaborate guide for implementation.
 </template>
 <script>
 // @ is an alias to /src
