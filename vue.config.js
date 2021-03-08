@@ -1,19 +1,21 @@
 module.exports = {
-    publicPath: '/pub-wechart',
-    parallel: false,
+	publicPath: '/pub-wechart',
+	parallel: false,
 
-    "devServer": {
-      "port": 8282
-    },
+	"devServer": {
+		"port": 8282
+	},
 
-    chainWebpack: config => {
+	chainWebpack: config => {
+		//const lintFixAuto = config.module.rule('eslint');
+
 		const sRule = config.module.rule('stylus');
-		//console.log("--------------->",sRule);
+		//console.log("--------------->",lintFixAuto.uses);
 		sRule.uses.clear();
 		sRule
 			.test(/\.styl(us)?$/)
 			.oneOf('vue')
-	        	.resourceQuery(/vue/)
+				.resourceQuery(/vue/)
 				.use('stylus-loader')
 					.loader('stylus-loader')
 					.options( {stylusOptions: { sourceMap: false,preferPathResolver: 'webpack' }})
@@ -21,7 +23,13 @@ module.exports = {
 			.end()		
 	},
 
-    transpileDependencies: [
-      'vuetify'
-    ]
+	transpileDependencies: [
+		'vuetify'
+	],
+
+ //    chainWebpack: config => {
+	//     config.module.rule('eslint').use('eslint-loader').options({
+	//       fix: true
+	//     })
+	// }
 }

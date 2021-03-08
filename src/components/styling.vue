@@ -91,7 +91,7 @@
 </template>
 
 <script>
-/* eslint-disable */
+
 import { component as VueCodeHighlight } from 'vue-code-highlight';
 export default {
     name: 'styling',
