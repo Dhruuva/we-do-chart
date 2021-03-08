@@ -1,12 +1,6 @@
 
 <template lang="pug">
 	svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @mousedown="startDrag" @mousemove="mousemove" )
-		defs
-			pattern#smallGrid(width='10' height='10' patternunits='userSpaceOnUse')
-				path(d='M 10 0 L 0 0 0 10' fill='none' stroke='gray' stroke-width='1.5')
-			pattern#grid(width='100' height='100' patternunits='userSpaceOnUse')
-				rect(width='100' height='100' fill='url(#smallGrid)')
-					path(d='M 100 0 L 0 0 0 100' fill='none' stroke='gray' stroke-width='1')
 		rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height")
 		circle.titlesDot( :cx="axis.x.x1" :cy="axis.y.y2-1-fs/3" :r="fs/3" )
 		text.legend(id="legend" ref="titles" :x="axis.x.x1+1+fs/3" :y="axis.y.y2-1" :font-size="fs" ) {{dPoint.txt}}
@@ -488,11 +482,10 @@ export default {
 	}
 }
 </script>
-<style scoped lang='stylus'>
+<style  lang='stylus'>
 	$colorPlot = #0074d9
 	$colorAxis = #0074d9
-	-webkit-font-smoothing antialiased
-	-moz-osx-font-smoothing grayscale
+	
 	.leftThumb
 		cursor ew-resize
 		fill  blue
@@ -512,11 +505,14 @@ export default {
 		fill red
 		text-anchor middle
 		font-weight 600
+		stroke transparent
+		
 	.axislabely	
 		font-family  Arial, Helvetica Neue, Helvetica
 		fill red 
 		alignment-baseline auto
 		font-weight 600
+		stroke transparent
 	.chartSheet
 		stroke blue
 		stroke-width 2.5
@@ -530,6 +526,7 @@ export default {
 		fill $colorPlot
 		font-weight 800
 		text-anchor middle	
+		stroke transparent
 	.titlesDot
 		stroke-width 1.1
 		font-family  Arial, Helvetica Neue, Helvetica

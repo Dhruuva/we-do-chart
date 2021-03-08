@@ -80,7 +80,11 @@
           stroke: #0074d9;
           stroke-width: 2;
         }
-
+        .zero {
+          stroke: #f00;
+          stroke-width: 0.5;
+        }
+  
  </pre>
 </vue-code-highlight>
 

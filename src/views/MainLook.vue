@@ -53,7 +53,7 @@
 											code.grey.lighten-1.mx-2.white--text() price: 
 											|  should be a number otherwise error will rise.
 											code.grey.lighten-1.mx-2.white--text tm: 
-											|    field has no strict types but for a timeseries chart format.    Use buttons in upper toolbar to examine different data samples. Crypto button let you examine real-world sample ( crypto-currency ). 
+											|    field has no strict types but for a timeseries chart should be  ISO 8601 (YYYY-MM-DD).    Use buttons in upper toolbar to examine different data samples. Crypto button let you examine real-world sample ( crypto-currency ). 
 										p.body-1.text-left.mt-n5.pa-2
 											span 
 												v-icon.pa-2( color="yellow darken-2") mdi-lightbulb
@@ -495,9 +495,6 @@ export default {
 		border-style groove
 		background-color $colorBg
 		border-width n
-	.axislabelx
-		fill blue 
-		stroke-width 2.1
 	#sheet	
 		& .leftThumb
 			/*fill green*/
