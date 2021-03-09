@@ -142,7 +142,7 @@ export default {
 			this.crossMove()
 			this.thumbYY()
 			this.thumbY()
-			console.log( "Pos change",this.pos)
+			//console.log( "Pos change",this.pos)
 		},
 		points(val){
 			

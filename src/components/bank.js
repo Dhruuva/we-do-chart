@@ -1,20 +1,20 @@
 "use strict"
-/* eslint-disable */
+
 function Bank() {
 	const fs = require('fs');
 	const fsPromises = fs.promises;
 
 	async function listDir() {
-	  try {
-	    return fsPromises.readdir('./webeData/');
-	  } catch (err) {
-	    console.error('Error occured while reading directory!', err);
-	  }
+		try {
+			return fsPromises.readdir('./webeData/');
+		} catch (err) {
+			console.error('Error occured while reading directory!', err);
+		}
 	}
 
 	const readDir = dirPath =>
-	   new Promise((resolve, reject) => 
-	      fs.readdir(dirPath, (err, result) => err ? reject(err): resolve(result)));
+		new Promise((resolve, reject) => 
+			fs.readdir(dirPath, (err, result) => err ? reject(err): resolve(result)));
 
 	const test=[{name:'test',data:[{ tm: '2020-08-14', price: 48.61 },
 				{ tm: '2020-08-15', price: 60.61 },
@@ -503,7 +503,7 @@ function Bank() {
 		];	
 
 	const intra=[{name:'intra',data:[
-	 {tm:'2019-12-07 00:00:00',price:148.77},
+						{tm:'2019-12-07 00:00:00',price:148.77},
 						{tm:'2019-12-07 00:15:00',price:151.26},
 						{tm:'2019-12-07 00:30:00',price:148.23},
 						{tm:'2019-12-07 00:45:00',price:146.27},

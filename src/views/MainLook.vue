@@ -165,22 +165,13 @@
 </template>
 
 <script>
-/* eslint-disable */		
-//import TextSVGstudy  from "../components/textSVGstudy.vue";
-//v-responsive(class="overflow-y-auto" max-height="calc(90vh - 520px)")	
+
 import WeChart  from "../components/weChart.vue";	
 import Bank from "../components/bank";
 import Styling from "../components/styling.vue";
 import CodeSample from "../components/codeSample.vue";	
 
 const bank = new Bank();
-//import DataSet from "../components/dataset";
-// const DataSet = require('../components/dataset.js');
-// //const dataset =  new DataSet();
-// (async function(){
-//  const dataset = await new DataSet();
-// })()
-
 
 export default {
 	name: 'MainLook',
@@ -242,10 +233,24 @@ export default {
 		// this.getStyle(element)
 		this.calcHeight()
 	},
+	watch:{
+		xy(){
+			this.movePanelUp()
+			this.movePanel()
+		},
+		leftY(){
+			this.calcHeight()
+
+		},
+		sid(id){
+			this.toggle_none=null
+			this.getChart(id);
+		},
+		
+	},
 
 	computed: {
 		leftStyle(){
-			if (this.moveDrug && !this.upDrugMove) this.leftX =(this.xy[0]+this.offx)*100/(this.wh.width);
 			return " width: "+this.leftX + "%;height: "+(this.leftY-this.topp) + "%;"
 		},
 		rightStyle(){
@@ -256,8 +261,7 @@ export default {
 			return " height: "+this.leftY + "%;"
 		},
 		downStyle(){
-			let h=(this.xy[1]+this.offy)*100/(this.wh.height);
-			if (this.upDrugMove) this.leftY = h;
+			
 			return " top: "+ (this.leftY) + "%;width: "+this.leftX + "%;height: "+(100-(this.leftY) ) + "%;"
 		},
 		downRightStyle(){
@@ -272,47 +276,28 @@ export default {
 			return rtn
 		},
 		styleScroll () {
-		 return 'height: ' + this.scrollHeight + ';' 
+			return 'height: ' + this.scrollHeight + ';' 
 		},
 		styleScrolLeft () {
-		 return 'height: ' + this.scrollHeight2 + ';' 
+			return 'height: ' + this.scrollHeight2 + ';' 
 		},
 		dataTable () {
-		 return  (this.data.length>0)? this.data[0].data:[]
+			return  (this.data.length>0)? this.data[0].data:[]
 		}
 
 
 	},
-	watch:{
-		
-		leftY(y){
-			this.calcHeight()
 
-		},
-		sid(id){
-			this.toggle_none=null
-			this.getChart(id);
-		},
-		tkz(val){
-		
-		}
-
-
-	},
 	methods: {
-		getStyle(element){ // dev
-			let computedStyle = window.getComputedStyle(element, null);
-			let out = "";
-			let elementStyle = element.style;
-			let prp =""
-			 for (prp in elementStyle) {
-			  if (elementStyle.hasOwnProperty(prp)) {
-				 out += "  " + prp + " ==== '" + elementStyle[prp] + "' >>> '" + computedStyle[prp] + "'\n";
-			  }
-			//console.log("########################",prp)
+		movePanel(){
+			if (this.moveDrug && !this.upDrugMove) this.leftX =(this.xy[0]+this.offx)*100/(this.wh.width);
+		
+		},
+		movePanelUp(){
+			if (this.upDrugMove && !this.moveDrug){
+				let h=(this.xy[1]+this.offy)*100/(this.wh.height);
+				this.leftY = h;
 			}
-			prp =  " prp " + " ==== '" + elementStyle['font-size'] + "' >>> '" + computedStyle['font-size']
-			//console.log(prp)
 		},
 		initLayout(){
 			let top=(this.$refs.root) ?this.$refs.root.getBoundingClientRect().top: document.getElementById('mainLook_root').getBoundingClientRect().top
@@ -340,16 +325,15 @@ export default {
 		},
 		init(){
 			setTimeout(()=>{
-			  this.initLayout();
+				this.initLayout();
 			},25);
 		
 		},
 
 		reSize(){
 			setTimeout(()=>{
-			  this.init();
+				this.init();
 			},20);
-			
 		
 		},
 		getLocation(e) {
@@ -367,9 +351,8 @@ export default {
 			return [xx, yy];
 		},
 		stopDrag() {
-			
-		  this.moveDrug = false;
-		  this.upDrugMove = false;
+			this.moveDrug = false;
+			this.upDrugMove = false;
 		},
 		startLeftDrug(){
 			let elem = document.getElementsByClassName('split upper left border')
@@ -383,8 +366,6 @@ export default {
 		startUpDrug(){
 			let elem = document.getElementsByClassName('split down left border')
 			this.offy = elem[0].offsetTop-this.xy[1]
-			this.leftY =-1*this.topp+ (this.xy[1]+this.offy)*100/(this.wh.height)
-			
 			if (this.upDrug){
 				this.upDrugMove = true;
 			}
@@ -412,11 +393,11 @@ export default {
 			xobj.overrideMimeType("application/json");
 			xobj.open('GET', name, true); // Replace 'my_data' with the path to your file
 			xobj.onreadystatechange = function () {
-				if (xobj.readyState == 4 && xobj.status == "200") {
-					callback(xobj.responseText);
-			}
-		 };
-		 xobj.send(null);  
+					if (xobj.readyState == 4 && xobj.status == "200") {
+						callback(xobj.responseText);
+				}
+			};
+			xobj.send(null);  
 		},
 		initData(name) {
 			let vm=this
@@ -472,7 +453,7 @@ export default {
 			this.txt = textToCopy;
 			
 			setTimeout(()=>{
-			  let aria = document.getElementById("aria");
+				let aria = document.getElementById("aria");
 				aria.focus();
 				aria.select(); 
 				document.execCommand("copy");
