@@ -3,7 +3,7 @@
 	svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @mousedown="startDrag" @mousemove="mousemove" )
 		rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height")
 		circle.titlesDot( :cx="axis.x.x1" :cy="axis.y.y2-1-fs/3" :r="fs/3" )
-		text.legend(id="legend" ref="titles" :x="axis.x.x1+1+fs/3" :y="axis.y.y2-1" :font-size="fs" ) {{dPoint.txt}}
+		text.legend(id="legend" ref="titles" :x="axis.x.x1+1+fs/3" :y="axis.y.y2-1" :font-size="fs" ) {{cross.txt}}
 		text.titles(id="title"  :x="axis.x.x1+(axis.x.x2-axis.x.x1)/2+1+fs/3" :y="axis.y.y2-1" :font-size="fs*1.2" ) {{title}}	
 		line.axisY(:x1="axis.y.x1" :x2="axis.y.x2" :y1="axis.y.y1" :y2="axis.y.y2" )
 		line.axisX(:x1="axis.x.x1" :x2="axis.x.x2" :y1="axis.x.y1" :y2="axis.x.y2" )
@@ -21,11 +21,11 @@
 			line.ticks( :x1="n.x" :x2="n.x" :y1="axis.x.y1" :y2="axis.x.y1+tsz.size")
 			text.axislabelx( :x="n.x" :y="axis.x.y1+tsz.size+tsz.off+fs/2" :font-size='fs') {{n.tm}}
 		polyline.plot(v-bind:points='pointsAsPolyline')
-		g.leftThumb(@mouseleave="stopThumb()" :transform="'translate('+thumbY+') scale('+scl+')'" @mouseenter="leftDrug = true" )
+		g.leftThumb(@mouseleave="stopThumb()" :transform="'translate('+thumbs.left.x+','+thumbs.left.y+') scale('+scl+')'" @mouseenter="leftDrug = true" )
 			polyline(points="10,40 0,30 0,10 10,0 31,0 31,40 " )
 		line.wline(:x1="wline.left.x1" :x2="wline.left.x2" :y1="wline.left.y1" :y2="wline.left.y2" :stroke-width='wline.left.sSize' @click="wlineLeftClick")
 		rect.mbody( @mouseleave="draggingCenter =!draggingCenter" @mouseenter="draggingCenter =!draggingCenter" :x="wline.middle.x" :y="wline.middle.y" :width="wline.middle.w" :height="wline.middle.h" )
-		g.rightThumb(@mouseleave="stopThumb()" :transform="'translate('+thumbYY+') scale('+scl+')'" @mouseenter="rightDrug = true" )
+		g.rightThumb(@mouseleave="stopThumb()" :transform="'translate('+thumbs.right.x+','+thumbs.right.y+') scale('+scl+')'" @mouseenter="rightDrug = true" )
 			polyline(points="0,0 0,40 21,40 30,30 30,10 21,0 " )
 		line.wline(:x1="wline.right.x1" :x2="wline.right.x2" :y1="wline.right.y1" :y2="wline.right.y2"  :stroke-width='wline.right.sSize' @click="wlineRightClick" )
 </template>
@@ -35,9 +35,10 @@
 import mouseLocation  from "../components/mouseLocation";
 import observeApi  from "../components/observeApi.js";
 import DoAxis from "../components/doAxis";
+import slider from "../components/slider";
 
 export default {
-	mixins: [mouseLocation,observeApi],
+	mixins: [mouseLocation,observeApi,slider],
 	name: 'WeChart',
 	props: {
 		ds: {
@@ -134,9 +135,15 @@ export default {
 
 	},
 	beforeDestroy() {
-	  this.destroy()
+		this.destroy()
 	},
 	watch: {
+		pos(){
+			this.crossMove()
+			this.thumbYY()
+			this.thumbY()
+			console.log( "Pos change",this.pos)
+		},
 		points(val){
 			
 			if (val.length>0){
@@ -147,123 +154,53 @@ export default {
 
 			}
 		},
-		wh(val){
+		wh(){
 			
 			this.loadChart()
 		},
-		decimals (val){
-			
-			this.loadChart()
-			
-		},
-		off (val){
+		decimals (){
 			
 			this.loadChart()
 			
 		},
-		tky (val){
+		off (){
+			
+			this.loadChart()
+			
+		},
+		tky (){
 			this.loadChart()
 			
 		},
 		
-		scl (val){
+		scl (){
 			this.loadChart()
 		
 		},
-		timeFotmat (val){
+		timeFotmat (){
 			this.loadChart()
 			
 		},
-		fs (val){
+		fs (){
 			this.loadChart()
 		},
 		tsz: {
 			deep: true,
-			handler: function(changed)  {
+			handler: function()  {
 				this.loadChart()
 			},
 		}
 
 	},
 	computed: {
-		thumbY() {
-			let wd = this.scl*31,lmt =this.thumbs.step*this.limitSize
-			if (this.draggingCenter && !this.rightDrug && !this.leftDrug && this.moveDrug ){
-				let xp = this.pos.x-this.thumbs.left.mp, rx = this.thumbs.right.mp+this.pos.x
-				if(  rx <= this.axis.x.x2) this.getDisplayData(xp, this.thumbs.right.x) 
-				if( xp >= this.axis.x.x1-wd &&  rx <= this.axis.x.x2){
-					this.thumbs.left.x = xp
-					this.wline.left.x2 = ( xp < this.axis.x.x1)? this.axis.x.x1:xp
-					this.wline.middle.x = this.thumbs.left.x + wd
-				} else if ( xp< this.axis.x.x1-wd &&  rx <= this.axis.x.x2){
-					
-					xp=this.axis.x.x1-wd
-					this.thumbs.left.x = xp
-					this.wline.left.x2 = ( xp < this.axis.x.x1)? this.axis.x.x1:xp
-					this.wline.middle.x = this.thumbs.left.x + wd
-				}
-			} else if ((this.leftDrug && this.draggingLeft) || this.wline.left.active){
-				let offset = (this.thumbs.left.off)? this.thumbs.left.off:this.scl*31
 				
-				if ( (this.pos.x + wd) > this.axis.x.x1  && (this.thumbs.right.x -this.pos.x - offset)>lmt  ) {
-					this.thumbs.left.x = this.pos.x - offset
-					this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
-					this.wline.middle.x = this.thumbs.left.x + wd
-					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
-					this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x)
-				} 
-			}
-			this.wline.left.active = false
-			return  `${this.thumbs.left.x} ,  ${this.thumbs.left.y}`;
-		},
-		thumbYY() {
-			let wd = this.scl*31,lmt =this.thumbs.step*this.limitSize
-			let offset = (this.thumbs.right.off)? this.thumbs.right.off:0
-
-			if (this.draggingCenter && !this.rightDrug && !this.leftDrug && this.moveDrug ){
-
-				let xp = this.thumbs.right.mp+this.pos.x ,lx = this.pos.x-this.thumbs.left.mp
-				if (lx >= this.axis.x.x1-wd) this.getDisplayData(this.thumbs.left.x, xp)
-				if (xp <= this.axis.x.x2 && lx >= this.axis.x.x1-wd) { 
-					this.thumbs.right.x = xp
-					this.wline.right.x1 = (xp+wd > this.axis.x.x2)? this.axis.x.x2: xp+wd
-					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x
-					
-					this.move = "move"
-				} else if (xp > this.axis.x.x2 && lx >= this.axis.x.x1-wd) {
-					xp=this.axis.x.x2
-					this.thumbs.right.x = xp
-					this.wline.right.x1 = (xp+wd > this.axis.x.x2)? this.axis.x.x2: xp+wd
-					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x
-				} 
-				else if ( lx < this.axis.x.x1-wd) {
-					xp=this.wline.middle.w+this.thumbs.left.x
-					this.thumbs.right.x = xp
-					this.wline.right.x1 = (xp+wd > this.axis.x.x2)? this.axis.x.x2: xp+wd
-					this.move = "dont't move";
-				}
-
-			} else if (this.rightDrug && this.draggingRight || this.wline.right.active){
-				if( this.pos.x  < this.axis.x.x2+wd && (this.pos.x - offset -this.thumbs.left.x)>lmt ) {
-					this.thumbs.right.x = this.pos.x - offset
-				
-					this.wline.right.x1 = (this.pos.x > this.axis.x.x2 - wd ) ?  this.wline.right.x2:this.thumbs.right.x+wd
-					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x
-					this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x)
-
-				}
-				
-			}
-			this.wline.right.active = false 
-			return  `${this.thumbs.right.x} ,  ${this.thumbs.right.y}`;
-		},
 		viewBoxSet() {
 			return  `0 0 ${this.ds.width } ${this.ds.height }`;
 		},
 				
 		pointsAsPolyline: function() {
 			
-			return this.pointYX.map((p, i) => `${p.x} ${p.y}`).join(' ');
+			return this.pointYX.map((p) => `${p.x} ${p.y}`).join(' ');
 		},
 		rects() {
 			let rect = this.$refs.field ? this.$refs.field.getBoundingClientRect():{ width:this.ds.width, height:this.ds.height};
@@ -299,7 +236,15 @@ export default {
 		
 			return { y: y};
 		},
-		dPoint(){
+		
+	},
+	methods: {
+		destroy: function () {
+			window.removeEventListener('mouseup', this.stopDrag);
+			window.removeEventListener("resize", this.reSize);
+		},
+		
+		crossMove(){
 			if (this.pos.x<this.axis.x.x2 && this.pos.x>this.axis.x.x1 && this.pos.y>this.axis.y.y2 && this.pos.y<this.axis.y.y1 ) {
 				this.cross.hide=false;
 				let arr = (this.pointYX.length >0)? this.pointYX:(this.points.length>0)?this.points[0].data:[]
@@ -323,45 +268,9 @@ export default {
 			}	else {
 				this.cross.hide=true;
 			}
-			return this.cross;
-		}
-		
-	},
-	methods: {
-		destroy: function () {
-			window.removeEventListener('mouseup', this.stopDrag);
-			window.removeEventListener("resize", this.reSize);
+			
 		},
 		
-		initSlider() {
-			this.pos.x =  this.axis.x.x1 
-			let hf =  (this.ds.height-(this.axis.y.y1 + this.fs*1.18))/2 + (this.scl*40)/2
-			let y = this.ds.height-hf
-		
-			this.thumbs.left.x = this.axis.x.x1 - this.scl*31
-			this.thumbs.left.y = y
-			this.wline.left.x1 = this.axis.x.x1
-			this.wline.left.x2 = this.axis.x.x1
-			this.wline.left.y1 =  y + this.scl*40/2
-			this.wline.left.y2 =  y +this.scl*40/2
-			this.wline.left.sSize = this.scl*40*0.6
-			this.wline.left.active = false
-
-			this.wline.middle.x = this.axis.x.x1
-			this.wline.middle.y = y+this.scl*8
-			this.wline.middle.w = this.axis.x.x2 - this.axis.x.x1
-			this.wline.middle.h = this.scl*(40-16)
-
-			this.thumbs.right.x = this.axis.x.x2 
-			this.thumbs.right.y = y
-			this.wline.right.x1 = this.axis.x.x2
-			this.wline.right.x2 = this.axis.x.x2
-			this.wline.right.y1 = y + this.scl*40/2
-			this.wline.right.y2 = y + this.scl*40/2
-			this.wline.right.sSize = this.scl*40*0.6
-				
-			return 'ok'
-		},
 		mousemove(e) {
 			e.preventDefault();
 			this.pos = this.getMousePosition(e);
