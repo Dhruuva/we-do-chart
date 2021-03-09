@@ -31,7 +31,7 @@
 </template>
 
 <script>
-/* eslint-disable */
+
 import mouseLocation  from "../components/mouseLocation";
 import observeApi  from "../components/observeApi.js";
 import DoAxis from "../components/doAxis";
@@ -39,9 +39,6 @@ import DoAxis from "../components/doAxis";
 export default {
 	mixins: [mouseLocation,observeApi],
 	name: 'WeChart',
-	components: {
-	 
-	},
 	props: {
 		ds: {
 			type:Object,
@@ -99,11 +96,11 @@ export default {
 		dPoints: [], // points in display 
 		pSize : 0, // data in  display
 		limitSize : 0, // data count it's use in limit calculation
-      farPoints :[], // dev
-      move:"don't",
-      cross:{ v:{x1:0, y1:0, x2:0, y2:0 }, h:{x1:0, y1:0, x2:0, y2:0 }, hide:false, txt:"" },
-      pointsID:{x1:0,x2:15},
- 		pos:{x:0, y:0},
+		farPoints :[], // dev
+		move:"don't",
+		cross:{ v:{x1:0, y1:0, x2:0, y2:0 }, h:{x1:0, y1:0, x2:0, y2:0 }, hide:false, txt:"" },
+		pointsID:{x1:0,x2:15},
+		pos:{x:0, y:0},
 		ticksY:[],
 		ticksX:[],
 		pointYX:[],
@@ -118,11 +115,10 @@ export default {
 	mounted() {
 		window.addEventListener('mouseup', this.stopDrag);
 		window.addEventListener("resize", this.reSize);
-		let el=document.getElementById('sheet')
 		this.svg = this.$refs.sheet
 		this.ds.width=this.$refs.sheet.clientWidth
 		this.ds.height= this.$refs.sheet.clientHeight
-      this.cross.txt=' ' //dev
+		this.cross.txt=' ' //dev
 
 		this.leftDrug = true
 		this.draggingLeft =true
@@ -138,7 +134,7 @@ export default {
 
 	},
 	beforeDestroy() {
-      this.destroy()
+	  this.destroy()
 	},
 	watch: {
 		points(val){
@@ -182,11 +178,11 @@ export default {
 			this.loadChart()
 		},
 		tsz: {
-	        deep: true,
-	        handler: function(changed)  {
-	            this.loadChart()
-	        },
-	    }
+			deep: true,
+			handler: function(changed)  {
+				this.loadChart()
+			},
+		}
 
 	},
 	computed: {
@@ -285,8 +281,8 @@ export default {
 			let tbox = this.calcMiniTopHight()
 			let x = (off) < lfBox/3 ? lfBox/3:off;
 			let y = (off) < hbox ? hbox:off;
-            let y2 = (tbox > off ) ? tbox:off;
-            let x2 = (off) < wbox/1.5 ? wbox/1.5:off;
+			let y2 = (tbox > off ) ? tbox:off;
+			let x2 = (off) < wbox/1.5 ? wbox/1.5:off;
 			return {
 				y: {y1: this.ds.height-y, y2:y2, x1: this.ds.width-x2, x2: this.ds.width-x2},
 				x: {y1: this.ds.height-y, y2:this.ds.height-y, x1:x, x2: this.ds.width-x2},
@@ -324,23 +320,24 @@ export default {
 				} else {
 					this.cross.txt = "_" ;
 				}
-			} else  this.cross.hide=true;
-
+			}	else {
+				this.cross.hide=true;
+			}
 			return this.cross;
 		}
 		
 	},
 	methods: {
 		destroy: function () {
-         window.removeEventListener('mouseup', this.stopDrag);
-         window.removeEventListener("resize", this.reSize);
-      	},
+			window.removeEventListener('mouseup', this.stopDrag);
+			window.removeEventListener("resize", this.reSize);
+		},
 		
 		initSlider() {
 			this.pos.x =  this.axis.x.x1 
 			let hf =  (this.ds.height-(this.axis.y.y1 + this.fs*1.18))/2 + (this.scl*40)/2
 			let y = this.ds.height-hf
-		 
+		
 			this.thumbs.left.x = this.axis.x.x1 - this.scl*31
 			this.thumbs.left.y = y
 			this.wline.left.x1 = this.axis.x.x1
@@ -374,15 +371,13 @@ export default {
 			let sz = (this.points.length>0)? this.points[0].data.length:0
 			let step = (this.axis.x.x2-this.axis.x.x1)/(sz-1)
 			this.thumbs.step = step  // this need for slider to display last point easy
-			let i = this.axis.x.x1, aa=0.00;
+			let i = this.axis.x.x1
 			this.limitSize = (sz/100)*this.limit
 			if (sz<=15 && sz>0) this.limitSize = sz;
-
 			if (this.points.length>0){
 				this.points[0].data.forEach((a,j)=> {
-					 a.x = (j == 0)? i : i = step+i ;
-					 a.id=j
-					 aa=a.x
+					a.x = (j == 0)? i : i = step+i ;
+					a.id=j
 				})
 			}	
 		},
@@ -409,28 +404,28 @@ export default {
 		},
 		formatTicksX(){
 			let prevDtm=(this.ticksX.length>0)?this.ticksX[0].dtm:null
-         this.ticksX.forEach((a,i)=>{
-         	if (this.timeFotmat=='HH:MM'  || this.timeFotmat=='HH:MM:ss'){
-	            if ( new Date(a.dtm).getFullYear() !== new Date(prevDtm).getFullYear() ) {
-	            	a.tm = a.yy
-	            }
-	            else if (new Date(a.dtm).getMonth() !== new Date(prevDtm).getMonth()){
-	            	a.tm=a.mm
-	            }
-	            else if (new Date(a.dtm).getDate() !== new Date(prevDtm).getDate()){
-	            	a.tm = new Date(a.dtm).getDate()
-	            }
-	         }  else if (this.timeFotmat=='dd') {
-	         	if ( new Date(a.dtm).getFullYear() !== new Date(prevDtm).getFullYear() ) {
-	            	a.tm = a.yy
-	            }
-	            else if (new Date(a.dtm).getMonth() !== new Date(prevDtm).getMonth()){
-	            	a.tm=a.mm
-	            }
-	         }  
-            prevDtm=a.dtm
-            
-         })
+			this.ticksX.forEach((a)=>{
+				if (this.timeFotmat=='HH:MM'  || this.timeFotmat=='HH:MM:ss'){
+					if ( new Date(a.dtm).getFullYear() !== new Date(prevDtm).getFullYear() ) {
+						a.tm = a.yy
+					}
+					else if (new Date(a.dtm).getMonth() !== new Date(prevDtm).getMonth()){
+						a.tm=a.mm
+					}
+					else if (new Date(a.dtm).getDate() !== new Date(prevDtm).getDate()){
+						a.tm = new Date(a.dtm).getDate()
+					}
+				}	else if (this.timeFotmat=='dd') {
+					if ( new Date(a.dtm).getFullYear() !== new Date(prevDtm).getFullYear() ) {
+						a.tm = a.yy
+					}
+					else if (new Date(a.dtm).getMonth() !== new Date(prevDtm).getMonth()){
+						a.tm=a.mm
+					}
+				}
+				prevDtm=a.dtm
+				
+			})
 		},
 		calcOffsetY(){
 			let f = (this.decimals.length<2)? 2 : this.decimals.length
