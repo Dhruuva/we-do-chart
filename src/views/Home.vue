@@ -33,7 +33,7 @@
 					v-list-item-icon
 						v-icon(  color="red darken-2") mdi-star
 					v-list-item-content
-						v-list-item-title.pa-2.itemSay(class="title" ) Lightfull elaborate guide for implementation.
+						v-list-item-title.pa-2.itemSay(class="title" ) Lightfull and elaborate guide for implementation.
 </template>
 <script>
 // @ is an alias to /src
