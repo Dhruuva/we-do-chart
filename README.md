@@ -1,8 +1,8 @@
-# wechart
+#  we-do-chart
 
 ## Project setup
 ```
-npm install we-chart --save
+npm install we-do-chart --save
 ```
 
 ### To be continue
