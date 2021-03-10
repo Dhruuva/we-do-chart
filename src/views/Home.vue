@@ -9,7 +9,7 @@
 					span.titleBig  weCharts
 					| - simple and customizable Vue component to plot any line chart.
 			div.chartbox
-				WeChart(:points="data"  tky='7' off='5' timeFotmat='dd')
+				WeChart(:points="data"  tky='7' off='5' timefotmat='dd')
 			v-banner(color="pink lighten-6")
 				h3.titleBig Simplicity produce satisfaction.
 					

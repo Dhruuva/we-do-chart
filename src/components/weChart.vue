@@ -85,7 +85,7 @@ export default {
 			type:[String], //For price scale
 			default: () =>('0.01') 
 		},
-		timeFotmat:{
+		timefotmat:{
 			type:[String], // if date or null
 			default: () =>(null) 
 		},
@@ -177,7 +177,7 @@ export default {
 			this.loadChart()
 		
 		},
-		timeFotmat (){
+		timefotmat (){
 			this.loadChart()
 			
 		},
@@ -303,12 +303,12 @@ export default {
 			this.pointsID.x2= (arr.length>0)? arr.slice(-1)[0].id:this.pointsID.x2
 			if (this.pSize != arr.length){
 				this.pSize = arr.length
-				doAxis.formulaY(arr, this.axis ,this.tky,this.calcOffsetX(),this.decimals,this.timeFotmat) // this.calcOffsetX()=58
+				doAxis.formulaY(arr, this.axis ,this.tky,this.calcOffsetX(),this.decimals,this.timefotmat) // this.calcOffsetX()=58
 				this.ticksY.splice(0,this.ticksY.length);
 				this.ticksY=doAxis.ticksY().map(a=>a);
 				this.ticksX.splice(0,this.ticksX.length);
 				this.ticksX=doAxis.ticksX().map(a=>a);
-				if (this.timeFotmat) this.formatTicksX()
+				if (this.timefotmat) this.formatTicksX()
 				this.pointYX.splice(0,this.pointYX.length);// chart data
 				this.pointYX=doAxis.pointYX().map(a=>a);
 				this.zero=doAxis.zero()
@@ -318,7 +318,7 @@ export default {
 		formatTicksX(){
 			let prevDtm=(this.ticksX.length>0)?this.ticksX[0].dtm:null
 			this.ticksX.forEach((a)=>{
-				if (this.timeFotmat=='HH:MM'  || this.timeFotmat=='HH:MM:ss'){
+				if (this.timefotmat=='HH:MM'  || this.timefotmat=='HH:MM:ss'){
 					if ( new Date(a.dtm).getFullYear() !== new Date(prevDtm).getFullYear() ) {
 						a.tm = a.yy
 					}
@@ -328,7 +328,7 @@ export default {
 					else if (new Date(a.dtm).getDate() !== new Date(prevDtm).getDate()){
 						a.tm = new Date(a.dtm).getDate()
 					}
-				}	else if (this.timeFotmat=='dd') {
+				}	else if (this.timefotmat=='dd') {
 					if ( new Date(a.dtm).getFullYear() !== new Date(prevDtm).getFullYear() ) {
 						a.tm = a.yy
 					}
@@ -350,9 +350,9 @@ export default {
 			return  boxWidth;
 		},
 		calcOffsetX(){
-			let mxl =(this.timeFotmat)?this.timeFotmat.length:0;
+			let mxl =(this.timefotmat)?this.timefotmat.length:0;
 			if (mxl==0) mxl = (this.points.length>0) ? Math.max.apply(null,this.points[0].data.map(a=> (''+a.tm).length  )):6;
-			if (this.timeFotmat && mxl<3) mxl=3;
+			if (this.timefotmat && mxl<3) mxl=3;
 			let boxWidth = mxl*this.fs
 			return  boxWidth;
 		},

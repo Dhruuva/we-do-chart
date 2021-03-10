@@ -94,7 +94,7 @@
 							v-slider(label="tsz.off" v-model="tickSize.off" thumb-size="20" thumb-label="always" min="5" max="16" ticks="always" tick-size="4" step="1")
 					v-tab-item 
 						v-card.pa-2(height="700") 
-							h1.text-left timeFotmat
+							h1.text-left timefotmat
 							v-row
 								v-col.text-h5( cols="12" sm="8" )
 									p.body-1.text-left.pa-2 In case time series data this property change format x-axis labels. For help take a  reference of the 
@@ -106,7 +106,7 @@
 										code.grey.mx-2.white--text(color="lighten-5") HH:MM, HH:MM:ss, dd  
 										| would be display month and year on the changing tick-label.	
 								v-col.text-h5( cols="12" sm="4" )
-									v-select(:items="fmts" v-model='timeFotmat')
+									v-select(:items="fmts" v-model='timefotmat')
 					v-tab-item 
 						v-card.pa-2(height="700") 
 							h1.text-left scl
@@ -134,7 +134,7 @@
 							p  topp {{ topp}}	
 			.thumb(@mousedown='startLeftDrug()' @mouseenter='rightDrug=!rightDrug' @mouseleave='rightDrug=!rightDrug')
 		.split.upper.right.border(:style='rightStyle')
-			WeChart(ref="weChart1" :points='data' :decimals='tkzz' :showGrid='showGrid' :timeFotmat='timeFotmat' :off="chartOff" :tky="tickYnumber" :tsz="tickSize" :scl="scl" :limit="lmt" :fs="fsz" :theme="theme")
+			WeChart(ref="weChart1" :points='data' :decimals='tkzz' :showGrid='showGrid' :timefotmat='timefotmat' :off="chartOff" :tky="tickYnumber" :tsz="tickSize" :scl="scl" :limit="lmt" :fs="fsz" :theme="theme")
 		.split.down.left.border(:style='downStyle')
 			.thumbUp(@mousedown='startUpDrug()' @mouseenter='upDrug=!upDrug' @mouseleave='upDrug=!upDrug')
 			v-row
@@ -197,13 +197,13 @@ export default {
 		sid:null, // symboll ID
 		tkz:2, // for update tkzz 
 		//tkz:2, // minimal move for chart prop
-		timeFotmat:'HH:MM',
+		timefotmat:'HH:MM',
 		headers:[{text:'tm',value:'tm'},{text:'price',value:'price'}],
 		offx:0,offy:0,
 		chartDiv:[], // dev
 		tab: null,
 		iTabs: [
-			'Setup options','points','decimals','fs','tky','off','tsz','timeFotmat','scl','limit','showGrid'
+			'Setup options','points','decimals','fs','tky','off','tsz','timefotmat','scl','limit','showGrid'
 		],
 		dcml:['0','0.1','0.01','0.001','0.0001'],
 		chartOff:2,
@@ -373,13 +373,13 @@ export default {
 		async loadData(val){
 			let arr = bank.getData(val);
 			if (val=='sto') {
-				this.timeFotmat='dd'
+				this.timefotmat='dd'
 			}
 			else if (val=='year'){
-				this.timeFotmat='dd'
+				this.timefotmat='dd'
 			}
 			else if (val=='intra'){
-				this.timeFotmat='HH:MM'
+				this.timefotmat='HH:MM'
 			}
 			while( this.data.length>0) this.data.pop()
 				
@@ -436,7 +436,7 @@ export default {
 		
 			this.data=[...toPoints]	
 		
-			this.timeFotmat='HH:MM:ss'
+			this.timefotmat='HH:MM:ss'
 		},
 		calcHeight(){
 			let element = document.getElementsByClassName("split down left border")[0]
