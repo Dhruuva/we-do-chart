@@ -49,3 +49,68 @@ exports[`Home.vue has chartbox 1`] = `
   </v-card-stub>
 </v-container-stub>
 `;
+
+exports[`views and component code 1`] = `
+<vue-code-highlight language="js"><pre>	[ 
+		{  name:"text", data:
+			[
+				{tm: '2020-08-14', price: 48.61},
+				{tm: '2020-08-15', price: 60.61},
+				{tm: '2020-08-15', price: 60.61}
+			]
+		},
+		...
+	]	
+</pre>
+</vue-code-highlight>
+`;
+
+exports[`views and component has chartbox 1`] = `
+<v-container-stub tag="div" fluid="true" class="main grey lighten-1">
+  <v-card-stub loaderheight="4" tag="div" maxwidth="700" class="mx-auto">
+    <v-banner-stub color="pink lighten-6" tag="div" mobilebreakpoint="1264" value="true">
+      <h3 class="titleNormal"><span class="titleBig"> weCharts</span>- simple and customizable Vue component to plot any line chart.</h3>
+    </v-banner-stub>
+    <div class="chartbox">
+      <wechart-stub ds="[object Object]" background="AliceBlue" showgrid="true" tky="7" off="5" scl="0.45" tsz="[object Object]" points="" fs="14" limit="10" decimals="0.01" timefotmat="dd"></wechart-stub>
+    </div>
+    <v-banner-stub color="pink lighten-6" tag="div" mobilebreakpoint="1264" value="true">
+      <h3 class="titleBig">Simplicity produce satisfaction.</h3>
+    </v-banner-stub>
+    <v-list-stub tag="div" dense="true" transition="fab-transition">
+      <v-list-item-stub activeclass="" tag="div">
+        <v-list-item-icon-stub>
+          <v-icon-stub color="red darken-2">mdi-star</v-icon-stub>
+        </v-list-item-icon-stub>
+        <v-list-item-content-stub>
+          <v-list-item-title-stub class="pa-2 itemSay title">Truly responsive and adaptive. </v-list-item-title-stub>
+        </v-list-item-content-stub>
+      </v-list-item-stub>
+      <v-list-item-stub activeclass="" tag="div">
+        <v-list-item-icon-stub>
+          <v-icon-stub color="red darken-2">mdi-star</v-icon-stub>
+        </v-list-item-icon-stub>
+        <v-list-item-content-stub>
+          <v-list-item-title-stub class="pa-2 itemSay title">Easy scale and slide.</v-list-item-title-stub>
+        </v-list-item-content-stub>
+      </v-list-item-stub>
+      <v-list-item-stub activeclass="" tag="div">
+        <v-list-item-icon-stub>
+          <v-icon-stub color="red darken-2">mdi-star</v-icon-stub>
+        </v-list-item-icon-stub>
+        <v-list-item-content-stub>
+          <v-list-item-title-stub class="pa-2 itemSay title">Crosshair available. </v-list-item-title-stub>
+        </v-list-item-content-stub>
+      </v-list-item-stub>
+      <v-list-item-stub activeclass="" tag="div">
+        <v-list-item-icon-stub>
+          <v-icon-stub color="red darken-2">mdi-star</v-icon-stub>
+        </v-list-item-icon-stub>
+        <v-list-item-content-stub>
+          <v-list-item-title-stub class="pa-2 itemSay title">Lightfull elaborate guide for implementation.</v-list-item-title-stub>
+        </v-list-item-content-stub>
+      </v-list-item-stub>
+    </v-list-stub>
+  </v-card-stub>
+</v-container-stub>
+`;

@@ -1,5 +1,5 @@
 <template>
-<vue-code-highlight language="js">
+<vue-code-highlight language="js" ref="hlight">
 <pre>
 	[ 
 		{  name:"text", data:
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-/* eslint-disable */
+
 import { component as VueCodeHighlight } from 'vue-code-highlight';
 
 export default {
