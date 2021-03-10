@@ -1,0 +1,31 @@
+{
+  "name": "@albazhenov/we-chart",
+  "version": "1.0.1",
+  "description": "Nice looking and easy customize vue component for plot line-chart.Slider & resizing present.Truly adaptive.",
+  "main": "WeChart.common.js",
+  "module": "WeChart.umd.js",
+  "browser": "WeChart.umd.min.js",
+  "unpkg": "WeChart.umd.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dhruuva/we-chart.git"
+  },
+  "keywords": [
+    "vue",
+    "web-component",
+    "chart", "line-chart", "crosshair","chart-slider","charting"
+  ],
+  "author": "Aleksey Bazhenov <alekseybazhenov@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dhruuva/we-chart/issues"
+  },
+  "homepage": "https://dhruuva.github.io/we-chart"
+}
+
+
+
+

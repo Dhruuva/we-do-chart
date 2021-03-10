@@ -7,7 +7,7 @@ module.exports = {
 	},
 	css: {
         requireModuleExtension: true,
-        extract: false
+        extract: true
     },
 
 	chainWebpack: config => {

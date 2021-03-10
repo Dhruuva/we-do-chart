@@ -4,7 +4,7 @@
 		rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height")
 		circle.titlesDot( :cx="axis.x.x1" :cy="axis.y.y2-1-fs/3" :r="fs/3" )
 		text.legend(id="legend" ref="titles" :x="axis.x.x1+1+fs/3" :y="axis.y.y2-1" :font-size="fs" ) {{cross.txt}}
-		text.titles(id="title"  :x="axis.x.x1+(axis.x.x2-axis.x.x1)/2+1+fs/3" :y="axis.y.y2-1" :font-size="fs*1.2" ) {{title}}	
+		text.titles(id="title"  :x="axis.x.x1+(axis.x.x2-axis.x.x1)/2+1+fs/3" :y="axis.y.y2-1" :font-size="fs*1.2" ) {{chartName}}	
 		line.axisY(:x1="axis.y.x1" :x2="axis.y.x2" :y1="axis.y.y1" :y2="axis.y.y2" )
 		line.axisX(:x1="axis.x.x1" :x2="axis.x.x2" :y1="axis.x.y1" :y2="axis.x.y2" )
 		g(v-if="!cross.hide")
@@ -149,7 +149,7 @@ export default {
 			if (val.length>0){
 				this.pointsID.x1 = 0
 				this.pointsID.x2 = val[0].data.length
-				this.title = (val[0].name)? val[0].name:''
+				//this.title = (val[0].name)? val[0].name:''
 				this.loadChart()
 
 			}
@@ -193,6 +193,10 @@ export default {
 
 	},
 	computed: {
+
+		chartName(){
+			return   (this.points[0])?  (this.points[0].name)? this.points[0].name:'':''
+		},
 				
 		viewBoxSet() {
 			return  `0 0 ${this.ds.width } ${this.ds.height }`;
