@@ -463,5 +463,5 @@ export default {
 	.zero
 		stroke red 
 		stroke-width 0.5	
-	@import '.././assets/themeUsa.styl'				
+	@import '.././assets/theme.styl'				
 </style>
