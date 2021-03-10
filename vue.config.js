@@ -1,10 +1,14 @@
 module.exports = {
-	publicPath: '/pub-wechart',
+	
 	parallel: false,
-
+	publicPath: process.env.NODE_ENV === "production" ? "/" : "/pub-wechart",
 	"devServer": {
 		"port": 8282
 	},
+	css: {
+        requireModuleExtension: true,
+        extract: false
+    },
 
 	chainWebpack: config => {
 		//const lintFixAuto = config.module.rule('eslint');

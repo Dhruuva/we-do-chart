@@ -1,8 +1,8 @@
 <template lang="pug">
 	v-container.main( fluid class="grey lighten-1" )
-		//-	#stars
-			#stars2
-			#stars3
+		#stars
+		#stars2
+		#stars3
 		v-card( class="mx-auto" max-width="700")
 			v-banner(color="pink lighten-6" )
 				h3.titleNormal
