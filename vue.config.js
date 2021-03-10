@@ -1,7 +1,7 @@
 module.exports = {
 	
 	parallel: false,
-	publicPath: process.env.NODE_ENV === "production" ? "/" : "/pub-wechart",
+	publicPath: process.env.NODE_ENV === "production" ? "/we-chart" : "/pub-wechart",
 	"devServer": {
 		"port": 8282
 	},
