@@ -68,6 +68,7 @@ export default {
       this.wline.left.active = true
       this.thumbs.left.off = 0
       this.thumbs.left.x = Math.floor(cursorPt.x)
+      this.thumbY()
     },
     wlineRightClick(evt){
       evt.preventDefault();
@@ -78,6 +79,7 @@ export default {
       this.wline.right.active = true
       this.thumbs.right.off = 0
       this.thumbs.right.x = Math.floor(cursorPt.x)
+      this.thumbYY()
     },
     stopDrag() {
       this.draggingLeft = false;

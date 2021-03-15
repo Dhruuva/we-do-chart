@@ -142,16 +142,13 @@ export default {
 			this.crossMove()
 			this.thumbYY()
 			this.thumbY()
-			//console.log( "Pos change",this.pos)
 		},
+		
 		points(val){
-			
 			if (val.length>0){
 				this.pointsID.x1 = 0
 				this.pointsID.x2 = val[0].data.length
-				//this.title = (val[0].name)? val[0].name:''
 				this.loadChart()
-
 			}
 		},
 		wh(){
@@ -189,8 +186,7 @@ export default {
 			handler: function()  {
 				this.loadChart()
 			},
-		}
-
+		},
 	},
 	computed: {
 

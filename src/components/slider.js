@@ -62,7 +62,6 @@ export default {
 		thumbYY() {
 			let wd = this.scl*31,lmt =this.thumbs.step*this.limitSize
 			let offset = (this.thumbs.right.off)? this.thumbs.right.off:0
-
 			if (this.draggingCenter && !this.rightDrug && !this.leftDrug && this.moveDrug ){
 
 				let xp = this.thumbs.right.mp+this.pos.x ,lx = this.pos.x-this.thumbs.left.mp
