@@ -153,9 +153,13 @@
 							v-icon  mdi-content-copy
 					v-col( cols="12" md="6" )
 						h1.text-left Style
-							p.body-1.text-left.pa-2 Default styles maybe overridden with !important. You can also create custom style follow example in right panel or take look in theme.styl file. Then your style be ready just set its name in theme attribute of
+							p.body-1.text-left.pa-2 Default styles maybe overridden in your page style section. You can also create custom style follow example in right panel. Then your style be ready just set its name in theme attribute of
 								span.d-inline.green--text.font-weight-bold   weChart 
 								|  component.
+							p.body-1.text-left.pa-2
+								span.caption  
+									v-icon.pa-2( color="yellow darken-2") mdi-lightbulb
+									| Hint- you can explore theme.styl which founded in the component npm folder.
 						v-textarea#aria(:style='visible' no-resize rows='1' :value='txt' ref='aria')
 					v-col( cols="12" md="6" dark)
 						div.meScroll(:style="styleScroll")
