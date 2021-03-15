@@ -3,7 +3,7 @@
 
 #  we-do-chart
 A we-do-chart Vue component. Compatible with Vue 2.x 
-For more info about features, demonstration , customization options see the [project pages](dhruuva.github.io/we-do-chart/)
+For more info about features, demonstration , customization options see the [project pages](https://dhruuva.github.io/we-do-chart/)
 
 ##  Project setup
 In vue app  just do it.( if project has no vue.js just add it to the dependencies before next step  )
