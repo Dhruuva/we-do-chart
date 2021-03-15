@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["WeChart"] = factory();
+		exports["WeDoChart"] = factory();
 	else
-		root["WeChart"] = factory();
+		root["WeDoChart"] = factory();
 })((typeof self !== 'undefined' ? self : this), function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -3863,12 +3863,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"53b12b1e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/weChart.vue?vue&type=template&id=0d624b9e&lang=pug&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{ref:"sheet",attrs:{"id":"sheet","viewBox":_vm.viewBoxSet,"xmlns":"http://www.w3.org/2000/svg"},on:{"mousedown":_vm.startDrag,"mousemove":_vm.mousemove}},[_c('rect',{ref:"chartSheet",staticClass:"chartSheet",attrs:{"x":"0","y":"0","width":_vm.ds.width,"height":_vm.ds.height}}),_c('circle',{staticClass:"titlesDot",attrs:{"cx":_vm.axis.x.x1,"cy":_vm.axis.y.y2-1-_vm.fs/3,"r":_vm.fs/3}}),_c('text',{ref:"titles",staticClass:"legend",attrs:{"id":"legend","x":_vm.axis.x.x1+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs}},[_vm._v(_vm._s(_vm.cross.txt))]),_c('text',{staticClass:"titles",attrs:{"id":"title","x":_vm.axis.x.x1+(_vm.axis.x.x2-_vm.axis.x.x1)/2+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs*1.2}},[_vm._v(_vm._s(_vm.title)+" ")]),_c('line',{staticClass:"axisY",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x2,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}),_c('line',{staticClass:"axisX",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y2}}),(!_vm.cross.hide)?_c('g',[_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.v.x1,"x2":_vm.cross.v.x2,"y1":_vm.cross.v.y1,"y2":_vm.cross.v.y2}}),_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.h.x1,"x2":_vm.cross.h.x2,"y1":_vm.cross.h.y1,"y2":_vm.cross.h.y2}})]):_vm._e(),(_vm.zero>0)?_c('g',[_c('line',{staticClass:"zero",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.zero,"y2":_vm.zero}})]):_vm._e(),_vm._l((_vm.ticksY),function(r){return _c('g',{key:r.y,staticClass:"ticksY"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":r.y,"y2":r.y}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x1+_vm.tsz.size,"y1":r.y,"y2":r.y}}),_c('text',{staticClass:"axislabely",attrs:{"x":_vm.axis.y.x1+_vm.tsz.off,"y":r.y+_vm.fs/3,"font-size":_vm.fs}},[_vm._v(_vm._s(r.price))])])}),_vm._l((_vm.ticksX),function(n){return _c('g',{key:n.y,staticClass:"ticksX"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y1+_vm.tsz.size}}),_c('text',{staticClass:"axislabelx",attrs:{"x":n.x,"y":_vm.axis.x.y1+_vm.tsz.size+_vm.tsz.off+_vm.fs/2,"font-size":_vm.fs}},[_vm._v(_vm._s(n.tm))])])}),_c('polyline',{staticClass:"plot",attrs:{"points":_vm.pointsAsPolyline}}),_c('g',{staticClass:"leftThumb",attrs:{"transform":'translate('+_vm.thumbs.left.x+','+_vm.thumbs.left.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.leftDrug = true}}},[_c('polyline',{attrs:{"points":"10,40 0,30 0,10 10,0 31,0 31,40 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.left.x1,"x2":_vm.wline.left.x2,"y1":_vm.wline.left.y1,"y2":_vm.wline.left.y2,"stroke-width":_vm.wline.left.sSize},on:{"click":_vm.wlineLeftClick}}),_c('rect',{staticClass:"mbody",attrs:{"x":_vm.wline.middle.x,"y":_vm.wline.middle.y,"width":_vm.wline.middle.w,"height":_vm.wline.middle.h},on:{"mouseleave":function($event){_vm.draggingCenter =!_vm.draggingCenter},"mouseenter":function($event){_vm.draggingCenter =!_vm.draggingCenter}}}),_c('g',{staticClass:"rightThumb",attrs:{"transform":'translate('+_vm.thumbs.right.x+','+_vm.thumbs.right.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.rightDrug = true}}},[_c('polyline',{attrs:{"points":"0,0 0,40 21,40 30,30 30,10 21,0 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.right.x1,"x2":_vm.wline.right.x2,"y1":_vm.wline.right.y1,"y2":_vm.wline.right.y2,"stroke-width":_vm.wline.right.sSize},on:{"click":_vm.wlineRightClick}})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"53b12b1e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/weChart.vue?vue&type=template&id=0101cc99&lang=pug&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{ref:"sheet",attrs:{"id":"sheet","viewBox":_vm.viewBoxSet,"xmlns":"http://www.w3.org/2000/svg"},on:{"mousedown":_vm.startDrag,"mousemove":_vm.mousemove}},[_c('rect',{ref:"chartSheet",staticClass:"chartSheet",attrs:{"x":"0","y":"0","width":_vm.ds.width,"height":_vm.ds.height}}),_c('circle',{staticClass:"titlesDot",attrs:{"cx":_vm.axis.x.x1,"cy":_vm.axis.y.y2-1-_vm.fs/3,"r":_vm.fs/3}}),_c('text',{ref:"titles",staticClass:"legend",attrs:{"id":"legend","x":_vm.axis.x.x1+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs}},[_vm._v(_vm._s(_vm.cross.txt))]),_c('text',{staticClass:"titles",attrs:{"id":"title","x":_vm.axis.x.x1+(_vm.axis.x.x2-_vm.axis.x.x1)/2+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs*1.2}},[_vm._v(_vm._s(_vm.chartName)+" ")]),_c('line',{staticClass:"axisY",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x2,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}),_c('line',{staticClass:"axisX",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y2}}),(!_vm.cross.hide)?_c('g',[_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.v.x1,"x2":_vm.cross.v.x2,"y1":_vm.cross.v.y1,"y2":_vm.cross.v.y2}}),_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.h.x1,"x2":_vm.cross.h.x2,"y1":_vm.cross.h.y1,"y2":_vm.cross.h.y2}})]):_vm._e(),(_vm.zero>0)?_c('g',[_c('line',{staticClass:"zero",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.zero,"y2":_vm.zero}})]):_vm._e(),_vm._l((_vm.ticksY),function(r){return _c('g',{key:r.y,staticClass:"ticksY"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":r.y,"y2":r.y}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x1+_vm.tsz.size,"y1":r.y,"y2":r.y}}),_c('text',{staticClass:"axislabely",attrs:{"x":_vm.axis.y.x1+_vm.tsz.off,"y":r.y+_vm.fs/3,"font-size":_vm.fs}},[_vm._v(_vm._s(r.price))])])}),_vm._l((_vm.ticksX),function(n){return _c('g',{key:n.y,staticClass:"ticksX"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y1+_vm.tsz.size}}),_c('text',{staticClass:"axislabelx",attrs:{"x":n.x,"y":_vm.axis.x.y1+_vm.tsz.size+_vm.tsz.off+_vm.fs/2,"font-size":_vm.fs}},[_vm._v(_vm._s(n.tm))])])}),_c('polyline',{staticClass:"plot",attrs:{"points":_vm.pointsAsPolyline}}),_c('g',{staticClass:"leftThumb",attrs:{"transform":'translate('+_vm.thumbs.left.x+','+_vm.thumbs.left.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.leftDrug = true}}},[_c('polyline',{attrs:{"points":"10,40 0,30 0,10 10,0 31,0 31,40 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.left.x1,"x2":_vm.wline.left.x2,"y1":_vm.wline.left.y1,"y2":_vm.wline.left.y2,"stroke-width":_vm.wline.left.sSize},on:{"click":_vm.wlineLeftClick}}),_c('rect',{staticClass:"mbody",attrs:{"x":_vm.wline.middle.x,"y":_vm.wline.middle.y,"width":_vm.wline.middle.w,"height":_vm.wline.middle.h},on:{"mouseleave":function($event){_vm.draggingCenter =!_vm.draggingCenter},"mouseenter":function($event){_vm.draggingCenter =!_vm.draggingCenter}}}),_c('g',{staticClass:"rightThumb",attrs:{"transform":'translate('+_vm.thumbs.right.x+','+_vm.thumbs.right.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.rightDrug = true}}},[_c('polyline',{attrs:{"points":"0,0 0,40 21,40 30,30 30,10 21,0 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.right.x1,"x2":_vm.wline.right.x2,"y1":_vm.wline.right.y1,"y2":_vm.wline.right.y2,"stroke-width":_vm.wline.right.sSize},on:{"click":_vm.wlineRightClick}})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/weChart.vue?vue&type=template&id=0d624b9e&lang=pug&
+// CONCATENATED MODULE: ./src/components/weChart.vue?vue&type=template&id=0101cc99&lang=pug&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
 var es_object_keys = __webpack_require__("b64b");
@@ -4331,7 +4331,7 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
         return '0.01';
       }
     },
-    timeFotmat: {
+    timefotmat: {
       type: [String],
       // if date or null
       default: function _default() {
@@ -4449,8 +4449,8 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
     points: function points(val) {
       if (val.length > 0) {
         this.pointsID.x1 = 0;
-        this.pointsID.x2 = val[0].data.length;
-        this.title = val[0].name ? val[0].name : '';
+        this.pointsID.x2 = val[0].data.length; //this.title = (val[0].name)? val[0].name:''
+
         this.loadChart();
       }
     },
@@ -4469,7 +4469,7 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
     scl: function scl() {
       this.loadChart();
     },
-    timeFotmat: function timeFotmat() {
+    timefotmat: function timefotmat() {
       this.loadChart();
     },
     fs: function fs() {
@@ -4483,6 +4483,9 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
     }
   },
   computed: {
+    chartName: function chartName() {
+      return this.points[0] ? this.points[0].name ? this.points[0].name : '' : '';
+    },
     viewBoxSet: function viewBoxSet() {
       return "0 0 ".concat(this.ds.width, " ").concat(this.ds.height);
     },
@@ -4612,7 +4615,7 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
 
       if (this.pSize != arr.length) {
         this.pSize = arr.length;
-        doAxis.formulaY(arr, this.axis, this.tky, this.calcOffsetX(), this.decimals, this.timeFotmat); // this.calcOffsetX()=58
+        doAxis.formulaY(arr, this.axis, this.tky, this.calcOffsetX(), this.decimals, this.timefotmat); // this.calcOffsetX()=58
 
         this.ticksY.splice(0, this.ticksY.length);
         this.ticksY = doAxis.ticksY().map(function (a) {
@@ -4622,7 +4625,7 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
         this.ticksX = doAxis.ticksX().map(function (a) {
           return a;
         });
-        if (this.timeFotmat) this.formatTicksX();
+        if (this.timefotmat) this.formatTicksX();
         this.pointYX.splice(0, this.pointYX.length); // chart data
 
         this.pointYX = doAxis.pointYX().map(function (a) {
@@ -4637,7 +4640,7 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
 
       var prevDtm = this.ticksX.length > 0 ? this.ticksX[0].dtm : null;
       this.ticksX.forEach(function (a) {
-        if (_this2.timeFotmat == 'HH:MM' || _this2.timeFotmat == 'HH:MM:ss') {
+        if (_this2.timefotmat == 'HH:MM' || _this2.timefotmat == 'HH:MM:ss') {
           if (new Date(a.dtm).getFullYear() !== new Date(prevDtm).getFullYear()) {
             a.tm = a.yy;
           } else if (new Date(a.dtm).getMonth() !== new Date(prevDtm).getMonth()) {
@@ -4645,7 +4648,7 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
           } else if (new Date(a.dtm).getDate() !== new Date(prevDtm).getDate()) {
             a.tm = new Date(a.dtm).getDate();
           }
-        } else if (_this2.timeFotmat == 'dd') {
+        } else if (_this2.timefotmat == 'dd') {
           if (new Date(a.dtm).getFullYear() !== new Date(prevDtm).getFullYear()) {
             a.tm = a.yy;
           } else if (new Date(a.dtm).getMonth() !== new Date(prevDtm).getMonth()) {
@@ -4670,11 +4673,11 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
       return boxWidth;
     },
     calcOffsetX: function calcOffsetX() {
-      var mxl = this.timeFotmat ? this.timeFotmat.length : 0;
+      var mxl = this.timefotmat ? this.timefotmat.length : 0;
       if (mxl == 0) mxl = this.points.length > 0 ? Math.max.apply(null, this.points[0].data.map(function (a) {
         return ('' + a.tm).length;
       })) : 6;
-      if (this.timeFotmat && mxl < 3) mxl = 3;
+      if (this.timefotmat && mxl < 3) mxl = 3;
       var boxWidth = mxl * this.fs;
       return boxWidth;
     },
@@ -4976,4 +4979,4 @@ module.exports = NATIVE_SYMBOL
 
 /******/ })["default"];
 });
-//# sourceMappingURL=WeChart.umd.js.map
+//# sourceMappingURL=WeDoChart.umd.js.map

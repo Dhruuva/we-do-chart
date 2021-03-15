@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<title>WeDoChart demo</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="./WeDoChart.umd.js"></script>
+
+<link rel="stylesheet" href="./WeDoChart.css">
+
+
+<div id="app">
+  <demo></demo>
+</div>
+
+<script>
+new Vue({
+  components: {
+    demo: WeDoChart
+  }
+}).$mount('#app')
+</script>
