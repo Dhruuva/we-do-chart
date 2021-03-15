@@ -3854,12 +3854,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"53b12b1e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/weChart.vue?vue&type=template&id=0101cc99&lang=pug&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"53b12b1e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/weChart.vue?vue&type=template&id=33a2d26c&lang=pug&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{ref:"sheet",attrs:{"id":"sheet","viewBox":_vm.viewBoxSet,"xmlns":"http://www.w3.org/2000/svg"},on:{"mousedown":_vm.startDrag,"mousemove":_vm.mousemove}},[_c('rect',{ref:"chartSheet",staticClass:"chartSheet",attrs:{"x":"0","y":"0","width":_vm.ds.width,"height":_vm.ds.height}}),_c('circle',{staticClass:"titlesDot",attrs:{"cx":_vm.axis.x.x1,"cy":_vm.axis.y.y2-1-_vm.fs/3,"r":_vm.fs/3}}),_c('text',{ref:"titles",staticClass:"legend",attrs:{"id":"legend","x":_vm.axis.x.x1+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs}},[_vm._v(_vm._s(_vm.cross.txt))]),_c('text',{staticClass:"titles",attrs:{"id":"title","x":_vm.axis.x.x1+(_vm.axis.x.x2-_vm.axis.x.x1)/2+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs*1.2}},[_vm._v(_vm._s(_vm.chartName)+" ")]),_c('line',{staticClass:"axisY",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x2,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}),_c('line',{staticClass:"axisX",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y2}}),(!_vm.cross.hide)?_c('g',[_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.v.x1,"x2":_vm.cross.v.x2,"y1":_vm.cross.v.y1,"y2":_vm.cross.v.y2}}),_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.h.x1,"x2":_vm.cross.h.x2,"y1":_vm.cross.h.y1,"y2":_vm.cross.h.y2}})]):_vm._e(),(_vm.zero>0)?_c('g',[_c('line',{staticClass:"zero",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.zero,"y2":_vm.zero}})]):_vm._e(),_vm._l((_vm.ticksY),function(r){return _c('g',{key:r.y,staticClass:"ticksY"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":r.y,"y2":r.y}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x1+_vm.tsz.size,"y1":r.y,"y2":r.y}}),_c('text',{staticClass:"axislabely",attrs:{"x":_vm.axis.y.x1+_vm.tsz.off,"y":r.y+_vm.fs/3,"font-size":_vm.fs}},[_vm._v(_vm._s(r.price))])])}),_vm._l((_vm.ticksX),function(n){return _c('g',{key:n.y,staticClass:"ticksX"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y1+_vm.tsz.size}}),_c('text',{staticClass:"axislabelx",attrs:{"x":n.x,"y":_vm.axis.x.y1+_vm.tsz.size+_vm.tsz.off+_vm.fs/2,"font-size":_vm.fs}},[_vm._v(_vm._s(n.tm))])])}),_c('polyline',{staticClass:"plot",attrs:{"points":_vm.pointsAsPolyline}}),_c('g',{staticClass:"leftThumb",attrs:{"transform":'translate('+_vm.thumbs.left.x+','+_vm.thumbs.left.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.leftDrug = true}}},[_c('polyline',{attrs:{"points":"10,40 0,30 0,10 10,0 31,0 31,40 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.left.x1,"x2":_vm.wline.left.x2,"y1":_vm.wline.left.y1,"y2":_vm.wline.left.y2,"stroke-width":_vm.wline.left.sSize},on:{"click":_vm.wlineLeftClick}}),_c('rect',{staticClass:"mbody",attrs:{"x":_vm.wline.middle.x,"y":_vm.wline.middle.y,"width":_vm.wline.middle.w,"height":_vm.wline.middle.h},on:{"mouseleave":function($event){_vm.draggingCenter =!_vm.draggingCenter},"mouseenter":function($event){_vm.draggingCenter =!_vm.draggingCenter}}}),_c('g',{staticClass:"rightThumb",attrs:{"transform":'translate('+_vm.thumbs.right.x+','+_vm.thumbs.right.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.rightDrug = true}}},[_c('polyline',{attrs:{"points":"0,0 0,40 21,40 30,30 30,10 21,0 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.right.x1,"x2":_vm.wline.right.x2,"y1":_vm.wline.right.y1,"y2":_vm.wline.right.y2,"stroke-width":_vm.wline.right.sSize},on:{"click":_vm.wlineRightClick}})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/weChart.vue?vue&type=template&id=0101cc99&lang=pug&
+// CONCATENATED MODULE: ./src/components/weChart.vue?vue&type=template&id=33a2d26c&lang=pug&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
 var es_object_keys = __webpack_require__("b64b");
@@ -4038,6 +4038,7 @@ var es_array_slice = __webpack_require__("fb6a");
       this.wline.left.active = true;
       this.thumbs.left.off = 0;
       this.thumbs.left.x = Math.floor(cursorPt.x);
+      this.thumbY();
     },
     wlineRightClick: function wlineRightClick(evt) {
       evt.preventDefault();
@@ -4048,6 +4049,7 @@ var es_array_slice = __webpack_require__("fb6a");
       this.wline.right.active = true;
       this.thumbs.right.off = 0;
       this.thumbs.right.x = Math.floor(cursorPt.x);
+      this.thumbYY();
     },
     stopDrag: function stopDrag() {
       this.draggingLeft = false;
@@ -4435,13 +4437,12 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
     pos: function pos() {
       this.crossMove();
       this.thumbYY();
-      this.thumbY(); //console.log( "Pos change",this.pos)
+      this.thumbY();
     },
     points: function points(val) {
       if (val.length > 0) {
         this.pointsID.x1 = 0;
-        this.pointsID.x2 = val[0].data.length; //this.title = (val[0].name)? val[0].name:''
-
+        this.pointsID.x2 = val[0].data.length;
         this.loadChart();
       }
     },
