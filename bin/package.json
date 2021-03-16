@@ -1,6 +1,6 @@
 {
   "name": "we-do-chart",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Nice looking and easy customize vue component for plot line-chart.Slider & resizing present.Truly adaptive.",
   "main": "WeDoChart.common.js",
   "module": "WeDoChart.umd.js",
