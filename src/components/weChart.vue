@@ -1,7 +1,7 @@
 
 <template lang="pug">
 	svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @mousedown="startDrag" @mousemove="mousemove" @wheel="zoom")
-		rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height" )
+		rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height" :style="cross.cursor" )
 		circle.titlesDot( :cx="axis.x.x1" :cy="axis.y.y2-1-fs/3" :r="fs/3" )
 		text.legend(id="legend" ref="titles" :x="axis.x.x1+1+fs/3" :y="axis.y.y2-1" :font-size="fs" ) {{cross.txt}}
 		text.titles(id="title"  :x="axis.x.x1+(axis.x.x2-axis.x.x1)/2+1+fs/3" :y="axis.y.y2-1" :font-size="fs*1.2" ) {{chartName}}	
@@ -99,7 +99,7 @@ export default {
 		limitSize : 0, // data count it's use in limit calculation
 		farPoints :[], // dev
 		move:"don't",
-		cross:{ v:{x1:0, y1:0, x2:0, y2:0 }, h:{x1:0, y1:0, x2:0, y2:0 }, hide:false, txt:"" },
+		cross:{ v:{x1:0, y1:0, x2:0, y2:0 }, h:{x1:0, y1:0, x2:0, y2:0 }, hide:false, txt:"",cursor:'cursor: crosshair;' },
 		pointsID:{x1:0,x2:15},
 		pos:{x:0, y:0},
 		ticksY:[],
@@ -248,33 +248,41 @@ export default {
 		},
 		zoom(event){
 			event.preventDefault();
-			this.zoomSlider(event.deltaY)
+			if (this.pos.x<this.axis.x.x2 && this.pos.x>this.axis.x.x1 && this.pos.y>this.axis.y.y2 && this.pos.y<this.axis.y.y1 ) {
+				this.zoomSlider(event.deltaY)
+			}	
 			//console.log(event.deltaY );
 		},
 		
 		crossMove(){
-			if (this.pos.x<this.axis.x.x2 && this.pos.x>this.axis.x.x1 && this.pos.y>this.axis.y.y2 && this.pos.y<this.axis.y.y1 ) {
-				this.cross.hide=false;
-				let arr = (this.pointYX.length >0)? this.pointYX:(this.points.length>0)?this.points[0].data:[]
-				let far = arr.map(a=> ({...a, f: Math.abs(a.x-this.pos.x) }) ).sort((a, b) =>Number(a.f-b.f))
-				this.farPoints.splice(0,this.farPoints.length)
-				this.farPoints = far
-				let p = (far.length>0) ? far[0] : null
-				if (p ){
-					this.cross.v.x1=p.x
-					this.cross.v.x2=p.x
-					this.cross.v.y1=this.axis.y.y1
-					this.cross.v.y2=this.axis.y.y2
-					this.cross.txt = p.price + " " + p.dtm;
-					this.cross.h.x1=this.axis.x.x1
-					this.cross.h.x2=this.axis.x.x2
-					this.cross.h.y1=p.y
-					this.cross.h.y2=p.y
-				} else {
-					this.cross.txt = "_" ;
-				}
+			if (this.pos.x<this.axis.x.x2 && this.pos.x>this.axis.x.x1 && this.pos.y>this.axis.y.y2 && this.pos.y<this.axis.y.y1 
+				) {
+				if ( this.cross.cursor!=='cursor: move;'){
+					this.cross.hide=false;
+					this.cross.cursor='cursor: crosshair;'
+					let arr = (this.pointYX.length >0)? this.pointYX:(this.points.length>0)?this.points[0].data:[]
+					let far = arr.map(a=> ({...a, f: Math.abs(a.x-this.pos.x) }) ).sort((a, b) =>Number(a.f-b.f))
+					this.farPoints.splice(0,this.farPoints.length)
+					this.farPoints = far
+					let p = (far.length>0) ? far[0] : null
+					if (p ){
+						this.cross.v.x1=p.x
+						this.cross.v.x2=p.x
+						this.cross.v.y1=this.axis.y.y1
+						this.cross.v.y2=this.axis.y.y2
+						this.cross.txt = p.price + " " + p.dtm;
+						this.cross.h.x1=this.axis.x.x1
+						this.cross.h.x2=this.axis.x.x2
+						this.cross.h.y1=p.y
+						this.cross.h.y2=p.y
+					} else {
+						this.cross.txt = "_" ;
+					}
+				}	
 			}	else {
+				this.cross.cursor='cursor: default;'
 				this.cross.hide=true;
+
 			}
 			
 		},

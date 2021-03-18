@@ -32,19 +32,8 @@ export default {
 		thumbY() {
 			let wd = this.scl*31,lmt =this.thumbs.step*this.limitSize
 			if (this.draggingCenter && !this.rightDrug && !this.leftDrug && this.moveDrug ){
-				let xp = this.pos.x-this.thumbs.left.mp, rx = this.thumbs.right.mp+this.pos.x
-				if(  rx <= this.axis.x.x2) this.getDisplayData(xp, this.thumbs.right.x) 
-				if( xp >= this.axis.x.x1-wd &&  rx <= this.axis.x.x2){
-					this.thumbs.left.x = xp
-					this.wline.left.x2 = ( xp < this.axis.x.x1)? this.axis.x.x1:xp
-					this.wline.middle.x = this.thumbs.left.x + wd
-				} else if ( xp< this.axis.x.x1-wd &&  rx <= this.axis.x.x2){
-					
-					xp=this.axis.x.x1-wd
-					this.thumbs.left.x = xp
-					this.wline.left.x2 = ( xp < this.axis.x.x1)? this.axis.x.x1:xp
-					this.wline.middle.x = this.thumbs.left.x + wd
-				}
+				this.moveChartLeft(wd);
+				
 			} else if ((this.leftDrug && this.draggingLeft) || this.wline.left.active){
 				let offset = (this.thumbs.left.off)? this.thumbs.left.off:this.scl*31
 				
@@ -63,28 +52,7 @@ export default {
 			let wd = this.scl*31,lmt =this.thumbs.step*this.limitSize
 			let offset = (this.thumbs.right.off)? this.thumbs.right.off:0
 			if (this.draggingCenter && !this.rightDrug && !this.leftDrug && this.moveDrug ){
-
-				let xp = this.thumbs.right.mp+this.pos.x ,lx = this.pos.x-this.thumbs.left.mp
-				if (lx >= this.axis.x.x1-wd) this.getDisplayData(this.thumbs.left.x, xp)
-				if (xp <= this.axis.x.x2 && lx >= this.axis.x.x1-wd) { 
-					this.thumbs.right.x = xp
-					this.wline.right.x1 = (xp+wd > this.axis.x.x2)? this.axis.x.x2: xp+wd
-					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x
-					
-					this.move = "move"
-				} else if (xp > this.axis.x.x2 && lx >= this.axis.x.x1-wd) {
-					xp=this.axis.x.x2
-					this.thumbs.right.x = xp
-					this.wline.right.x1 = (xp+wd > this.axis.x.x2)? this.axis.x.x2: xp+wd
-					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x
-				} 
-				else if ( lx < this.axis.x.x1-wd) {
-					xp=this.wline.middle.w+this.thumbs.left.x
-					this.thumbs.right.x = xp
-					this.wline.right.x1 = (xp+wd > this.axis.x.x2)? this.axis.x.x2: xp+wd
-					this.move = "dont't move";
-				}
-
+				this.moveChartRight(wd)
 			} else if (this.rightDrug && this.draggingRight || this.wline.right.active){
 				if( this.pos.x  < this.axis.x.x2+wd && (this.pos.x - offset -this.thumbs.left.x)>lmt ) {
 					this.thumbs.right.x = this.pos.x - offset
@@ -134,6 +102,43 @@ export default {
 
 				console.log('lmt ', lmt );
 			}
+		},
+		moveChartLeft(wd){
+			let xp = this.pos.x-this.thumbs.left.mp, rx = this.thumbs.right.mp+this.pos.x
+				if(  rx <= this.axis.x.x2) this.getDisplayData(xp, this.thumbs.right.x) 
+				if( xp >= this.axis.x.x1-wd &&  rx <= this.axis.x.x2){
+					this.thumbs.left.x = xp
+					this.wline.left.x2 = ( xp < this.axis.x.x1)? this.axis.x.x1:xp
+					this.wline.middle.x = this.thumbs.left.x + wd
+				} else if ( xp< this.axis.x.x1-wd &&  rx <= this.axis.x.x2){
+					
+					xp=this.axis.x.x1-wd
+					this.thumbs.left.x = xp
+					this.wline.left.x2 = ( xp < this.axis.x.x1)? this.axis.x.x1:xp
+					this.wline.middle.x = this.thumbs.left.x + wd
+				}
+		},
+		moveChartRight(wd){
+			let xp = this.thumbs.right.mp+this.pos.x ,lx = this.pos.x-this.thumbs.left.mp
+				if (lx >= this.axis.x.x1-wd) this.getDisplayData(this.thumbs.left.x, xp)
+				if (xp <= this.axis.x.x2 && lx >= this.axis.x.x1-wd) { 
+					this.thumbs.right.x = xp
+					this.wline.right.x1 = (xp+wd > this.axis.x.x2)? this.axis.x.x2: xp+wd
+					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x
+					
+					this.move = "move"
+				} else if (xp > this.axis.x.x2 && lx >= this.axis.x.x1-wd) {
+					xp=this.axis.x.x2
+					this.thumbs.right.x = xp
+					this.wline.right.x1 = (xp+wd > this.axis.x.x2)? this.axis.x.x2: xp+wd
+					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x
+				} 
+				else if ( lx < this.axis.x.x1-wd) {
+					xp=this.wline.middle.w+this.thumbs.left.x
+					this.thumbs.right.x = xp
+					this.wline.right.x1 = (xp+wd > this.axis.x.x2)? this.axis.x.x2: xp+wd
+					this.move = "dont't move";
+				}
 		}
 	}
 }
