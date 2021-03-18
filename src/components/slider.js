@@ -98,5 +98,48 @@ export default {
 			}
 			this.wline.right.active = false 
 		},
+		zoomSlider(x){
+			let wd = this.scl*31,lmt =this.thumbs.step*this.limitSize,zms=10
+			let xRight,xLeft,offset = (this.thumbs.right.off)? this.thumbs.right.off:0
+			if (x>0) {
+				
+				xRight = this.thumbs.right.x - zms, xLeft = this.thumbs.left.x + zms
+				console.log('lmt ', lmt ,'wd ',wd, 'offset ',offset,'xRight ',xRight);
+				console.log('this.axis.x.x2+wd ',this.axis.x.x2+wd);
+				if( (xRight - offset -this.thumbs.left.x)>lmt ) {
+					this.thumbs.right.x = xRight - offset
+					this.wline.right.x1 = (xRight > this.axis.x.x2 - wd ) ?  this.wline.right.x2:this.thumbs.right.x+wd
+					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x
+					this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x)
+
+				}
+				if ( xLeft > this.axis.x.x1  && (this.thumbs.right.x -xLeft - offset)>lmt  ) {
+					this.thumbs.left.x = xLeft - offset
+					this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
+					this.wline.middle.x = this.thumbs.left.x + wd
+					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
+					//this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x)
+				} 
+
+			} else {
+				xRight = this.thumbs.right.x + zms, xLeft = this.thumbs.left.x - zms
+				if( xRight  < this.axis.x.x2+wd  ) {
+					this.thumbs.right.x = xRight - offset
+					this.wline.right.x1 = (xRight > this.axis.x.x2 - wd ) ?  this.wline.right.x2:this.thumbs.right.x+wd
+					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x
+					this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x)
+
+				}
+				if ( xLeft > this.axis.x.x1   ) {
+					this.thumbs.left.x = xLeft - offset
+					this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
+					this.wline.middle.x = this.thumbs.left.x + wd
+					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
+					//this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x)
+				} 
+
+				console.log('lmt ', lmt );
+			}
+		}
 	}
 }
