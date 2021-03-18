@@ -116,6 +116,7 @@ export default {
 	mounted() {
 		window.addEventListener('mouseup', this.stopDrag);
 		window.addEventListener("resize", this.reSize);
+		window.addEventListener('wheel', zoom);
 		this.svg = this.$refs.sheet
 		this.ds.width=this.$refs.sheet.clientWidth
 		this.ds.height= this.$refs.sheet.clientHeight
@@ -242,6 +243,7 @@ export default {
 		destroy: function () {
 			window.removeEventListener('mouseup', this.stopDrag);
 			window.removeEventListener("resize", this.reSize);
+			window.removeEventListener('wheel', zoom);
 		},
 		
 		crossMove(){
