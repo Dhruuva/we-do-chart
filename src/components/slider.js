@@ -5,6 +5,8 @@ export default {
 			let hf =  (this.ds.height-(this.axis.y.y1 + this.fs*1.18))/2 + (this.scl*40)/2
 			let y = this.ds.height-hf
 		
+		console.log("this.axis.x.x1",this.axis.x.x1, "this.scl*31", this.scl*31)
+
 			this.thumbs.left.x = this.axis.x.x1 - this.scl*31
 			this.thumbs.left.y = y
 			this.wline.left.x1 = this.axis.x.x1
@@ -26,7 +28,7 @@ export default {
 			this.wline.right.y1 = y + this.scl*40/2
 			this.wline.right.y2 = y + this.scl*40/2
 			this.wline.right.sSize = this.scl*40*0.6
-				
+			console.log( "this.thumbs.left.x",this.thumbs.left.x)	
 			return 'ok'
 		},
 		thumbY() {
@@ -35,10 +37,11 @@ export default {
 				this.moveChartLeft(wd);
 				
 			} else if ((this.leftDrug && this.draggingLeft) || this.wline.left.active){
-				let offset = (this.thumbs.left.off)? this.thumbs.left.off:this.scl*31
+				let offset = (this.thumbs.left.off)? this.thumbs.left.off:wd
 				
-				if ( (this.pos.x + wd) > this.axis.x.x1  && (this.thumbs.right.x -this.pos.x - offset)>lmt  ) {
+				if ( (this.pos.x - offset+wd) > this.axis.x.x1  && (this.thumbs.right.x -this.pos.x - offset)>lmt  ) {
 					this.thumbs.left.x = this.pos.x - offset
+					console.log('wd',wd ,"x=",this.pos.x ,"thumbY()  -> this.thumbs.left.x",this.thumbs.left.x,"off=",this.thumbs.left.off)
 					this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
 					this.wline.middle.x = this.thumbs.left.x + wd
 					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
@@ -68,11 +71,12 @@ export default {
 		},
 		zoomSlider(x){
 			let wd = this.scl*31,lmt =this.thumbs.step*this.limitSize,zms=10
-			let xLeft,offset = (this.thumbs.left.off)? this.thumbs.left.off:this.scl*31
+			let xLeft,offset = (this.thumbs.left.off)? this.thumbs.left.off:wd
 			if (x>0) {
 				xLeft = this.thumbs.left.x + zms
-				if ( xLeft > this.axis.x.x1  && (this.thumbs.right.x -xLeft - offset)>lmt  ) {
-					this.thumbs.left.x = xLeft + offset
+				if ( (this.thumbs.right.x -xLeft - offset)>lmt  ) {
+					this.thumbs.left.x = xLeft 
+					console.log("zoomSlider --> this.thumbs.left.x",this.thumbs.left.x)
 					this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
 					this.wline.middle.x = this.thumbs.left.x + wd
 					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
@@ -81,14 +85,16 @@ export default {
 
 			} else {
 				xLeft = this.thumbs.left.x - zms
-				if ( xLeft > this.axis.x.x1   ) {
-					this.thumbs.left.x = xLeft - offset
+				if ( xLeft+wd > this.axis.x.x1   ) {
+					this.thumbs.left.x = xLeft   //offset
+					console.log(" 2 zoomSlider --> this.thumbs.left.x",this.thumbs.left.x)
 					this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
 					this.wline.middle.x = this.thumbs.left.x + wd
 					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
 					this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x)
 				} else {
-					this.thumbs.left.x = this.axis.x.x1 
+					this.thumbs.left.x = this.axis.x.x1 -wd
+					console.log(" 3 zoomSlider --> this.thumbs.left.x",this.thumbs.left.x)
 					this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
 					this.wline.middle.x = this.thumbs.left.x + wd
 					this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
@@ -102,12 +108,14 @@ export default {
 				if(  rx <= this.axis.x.x2) this.getDisplayData(xp, this.thumbs.right.x) 
 				if( xp >= this.axis.x.x1-wd &&  rx <= this.axis.x.x2){
 					this.thumbs.left.x = xp
+					console.log("moveChartLeft-->this.thumbs.left.x",this.thumbs.left.x)
 					this.wline.left.x2 = ( xp < this.axis.x.x1)? this.axis.x.x1:xp
 					this.wline.middle.x = this.thumbs.left.x + wd
 				} else if ( xp< this.axis.x.x1-wd &&  rx <= this.axis.x.x2){
 					
 					xp=this.axis.x.x1-wd
 					this.thumbs.left.x = xp
+					console.log("2 moveChartLeft-->this.thumbs.left.x",this.thumbs.left.x)
 					this.wline.left.x2 = ( xp < this.axis.x.x1)? this.axis.x.x1:xp
 					this.wline.middle.x = this.thumbs.left.x + wd
 				}

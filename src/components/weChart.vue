@@ -4,7 +4,9 @@
 		rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height" :style="cross.cursor" @mouseup="stopDrag")
 		circle.titlesDot( :cx="axis.x.x1" :cy="axis.y.y2-1-fs/3" :r="fs/3" )
 		text.legend(id="legend" ref="titles" :x="axis.x.x1+1+fs/3" :y="axis.y.y2-1" :font-size="fs" ) {{cross.txt}}
-		text.titles(id="title"  :x="axis.x.x1+(axis.x.x2-axis.x.x1)/2+1+fs/3" :y="axis.y.y2-1" :font-size="fs*1.2" ) {{chartName}}	
+		text.titles(id="title"  :x="axis.x.x1+(axis.x.x2-axis.x.x1)/2+1+fs/3" :y="axis.y.y2-1" :font-size="fs*1.2" ) {{axis.y.y2}}	
+		text.titles(x="100" y="100" :font-size="fs*1.2" ) x1= {{axis.x.x1}}
+		text.titles(x="120" y="125" :font-size="fs*1.2" ) thumbs.left.x= {{thumbs.left.x}}
 		line.axisY(:x1="axis.y.x1" :x2="axis.y.x2" :y1="axis.y.y1" :y2="axis.y.y2" )
 		line.axisX(:x1="axis.x.x1" :x2="axis.x.x2" :y1="axis.x.y1" :y2="axis.x.y2" )
 		g(v-if="!cross.hide")
@@ -144,6 +146,7 @@ export default {
 			this.crossMove()
 			this.thumbYY()
 			this.thumbY()
+			//this.initSlider()
 		},
 		
 		points(val){
@@ -218,7 +221,9 @@ export default {
 			let lfBox= this.calcOffsetX()
 			let hbox = this.calcMiniBottomHight()
 			let tbox = this.calcMiniTopHight()
-			let x = (off) < lfBox/3 ? lfBox/3:off;
+			let x = (off) < lfBox/3 ? lfBox/3:off
+			if (x < this.scl*31) x=this.scl*31+(this.scl*31/2.5)
+			console.log(" lfBox ",lfBox ," this.scl*31 ",this.scl*31," lfBox/3 ",lfBox/3)
 			let y = (off) < hbox ? hbox:off;
 			let y2 = (tbox > off ) ? tbox:off;
 			let x2 = (off) < wbox/1.5 ? wbox/1.5:off;
@@ -391,7 +396,8 @@ export default {
 		},
 		moveSlider(x1,x2){
 			let wd = this.scl*31
-			this.thumbs.left.x = x1
+			this.thumbs.left.x = x1-wd
+			console.log("moveSlider  -->this.thumbs.left.x",this.thumbs.left.x)
 			this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
 			this.wline.middle.x = this.thumbs.left.x + wd
 			this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
@@ -437,6 +443,7 @@ export default {
 		stroke blue
 		stroke-width 2.5
 		fill snow
+		z-index 1
 	.legend
 		font-family  Arial, Helvetica Neue, Helvetica
 		fill $colorPlot
@@ -447,6 +454,7 @@ export default {
 		font-weight 800
 		text-anchor middle	
 		stroke transparent
+		z-index 2
 	.titlesDot
 		stroke-width 1.1
 		font-family  Arial, Helvetica Neue, Helvetica
