@@ -12,12 +12,12 @@
 								p.display-1.text--primary.text-left weChart 
 									span.float-right
 										v-btn.mx-2(  small color="primary" dark @click="loadData('sto')") Load Data  
-								p.body-1.text-left.pa-2 
+								p.body-1.text-left.pa-2
 									|  This is a brief interactive guide help You in quick its implementation in Web pages with all your requirements.Let's go to load some sample data in the component and look it.
 									| Resize this panel size using thumb or resize browser window. The 
 									span.green--text.font-weight-bold weChart
 									|   will stay in pretty look.	Any screen size you get the pretty looking your data visualizations.
-					
+								
 					v-tab-item
 						v-card(flat )
 							v-toolbar(color="orange" dense)

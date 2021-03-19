@@ -68,13 +68,9 @@ export default {
 		},
 		zoomSlider(x){
 			let wd = this.scl*31,lmt =this.thumbs.step*this.limitSize,zms=10
-			let xRight,xLeft,offset = (this.thumbs.left.off)? this.thumbs.left.off:this.scl*31
+			let xLeft,offset = (this.thumbs.left.off)? this.thumbs.left.off:this.scl*31
 			if (x>0) {
-				
-				xRight = this.thumbs.right.x - zms, xLeft = this.thumbs.left.x + zms
-				console.log('lmt ', lmt ,'wd ',wd, 'offset ',offset,'xRight ',xRight);
-				console.log('this.axis.x.x2+wd ',this.axis.x.x2+wd);
-				
+				xLeft = this.thumbs.left.x + zms
 				if ( xLeft > this.axis.x.x1  && (this.thumbs.right.x -xLeft - offset)>lmt  ) {
 					this.thumbs.left.x = xLeft + offset
 					this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
@@ -84,7 +80,7 @@ export default {
 				} 
 
 			} else {
-				xRight = this.thumbs.right.x + zms, xLeft = this.thumbs.left.x - zms
+				xLeft = this.thumbs.left.x - zms
 				if ( xLeft > this.axis.x.x1   ) {
 					this.thumbs.left.x = xLeft - offset
 					this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
@@ -99,8 +95,6 @@ export default {
 					this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x)
 
 				}
-
-				console.log('lmt ', lmt );
 			}
 		},
 		moveChartLeft(wd){

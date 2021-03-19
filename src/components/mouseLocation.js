@@ -91,6 +91,7 @@ export default {
 			this.moveDrug = false;
 			if (this.pos.x<this.axis.x.x2 && this.pos.x>this.axis.x.x1 && this.pos.y>this.axis.y.y2 && this.pos.y<this.axis.y.y1 ) {
 					this.cross.cursor='cursor: crosshair;'
+					this.draggingCenter=false
 			}
 			
 		},
