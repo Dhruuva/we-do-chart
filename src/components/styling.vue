@@ -36,6 +36,7 @@
           stroke: #00f;
           stroke-width: 2.5;
           fill: #fffafa;
+          z-index: 1;
         }
         .legend {
           font-family: Arial, Helvetica Neue, Helvetica;
@@ -47,6 +48,7 @@
           fill: #0074d9;
           font-weight: 800;
           text-anchor: middle;
+          z-index: 2;
         }
         .titlesDot {
           stroke-width: 1.1;

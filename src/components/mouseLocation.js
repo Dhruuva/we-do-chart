@@ -70,7 +70,6 @@ export default {
 			this.wline.left.active = true
 			this.thumbs.left.off = 0
 			this.thumbs.left.x = Math.floor(cursorPt.x)
-			console.log("wlineLeftClick")
 			this.thumbY()
 		},
 		wlineRightClick(evt){
