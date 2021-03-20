@@ -3854,12 +3854,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"53b12b1e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/weChart.vue?vue&type=template&id=33a2d26c&lang=pug&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{ref:"sheet",attrs:{"id":"sheet","viewBox":_vm.viewBoxSet,"xmlns":"http://www.w3.org/2000/svg"},on:{"mousedown":_vm.startDrag,"mousemove":_vm.mousemove}},[_c('rect',{ref:"chartSheet",staticClass:"chartSheet",attrs:{"x":"0","y":"0","width":_vm.ds.width,"height":_vm.ds.height}}),_c('circle',{staticClass:"titlesDot",attrs:{"cx":_vm.axis.x.x1,"cy":_vm.axis.y.y2-1-_vm.fs/3,"r":_vm.fs/3}}),_c('text',{ref:"titles",staticClass:"legend",attrs:{"id":"legend","x":_vm.axis.x.x1+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs}},[_vm._v(_vm._s(_vm.cross.txt))]),_c('text',{staticClass:"titles",attrs:{"id":"title","x":_vm.axis.x.x1+(_vm.axis.x.x2-_vm.axis.x.x1)/2+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs*1.2}},[_vm._v(_vm._s(_vm.chartName)+" ")]),_c('line',{staticClass:"axisY",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x2,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}),_c('line',{staticClass:"axisX",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y2}}),(!_vm.cross.hide)?_c('g',[_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.v.x1,"x2":_vm.cross.v.x2,"y1":_vm.cross.v.y1,"y2":_vm.cross.v.y2}}),_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.h.x1,"x2":_vm.cross.h.x2,"y1":_vm.cross.h.y1,"y2":_vm.cross.h.y2}})]):_vm._e(),(_vm.zero>0)?_c('g',[_c('line',{staticClass:"zero",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.zero,"y2":_vm.zero}})]):_vm._e(),_vm._l((_vm.ticksY),function(r){return _c('g',{key:r.y,staticClass:"ticksY"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":r.y,"y2":r.y}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x1+_vm.tsz.size,"y1":r.y,"y2":r.y}}),_c('text',{staticClass:"axislabely",attrs:{"x":_vm.axis.y.x1+_vm.tsz.off,"y":r.y+_vm.fs/3,"font-size":_vm.fs}},[_vm._v(_vm._s(r.price))])])}),_vm._l((_vm.ticksX),function(n){return _c('g',{key:n.y,staticClass:"ticksX"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y1+_vm.tsz.size}}),_c('text',{staticClass:"axislabelx",attrs:{"x":n.x,"y":_vm.axis.x.y1+_vm.tsz.size+_vm.tsz.off+_vm.fs/2,"font-size":_vm.fs}},[_vm._v(_vm._s(n.tm))])])}),_c('polyline',{staticClass:"plot",attrs:{"points":_vm.pointsAsPolyline}}),_c('g',{staticClass:"leftThumb",attrs:{"transform":'translate('+_vm.thumbs.left.x+','+_vm.thumbs.left.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.leftDrug = true}}},[_c('polyline',{attrs:{"points":"10,40 0,30 0,10 10,0 31,0 31,40 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.left.x1,"x2":_vm.wline.left.x2,"y1":_vm.wline.left.y1,"y2":_vm.wline.left.y2,"stroke-width":_vm.wline.left.sSize},on:{"click":_vm.wlineLeftClick}}),_c('rect',{staticClass:"mbody",attrs:{"x":_vm.wline.middle.x,"y":_vm.wline.middle.y,"width":_vm.wline.middle.w,"height":_vm.wline.middle.h},on:{"mouseleave":function($event){_vm.draggingCenter =!_vm.draggingCenter},"mouseenter":function($event){_vm.draggingCenter =!_vm.draggingCenter}}}),_c('g',{staticClass:"rightThumb",attrs:{"transform":'translate('+_vm.thumbs.right.x+','+_vm.thumbs.right.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.rightDrug = true}}},[_c('polyline',{attrs:{"points":"0,0 0,40 21,40 30,30 30,10 21,0 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.right.x1,"x2":_vm.wline.right.x2,"y1":_vm.wline.right.y1,"y2":_vm.wline.right.y2,"stroke-width":_vm.wline.right.sSize},on:{"click":_vm.wlineRightClick}})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"53b12b1e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/weChart.vue?vue&type=template&id=6f25c036&lang=pug&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{ref:"sheet",attrs:{"id":"sheet","viewBox":_vm.viewBoxSet,"xmlns":"http://www.w3.org/2000/svg"},on:{"mousedown":_vm.startDrag,"mousemove":_vm.mousemove,"wheel":_vm.zoom}},[_c('rect',{ref:"chartSheet",staticClass:"chartSheet",style:(_vm.cross.cursor),attrs:{"x":"0","y":"0","width":_vm.ds.width,"height":_vm.ds.height},on:{"mouseup":_vm.stopDrag}}),_c('circle',{staticClass:"titlesDot",attrs:{"cx":_vm.axis.x.x1,"cy":_vm.axis.y.y2-1-_vm.fs/3,"r":_vm.fs/3}}),_c('text',{ref:"titles",staticClass:"legend",attrs:{"id":"legend","x":_vm.axis.x.x1+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs}},[_vm._v(_vm._s(_vm.cross.txt))]),_c('text',{staticClass:"titles",attrs:{"id":"title","x":_vm.axis.x.x1+(_vm.axis.x.x2-_vm.axis.x.x1)/2+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs*1.2}},[_vm._v(_vm._s(_vm.chartName)+" ")]),_c('line',{staticClass:"axisY",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x2,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}),_c('line',{staticClass:"axisX",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y2}}),(!_vm.cross.hide)?_c('g',[_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.v.x1,"x2":_vm.cross.v.x2,"y1":_vm.cross.v.y1,"y2":_vm.cross.v.y2}}),_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.h.x1,"x2":_vm.cross.h.x2,"y1":_vm.cross.h.y1,"y2":_vm.cross.h.y2}})]):_vm._e(),(_vm.zero>0)?_c('g',[_c('line',{staticClass:"zero",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.zero,"y2":_vm.zero}})]):_vm._e(),_vm._l((_vm.ticksY),function(r){return _c('g',{key:r.y,staticClass:"ticksY"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":r.y,"y2":r.y}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x1+_vm.tsz.size,"y1":r.y,"y2":r.y}}),_c('text',{staticClass:"axislabely",attrs:{"x":_vm.axis.y.x1+_vm.tsz.off,"y":r.y+_vm.fs/3,"font-size":_vm.fs}},[_vm._v(_vm._s(r.price))])])}),_vm._l((_vm.ticksX),function(n){return _c('g',{key:n.y,staticClass:"ticksX"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y1+_vm.tsz.size}}),_c('text',{staticClass:"axislabelx",attrs:{"x":n.x,"y":_vm.axis.x.y1+_vm.tsz.size+_vm.tsz.off+_vm.fs/2,"font-size":_vm.fs}},[_vm._v(_vm._s(n.tm))])])}),_c('polyline',{staticClass:"plot",attrs:{"points":_vm.pointsAsPolyline}}),_c('g',{staticClass:"leftThumb",attrs:{"transform":'translate('+_vm.thumbs.left.x+','+_vm.thumbs.left.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.leftDrug = true}}},[_c('polyline',{attrs:{"points":"10,40 0,30 0,10 10,0 31,0 31,40 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.left.x1,"x2":_vm.wline.left.x2,"y1":_vm.wline.left.y1,"y2":_vm.wline.left.y2,"stroke-width":_vm.wline.left.sSize},on:{"click":_vm.wlineLeftClick}}),_c('rect',{staticClass:"mbody",attrs:{"x":_vm.wline.middle.x,"y":_vm.wline.middle.y,"width":_vm.wline.middle.w,"height":_vm.wline.middle.h},on:{"mouseleave":function($event){_vm.draggingCenter =!_vm.draggingCenter},"mouseenter":function($event){_vm.draggingCenter =!_vm.draggingCenter}}}),_c('g',{staticClass:"rightThumb",attrs:{"transform":'translate('+_vm.thumbs.right.x+','+_vm.thumbs.right.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.rightDrug = true}}},[_c('polyline',{attrs:{"points":"0,0 0,40 21,40 30,30 30,10 21,0 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.right.x1,"x2":_vm.wline.right.x2,"y1":_vm.wline.right.y1,"y2":_vm.wline.right.y2,"stroke-width":_vm.wline.right.sSize},on:{"click":_vm.wlineRightClick}})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/weChart.vue?vue&type=template&id=33a2d26c&lang=pug&
+// CONCATENATED MODULE: ./src/components/weChart.vue?vue&type=template&id=6f25c036&lang=pug&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
 var es_object_keys = __webpack_require__("b64b");
@@ -3987,6 +3987,11 @@ var es_array_slice = __webpack_require__("fb6a");
     startDrag: function startDrag(evt) {
       evt.preventDefault();
 
+      if (this.pos.x < this.axis.x.x2 && this.pos.x > this.axis.x.x1 && this.pos.y > this.axis.y.y2 && this.pos.y < this.axis.y.y1) {
+        this.cross.cursor = 'cursor: move;';
+        this.draggingCenter = true;
+      }
+
       if (this.leftDrug) {
         this.draggingCenter = false;
         this.rightDrug = false;
@@ -4057,6 +4062,11 @@ var es_array_slice = __webpack_require__("fb6a");
       this.leftDrug = false;
       this.rightDrug = false;
       this.moveDrug = false;
+
+      if (this.pos.x < this.axis.x.x2 && this.pos.x > this.axis.x.x1 && this.pos.y > this.axis.y.y2 && this.pos.y < this.axis.y.y1) {
+        this.cross.cursor = 'cursor: crosshair;';
+        this.draggingCenter = false;
+      }
     },
     stopThumb: function stopThumb() {
       if (this.leftDrug && !this.draggingLeft) this.leftDrug = false;
@@ -4132,24 +4142,11 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
           lmt = this.thumbs.step * this.limitSize;
 
       if (this.draggingCenter && !this.rightDrug && !this.leftDrug && this.moveDrug) {
-        var xp = this.pos.x - this.thumbs.left.mp,
-            rx = this.thumbs.right.mp + this.pos.x;
-        if (rx <= this.axis.x.x2) this.getDisplayData(xp, this.thumbs.right.x);
-
-        if (xp >= this.axis.x.x1 - wd && rx <= this.axis.x.x2) {
-          this.thumbs.left.x = xp;
-          this.wline.left.x2 = xp < this.axis.x.x1 ? this.axis.x.x1 : xp;
-          this.wline.middle.x = this.thumbs.left.x + wd;
-        } else if (xp < this.axis.x.x1 - wd && rx <= this.axis.x.x2) {
-          xp = this.axis.x.x1 - wd;
-          this.thumbs.left.x = xp;
-          this.wline.left.x2 = xp < this.axis.x.x1 ? this.axis.x.x1 : xp;
-          this.wline.middle.x = this.thumbs.left.x + wd;
-        }
+        this.moveChartLeft(wd);
       } else if (this.leftDrug && this.draggingLeft || this.wline.left.active) {
-        var offset = this.thumbs.left.off ? this.thumbs.left.off : this.scl * 31;
+        var offset = this.thumbs.left.off ? this.thumbs.left.off : wd;
 
-        if (this.pos.x + wd > this.axis.x.x1 && this.thumbs.right.x - this.pos.x - offset > lmt) {
+        if (this.pos.x - offset + wd > this.axis.x.x1 && this.thumbs.right.x - this.pos.x - offset > lmt) {
           this.thumbs.left.x = this.pos.x - offset;
           this.wline.left.x2 = this.thumbs.left.x < this.axis.x.x1 ? this.wline.left.x1 : this.thumbs.left.x;
           this.wline.middle.x = this.thumbs.left.x + wd;
@@ -4166,26 +4163,7 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
       var offset = this.thumbs.right.off ? this.thumbs.right.off : 0;
 
       if (this.draggingCenter && !this.rightDrug && !this.leftDrug && this.moveDrug) {
-        var xp = this.thumbs.right.mp + this.pos.x,
-            lx = this.pos.x - this.thumbs.left.mp;
-        if (lx >= this.axis.x.x1 - wd) this.getDisplayData(this.thumbs.left.x, xp);
-
-        if (xp <= this.axis.x.x2 && lx >= this.axis.x.x1 - wd) {
-          this.thumbs.right.x = xp;
-          this.wline.right.x1 = xp + wd > this.axis.x.x2 ? this.axis.x.x2 : xp + wd;
-          this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x;
-          this.move = "move";
-        } else if (xp > this.axis.x.x2 && lx >= this.axis.x.x1 - wd) {
-          xp = this.axis.x.x2;
-          this.thumbs.right.x = xp;
-          this.wline.right.x1 = xp + wd > this.axis.x.x2 ? this.axis.x.x2 : xp + wd;
-          this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x;
-        } else if (lx < this.axis.x.x1 - wd) {
-          xp = this.wline.middle.w + this.thumbs.left.x;
-          this.thumbs.right.x = xp;
-          this.wline.right.x1 = xp + wd > this.axis.x.x2 ? this.axis.x.x2 : xp + wd;
-          this.move = "dont't move";
-        }
+        this.moveChartRight(wd);
       } else if (this.rightDrug && this.draggingRight || this.wline.right.active) {
         if (this.pos.x < this.axis.x.x2 + wd && this.pos.x - offset - this.thumbs.left.x > lmt) {
           this.thumbs.right.x = this.pos.x - offset;
@@ -4196,6 +4174,80 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
       }
 
       this.wline.right.active = false;
+    },
+    zoomSlider: function zoomSlider(x) {
+      var wd = this.scl * 31,
+          lmt = this.thumbs.step * this.limitSize,
+          zms = 10;
+      var xLeft,
+          offset = this.thumbs.left.off ? this.thumbs.left.off : wd;
+
+      if (x > 0) {
+        xLeft = this.thumbs.left.x + zms;
+
+        if (this.thumbs.right.x - xLeft - offset > lmt) {
+          this.thumbs.left.x = xLeft;
+          this.wline.left.x2 = this.thumbs.left.x < this.axis.x.x1 ? this.wline.left.x1 : this.thumbs.left.x;
+          this.wline.middle.x = this.thumbs.left.x + wd;
+          this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x - wd;
+          this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x);
+        }
+      } else {
+        xLeft = this.thumbs.left.x - zms;
+
+        if (xLeft + wd > this.axis.x.x1) {
+          this.thumbs.left.x = xLeft; //offset
+
+          this.wline.left.x2 = this.thumbs.left.x < this.axis.x.x1 ? this.wline.left.x1 : this.thumbs.left.x;
+          this.wline.middle.x = this.thumbs.left.x + wd;
+          this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x - wd;
+          this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x);
+        } else {
+          this.thumbs.left.x = this.axis.x.x1 - wd;
+          this.wline.left.x2 = this.thumbs.left.x < this.axis.x.x1 ? this.wline.left.x1 : this.thumbs.left.x;
+          this.wline.middle.x = this.thumbs.left.x + wd;
+          this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x - wd;
+          this.getDisplayData(this.thumbs.left.x, this.thumbs.right.x);
+        }
+      }
+    },
+    moveChartLeft: function moveChartLeft(wd) {
+      var xp = this.pos.x - this.thumbs.left.mp,
+          rx = this.thumbs.right.mp + this.pos.x;
+      if (rx <= this.axis.x.x2) this.getDisplayData(xp, this.thumbs.right.x);
+
+      if (xp >= this.axis.x.x1 - wd && rx <= this.axis.x.x2) {
+        this.thumbs.left.x = xp;
+        this.wline.left.x2 = xp < this.axis.x.x1 ? this.axis.x.x1 : xp;
+        this.wline.middle.x = this.thumbs.left.x + wd;
+      } else if (xp < this.axis.x.x1 - wd && rx <= this.axis.x.x2) {
+        xp = this.axis.x.x1 - wd;
+        this.thumbs.left.x = xp;
+        this.wline.left.x2 = xp < this.axis.x.x1 ? this.axis.x.x1 : xp;
+        this.wline.middle.x = this.thumbs.left.x + wd;
+      }
+    },
+    moveChartRight: function moveChartRight(wd) {
+      var xp = this.thumbs.right.mp + this.pos.x,
+          lx = this.pos.x - this.thumbs.left.mp;
+      if (lx >= this.axis.x.x1 - wd) this.getDisplayData(this.thumbs.left.x, xp);
+
+      if (xp <= this.axis.x.x2 && lx >= this.axis.x.x1 - wd) {
+        this.thumbs.right.x = xp;
+        this.wline.right.x1 = xp + wd > this.axis.x.x2 ? this.axis.x.x2 : xp + wd;
+        this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x;
+        this.move = "move";
+      } else if (xp > this.axis.x.x2 && lx >= this.axis.x.x1 - wd) {
+        xp = this.axis.x.x2;
+        this.thumbs.right.x = xp;
+        this.wline.right.x1 = xp + wd > this.axis.x.x2 ? this.axis.x.x2 : xp + wd;
+        this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x;
+      } else if (lx < this.axis.x.x1 - wd) {
+        xp = this.wline.middle.w + this.thumbs.left.x;
+        this.thumbs.right.x = xp;
+        this.wline.right.x1 = xp + wd > this.axis.x.x2 ? this.axis.x.x2 : xp + wd;
+        this.move = "dont't move";
+      }
     }
   }
 });
@@ -4358,7 +4410,8 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
           y2: 0
         },
         hide: false,
-        txt: ""
+        txt: "",
+        cursor: 'cursor: crosshair;'
       },
       pointsID: {
         x1: 0,
@@ -4416,6 +4469,10 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
   mounted: function mounted() {
     window.addEventListener('mouseup', this.stopDrag);
     window.addEventListener("resize", this.reSize);
+    window.addEventListener('wheel', this.zoom, {
+      passive: false
+    }); //,{passive: true}
+
     this.svg = this.$refs.sheet;
     this.ds.width = this.$refs.sheet.clientWidth;
     this.ds.height = this.$refs.sheet.clientHeight;
@@ -4503,6 +4560,7 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
       var hbox = this.calcMiniBottomHight();
       var tbox = this.calcMiniTopHight();
       var x = off < lfBox / 3 ? lfBox / 3 : off;
+      if (x < this.scl * 31) x = this.scl * 31 + this.scl * 31 / 2.5;
       var y = off < hbox ? hbox : off;
       var y2 = tbox > off ? tbox : off;
       var x2 = off < wbox / 1.5 ? wbox / 1.5 : off;
@@ -4541,38 +4599,50 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
     destroy: function destroy() {
       window.removeEventListener('mouseup', this.stopDrag);
       window.removeEventListener("resize", this.reSize);
+      window.removeEventListener('wheel', this.zoom);
+    },
+    zoom: function zoom(event) {
+      event.preventDefault();
+
+      if (this.pos.x < this.axis.x.x2 && this.pos.x > this.axis.x.x1 && this.pos.y > this.axis.y.y2 && this.pos.y < this.axis.y.y1) {
+        this.zoomSlider(event.deltaY);
+      }
     },
     crossMove: function crossMove() {
       var _this = this;
 
       if (this.pos.x < this.axis.x.x2 && this.pos.x > this.axis.x.x1 && this.pos.y > this.axis.y.y2 && this.pos.y < this.axis.y.y1) {
-        this.cross.hide = false;
-        var arr = this.pointYX.length > 0 ? this.pointYX : this.points.length > 0 ? this.points[0].data : [];
-        var far = arr.map(function (a) {
-          return _objectSpread2(_objectSpread2({}, a), {}, {
-            f: Math.abs(a.x - _this.pos.x)
+        if (this.cross.cursor !== 'cursor: move;') {
+          this.cross.hide = false;
+          this.cross.cursor = 'cursor: crosshair;';
+          var arr = this.pointYX.length > 0 ? this.pointYX : this.points.length > 0 ? this.points[0].data : [];
+          var far = arr.map(function (a) {
+            return _objectSpread2(_objectSpread2({}, a), {}, {
+              f: Math.abs(a.x - _this.pos.x)
+            });
+          }).sort(function (a, b) {
+            return Number(a.f - b.f);
           });
-        }).sort(function (a, b) {
-          return Number(a.f - b.f);
-        });
-        this.farPoints.splice(0, this.farPoints.length);
-        this.farPoints = far;
-        var p = far.length > 0 ? far[0] : null;
+          this.farPoints.splice(0, this.farPoints.length);
+          this.farPoints = far;
+          var p = far.length > 0 ? far[0] : null;
 
-        if (p) {
-          this.cross.v.x1 = p.x;
-          this.cross.v.x2 = p.x;
-          this.cross.v.y1 = this.axis.y.y1;
-          this.cross.v.y2 = this.axis.y.y2;
-          this.cross.txt = p.price + " " + p.dtm;
-          this.cross.h.x1 = this.axis.x.x1;
-          this.cross.h.x2 = this.axis.x.x2;
-          this.cross.h.y1 = p.y;
-          this.cross.h.y2 = p.y;
-        } else {
-          this.cross.txt = "_";
+          if (p) {
+            this.cross.v.x1 = p.x;
+            this.cross.v.x2 = p.x;
+            this.cross.v.y1 = this.axis.y.y1;
+            this.cross.v.y2 = this.axis.y.y2;
+            this.cross.txt = p.price + " " + p.dtm;
+            this.cross.h.x1 = this.axis.x.x1;
+            this.cross.h.x2 = this.axis.x.x2;
+            this.cross.h.y1 = p.y;
+            this.cross.h.y2 = p.y;
+          } else {
+            this.cross.txt = "_";
+          }
         }
       } else {
+        this.cross.cursor = 'cursor: default;';
         this.cross.hide = true;
       }
     },
@@ -4700,7 +4770,7 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
     },
     moveSlider: function moveSlider(x1, x2) {
       var wd = this.scl * 31;
-      this.thumbs.left.x = x1;
+      this.thumbs.left.x = x1 - wd;
       this.wline.left.x2 = this.thumbs.left.x < this.axis.x.x1 ? this.wline.left.x1 : this.thumbs.left.x;
       this.wline.middle.x = this.thumbs.left.x + wd;
       this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x - wd;

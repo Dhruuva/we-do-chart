@@ -2,12 +2,15 @@
   div#app
     v-app
       v-bottom-navigation(v-model='bottomNav'  lihgt color="primary" background-color='grey lighten-4')
-        v-btn.mt-2(value='home' to="/")
-          span Home
-          v-icon mdi-home
-        v-btn.mt-2(value='mainLook' to="/MainLook")
-          span MainLook
-          v-icon mdi-lightbulb
+        v-chip.float-right.primary( class="ma-2" x-small) v1.0.5
+        v-spacer
+        v-layout  
+          v-btn.mt-2(value='home' to="/")
+            span Home
+            v-icon mdi-home
+          v-btn.mt-2(value='mainLook' to="/MainLook")
+            span MainLook
+            v-icon mdi-lightbulb
       router-view
 </template>
 
