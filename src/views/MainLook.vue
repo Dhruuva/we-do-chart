@@ -9,13 +9,13 @@
 					v-tab-item 
 						v-card(height="500")
 							v-card-text
-								p.display-1.text--primary.text-left weChart 
+								p.display-1.text--primary.text-left we-do-chart 
 									span.float-right
 										v-btn.mx-2(  small color="primary" dark @click="loadData('sto')") Load Data  
 								p.body-1.text-left.pa-2
 									|  This is a brief interactive guide help You in quick its implementation in Web pages with all your requirements.Let's go to load some sample data in the component and look it.
 									| Resize this panel size using thumb or resize browser window. The 
-									span.green--text.font-weight-bold weChart
+									span.green--text.font-weight-bold we-do-chart
 									|   will stay in pretty look.	Any screen size you get the pretty looking your data visualizations.
 								
 					v-tab-item
@@ -154,7 +154,7 @@
 					v-col( cols="12" md="6" )
 						h1.text-left Style
 							p.body-1.text-left.pa-2 Default styles maybe overridden in your page style section. You can also create custom style follow example in right panel. Then your style be ready just set its name in theme attribute of
-								span.d-inline.green--text.font-weight-bold   weChart 
+								span.d-inline.green--text.font-weight-bold   we-do-chart 
 								|  component.
 							p.body-1.text-left.pa-2
 								span.caption  
