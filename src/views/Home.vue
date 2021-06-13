@@ -6,7 +6,7 @@
 		v-card( class="mx-auto" max-width="700")
 			v-banner(color="pink lighten-6" )
 				h3.titleNormal
-					span.titleBig  weCharts
+					span.titleBig  we-do-charts  
 					| - simple and customizable Vue component to plot any line chart.
 			div.chartbox
 				WeChart(:points="data"  tky='7' off='5' timefotmat='dd')
