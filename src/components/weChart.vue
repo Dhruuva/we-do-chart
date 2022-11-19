@@ -12,6 +12,8 @@
 			line.cross(:x1="cross.h.x1" :x2="cross.h.x2" :y1="cross.h.y1" :y2="cross.h.y2")
 		g(v-if="zero>0")
 			line.zero(:x1="axis.x.x1" :x2="axis.x.x2" :y1="zero" :y2="zero" )
+		g(v-for="r in shape" :key="r.y")
+			circle.shape( :cx="r.x" :cy="r.y" :r="fs/5" )
 		g.ticksY(v-for="r in ticksY" :key="r.y")
 			line.grids(v-if="showGrid" :x1="axis.x.x1" :x2="axis.x.x2" :y1="r.y" :y2="r.y")
 			line.ticks( :x1="axis.y.x1" :x2="axis.y.x1+tsz.size" :y1="r.y" :y2="r.y" )
@@ -89,6 +91,10 @@ export default {
 			type:[String], // if date or null
 			default: () =>(null) 
 		},
+		shapes: {
+			type:Array,
+			default: () =>([{type:'dot',x:0,y:0,price:5,tm:"2018-02-05"}]) 
+		},
 
 	},
 	data: () => (
@@ -109,7 +115,7 @@ export default {
 		thumbs: { left:{x:0, y:0}, right:{x:0, y:0, priceDigits:0 },step:0.0001 },
 		wline: { left:{x1:0, x2:0, y1:0, y2:0 }, middle:{x:0,y:0, w:0,h:0}, right:{x1:0, x2:0, y1:0, y2:0 }},
 		title:"",
-		zero:null,
+		zero:null,shape:[]
 
 
 	}),
@@ -150,6 +156,11 @@ export default {
 			if (val.length>0){
 				this.pointsID.x1 = 0
 				this.pointsID.x2 = val[0].data.length
+				this.loadChart()
+			}
+		},
+		shapes(val){
+			if (val.length>0){
 				this.loadChart()
 			}
 		},
@@ -308,7 +319,7 @@ export default {
 		},
 		getDisplayData(first,end) {
 			let doAxis = new DoAxis()
-
+			doAxis.shapes=this.shapes
 			let n=this.thumbs.step*0.01
 			let arr =(this.points.length>0)? this.points[0].data.filter(a=>  a.x >= first &&  a.x <= end+n ) :[]
 			this.pointsID.x1= (arr.length>0)? arr[0].id:this.pointsID.x1
@@ -324,8 +335,12 @@ export default {
 				this.pointYX.splice(0,this.pointYX.length);// chart data
 				this.pointYX=doAxis.pointYX().map(a=>a);
 				this.zero=doAxis.zero()
+				//this.shapes=doAxis.shapes
+				this.shape.length=0
+				this.shape=doAxis.shapes
 				return 'ok'
-			} else  return 'no'
+			} else  return 'no';
+
 		},
 		formatTicksX(){
 			let prevDtm=(this.ticksX.length>0)?this.ticksX[0].dtm:null
@@ -385,9 +400,12 @@ export default {
 			let p = arr.slice(-1)[0]
 			this.cross.txt = (p)? p.price + " " + p.tm:'';
 			this.pSize=1
+			//doAxis.shapes=this.shapes
 			this.getDisplayData(x1,x2)
 			this.initSlider()
 			this.moveSlider(x1,x2)
+
+
 		},
 		moveSlider(x1,x2){
 			let wd = this.scl*31
@@ -476,6 +494,10 @@ export default {
 		stroke-width 2
 	.zero
 		stroke red 
-		stroke-width 0.5	
+		stroke-width 0.5
+	.shape
+		stroke green 
+		fill $colorPlot
+		stroke-width 1.5		
 	@import '.././assets/theme.styl'				
 </style>
