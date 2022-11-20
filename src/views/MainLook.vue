@@ -170,7 +170,7 @@
 
 <script>
 
-import WeChart  from "../components/weChart.vue";	
+import WeChart  from "../components/weDoChart.vue";	
 import Bank from "../components/bank";
 import Styling from "../components/styling.vue";
 import CodeSample from "../components/codeSample.vue";	

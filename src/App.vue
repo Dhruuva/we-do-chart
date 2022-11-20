@@ -2,7 +2,7 @@
   div#app
     v-app
       v-bottom-navigation(v-model='bottomNav'  lihgt color="primary" background-color='grey lighten-4')
-        v-chip.float-right.primary( class="ma-2" x-small) v1.0.5
+        v-chip.float-right.primary( class="ma-2" x-small) v1.0.6
         v-spacer
         v-layout  
           v-btn.mt-2(value='home' to="/")

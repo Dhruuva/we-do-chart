@@ -201,6 +201,13 @@ exports.f = DESCRIPTORS ? nativeGetOwnPropertyDescriptor : function getOwnProper
 
 /***/ }),
 
+/***/ "0968":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "0cfb":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -252,6 +259,8 @@ __webpack_require__("d3b7");
 __webpack_require__("d28b");
 
 __webpack_require__("3ca3");
+
+__webpack_require__("e260");
 
 __webpack_require__("ddb0");
 
@@ -521,13 +530,6 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
   return internalObjectKeys(O, hiddenKeys);
 };
 
-
-/***/ }),
-
-/***/ "2569":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -1345,6 +1347,17 @@ module.exports = function (NAME) {
     value: wrappedWellKnownSymbolModule.f(NAME)
   });
 };
+
+
+/***/ }),
+
+/***/ "7620":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_weDoChart_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("0968");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_weDoChart_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_weDoChart_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
 
 
 /***/ }),
@@ -3502,6 +3515,8 @@ __webpack_require__("a9e3");
 
 __webpack_require__("d81d");
 
+__webpack_require__("a434");
+
 var dateFormat = __webpack_require__("b9b9");
 
 function DoAxes() {
@@ -3513,6 +3528,7 @@ function DoAxes() {
       pointY = [],
       pointX = [],
       pointYX = [];
+  var shape = [];
   var zeroLine = 0;
 
   var yScale = function yScale(hi, lo, tky, a) {
@@ -3610,6 +3626,20 @@ function DoAxes() {
     var wbox = wbx * 1.5;
     var skip = (ds.length - 1) * wbox / ((ds.length - 1) * stepx),
         n = 1;
+    var out = [];
+    shape.forEach(function (a, i) {
+      var pct = (a.price - scale.low) * 100 / hl;
+      a.y = off.y.y1 - pPct * pct;
+      var j = ds.map(function (a) {
+        return a.tm;
+      }).indexOf(a.tm);
+      if (j < 0) out.push(i);
+      a.x = j * stepx + xtm; // console.log(" y = ", a.price,a.y, " j ", j, " x =",a.x)
+    });
+    out.forEach(function (a) {
+      shape.splice(a, 1);
+      console.log("del=", shape.length);
+    });
     ds.forEach(function (a, i) {
       var pct = (a.price - scale.low) * 100 / hl;
       var row = {
@@ -3706,6 +3736,17 @@ function DoAxes() {
   this.isValidDate = function (value) {
     return isValidDate(value);
   };
+
+  Object.defineProperty(this, 'shapes', {
+    get: function get() {
+      return shape;
+    },
+    set: function set(arr) {
+      shape.length = 0; //console.log(" set shape")
+
+      Array.prototype.push.apply(shape, arr); //console.log(" =",shape)
+    }
+  });
 }
 
 module.exports = DoAxes;
@@ -3760,17 +3801,6 @@ var ArrayPrototype = Array.prototype;
 module.exports = function (it) {
   return it !== undefined && (Iterators.Array === it || ArrayPrototype[ITERATOR] === it);
 };
-
-
-/***/ }),
-
-/***/ "f095":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_weChart_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2569");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_weChart_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_weChart_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
 
 
 /***/ }),
@@ -3854,12 +3884,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"53b12b1e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/weChart.vue?vue&type=template&id=6f25c036&lang=pug&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{ref:"sheet",attrs:{"id":"sheet","viewBox":_vm.viewBoxSet,"xmlns":"http://www.w3.org/2000/svg"},on:{"mousedown":_vm.startDrag,"mousemove":_vm.mousemove,"wheel":_vm.zoom}},[_c('rect',{ref:"chartSheet",staticClass:"chartSheet",style:(_vm.cross.cursor),attrs:{"x":"0","y":"0","width":_vm.ds.width,"height":_vm.ds.height},on:{"mouseup":_vm.stopDrag}}),_c('circle',{staticClass:"titlesDot",attrs:{"cx":_vm.axis.x.x1,"cy":_vm.axis.y.y2-1-_vm.fs/3,"r":_vm.fs/3}}),_c('text',{ref:"titles",staticClass:"legend",attrs:{"id":"legend","x":_vm.axis.x.x1+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs}},[_vm._v(_vm._s(_vm.cross.txt))]),_c('text',{staticClass:"titles",attrs:{"id":"title","x":_vm.axis.x.x1+(_vm.axis.x.x2-_vm.axis.x.x1)/2+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs*1.2}},[_vm._v(_vm._s(_vm.chartName)+" ")]),_c('line',{staticClass:"axisY",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x2,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}),_c('line',{staticClass:"axisX",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y2}}),(!_vm.cross.hide)?_c('g',[_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.v.x1,"x2":_vm.cross.v.x2,"y1":_vm.cross.v.y1,"y2":_vm.cross.v.y2}}),_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.h.x1,"x2":_vm.cross.h.x2,"y1":_vm.cross.h.y1,"y2":_vm.cross.h.y2}})]):_vm._e(),(_vm.zero>0)?_c('g',[_c('line',{staticClass:"zero",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.zero,"y2":_vm.zero}})]):_vm._e(),_vm._l((_vm.ticksY),function(r){return _c('g',{key:r.y,staticClass:"ticksY"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":r.y,"y2":r.y}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x1+_vm.tsz.size,"y1":r.y,"y2":r.y}}),_c('text',{staticClass:"axislabely",attrs:{"x":_vm.axis.y.x1+_vm.tsz.off,"y":r.y+_vm.fs/3,"font-size":_vm.fs}},[_vm._v(_vm._s(r.price))])])}),_vm._l((_vm.ticksX),function(n){return _c('g',{key:n.y,staticClass:"ticksX"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y1+_vm.tsz.size}}),_c('text',{staticClass:"axislabelx",attrs:{"x":n.x,"y":_vm.axis.x.y1+_vm.tsz.size+_vm.tsz.off+_vm.fs/2,"font-size":_vm.fs}},[_vm._v(_vm._s(n.tm))])])}),_c('polyline',{staticClass:"plot",attrs:{"points":_vm.pointsAsPolyline}}),_c('g',{staticClass:"leftThumb",attrs:{"transform":'translate('+_vm.thumbs.left.x+','+_vm.thumbs.left.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.leftDrug = true}}},[_c('polyline',{attrs:{"points":"10,40 0,30 0,10 10,0 31,0 31,40 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.left.x1,"x2":_vm.wline.left.x2,"y1":_vm.wline.left.y1,"y2":_vm.wline.left.y2,"stroke-width":_vm.wline.left.sSize},on:{"click":_vm.wlineLeftClick}}),_c('rect',{staticClass:"mbody",attrs:{"x":_vm.wline.middle.x,"y":_vm.wline.middle.y,"width":_vm.wline.middle.w,"height":_vm.wline.middle.h},on:{"mouseleave":function($event){_vm.draggingCenter =!_vm.draggingCenter},"mouseenter":function($event){_vm.draggingCenter =!_vm.draggingCenter}}}),_c('g',{staticClass:"rightThumb",attrs:{"transform":'translate('+_vm.thumbs.right.x+','+_vm.thumbs.right.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.rightDrug = true}}},[_c('polyline',{attrs:{"points":"0,0 0,40 21,40 30,30 30,10 21,0 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.right.x1,"x2":_vm.wline.right.x2,"y1":_vm.wline.right.y1,"y2":_vm.wline.right.y2,"stroke-width":_vm.wline.right.sSize},on:{"click":_vm.wlineRightClick}})],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"b18c394e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/weDoChart.vue?vue&type=template&id=b54956aa&lang=pug&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('svg',{ref:"sheet",attrs:{"id":"sheet","viewBox":_vm.viewBoxSet,"xmlns":"http://www.w3.org/2000/svg"},on:{"mousedown":_vm.startDrag,"mousemove":_vm.mousemove,"wheel":_vm.zoom}},[_c('rect',{ref:"chartSheet",staticClass:"chartSheet",style:(_vm.cross.cursor),attrs:{"x":"0","y":"0","width":_vm.ds.width,"height":_vm.ds.height},on:{"mouseup":_vm.stopDrag}}),_c('circle',{staticClass:"titlesDot",attrs:{"cx":_vm.axis.x.x1,"cy":_vm.axis.y.y2-1-_vm.fs/3,"r":_vm.fs/3}}),_c('text',{ref:"titles",staticClass:"legend",attrs:{"id":"legend","x":_vm.axis.x.x1+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs}},[_vm._v(_vm._s(_vm.cross.txt))]),_c('text',{staticClass:"titles",attrs:{"id":"title","x":_vm.axis.x.x1+(_vm.axis.x.x2-_vm.axis.x.x1)/2+1+_vm.fs/3,"y":_vm.axis.y.y2-1,"font-size":_vm.fs*1.2}},[_vm._v(_vm._s(_vm.chartName)+" ")]),_c('line',{staticClass:"axisY",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x2,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}),_c('line',{staticClass:"axisX",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y2}}),(!_vm.cross.hide)?_c('g',[_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.v.x1,"x2":_vm.cross.v.x2,"y1":_vm.cross.v.y1,"y2":_vm.cross.v.y2}}),_c('line',{staticClass:"cross",attrs:{"x1":_vm.cross.h.x1,"x2":_vm.cross.h.x2,"y1":_vm.cross.h.y1,"y2":_vm.cross.h.y2}})]):_vm._e(),(_vm.zero>0)?_c('g',[_c('line',{staticClass:"zero",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":_vm.zero,"y2":_vm.zero}})]):_vm._e(),_vm._l((_vm.shape),function(r){return _c('g',{key:r.y},[_c('circle',{staticClass:"shape",attrs:{"cx":r.x,"cy":r.y,"r":_vm.fs/5}})])}),_vm._l((_vm.ticksY),function(r){return _c('g',{key:r.y,staticClass:"ticksY"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":_vm.axis.x.x1,"x2":_vm.axis.x.x2,"y1":r.y,"y2":r.y}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":_vm.axis.y.x1,"x2":_vm.axis.y.x1+_vm.tsz.size,"y1":r.y,"y2":r.y}}),_c('text',{staticClass:"axislabely",attrs:{"x":_vm.axis.y.x1+_vm.tsz.off,"y":r.y+_vm.fs/3,"font-size":_vm.fs}},[_vm._v(_vm._s(r.price))])])}),_vm._l((_vm.ticksX),function(n){return _c('g',{key:n.y,staticClass:"ticksX"},[(_vm.showGrid)?_c('line',{staticClass:"grids",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.y.y1,"y2":_vm.axis.y.y2}}):_vm._e(),_c('line',{staticClass:"ticks",attrs:{"x1":n.x,"x2":n.x,"y1":_vm.axis.x.y1,"y2":_vm.axis.x.y1+_vm.tsz.size}}),_c('text',{staticClass:"axislabelx",attrs:{"x":n.x,"y":_vm.axis.x.y1+_vm.tsz.size+_vm.tsz.off+_vm.fs/2,"font-size":_vm.fs}},[_vm._v(_vm._s(n.tm))])])}),_c('polyline',{staticClass:"plot",attrs:{"points":_vm.pointsAsPolyline}}),_c('g',{staticClass:"leftThumb",attrs:{"transform":'translate('+_vm.thumbs.left.x+','+_vm.thumbs.left.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.leftDrug = true}}},[_c('polyline',{attrs:{"points":"10,40 0,30 0,10 10,0 31,0 31,40 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.left.x1,"x2":_vm.wline.left.x2,"y1":_vm.wline.left.y1,"y2":_vm.wline.left.y2,"stroke-width":_vm.wline.left.sSize},on:{"click":_vm.wlineLeftClick}}),_c('rect',{staticClass:"mbody",attrs:{"x":_vm.wline.middle.x,"y":_vm.wline.middle.y,"width":_vm.wline.middle.w,"height":_vm.wline.middle.h},on:{"mouseleave":function($event){_vm.draggingCenter =!_vm.draggingCenter},"mouseenter":function($event){_vm.draggingCenter =!_vm.draggingCenter}}}),_c('g',{staticClass:"rightThumb",attrs:{"transform":'translate('+_vm.thumbs.right.x+','+_vm.thumbs.right.y+') scale('+_vm.scl+')'},on:{"mouseleave":function($event){return _vm.stopThumb()},"mouseenter":function($event){_vm.rightDrug = true}}},[_c('polyline',{attrs:{"points":"0,0 0,40 21,40 30,30 30,10 21,0 "}})]),_c('line',{staticClass:"wline",attrs:{"x1":_vm.wline.right.x1,"x2":_vm.wline.right.x2,"y1":_vm.wline.right.y1,"y2":_vm.wline.right.y2,"stroke-width":_vm.wline.right.sSize},on:{"click":_vm.wlineRightClick}})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/weChart.vue?vue&type=template&id=6f25c036&lang=pug&
+// CONCATENATED MODULE: ./src/components/weDoChart.vue?vue&type=template&id=b54956aa&lang=pug&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
 var es_object_keys = __webpack_require__("b64b");
@@ -4251,7 +4281,7 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
     }
   }
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/weChart.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/weDoChart.vue?vue&type=script&lang=js&
 
 
 
@@ -4294,11 +4324,13 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
 //
 //
 //
+//
+//
 
 
 
 
-/* harmony default export */ var weChartvue_type_script_lang_js_ = ({
+/* harmony default export */ var weDoChartvue_type_script_lang_js_ = ({
   mixins: [mouseLocation, observeApi, slider],
   name: 'WeChart',
   props: {
@@ -4382,6 +4414,18 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
       default: function _default() {
         return null;
       }
+    },
+    shapes: {
+      type: Array,
+      default: function _default() {
+        return [{
+          type: 'dot',
+          x: 0,
+          y: 0,
+          price: 5,
+          tm: "2018-02-05"
+        }];
+      }
     }
   },
   data: function data() {
@@ -4463,7 +4507,8 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
         }
       },
       title: "",
-      zero: null
+      zero: null,
+      shape: []
     };
   },
   mounted: function mounted() {
@@ -4500,6 +4545,11 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
       if (val.length > 0) {
         this.pointsID.x1 = 0;
         this.pointsID.x2 = val[0].data.length;
+        this.loadChart();
+      }
+    },
+    shapes: function shapes(val) {
+      if (val.length > 0) {
         this.loadChart();
       }
     },
@@ -4668,6 +4718,7 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
     },
     getDisplayData: function getDisplayData(first, end) {
       var doAxis = new doAxis_default.a();
+      doAxis.shapes = this.shapes;
       var n = this.thumbs.step * 0.01;
       var arr = this.points.length > 0 ? this.points[0].data.filter(function (a) {
         return a.x >= first && a.x <= end + n;
@@ -4693,7 +4744,10 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
         this.pointYX = doAxis.pointYX().map(function (a) {
           return a;
         });
-        this.zero = doAxis.zero();
+        this.zero = doAxis.zero(); //this.shapes=doAxis.shapes
+
+        this.shape.length = 0;
+        this.shape = doAxis.shapes;
         return 'ok';
       } else return 'no';
     },
@@ -4763,7 +4817,8 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
       var x2 = arr.length > 0 ? arr.slice(-1)[0].x : this.axis.x.x2;
       var p = arr.slice(-1)[0];
       this.cross.txt = p ? p.price + " " + p.tm : '';
-      this.pSize = 1;
+      this.pSize = 1; //doAxis.shapes=this.shapes
+
       this.getDisplayData(x1, x2);
       this.initSlider();
       this.moveSlider(x1, x2);
@@ -4780,10 +4835,10 @@ var doAxis_default = /*#__PURE__*/__webpack_require__.n(components_doAxis);
     }
   }
 });
-// CONCATENATED MODULE: ./src/components/weChart.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_weChartvue_type_script_lang_js_ = (weChartvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/components/weChart.vue?vue&type=style&index=0&lang=stylus&
-var weChartvue_type_style_index_0_lang_stylus_ = __webpack_require__("f095");
+// CONCATENATED MODULE: ./src/components/weDoChart.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_weDoChartvue_type_script_lang_js_ = (weDoChartvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/components/weDoChart.vue?vue&type=style&index=0&lang=stylus&
+var weDoChartvue_type_style_index_0_lang_stylus_ = __webpack_require__("7620");
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
@@ -4885,7 +4940,7 @@ function normalizeComponent (
   }
 }
 
-// CONCATENATED MODULE: ./src/components/weChart.vue
+// CONCATENATED MODULE: ./src/components/weDoChart.vue
 
 
 
@@ -4895,7 +4950,7 @@ function normalizeComponent (
 /* normalize component */
 
 var component = normalizeComponent(
-  components_weChartvue_type_script_lang_js_,
+  components_weDoChartvue_type_script_lang_js_,
   render,
   staticRenderFns,
   false,
@@ -4905,11 +4960,11 @@ var component = normalizeComponent(
   
 )
 
-/* harmony default export */ var weChart = (component.exports);
+/* harmony default export */ var weDoChart = (component.exports);
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 
 
-/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (weChart);
+/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (weDoChart);
 
 
 

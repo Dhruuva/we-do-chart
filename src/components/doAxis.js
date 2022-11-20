@@ -5,6 +5,7 @@ const dateFormat = require('dateformat');
 
 function DoAxes() {
 	const  ticksX=[], ticksY=[], ds=[], pointY=[], pointX=[], pointYX=[]
+	const shape=[]
 	let zeroLine=0
 	
 
@@ -64,7 +65,19 @@ function DoAxes() {
 		let xtm  = off.x.x1
 		let wbox = (wbx*1.5) 
 		let skip =( (ds.length-1)*wbox)/((ds.length-1)*stepx), n=1
+
+		let out=[]
+		shape.forEach((a,i)=>{
+			let pct = ((a.price-scale.low)*100)/hl
+			a.y = (off.y.y1)-pPct*pct
+			let j = ds.map(a=>a.tm).indexOf(a.tm)
+			if ( j<0 ) out.push(i);
+			a.x = (j*stepx)+xtm
+			// console.log(" y = ", a.price,a.y, " j ", j, " x =",a.x)
+		})
+		out.forEach(a=> {shape.splice(a,1); console.log( "del=",shape.length)})
 		
+
 		ds.forEach((a,i)=>{
 			let pct = ((a.price-scale.low)*100)/hl;
 			let row = {id:i,price:a.price, y:(off.y.y1)-pPct*pct};
@@ -119,6 +132,18 @@ function DoAxes() {
 
 	this.yScale = (hi,lo,tky,yy) => yScale(hi,lo,tky,yy);
 	this.isValidDate=(value) => isValidDate(value);
+
+	Object.defineProperty(this, 'shapes', {
+		get : function() {
+			return shape;
+		},
+		set(arr) {
+			shape.length=0;
+			//console.log(" set shape")
+			Array.prototype.push.apply(shape,arr);
+			//console.log(" =",shape)
+		},
+	});
 	
 }
 
