@@ -1,11 +1,11 @@
 {
   "name": "we-do-chart",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Nice looking and easy customize vue component for plot line-chart.Slider & resizing present.Truly adaptive.",
   "main": "we-do-chart.js",
   "module": "we-do-chart.js",
-  "browser": "we-do-chart.min.css",
-  "unpkg": "we-do-chart.min.css",
+  "browser": "we-do-chart.min.js",
+  "unpkg": "we-do-chart.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
