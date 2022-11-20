@@ -38,7 +38,7 @@
 <script>
 // @ is an alias to /src
 /* eslint-disable */
-import WeChart  from "../components/weChart.vue";
+import WeChart  from "../components/weDoChart.vue";
 import Bank from "../components/bank";
 
 const bank = new Bank();
