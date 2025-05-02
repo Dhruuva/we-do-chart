@@ -174,7 +174,7 @@ export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs,limitSize) {
 		rightDrug = false
 		moveDrug = false;
 		if (this.pos.value.x<this.axis.x.x2 && this.pos.value.x>this.axis.x.x1 && this.pos.value.y>this.axis.y.y2 && this.pos.value.y<this.axis.y.y1 ) {
-			this.cross.cursor='cursor: crosshair;'
+			this.cross.cursor='cursor: default;'
 			draggingCenter=false
 		}
 		
@@ -182,7 +182,7 @@ export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs,limitSize) {
 	const startDrag=(evt)=> {
 		evt.preventDefault();
 		if (this.pos.value.x<this.axis.x.x2 && this.pos.value.x>this.axis.x.x1 && this.pos.value.y>this.axis.y.y2 && this.pos.value.y<this.axis.y.y1 ) {
-				this.cross.cursor='cursor: move;'
+				this.cross.cursor='cursor: grabbing;'
 				draggingCenter=true;
 		}
 		if (leftDrug) {
