@@ -19,7 +19,7 @@ const p = defineProps({
   ,msg: String
   ,showGrid:{ type:Boolean, default: true }
   ,timefotmat:{type:Object, default: () =>( new Intl.DateTimeFormat('sv-SE', { dateStyle:"short",timeStyle:"short"}) ) }
-  ,fs : { type:[Number,String], default: ()=>(14)}
+  ,fs : { type:[Number,String], default: ()=>(12)}
 });
 
 
@@ -298,6 +298,7 @@ main
 </template>
 
 <style lang ="stylus" >
+@import '../assets/theme.styl'	
 $colorPlot = #0074d9
 $colorAxis = #0074d9
 .one
