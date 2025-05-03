@@ -8,7 +8,7 @@ const fdate = new Intl.DateTimeFormat("sv-SE", { dateStyle: "short", timeZone: "
 </script>
 
 <template>
-  <HelloWorld msg="Vite + Vue" :ds="{width:600,height:400}" :points="data" :timefotmat="fdate"  />
+  <HelloWorld msg="Vite + Vue" :ds="{width:600,height:400}" :points="data" :timefotmat="fdate" :limit=17  />
 </template>
 
 <style scoped>

@@ -53,6 +53,7 @@ const axis= computed( ()=> {
   };
 });
 
+
 const doAxes = new DoAxes(p.timefotmat)
 , slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,p.scl,cross,p.fs,limitSize);
 
@@ -62,7 +63,7 @@ const isXtb= computed(() => bank1.getData("mins")[0].data.length);
 
 onMounted( async () => {
   let rows= bank1.getData("mins")[0].data;
-  console.log( " cross.value.txt" ,cross.value.txt);
+  console.log( " cross.value.txt" ,cross.value.txt, "limit----->",p.limit);
   console.log( "svg==" ,svg.value," width= ",svg.value.clientWidth," width= ",svg.value.clientWidth);
   //mousemove.bind(this); 
   slider.leftDrug = true
@@ -72,7 +73,7 @@ onMounted( async () => {
   const axi = axis.fn();
   getDisplayData(axi.x.x1,axi.x.x2);
   console.log( " pre &&&&&&&&& pointYX**************",pointYX);
-  const rtn=slider.init( getDisplayData,svg,pointYX);
+  const rtn=slider.init( getDisplayData,svg,pointYX,limitSize);
   let pt = svg.value.createSVGPoint();
   console.log( " pt=" ,pt);
   slider.leftDrug = false
@@ -115,17 +116,16 @@ watch(() => pos,  (newValue, oldValue) => {
 }, { deep: true });
 
 const xmapData=()=>{
-  let sz = (p.points.length>0)? p.points[0].data.length:0;
+	let sz = (p.points.length>0)? p.points[0].data.length:0;
+  limitSize.value =(sz<=15 && sz>0)? sz: (sz/100)*p.limit;
   const axi = axis.fn();
   console.log(" axis.x.x2 ",axi.x);
   let step = (axi.x.x2-axi.x.x1)/(sz-1);
   console.log(" step ",step);
   thumbs.value.step = step  // this need for slider to display last point easy
   let i = axi.x.x1;
-  limitSize.value = (sz/100)*p.limit
-  if (sz<=15 && sz>0) p.limitSize = sz;
-    if (p.points.length>0){
-      p.points[0].data.forEach((a,j)=> {
+  if (p.points.length>0){
+    p.points[0].data.forEach((a,j)=> {
       a.x = (j == 0)? i : i = step+i ;
       a.id=j
     })

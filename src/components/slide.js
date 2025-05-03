@@ -1,4 +1,4 @@
-export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs,limitSize) {
+export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs) {
 	const farPoints =new Array(); // dev
 	this.axis=axis;
 	this.pos=pos;
@@ -8,14 +8,14 @@ export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs,limitSize) {
 	this.scl=scl;
 	this.cross=cross.value;
 	this.fs=fs;
-	this.limitSize=limitSize.value;
-	
+		
 	let leftDrug=false,draggingLeft=false,rightDrug=false,draggingRight=false,draggingCenter=false,moveDrug=false;
-	const init=(gds,svg,pointYX)=> {
+	const init=(gds,svg,pointYX,limitSize)=> {
 		this.gds=gds;
 		this.svg=svg.value;
 		this.pointYX=pointYX;
-		console.log("pointYX---$$$$$$$$$$$$$$$",pointYX)
+		this.limitSize=limitSize?.value;
+		console.log("pointYX---$$$$$$$$$$$$$$$",pointYX, "limitSize init ",limitSize)
 		this.pos.value.x =  this.axis.x.x1 
 		let hf =  (this.h-(this.axis.y.y1 + this.fs*1.18))/2 + (this.scl*40)/2
 		let y = this.h-hf
@@ -88,7 +88,7 @@ export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs,limitSize) {
 
 		} else if ((leftDrug && draggingLeft) || this.wline.left.active){
 			let offset = (this.thumbs.left.off)? this.thumbs.left.off:wd
-			console.log("thumbY offset---->",offset, " lmt=",lmt)
+			console.log("thumbY offset---->",offset, " lmt=",lmt,  "thumbs.step>>>>>>",thumbs.step)
 			console.log("left cond=",this.pos.value.x - offset+wd>axis.x.x1," a.x1 ",axis.x.x1)
 			console.log(" right cond ",this.thumbs.right.x -this.pos.value.x - offset>lmt)
 
@@ -109,6 +109,7 @@ export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs,limitSize) {
 		if (draggingCenter && !rightDrug && !leftDrug && moveDrug ){
 			moveChartRight(wd)
 		} else if (rightDrug && draggingRight || this.wline.right.active){
+			console.log("thumbYY offset---->",offset, " lmt=",lmt,  "thumbs.step>>>>>>",thumbs.step);
 			if( this.pos.value.x  < this.axis.x.x2+wd && (this.pos.value.x - offset -this.thumbs.left.x)>lmt ) {
 				this.thumbs.right.x = this.pos.value.x - offset
 				this.wline.right.x1 = (this.pos.value.x > this.axis.x.x2 - wd ) ?  this.wline.right.x2:this.thumbs.right.x+wd
@@ -225,7 +226,7 @@ export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs,limitSize) {
 	}
 	// not use here
 	const crossMove=()=>{
-		console.log("crossMove----",this.pointYX);
+		//console.log("crossMove----",this.pointYX);
 		if (this.pos.value.x<this.axis.x.x2 && this.pos.value.x>this.axis.x.x1 && this.pos.value.y>this.axis.y.y2 && this.pos.value.y<this.axis.y.y1 
 		) {
 			if ( this.cross.cursor!=='cursor: move;'){
@@ -263,7 +264,7 @@ export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs,limitSize) {
 	}
 
 
-	this.init = (gds,svg) => init(gds,svg);
+	this.init = (gds,svg,pointYX,limitSize) => init(gds,svg,pointYX,limitSize);
 	this.zoomSlider = (x) => zoomSlider(x);
 	this.thumbYY = () => thumbYY();
 	this.thumbY = () => thumbY();
