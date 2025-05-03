@@ -191,7 +191,8 @@ const zoom=(event)=>{
 const crossMove=()=>{
   const axi = axis.fn(),farPoints= new Array();
   if (pos.value.x<axi.x.x2 && pos.value.x>axi.x.x1 && pos.value.y>axi.y.y2 && pos.value.y<axi.y.y1) {
-    if ( cross.value.cursor!=='cursor: grabbing;'){
+  	//console.log(" cross.value.cursor ",cross.value.cursor)
+    if ( !slider.draggingCenter){//cross.value.cursor!=='cursor: grabbing;'
       cross.value.hide=false;
       cross.value.cursor='cursor: default;'
       let arr = (pointYX.length >0)? pointYX:(p.points.length>0)?p.points[0].data:[]
@@ -200,6 +201,7 @@ const crossMove=()=>{
       Array.prototype.push.apply(farPoints, far);
       let p = (far.length>0) ? far[0] : null
       if (p ){
+      	//console.log(" +++++++++++++++++++++++++++++++++++++++++ cros far match")
         cross.value.v.x1=p.x
         cross.value.v.x2=p.x
         cross.value.v.y1=axi.y.y1
@@ -214,6 +216,8 @@ const crossMove=()=>{
       }
     } 
   } else {
+ // console.log("cursor: default; ___________________________________________________")
+  //slider.stopDrag();
   cross.value.cursor='cursor: default;'
   cross.value.hide=true;
   }
@@ -242,7 +246,7 @@ main
       h5  thumbs left.x={{f(thumbs.left.x)}} left.y={{f(thumbs.left.y)}}  right.x={{f(thumbs.right.x)}} right.y={{f(thumbs.right.y)}}
       h5 wline.middle :x {{f(wline.middle.x)}} :y {{f(wline.middle.y)}} :width {{f(wline.middle.w)}} :height {{f(wline.middle.h)}}
       svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @mousedown="slider.startDrag($event)" @mousemove="mousemove($event,pos)" @wheel="zoom" @mouseleave="slider.stopDrag")
-        rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height" :style="cross.cursor" @mouseup="slider.stopDrag"  @mouseleave="slider.stopDrag")
+        rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height" :style="cross.cursor" @mouseup="slider.stopDrag" )
         circle.titlesDot( :cx="axis.x.x1" :cy="axis.y.y2-1-fs/3" :r="fs/3" )
         text.legend(id="legend" ref="titles" :x="axis.x.x1+1+fs/3" :y="axis.y.y2-1" :font-size="fs" ) {{cross.txt}}
         text.titles(id="title"  :x="axis.x.x1+(axis.x.x2-axis.x.x1)/2+1+fs/3" :y="axis.y.y2-1" :font-size="fs*1.2" ) {{chartName}}  

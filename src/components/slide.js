@@ -173,9 +173,12 @@ export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs,limitSize) {
 		leftDrug = false;
 		rightDrug = false
 		moveDrug = false;
+		draggingCenter=false;
+		console.log("stopDrag **********************",)
 		if (this.pos.value.x<this.axis.x.x2 && this.pos.value.x>this.axis.x.x1 && this.pos.value.y>this.axis.y.y2 && this.pos.value.y<this.axis.y.y1 ) {
+			console.log("stopDrag **********************",)
 			this.cross.cursor='cursor: default;'
-			draggingCenter=false
+			
 		}
 		
 	}
