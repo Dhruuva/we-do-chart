@@ -134,7 +134,7 @@
 							p  topp {{ topp}}	
 			.thumb(@mousedown='startLeftDrug()' @mouseenter='rightDrug=!rightDrug' @mouseleave='rightDrug=!rightDrug')
 		.split.upper.right.border(:style='rightStyle')
-			WeChart(ref="weChart1" :points='data' :decimals='tkzz' :showGrid='showGrid' :timefotmat='timefotmat' :off="chartOff" :tky="tickYnumber" :tsz="tickSize" :scl="scl" :limit="lmt" :fs="fsz" :theme="theme")
+			WeChart(ref="weChart1" :points='data' :decimals='tkzz' :showGrid='showGrid' :timefotmat='timefotmat' :off="chartOff" :tky="tickYnumber" :tsz="tickSize" :scl="scl" :limit="lmt" :fs="fsz" :theme="theme" :shapes="shape")
 		.split.down.left.border(:style='downStyle')
 			.thumbUp(@mousedown='startUpDrug()' @mouseenter='upDrug=!upDrug' @mouseleave='upDrug=!upDrug')
 			v-row
@@ -224,7 +224,8 @@ export default {
 		visible:"visibility: hidden;",
 		txt:" Ha Ha copy me",
 		hideme:("visibility: hidden;"),
-		ishide: false
+		ishide: false,
+		shape :[],
 
 
 	}),
@@ -236,6 +237,8 @@ export default {
 		// let element = document.getElementsByClassName("split upper left border")[0];
 		// this.getStyle(element)
 		this.calcHeight()
+		this.shape.push({type:'dot',x:0,y:0,price:110,tm:"2019-12-08 00:15:00"})
+		this.shape.push({type:'dot',x:0,y:0,price:110,tm:"2019-12-25"})
 	},
 	watch:{
 		xy(){

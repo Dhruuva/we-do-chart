@@ -9,7 +9,7 @@
 					span.titleBig  we-do-charts  
 					| - simple and customizable Vue component to plot any line chart.
 			div.chartbox
-				WeChart(:points="data"  tky='7' off='5' timefotmat='dd')
+				WeChart(:points="data"  tky='7' off='5' timefotmat='dd',:shapes="shape")
 			v-banner(color="pink lighten-6")
 				h3.titleBig Simplicity produce satisfaction.
 					
@@ -53,10 +53,15 @@ export default {
 	data: () => (
 	{
 		data:[],
+		shape:[]
 
 	}),
 	mounted() {
 		this.loadData()
+		let shp ={type:'dot',x:0,y:0,price:-65,tm:"2018-02-07"};
+		let shp1 ={type:'dot',x:0,y:0,price:-65,tm:"2018-04-24"};
+		this.shape.push(shp);
+		this.shape.push(shp1);
 
 	},
 	computed: {
