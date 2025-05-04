@@ -79,6 +79,9 @@ onMounted( async () => {
   slider.leftDrug = false
   slider.draggingLeft =false
 
+  let lgd = document.getElementsByClassName('legend');
+  console.log(" style --",lgd[0])
+
 
 })
 
@@ -337,7 +340,6 @@ $colorAxis = #0074d9
   &:active
   	fill #ceed
   	cursor url('../assets/closedhand.cur'), auto
-   
 .axislabelx 
   font-family  Arial, Helvetica Neue, Helvetica
   fill red
