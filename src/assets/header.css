@@ -1,0 +1,125 @@
+@keyframes animate {
+        0% {
+          background-position: -500%;
+        }
+        100% {
+          background-position: 500%;
+        }
+}
+
+@keyframes rotate {
+  0%   {transform: rotate(-1deg);}
+  25%  {transform: rotate(-2deg);}
+  50%  {transform: rotate(-1deg);}
+  100% {transform: rotate(0deg);}
+}
+
+header {
+   width: auto;
+   background-color: seagreen;
+   padding: 0.1em 0.1em;
+   box-shadow: 1px 2px 8px 3px darkslategray;
+   border-radius: 13px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   transition: all 0.4s ease-in-out;
+
+}
+
+header:hover{
+   box-shadow: 1px 2px 8px 3px yellowgreen;
+
+}
+#mynav img {
+   background: transparent;
+   height: 50px;
+   width:50px ;
+   margin :15px;
+   box-shadow: 3px 2px 4px 3px yellowgreen;
+   border-radius: 20%;
+   background-color: azure;
+   padding-top: 5px;
+}
+.logo{  
+   
+   text-align: left;
+}
+.logo:hover{  
+    animation: rotate 0.5s infinite ;
+}
+
+
+#mynav li {
+   background: azure;
+   color: forestgreen;
+   margin: 5px;
+   display: inline-flex;
+   font-size: 22;
+   font-weight: 700;
+   border-style: groove;
+   border-radius: 5px 5px;
+   padding: 5px 5px 5px 0.5em;
+   transition: box-shadow 0.5s;
+}
+#mynav li:hover{
+   border-style: outset;
+   box-shadow: 1px 2px 8px 3px greenyellow;
+}
+#mynav .active:hover{
+  box-shadow: 1px 2px 8px 3px darkgreen;
+   border-style: inset;
+   top: 20px;
+
+
+}
+#mynav ul {
+ padding: 1px;
+ margin-top: 1rem; 
+ margin-bottom: 14px; 
+ text-align: center;
+ align-self: flex-start;
+ flex-basis: 100%;
+}
+
+#mynav .active  {
+   color: yellowgreen;
+   border-style: inset;
+   background: ghostwhite;
+   text-shadow: azure 3px 1px 12px;
+}
+
+#mynav .active a {
+   color: yellowgreen;
+  
+}
+#mynav li a:hover{
+   text-decoration: underline;
+
+}
+#mynav .active a:hover{
+   text-decoration: unset;
+   animation: rotate 0.5s infinite;
+   
+}
+#mynav li a {
+   font-display: block;
+   color: forestgreen;
+   float: right;
+   display: block;
+   padding: 0.1em 0.2em;
+   text-decoration: none;
+   white-space: nowrap;
+   animation: animate  0.5s infinite;
+}
+
+#mynav li Icon {
+   font-display: block;
+   color: red;
+   float: right;
+   display: block;
+   padding-left: 0.1em;
+   
+}
+
+
