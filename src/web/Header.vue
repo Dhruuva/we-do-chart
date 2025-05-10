@@ -19,7 +19,7 @@ header#mynav
 	,stuff=reactive(new Array(
 		{id:1,page:"index.html",isActive:true, name:"Home", ico:"ic:baseline-account-balance"},
 		{id:2,page:"inputData.html", name:"Data source", ico:"ic:baseline-contact-support"},
-		{id:3,page:"market.html", name:"Market", ico:"ic:sharp-barcode"},
+		{id:3,page:"props.html", name:"Props", ico:"ic:sharp-barcode"},
 		{id:4,page:"sakura.html", name:"Sakura", ico:"ic:round-compost"},
 	));
 
