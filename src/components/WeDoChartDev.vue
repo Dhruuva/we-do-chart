@@ -239,39 +239,65 @@ const canDrug=()=>{
   }
 }
 
+
+
+
+
 </script>
 
 <template lang ="pug">
-svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @mousedown="slider.startDrag($event)" @mousemove="mousemove($event,pos)" @wheel="zoom" @mouseleave="slider.stopDrag")
-  rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height" :style="cross.cursor" @mouseup="slider.stopDrag" )
-  circle.titlesDot( :cx="axis.x.x1" :cy="axis.y.y2-1-fs/3" :r="fs/3" )
-  text.legend(id="legend" ref="titles" :x="axis.x.x1+1+fs/3" :y="axis.y.y2-1" :font-size="fs" ) {{cross.txt}}
-  text.titles(id="title"  :x="axis.x.x1+(axis.x.x2-axis.x.x1)/2+1+fs/3" :y="axis.y.y2-1" :font-size="fs*1.2" ) {{chartName}}  
-  line.axisY(:x1="axis.y.x1" :x2="axis.y.x2" :y1="axis.y.y1" :y2="axis.y.y2" )
-  line.axisX(:x1="axis.x.x1" :x2="axis.x.x2" :y1="axis.x.y1" :y2="axis.x.y2" )
-  g(v-if="!cross.hide")
-    line.cross(:x1="cross.v.x1" :x2="cross.v.x2" :y1="cross.v.y1" :y2="cross.v.y2")
-    line.cross(:x1="cross.h.x1" :x2="cross.h.x2" :y1="cross.h.y1" :y2="cross.h.y2")
-  g(v-if="zero>0")
-    line.zero(:x1="axis.x.x1" :x2="axis.x.x2" :y1="zero" :y2="zero" )
-  g(v-for="r in shape" :key="r.y")
-    circle.shape( :cx="r.x" :cy="r.y" :r="fs/5" )
-  g.ticksY(v-for="r in ticksY" :key="r.y")
-    line.grids(v-if="showGrid" :x1="axis.x.x1" :x2="axis.x.x2" :y1="r.y" :y2="r.y")
-    line.ticks( :x1="axis.y.x1" :x2="axis.y.x1+tsz.size" :y1="r.y" :y2="r.y" )
-    text.axislabely( :x="axis.y.x1+tsz.off" :y="r.y+fs/3" :font-size='fs') {{r.price}}
-  g.ticksX(v-for="n in ticksX" :key="n.y")
-    line.grids(v-if="showGrid" :x1="n.x" :x2="n.x" :y1="axis.y.y1" :y2="axis.y.y2")
-    line.ticks( :x1="n.x" :x2="n.x" :y1="axis.x.y1" :y2="axis.x.y1+tsz.size")
-    text.axislabelx( :x="n.x" :y="axis.x.y1+tsz.size+tsz.off+fs/2" :font-size='fs') {{n.tm}}
-  polyline.plot(v-bind:points='pointsAsPolyline')
-  g.leftThumb( :transform="'translate('+thumbs.left.x+','+thumbs.left.y+') scale('+p.scl+')'" @mouseenter="slider.leftDrug= true" @mouseup="slider.stopDrag")
-    polyline(points="10,40 0,30 0,10 10,0 31,0 31,40 " )
-  line.wline(:x1="wline.left.x1" :x2="wline.left.x2" :y1="wline.left.y1" :y2="wline.left.y2" :stroke-width='wline.left.sSize' @click="slider.wlineLeftClick")
-  rect.mbody(@mouseup="slider.stopDrag" :x="wline.middle.x" :y="wline.middle.y" :width="wline.middle.w" :height="wline.middle.h" @mousedown="slider.draggingCenter=true;slider.startDrag($event);")
-  g.rightThumb(@mouseup="slider.stopDrag" :transform="'translate('+thumbs.right.x+','+thumbs.right.y+')scale('+p.scl+')'" @mouseenter="slider.rightDrug = true" )
-    polyline(points="0,0 0,40 21,40 30,30 30,10 21,0 " )
-  line.wline(:x1="wline.right.x1" :x2="wline.right.x2" :y1="wline.right.y1" :y2="wline.right.y2" :stroke-width='wline.right.sSize' @click="slider.wlineRightClick" )
+main
+  .my-grid
+    .left-side
+      h4 x= {{ pos.x }} y= {{ pos.y }}
+      h4 limitSize  {{limitSize}}
+      h4 p.scl {{ p.scl }}
+      h4 pointYX {{pointYX.length}}
+      h4 ticksX {{ticksX.length}}
+    .central  
+      h5  thumbs left.x={{f(thumbs.left.x)}} left.y={{f(thumbs.left.y)}}  right.x={{f(thumbs.right.x)}} right.y={{f(thumbs.right.y)}}
+      h5 wline.middle :x {{f(wline.middle.x)}} :y {{f(wline.middle.y)}} :width {{f(wline.middle.w)}} :height {{f(wline.middle.h)}}
+      svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @mousedown="slider.startDrag($event)" @mousemove="mousemove($event,pos)" @wheel="zoom" @mouseleave="slider.stopDrag")
+        rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height" :style="cross.cursor" @mouseup="slider.stopDrag" )
+        circle.titlesDot( :cx="axis.x.x1" :cy="axis.y.y2-1-fs/3" :r="fs/3" )
+        text.legend(id="legend" ref="titles" :x="axis.x.x1+1+fs/3" :y="axis.y.y2-1" :font-size="fs" ) {{cross.txt}}
+        text.titles(id="title"  :x="axis.x.x1+(axis.x.x2-axis.x.x1)/2+1+fs/3" :y="axis.y.y2-1" :font-size="fs*1.2" ) {{chartName}}  
+        line.axisY(:x1="axis.y.x1" :x2="axis.y.x2" :y1="axis.y.y1" :y2="axis.y.y2" )
+        line.axisX(:x1="axis.x.x1" :x2="axis.x.x2" :y1="axis.x.y1" :y2="axis.x.y2" )
+        g(v-if="!cross.hide")
+          line.cross(:x1="cross.v.x1" :x2="cross.v.x2" :y1="cross.v.y1" :y2="cross.v.y2")
+          line.cross(:x1="cross.h.x1" :x2="cross.h.x2" :y1="cross.h.y1" :y2="cross.h.y2")
+        g(v-if="zero>0")
+          line.zero(:x1="axis.x.x1" :x2="axis.x.x2" :y1="zero" :y2="zero" )
+        g(v-for="r in shape" :key="r.y")
+          circle.shape( :cx="r.x" :cy="r.y" :r="fs/5" )
+        g.ticksY(v-for="r in ticksY" :key="r.y")
+          line.grids(v-if="showGrid" :x1="axis.x.x1" :x2="axis.x.x2" :y1="r.y" :y2="r.y")
+          line.ticks( :x1="axis.y.x1" :x2="axis.y.x1+tsz.size" :y1="r.y" :y2="r.y" )
+          text.axislabely( :x="axis.y.x1+tsz.off" :y="r.y+fs/3" :font-size='fs') {{r.price}}
+        g.ticksX(v-for="n in ticksX" :key="n.y")
+          line.grids(v-if="showGrid" :x1="n.x" :x2="n.x" :y1="axis.y.y1" :y2="axis.y.y2")
+          line.ticks( :x1="n.x" :x2="n.x" :y1="axis.x.y1" :y2="axis.x.y1+tsz.size")
+          text.axislabelx( :x="n.x" :y="axis.x.y1+tsz.size+tsz.off+fs/2" :font-size='fs') {{n.tm}}
+        polyline.plot(v-bind:points='pointsAsPolyline')
+        g.leftThumb( :transform="'translate('+thumbs.left.x+','+thumbs.left.y+') scale('+p.scl+')'" @mouseenter="slider.leftDrug= true" @mouseup="slider.stopDrag")
+          polyline(points="10,40 0,30 0,10 10,0 31,0 31,40 " )
+        line.wline(:x1="wline.left.x1" :x2="wline.left.x2" :y1="wline.left.y1" :y2="wline.left.y2" :stroke-width='wline.left.sSize' @click="slider.wlineLeftClick")
+        rect.mbody(@mouseup="slider.stopDrag" :x="wline.middle.x" :y="wline.middle.y" :width="wline.middle.w" :height="wline.middle.h" @mousedown="slider.draggingCenter=true;slider.startDrag($event);")
+        g.rightThumb(@mouseup="slider.stopDrag" :transform="'translate('+thumbs.right.x+','+thumbs.right.y+')scale('+p.scl+')'" @mouseenter="slider.rightDrug = true" )
+          polyline(points="0,0 0,40 21,40 30,30 30,10 21,0 " )
+        line.wline(:x1="wline.right.x1" :x2="wline.right.x2" :y1="wline.right.y1" :y2="wline.right.y2" :stroke-width='wline.right.sSize' @click="slider.wlineRightClick" )
+      h4 wline.left  :x1 {{f(wline.left.x1)}} :x2 {{f(wline.left.x2)}} :y1 {{f(wline.left.y1)}} :y2 {{f(wline.left.y2)}}
+      
+    .right-side
+      h4.one leftDrug {{slider.leftDrug}}
+      h4.two rightDrug {{slider.rightDrug}}
+      h4.tre draggingLeft {{slider.draggingLeft}}
+      h4.one wline.left.active {{wline.left.active}}
+      h4.for draggingCenter {{slider.draggingCenter}}
+      h4.one draggingRight {{slider.draggingRight}}
+      h4.two moveDrug {{slider.moveDrug}}
+
 </template>
 
 <style lang ="stylus" >
