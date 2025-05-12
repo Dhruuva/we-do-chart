@@ -167,8 +167,8 @@ const loadChart=()=> {
   let arr =(p.points.length>0)? p.points[0].data.filter(a=>  a.id >=  pointsID.value.x1 &&  a.id <=  pointsID.value.x2 ):[] 
   let x1 = (arr.length>0)? arr[0].x:axi.x.x1
   let x2 = (arr.length>0)? arr.slice(-1)[0].x:axi.x.x2
-  let p = arr.slice(-1)[0]
-  cross.value.txt = (p)? p.price + " " + p.tm:'';
+  let p1 = arr.slice(-1)[0]
+  cross.value.txt = (p1)? p1.price + " " + p1.tm:'';
   pSize.value=1
   //doAxis.shapes=this.shapes
   getDisplayData(x1,x2)
@@ -239,6 +239,7 @@ const canDrug=()=>{
   }
 }
 
+defineExpose({loadChart,f});
 </script>
 
 <template lang ="pug">

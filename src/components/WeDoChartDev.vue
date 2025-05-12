@@ -1,5 +1,5 @@
 <script setup>
-import { ref,onMounted ,reactive,computed,watch,watchEffect ,useTemplateRef} from 'vue'
+import { ref,onMounted ,reactive,computed,watch,watchEffect ,useTemplateRef,toRefs} from 'vue'
 import {Bank} from '../components/bank.js'
 //import {startDrag,mousemove} from '../components/mouse.js'
 import {calcOffsetX,calcOffsetY,calcMiniBottomHight,calcMiniTopHight} from '../components/offset.js'
@@ -118,6 +118,23 @@ watch(() => pos,  (newValue, oldValue) => {
 
 }, { deep: true });
 
+watch(() => p.tky,  (newValue, oldValue) => {
+    console.log( " tky --->",newValue.value);
+    crossMove();
+    slider.thumbYY();
+    slider.thumbY();
+
+}, { deep: true });
+
+// watch(() => p.tsz,  (newValue, oldValue) => {
+//     console.log( " tsz --->",newValue.value.size);
+//     crossMove();
+//     slider.thumbYY();
+//     slider.thumbY();
+
+// }, { deep: true });
+
+
 const xmapData=()=>{
 	let sz = (p.points.length>0)? p.points[0].data.length:0;
   limitSize.value =(sz<=15 && sz>0)? sz: (sz/100)*p.limit;
@@ -162,13 +179,14 @@ const getDisplayData=(first,end)=> {
   } else  return 'no';
 }
 const loadChart=()=> {
+  console.log( "p.tky loadChart --->",p.tky);
   const axi = axis.fn(); 
   xmapData()
   let arr =(p.points.length>0)? p.points[0].data.filter(a=>  a.id >=  pointsID.value.x1 &&  a.id <=  pointsID.value.x2 ):[] 
   let x1 = (arr.length>0)? arr[0].x:axi.x.x1
   let x2 = (arr.length>0)? arr.slice(-1)[0].x:axi.x.x2
-  let p = arr.slice(-1)[0]
-  cross.value.txt = (p)? p.price + " " + p.tm:'';
+  let p1 = arr.slice(-1)[0]
+  cross.value.txt = (p1)? p1.price + " " + p1.tm:'';
   pSize.value=1
   //doAxis.shapes=this.shapes
   getDisplayData(x1,x2)
@@ -239,7 +257,7 @@ const canDrug=()=>{
   }
 }
 
-
+defineExpose({loadChart,f});
 
 
 
