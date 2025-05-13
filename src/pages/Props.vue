@@ -52,7 +52,7 @@ body
         h4.tide :scl
         p Use it in same cases, you wish to change size of the slider. Default value  
           code 0.46 
-        input( type="range" id="scl" step="0.05"  name="scl" min="0.01" max="0.9" v-model="scl")    
+        input( type="range" id="scl" step="0.05"  name="scl" min="0.00" max="0.99" v-model="scl")    
     .central
       article.tide  
         h4 :tky

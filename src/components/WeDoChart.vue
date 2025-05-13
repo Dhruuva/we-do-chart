@@ -55,7 +55,7 @@ const axis= computed( ()=> {
 
 
 const doAxes = new DoAxes(p.timefotmat)
-, slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,p.scl,cross,p.fs,limitSize);
+, slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,cross,p.fs,limitSize);
 
 const isXtb= computed(() => bank1.getData("mins")[0].data.length);
 
@@ -63,26 +63,18 @@ const isXtb= computed(() => bank1.getData("mins")[0].data.length);
 
 onMounted( async () => {
   let rows= bank1.getData("mins")[0].data;
-  console.log( " cross.value.txt" ,cross.value.txt, "limit----->",p.limit);
-  console.log( "svg==" ,svg.value," width= ",svg.value.clientWidth," width= ",svg.value.clientWidth);
-  //mousemove.bind(this); 
   slider.leftDrug = true
   slider.draggingLeft =true
   xmapData();
   cross.value.txt=' ';
   const axi = axis.fn();
   getDisplayData(axi.x.x1,axi.x.x2);
-  console.log( " pre &&&&&&&&& pointYX**************",pointYX);
+  slider.scl=p.scl;
   const rtn=slider.init( getDisplayData,svg,pointYX,limitSize);
   let pt = svg.value.createSVGPoint();
-  console.log( " pt=" ,pt);
   slider.leftDrug = false
   slider.draggingLeft =false
-
-  let lgd = document.getElementsByClassName('legend');
-  console.log(" style --",lgd[0])
-
-
+  
 })
 
 const viewBoxSet= computed( ()=> `0 0 ${p.ds.width } ${p.ds.height }`);
@@ -172,7 +164,8 @@ const loadChart=()=> {
   pSize.value=1
   //doAxis.shapes=this.shapes
   getDisplayData(x1,x2)
- // slider.init(getDisplayData,svg)
+  slider.scl=p.scl;
+  const rtn=slider.init( getDisplayData,svg,pointYX,limitSize);
   slider.moveSlider(x1,x2)
 }
 
