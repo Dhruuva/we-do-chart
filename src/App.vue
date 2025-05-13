@@ -1,5 +1,5 @@
 <script setup>
-import { ref,computed} from 'vue'  
+import { ref,computed,watch} from 'vue'  
 import WeDoChart from './components/WeDoChart.vue'
 import Navi from './web/Header.vue'
 
