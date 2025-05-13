@@ -1,8 +1,8 @@
 <script setup>
-import { ref,computed,useTemplateRef} from 'vue'  
+import { ref,computed,useTemplateRef,watch} from 'vue'  
 import WeDoChartDev from './components/WeDoChartDev.vue'
 import {Bank} from './components/bank.js'
-const  bank1 = new Bank(), chart= ref(null),tky1= ref(2);
+const  bank1 = new Bank(), chart= ref(null),tky1= ref(2),scl= ref(0.7);
 const data= computed(() => bank1.getData("sto"))
 const fdate = new Intl.DateTimeFormat("sv-SE", { dateStyle: "short", timeZone: "MET" });
 //const chartRef = useTemplateRef('chart')
@@ -13,14 +13,18 @@ const reload =()=>{
   chart.value.loadChart();
    console.log( " reload chart -->")
 }
- 
+watch(scl, (v) => {
+  console.log(`scl is ${v}`);
+   chart.value.loadChart();
+}) 
 </script>
 
 <template>
   <header>
     <button @click="reload()">Reload </button>
+    <input type="range" id="scl" name="scl" min="0" max="1" step="0.01" v-model="scl"></input>
   </header>
-  <WeDoChartDev ref="chart" :ds="{width:600,height:400}" :tky="tky1" :points="data" :timefotmat="fdate" :limit=17 theme="berry" />
+  <WeDoChartDev ref="chart" :ds="{width:600,height:400}" :tky="tky1" :points="data" :timefotmat="fdate" :limit=17 theme="berry" :scl="scl" />
 </template>
 
 <style scoped>

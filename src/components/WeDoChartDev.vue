@@ -55,7 +55,8 @@ const axis= computed( ()=> {
 
 
 const doAxes = new DoAxes(p.timefotmat)
-, slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,p.scl,cross,p.fs,limitSize);
+, slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,cross,p.fs,limitSize);
+
 
 const isXtb= computed(() => bank1.getData("mins")[0].data.length);
 
@@ -73,6 +74,7 @@ onMounted( async () => {
   const axi = axis.fn();
   getDisplayData(axi.x.x1,axi.x.x2);
   console.log( " pre &&&&&&&&& pointYX**************",pointYX);
+  slider.scl=p.scl;
   const rtn=slider.init( getDisplayData,svg,pointYX,limitSize);
   let pt = svg.value.createSVGPoint();
   console.log( " pt=" ,pt);
@@ -190,7 +192,8 @@ const loadChart=()=> {
   pSize.value=1
   //doAxis.shapes=this.shapes
   getDisplayData(x1,x2)
- // slider.init(getDisplayData,svg)
+  slider.scl=p.scl;
+  const rtn=slider.init( getDisplayData,svg,pointYX,limitSize);
   slider.moveSlider(x1,x2)
 }
 
@@ -261,6 +264,7 @@ defineExpose({loadChart,f});
 
 
 
+
 </script>
 
 <template lang ="pug">
@@ -272,6 +276,7 @@ main
       h4 p.scl {{ p.scl }}
       h4 pointYX {{pointYX.length}}
       h4 ticksX {{ticksX.length}}
+
     .central  
       h5  thumbs left.x={{f(thumbs.left.x)}} left.y={{f(thumbs.left.y)}}  right.x={{f(thumbs.right.x)}} right.y={{f(thumbs.right.y)}}
       h5 wline.middle :x {{f(wline.middle.x)}} :y {{f(wline.middle.y)}} :width {{f(wline.middle.w)}} :height {{f(wline.middle.h)}}

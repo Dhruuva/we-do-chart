@@ -1,14 +1,13 @@
-export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs) {
+export function Slide(axis,pos,height,thumbs,wline,cross,fs) {
 	const farPoints =new Array(); // dev
 	this.axis=axis;
 	this.pos=pos;
 	this.h=height;
 	this.thumbs=thumbs.value;
 	this.wline=wline.value;
-	this.scl=scl;
 	this.cross=cross.value;
 	this.fs=fs;
-		
+	let scl=0.41;	
 	let leftDrug=false,draggingLeft=false,rightDrug=false,draggingRight=false,draggingCenter=false,moveDrug=false;
 	const init=(gds,svg,pointYX,limitSize)=> {
 		this.gds=gds;
@@ -17,38 +16,38 @@ export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs) {
 		this.limitSize=limitSize?.value;
 		console.log("pointYX---$$$$$$$$$$$$$$$",pointYX, "limitSize init ",limitSize)
 		this.pos.value.x =  this.axis.x.x1 
-		let hf =  (this.h-(this.axis.y.y1 + this.fs*1.18))/2 + (this.scl*40)/2
+		let hf =  (this.h-(this.axis.y.y1 + this.fs*1.18))/2 + (scl*40)/2
 		let y = this.h-hf
 		//console.log("hf ",hf, "this.h ",this.h)
 
-		this.thumbs.left.x = this.axis.x.x1 - this.scl*31
+		this.thumbs.left.x = this.axis.x.x1 - scl*31
 		this.thumbs.left.y = y
 		this.wline.left.x1 = this.axis.x.x1
 		this.wline.left.x2 = this.axis.x.x1
-		this.wline.left.y1 =  y + this.scl*40/2
-		this.wline.left.y2 =  y +this.scl*40/2
-		this.wline.left.sSize = this.scl*40*0.6
+		this.wline.left.y1 =  y + scl*40/2
+		this.wline.left.y2 =  y +scl*40/2
+		this.wline.left.sSize = scl*40*0.6
 		this.wline.left.active = false
 
 		this.wline.middle.x = this.axis.x.x1
-		this.wline.middle.y = y+this.scl*8
+		this.wline.middle.y = y+scl*8
 		this.wline.middle.w = this.axis.x.x2 - this.axis.x.x1
-		this.wline.middle.h = this.scl*(40-16)
+		this.wline.middle.h = scl*(40-16)
 
 		this.thumbs.right.x = this.axis.x.x2 
 		this.thumbs.right.y = y
 		this.wline.right.x1 = this.axis.x.x2
 		this.wline.right.x2 = this.axis.x.x2
-		this.wline.right.y1 = y + this.scl*40/2
-		this.wline.right.y2 = y + this.scl*40/2
-		this.wline.right.sSize = this.scl*40*0.6
+		this.wline.right.y1 = y + scl*40/2
+		this.wline.right.y2 = y + scl*40/2
+		this.wline.right.sSize = scl*40*0.6
 		return 'ok'
 	}
 
 	
 
 	const zoomSlider=(x)=>{
-		let wd = this.scl*31,lmt =this.thumbs.step*this.limitSize,zms=10
+		let wd = scl*31,lmt =this.thumbs.step*this.limitSize,zms=10
 		let xLeft,offset = (this.thumbs.left.off)? this.thumbs.left.off:wd
 		if (x>0) {
 			xLeft = this.thumbs.left.x + zms
@@ -82,7 +81,7 @@ export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs) {
 		}
 	}
 	const thumbY=()=> {
-		let wd = this.scl*31,lmt =this.thumbs.step*this.limitSize
+		let wd =scl*31,lmt =this.thumbs.step*this.limitSize
 		if (draggingCenter && !rightDrug && !leftDrug && moveDrug ){
 			moveChartLeft(wd);
 
@@ -308,5 +307,11 @@ export function Slide(axis,pos,height,thumbs,wline,scl,cross,fs) {
 			return moveDrug;
 		},
 		set(val) {moveDrug=val;},
+	});
+	Object.defineProperty(this, 'scl', {
+		get : function() {
+			return scl;
+		},
+		set(val) {scl=val;},
 	});
 }
