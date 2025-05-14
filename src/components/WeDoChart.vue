@@ -153,6 +153,7 @@ const getDisplayData=(first,end)=> {
     return 'ok'
   } else  return 'no';
 }
+
 const loadChart=()=> {
   const axi = axis.fn(); 
   xmapData()

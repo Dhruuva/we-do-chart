@@ -1,22 +1,22 @@
 <script setup>
 import { ref,computed,watch} from 'vue'  
-import WeDoChart from './components/WeDoChart.vue'
 import Navi from './web/Header.vue'
+import StyleView from './web/Style.vue'
 
-import {Bank} from './components/bank.js'
-const  bank1 = new Bank()
-const data= computed(() => bank1.getData("sto"))
-const fdate = new Intl.DateTimeFormat("sv-SE", { dateStyle: "short", timeZone: "MET" });
+
 </script>
 
 <template>
   <header>
     <Navi id="mynav" active="1"/>
   </header> 
+  <body>
+    <StyleView></StyleView>
+  </body>
 
 
 
-  <WeDoChart msg="Vite + Vue" :ds="{width:600,height:400}" :points="data" :timefotmat="fdate" :limit=17 theme="berry" />
+  
 </template>
 
 <style scoped>
