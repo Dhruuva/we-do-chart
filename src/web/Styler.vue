@@ -104,15 +104,12 @@ onMounted( async () => {
 	// });
 	// console.log(" textToCopy =",hljs)
 })
+
 defineExpose({cssCode});
 </script>
 
 <template>
-<hljsVuePlugin  language='javascript' code="var x = 5;" />
-<hljsVuePlugin autodetect :code="cssCode" /> 
 <pre><code class="hljs css" v-html="hljsText"></code></pre>
-
-
 </template>
 
 <style scoped>

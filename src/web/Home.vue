@@ -8,10 +8,13 @@ body
 				.box
 					p
 						|Default styles maybe overridden in your page style section. You can also create custom style follow example in right panel. Then your style be ready just set its name in theme attribute of the component.
-			Styler
+				button.fly( @click="copyText" )
+					Icon(icon="prime:copy" height="29")
+				Styler(ref="styler1")
 		.right-side
 			p right
-			WeDoChart(tky="7" fs="18" :ds="{width:700,height:600}" :points="data" :timefotmat="fdate" :limit=17 ) 	
+			WeDoChart(tky="7" fs="18" :ds="{width:700,height:600}" :points="data" :timefotmat="fdate" :limit=17 )
+			textarea#aria(:style="aStyle" rows="1" :value="txt" )
 </template>
 
 
@@ -19,22 +22,52 @@ body
 	import { ref,onMounted ,reactive,computed,watch,watchEffect ,useTemplateRef} from 'vue'
 	import { Icon } from '@iconify/vue';
 	import {Bank} from '../components/bank.js';
-	import WeDoChart from '../components/WeDoChart.vue'
-	import hljsVuePlugin from "@highlightjs/vue-plugin";
-	import hljs from 'highlight.js';
-	import 'highlight.js/styles/an-old-hope.min.css';
-	import Styler from '../web/Styler.vue'
+	import WeDoChart from '../components/WeDoChart.vue';
+  import Styler from '../web/Styler.vue';
 
-	const  bank1 = new Bank()
-	const data= computed(() => bank1.getData("sto"))
+	const  bank1 = new Bank(),styler1=ref(null), aStyle=ref("visibility: hidden;") ,txt=ref("no");
+	const data= computed(() => bank1.getData("sto"));
 	const fdate = new Intl.DateTimeFormat("sv-SE", { dateStyle: "short", timeZone: "MET" });
-	
+
+	const copyText=()=>{
+		console.log( "copy", txt.value)
+		aStyle.value="visibility: visible;"
+		txt.value=styler1.value.cssCode;
+		console.log( "copyy", txt.value)
+		setTimeout(()=>{
+			let aria = document.getElementById("aria");
+			aria.focus();
+			aria.select(); 
+			document.execCommand("copy");
+			aStyle.value="visibility: hidden;"   
+		},25);
+		return 'ok';  	 
+	}
+	const	test=(n)=>{
+		  console.log(`limit is ${n}`);
+	}	
 
 </script>
 <style lang ="stylus">
 @import '../assets/theme.styl'	
 $colorPlot = #0074d9
 $colorAxis = #0074d9
+.fly
+	float: right;
+	padding 0.1em 1em
+	z-index 100
+	margin-left -3rem
+	&:hover
+		border 1px solid #0f5ef3
+		background-image linear-gradient(to bottom, #9eee, #eee)
+	&:active 
+		color rgb(213, 251, 251)
+		text-shadow 1px 2px 0 rgba(0,0,0,0.5)
+		background-image: linear-gradient(to bottom, #a7c3f4, #103675);
+		border 1px solid rgba(0,0,0,0.3)
+		border-style groove
+		box-shadow: 0.3em 0.3em  rgb(10, 38, 46) groove;
+		
 .my-grid
 	display grid
 	width 100%
@@ -70,8 +103,8 @@ $colorAxis = #0074d9
 	inline-size: 60ch;
 	margin-block-end: 0.01em;
 	white-space: pre-line;
-h5,h4,h3,p
-	margin 0.1em
+h5,h4,h3,p,button
+	margin 0.2em 0.1em
 	
 .tide2
 	line-height 0.8em
