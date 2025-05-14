@@ -1,7 +1,8 @@
 <script setup>
 import { ref,computed,watch} from 'vue'  
 import Navi from './web/Header.vue'
-import StyleView from './web/Style.vue'
+import Home from './web/Home.vue'
+
 
 
 </script>
@@ -11,7 +12,8 @@ import StyleView from './web/Style.vue'
     <Navi id="mynav" active="1"/>
   </header> 
   <body>
-    <StyleView></StyleView>
+    <Home>
+         </Home>
   </body>
 
 
