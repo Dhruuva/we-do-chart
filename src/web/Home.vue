@@ -12,9 +12,16 @@ body
 					Icon(icon="prime:copy" height="29")
 				Styler(ref="styler1")
 		.right-side
-			p right
-			WeDoChart(tky="7" fs="18" :ds="{width:700,height:600}" :points="data" :timefotmat="fdate" :limit=17 )
+			.box
+				select.select-my(v-model="act" name="option")
+					option(value="default") default
+					option(value="monaco") monaco
+					option(value="berry") berry
+			WeDoChart(tky="7" fs="16" :ds="{width:700,height:500}" :points="data" :timefotmat="fdate" :theme="act"  )
 			textarea#aria(:style="aStyle" rows="1" :value="txt" )
+			hChart(:theme="act")
+
+
 </template>
 
 
@@ -23,17 +30,17 @@ body
 	import { Icon } from '@iconify/vue';
 	import {Bank} from '../components/bank.js';
 	import WeDoChart from '../components/WeDoChart.vue';
-  import Styler from '../web/Styler.vue';
+    import Styler from '../web/Styler.vue';
+    import hChart from '../web/hLightChart.vue'
 
 	const  bank1 = new Bank(),styler1=ref(null), aStyle=ref("visibility: hidden;") ,txt=ref("no");
 	const data= computed(() => bank1.getData("sto"));
-	const fdate = new Intl.DateTimeFormat("sv-SE", { dateStyle: "short", timeZone: "MET" });
+	const fdate = new Intl.DateTimeFormat("sv-SE", { dateStyle: "short", timeZone: "MET" })
+	,themes=reactive(new Array("default","monaco","berry")), act=ref("default");
 
 	const copyText=()=>{
-		console.log( "copy", txt.value)
 		aStyle.value="visibility: visible;"
 		txt.value=styler1.value.cssCode;
-		console.log( "copyy", txt.value)
 		setTimeout(()=>{
 			let aria = document.getElementById("aria");
 			aria.focus();
@@ -43,13 +50,11 @@ body
 		},25);
 		return 'ok';  	 
 	}
-	const	test=(n)=>{
-		  console.log(`limit is ${n}`);
-	}	
-
+	
 </script>
 <style lang ="stylus">
-@import '../assets/theme.styl'	
+@import '../assets/theme.styl'
+@import '../assets/select-my.styl'		
 $colorPlot = #0074d9
 $colorAxis = #0074d9
 .fly
@@ -67,7 +72,6 @@ $colorAxis = #0074d9
 		border 1px solid rgba(0,0,0,0.3)
 		border-style groove
 		box-shadow: 0.3em 0.3em  rgb(10, 38, 46) groove;
-		
 .my-grid
 	display grid
 	width 100%
@@ -76,7 +80,7 @@ $colorAxis = #0074d9
 	padding 0.1em 1em
 	background-color #feeffe
 	max-height 80vh
-	
+	text-align left
 .central
 	min-width 600px
 	background-color #efde
@@ -103,7 +107,7 @@ $colorAxis = #0074d9
 	inline-size: 60ch;
 	margin-block-end: 0.01em;
 	white-space: pre-line;
-h5,h4,h3,p,button
+h5,h4,h3,p,button,pre,code
 	margin 0.2em 0.1em
 	
 .tide2
