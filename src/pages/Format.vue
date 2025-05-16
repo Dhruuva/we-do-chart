@@ -3,18 +3,31 @@ import { ref,onMounted ,reactive,computed,watch,watchEffect ,useTemplateRef} fro
 import WeDoChart from '../components/WeDoChart.vue'
 import Navi from '../web/Header.vue'
 import hData from '../web/hLightData.vue'
-const fdate = ref(new Intl.DateTimeFormat("gb-GB", { hour: "2-digit", minute:"2-digit",timeZone: "America/Panama" }));
+const fdate = ref(new Intl.DateTimeFormat("ja-JP", { month: "short", day:"2-digit",timeZone: "Asia/Tokyo" }));
 import {Bank} from '../components/bank.js';
-const  bank1 = new Bank(),fts =reactive(new Array(
+const  bank1 = new Bank(), chart=ref(null),fts =reactive(new Array(
 		 new Intl.DateTimeFormat("ar-EG", { month: "short", day:"numeric", timeZone: "Asia/Dubai"})
 		,new Intl.DateTimeFormat("ko-KR", { month: "short", day:"numeric", timeZone: "Asia/Seoul" })
 		,new Intl.DateTimeFormat("ja-JP", { month: "short", day:"2-digit", timeZone: "Asia/Tokyo" })
 		,new Intl.DateTimeFormat("gb-GB", { hour: "2-digit", minute:"2-digit",timeZone:"Pacific/Midway"})
 ));
 const data= computed(() => bank1.getData("sto"));
-watch(fdate, (newX) => {
-  console.log(`fdate is ${newX}`)
-})
+// watch(fdate, (newX) => {
+//   console.log(`fdate is ${newX}`);
+//   chart.value.loadChart();
+// })
+watch(
+  () => fdate.value.resolvedOptions().timeZone,
+  (nv,ov) => {
+  	const f =fdate.value.resolvedOptions();
+    console.log(`fdate is----------------> ${nv} f= ${f.timeZone}`);
+    chart.value.loadChart();
+  },
+  { deep: true }
+)
+const upd=(v)=>{
+	 console.log(`fdate is-++++++++++++++++--> ${v} f= ${fdate.value.resolvedOptions().timeZone}`);
+}
 
 </script>
 
@@ -36,26 +49,26 @@ body
 						tbody
 							tr
 								td
-									input( type="radio" id="ar" name="drone" :value="fts[0]" checked v-model="fdate")
+									input( type="radio" id="ar" name="drone" :value="fts[0]"  v-model="fdate")
 									label( for="ar")
 										code ("ar-EG", { month: "short", day:"numeric", timeZone: "Asia/Dubai"} )
 							tr
 								td
-									input( type="radio" id="ko" name="drone" :value="fts[1]" v-model="fdate" )
+									input( type="radio" id="ko" name="drone" :value="fts[1]" v-model="fdate" @changed="upd")
 									label( for="ko")
 										code ("ko-KR", { month: "short", day:"numeric", timeZone: "Asia/Seoul" })
 							tr
 								td
-									input( type="radio" id="ja" name="drone" value="fts[2]" v-model="fdate")
+									input( type="radio" id="ja" name="drone" :value="fts[2]" v-model="fdate")
 									label( for="ja")
 										code ("ja-JP", { month: "short", day:"2-digit",timeZone: "Asia/Tokyo" })
 							tr
 								td
-									input( type="radio" id="intra" name="drone" value="fts[3]" v-model="fdate")
+									input( type="radio" id="intra" name="drone" :value="fts[3]" v-model="fdate")
 									label( for="intra")
 										code ("gb-GB", { hour: "2-digit", minute:"2-digit",timeZone:"Pacific/Midway"})					
 		.right-side
-			WeDoChart(tky="7" fs="16" :ds="{width:700,height:500}" :points="data" :timefotmat="fdate"   )
+			WeDoChart( ref="chart" tky="7" fs="16" :ds="{width:700,height:500}" :points="data" :timefotmat="fdate"   )
 			
 
 		
@@ -82,10 +95,12 @@ $colorAxis = #0074d9
 		border-style groove
 		box-shadow: 0.3em 0.3em  rgb(10, 38, 46) groove;
 .my-grid
+	margin 0.1em 0.1em
 	display grid
 	width 100%
 	grid-template-columns 1fr 1fr;
 .right-side
+	margin 0.2em 0.1em
 	padding 0.1em 1em
 	background-color #feeffe
 	max-height 80vh
@@ -94,6 +109,7 @@ $colorAxis = #0074d9
 	min-width 600px
 	background-color #efde
 .left-side
+	margin 0.2em 0.1em
 	padding 0.1em 1em
 	height auto
 	min-width 600px
