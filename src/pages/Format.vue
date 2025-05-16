@@ -11,20 +11,21 @@ const  bank1 = new Bank(), chart=ref(null),fts =reactive(new Array(
 		,new Intl.DateTimeFormat("ja-JP", { month: "short", day:"2-digit", timeZone: "Asia/Tokyo" })
 		,new Intl.DateTimeFormat("gb-GB", { hour: "2-digit", minute:"2-digit",timeZone:"Pacific/Midway"})
 ));
-const data= computed(() => bank1.getData("sto"));
-// watch(fdate, (newX) => {
-//   console.log(`fdate is ${newX}`);
-//   chart.value.loadChart();
-// })
-watch(
-  () => fdate.value.resolvedOptions().timeZone,
-  (nv,ov) => {
-  	const f =fdate.value.resolvedOptions();
-    console.log(`fdate is----------------> ${nv} f= ${f.timeZone}`);
-    chart.value.loadChart();
-  },
-  { deep: true }
-)
+const data= computed(() => bank1.getData("sto")),upi =ref(0) ;
+watch(upi, (newX) => {
+  console.log(`upi is ${upi.value}`);
+  fdate.value=fts[+upi.value]
+  chart.value.loadChart();
+})
+// watch(
+//   () => fdate.resolvedOptions().timeZone,
+//   (nv,ov) => {
+//   	const f =fdate.resolvedOptions();
+//     console.log(`fdate is----------------> ${nv} f= ${f.timeZone}`);
+//     chart.value.loadChart();
+//   },
+//   { deep: true }
+// )
 const upd=(v)=>{
 	 console.log(`fdate is-++++++++++++++++--> ${v} f= ${fdate.value.resolvedOptions().timeZone}`);
 }
@@ -49,22 +50,22 @@ body
 						tbody
 							tr
 								td
-									input( type="radio" id="ar" name="drone" :value="fts[0]"  v-model="fdate")
+									input( type="radio" id="ar" name="drone" value="0"  v-model="upi")
 									label( for="ar")
 										code ("ar-EG", { month: "short", day:"numeric", timeZone: "Asia/Dubai"} )
 							tr
 								td
-									input( type="radio" id="ko" name="drone" :value="fts[1]" v-model="fdate" @changed="upd")
+									input( type="radio" id="ko" name="drone" value="1" v-model="upi" )
 									label( for="ko")
 										code ("ko-KR", { month: "short", day:"numeric", timeZone: "Asia/Seoul" })
 							tr
 								td
-									input( type="radio" id="ja" name="drone" :value="fts[2]" v-model="fdate")
+									input( type="radio" id="ja" name="drone" value="2" v-model="upi")
 									label( for="ja")
 										code ("ja-JP", { month: "short", day:"2-digit",timeZone: "Asia/Tokyo" })
 							tr
 								td
-									input( type="radio" id="intra" name="drone" :value="fts[3]" v-model="fdate")
+									input( type="radio" id="intra" name="drone" value="3" v-model="upi")
 									label( for="intra")
 										code ("gb-GB", { hour: "2-digit", minute:"2-digit",timeZone:"Pacific/Midway"})					
 		.right-side
