@@ -95,11 +95,23 @@ const pointsAsPolyline= computed( ()=> {
   return pointYX.map((p) => `${p.x} ${p.y}`).join(' ');
 })
 
-watchEffect(() => {
-  // runs only once before 3.5
-  // re-runs when the "foo" prop changes in 3.5+
-  console.log("watchEffect ds.",p.ds)
-})
+watch(() => p.timefotmat,  (newValue, oldValue) => {
+    //console.log( " timefotmat --->",newValue.value);
+    loadChart();
+
+}, { deep: true });
+
+watch(() => p.shapes,  (newValue, oldValue) => {
+    //console.log( " timefotmat --->",newValue.value);
+    loadChart();
+
+}, { deep: true });
+
+watch(() => p.tsz,  (newValue, oldValue) => {
+    //console.log( " timefotmat --->",newValue.value);
+    loadChart();
+
+}, { deep: true });
 
 watch(() => pos,  (newValue, oldValue) => {
     //console.log( " pos --->",newValue.value.x);
@@ -113,9 +125,9 @@ const xmapData=()=>{
 	let sz = (p.points.length>0)? p.points[0].data.length:0;
   limitSize.value =(sz<=15 && sz>0)? sz: (sz/100)*p.limit;
   const axi = axis.fn();
-  console.log(" axis.x.x2 ",axi.x);
+ // console.log(" axis.x.x2 ",axi.x);
   let step = (axi.x.x2-axi.x.x1)/(sz-1);
-  console.log(" step ",step);
+ // console.log(" step ",step);
   thumbs.value.step = step  // this need for slider to display last point easy
   let i = axi.x.x1;
   if (p.points.length>0){
@@ -134,23 +146,23 @@ const getDisplayData=(first,end)=> {
   pointsID.value.x1= (arr.length>0)? arr[0].id:pointsID.value.x1;
   pointsID.value.x2= (arr.length>0)? arr.slice(-1)[0].id:pointsID.value.x2;
   //console.log( 'arr.length=' ,arr.length)
-  //if (pSize.value != arr.length){
+  if (pSize.value != arr.length){
     pSize.value = arr.length;
     doAxes.formulaY(arr, axi, p.tky, calcOffsetX(p.timefotmat,p.points,p.fs), p.decimals, p.timefotmat)
     ticksY.splice(0,ticksY.length);
     Array.prototype.push.apply(ticksY,doAxes.ticksY().map(a=>a));
     ticksX.splice(0,ticksX.length);
     Array.prototype.push.apply(ticksX,doAxes.ticksX().map(a=>a));
-    console.log("ticksX =",ticksX)
+    //console.log("ticksX =",ticksX)
     if (p.timefotmat) doAxes.formatTicksX(ticksX,p.timefotmat);
     pointYX.length=0;
-    console.log("pointYX.legth =",pointYX.length)
+    //console.log("pointYX.legth =",pointYX.length)
     Array.prototype.push.apply(pointYX,doAxes.pointYX().map(a=>a));
     zero.value=doAxes.zero();
     shape.length=0;
     Array.prototype.push.apply(shape,doAxes.shapes);
     return 'ok'
-  //} else  return 'no';
+  } else  return 'no';
 }
 const loadChart=()=> {
   const axi = axis.fn(); 
