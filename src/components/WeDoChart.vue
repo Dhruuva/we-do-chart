@@ -54,8 +54,7 @@ const axis= computed( ()=> {
 });
 
 
-const doAxes = new DoAxes(p.timefotmat)
-, slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,cross,p.fs,limitSize);
+const doAxes = new DoAxes(),slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,cross,p.fs,limitSize);
 
 const isXtb= computed(() => bank1.getData("mins")[0].data.length);
 
@@ -135,7 +134,7 @@ const getDisplayData=(first,end)=> {
   pointsID.value.x1= (arr.length>0)? arr[0].id:pointsID.value.x1;
   pointsID.value.x2= (arr.length>0)? arr.slice(-1)[0].id:pointsID.value.x2;
   //console.log( 'arr.length=' ,arr.length)
-  if (pSize.value != arr.length){
+  //if (pSize.value != arr.length){
     pSize.value = arr.length;
     doAxes.formulaY(arr, axi, p.tky, calcOffsetX(p.timefotmat,p.points,p.fs), p.decimals, p.timefotmat)
     ticksY.splice(0,ticksY.length);
@@ -151,9 +150,8 @@ const getDisplayData=(first,end)=> {
     shape.length=0;
     Array.prototype.push.apply(shape,doAxes.shapes);
     return 'ok'
-  } else  return 'no';
+  //} else  return 'no';
 }
-
 const loadChart=()=> {
   const axi = axis.fn(); 
   xmapData()

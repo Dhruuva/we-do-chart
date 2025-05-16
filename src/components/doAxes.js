@@ -1,14 +1,12 @@
 
 //const dateFormat = require('dateformat');
-const mmm =new Intl.DateTimeFormat('en-US',{ month: "short",  timeZone: 'MET'});
-const yyyy =new Intl.DateTimeFormat('en-US',{ year: "numeric",  timeZone: 'MET'});
+
 const fdate = new Intl.DateTimeFormat("sv-SE", { dateStyle: "short", timeZone: "MET" });
 const ftime = new Intl.DateTimeFormat("sv-SE", { timeStyle: "short", timeZone: "MET" });
 
-export function DoAxes(IntlFormat) {
+export function DoAxes() {
 	const  ticksX=[], ticksY=[], ds=[], pointY=[], pointYX=[]
 	, shape=[];
-	const f = (IntlFormat)? IntlFormat:fdate;
 	let zeroLine=0;
 	const yScale =(hi,lo,tky,a) =>{
 		let mv =this.movMin
@@ -46,7 +44,7 @@ export function DoAxes(IntlFormat) {
 		return  { mMov:mMov, width: mxl };
 	}
 	
-	const formulaY = (data, off,tky, wbx,minMove,format) => {
+	const formulaY = (data, off,tky, wbx,minMove,fmt) => {
 		pointYX.length=0;
 		ticksX.length=0;
 		ticksY.length=0;
@@ -82,8 +80,11 @@ export function DoAxes(IntlFormat) {
 			a.x = (j*stepx)+xtm
 			// console.log(" y = ", a.price,a.y, " j ", j, " x =",a.x)
 		})
-		out.forEach(a=> {shape.splice(a,1); console.log( "del=",shape.length)});
+		out.forEach(a=> {shape.splice(a,1);});
 		
+		const o=fmt.resolvedOptions();
+		const mmm =new Intl.DateTimeFormat(o.locale,{ month: "short",  timeZone: o.locale.timeZone});
+		const yyyy =new Intl.DateTimeFormat(o.locale,{ year: "numeric",  timeZone: o.locale.timeZone});
 
 		ds.forEach((a,i)=>{
 			let pct = ((a.price-scale.low)*100)/hl;
@@ -96,8 +97,8 @@ export function DoAxes(IntlFormat) {
 			pointYX.push(row);
 			if (i==0){
 				let rowx = {id:i,dtm:tms, x:off.x.x1};
-				if (format){
-					rowx.tm = f.format(new Date(tms)) // this for x labels
+				if (fmt){
+					rowx.tm = fmt.format(new Date(tms)) // this for x labels
 					rowx.d = new Date(tms).getDate()
 					rowx.mm = mmm.format(new Date(tms))
 					rowx.yy = yyyy.format(new Date(tms))
@@ -105,8 +106,8 @@ export function DoAxes(IntlFormat) {
 				ticksX.push(rowx);
 			} else if (i > 0 && n >=Math.round(skip) ){
 				let rowx = {id:i,dtm:tms, x:row.x};
-				if (format){
-					rowx.tm =  f.format(new Date(tms)) // this for x labels
+				if (fmt){
+					rowx.tm =  fmt.format(new Date(tms)) // this for x labels
 					rowx.d = new Date(tms).getDate()
 					rowx.mm =  mmm.format(new Date(tms))
 					rowx.yy =  yyyy.format(new Date(tms))
@@ -154,7 +155,7 @@ export function DoAxes(IntlFormat) {
 
 
 	
-	this.formulaY = (data, off, tky, wbx,minMove,format) => formulaY(data, off, tky, wbx,minMove,format);
+	this.formulaY = (data, off, tky, wbx,minMove,fmt) => formulaY(data, off, tky, wbx,minMove,fmt);
 	this.minMove = (data) => minMove(data);
 	this.formatTicksX=(ticksX,f) => formatTicksX(ticksX,f);
 	this.ticksY=() =>(ticksY);
