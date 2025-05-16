@@ -54,8 +54,7 @@ const axis= computed( ()=> {
 });
 
 
-const doAxes = new DoAxes(p.timefotmat)
-, slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,cross,p.fs,limitSize);
+const doAxes = new DoAxes(),slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,cross,p.fs,limitSize);
 
 const isXtb= computed(() => bank1.getData("mins")[0].data.length);
 

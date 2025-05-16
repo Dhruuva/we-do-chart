@@ -54,8 +54,7 @@ const axis= computed( ()=> {
 });
 
 
-const doAxes = new DoAxes(p.timefotmat)
-, slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,cross,p.fs,limitSize);
+const doAxes = new DoAxes(), slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,cross,p.fs,limitSize);
 
 
 const isXtb= computed(() => bank1.getData("mins")[0].data.length);
@@ -251,6 +250,8 @@ const f=(d)=>{
   return +d.toFixed(2)
 }
 
+
+
 const canDrug=()=>{
 	if (!slider.draggingLeft && !slider.draggingRight  && !slider.draggingCenter ){
 		return true;
@@ -280,6 +281,7 @@ main
     .central  
       h5  thumbs left.x={{f(thumbs.left.x)}} left.y={{f(thumbs.left.y)}}  right.x={{f(thumbs.right.x)}} right.y={{f(thumbs.right.y)}}
       h5 wline.middle :x {{f(wline.middle.x)}} :y {{f(wline.middle.y)}} :width {{f(wline.middle.w)}} :height {{f(wline.middle.h)}}
+      
       svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @mousedown="slider.startDrag($event)" @mousemove="mousemove($event,pos)" @wheel="zoom" @mouseleave="slider.stopDrag")
         rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height" :style="cross.cursor" @mouseup="slider.stopDrag" )
         circle.titlesDot( :cx="axis.x.x1" :cy="axis.y.y2-1-fs/3" :r="fs/3" )
