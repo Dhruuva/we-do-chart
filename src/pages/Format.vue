@@ -1,11 +1,14 @@
 <script setup>
 import { ref,onMounted ,reactive,computed,watch,watchEffect ,useTemplateRef} from 'vue'
-import WeDoChart from '../components/WeDoChart.vue'
-import Navi from '../web/Header.vue'
-import hData from '../web/hLightData.vue'
+import hljs from 'highlight.js';
+import 'highlight.js/styles/an-old-hope.min.css';
+import WeDoChart from '../components/WeDoChart.vue';
+import Navi from '../web/Header.vue';
+import hChart from '../web/hLightChart.vue';
 const fdate = ref(new Intl.DateTimeFormat("ja-JP", { month: "short", day:"2-digit",timeZone: "Asia/Tokyo" }));
 import {Bank} from '../components/bank.js';
-const  bank1 = new Bank(), chart=ref(null),fts =reactive(new Array(
+const act = ref(null);
+const  bank1 = new Bank(),hlight=ref(null), chart=ref(null),fts =reactive(new Array(
 		 new Intl.DateTimeFormat("ar-EG", { month: "short", day:"numeric", timeZone: "Asia/Dubai"})
 		,new Intl.DateTimeFormat("ko-KR", { month: "short", day:"numeric", timeZone: "Asia/Seoul" })
 		,new Intl.DateTimeFormat("ja-JP", { month: "short", day:"2-digit", timeZone: "Asia/Tokyo" })
@@ -13,22 +16,19 @@ const  bank1 = new Bank(), chart=ref(null),fts =reactive(new Array(
 ));
 const data= computed(() => bank1.getData("sto")),upi =ref(0) ;
 watch(upi, (newX) => {
-  console.log(`upi is ${upi.value}`);
-  fdate.value=fts[+upi.value]
+	let estr= `c${upi.value}`;
+	//console.log(`upi is ${upi.value}   str ${estr}`);
+  fdate.value=fts[+upi.value];
+  act.value= document.getElementById(`c${+upi.value+1}`).innerHTML;
+ 
+  //console.log(el)
   chart.value.loadChart();
 })
-// watch(
-//   () => fdate.resolvedOptions().timeZone,
-//   (nv,ov) => {
-//   	const f =fdate.resolvedOptions();
-//     console.log(`fdate is----------------> ${nv} f= ${f.timeZone}`);
-//     chart.value.loadChart();
-//   },
-//   { deep: true }
-// )
-const upd=(v)=>{
-	 console.log(`fdate is-++++++++++++++++--> ${v} f= ${fdate.value.resolvedOptions().timeZone}`);
-}
+const hljsText=computed( ()=> { 
+		let str =`const fdate = ref(new Intl.DateTimeFormat${act.value});`
+	return hljs.highlight(str,  {language: 'js'}).value;
+})
+
 
 </script>
 
@@ -52,24 +52,28 @@ body
 								td
 									input( type="radio" id="ar" name="drone" value="0"  v-model="upi")
 									label( for="ar")
-										code ("ar-EG", { month: "short", day:"numeric", timeZone: "Asia/Dubai"} )
+										code#c1 ( "ar-EG", { month: "short", day:"numeric", timeZone: "Asia/Dubai"} )
 							tr
 								td
 									input( type="radio" id="ko" name="drone" value="1" v-model="upi" )
 									label( for="ko")
-										code ("ko-KR", { month: "short", day:"numeric", timeZone: "Asia/Seoul" })
+										code#c2 ("ko-KR", { month: "short", day:"numeric", timeZone: "Asia/Seoul" })
 							tr
 								td
 									input( type="radio" id="ja" name="drone" value="2" v-model="upi")
 									label( for="ja")
-										code ("ja-JP", { month: "short", day:"2-digit",timeZone: "Asia/Tokyo" })
+										code#c3 ("ja-JP", { month: "short", day:"2-digit",timeZone: "Asia/Tokyo" })
 							tr
 								td
 									input( type="radio" id="intra" name="drone" value="3" v-model="upi")
 									label( for="intra")
-										code ("gb-GB", { hour: "2-digit", minute:"2-digit",timeZone:"Pacific/Midway"})					
+										code#c4 ("gb-GB", { hour: "2-digit", minute:"2-digit",timeZone:"Pacific/Midway"})
+					
 		.right-side
-			WeDoChart( ref="chart" tky="7" fs="16" :ds="{width:700,height:500}" :points="data" :timefotmat="fdate"   )
+			WeDoChart( ref="chart" tky="7" fs="12" :ds="{width:600,height:400}" :points="data" :timefotmat="fdate")
+			pre
+				code(class="js" v-html="hljsText")
+			hChart(ref="hlight" :code="fdate" )
 			
 
 		
@@ -80,6 +84,8 @@ body
 @import '../assets/select-my.styl'		
 $colorPlot = #0074d9
 $colorAxis = #0074d9
+code
+	white-space:normal;
 .fly
 	float: right;
 	padding 0.1em 1em
@@ -104,7 +110,7 @@ $colorAxis = #0074d9
 	margin 0.2em 0.1em
 	padding 0.1em 1em
 	background-color #feeffe
-	max-height 80vh
+	max-height 90vh
 	text-align left
 .central
 	min-width 600px
