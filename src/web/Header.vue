@@ -21,6 +21,7 @@ header#mynav
 		{id:2,page:"inputData.html", name:"Data source", ico:"ic:baseline-contact-support"},
 		{id:3,page:"props.html", name:"Props", ico:"ic:sharp-barcode"},
 		{id:4,page:"format.html", name:"Format", ico:"ic:round-compost"},
+		{id:5,page:"shapes.html", name:"Shapes", ico:"ix:boundary-signals"},
 	));
 
 	onMounted( async () => {
