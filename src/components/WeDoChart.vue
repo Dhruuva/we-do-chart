@@ -95,6 +95,17 @@ const pointsAsPolyline= computed( ()=> {
   return pointYX.map((p) => `${p.x} ${p.y}`).join(' ');
 })
 
+watch([p.showGrid,p.fs,p.off,p.limit,p.scl,p.tky], ([newX, newY]) => {
+  loadChart();
+})
+watch(() => pos,  (newValue, oldValue) => {
+   if ( p.points && p.points.length > 0 && p.points[0]?.data.length>0){
+    crossMove();
+    slider.thumbYY();
+    slider.thumbY();
+  }
+}, { deep: true });
+
 watch(() => p.timefotmat,  (newValue, oldValue) => {
     //console.log( " timefotmat --->",newValue.value);
     loadChart();

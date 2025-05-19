@@ -56,7 +56,7 @@ export function Slide(axis,pos,height,thumbs,wline,cross,fs) {
 				this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
 				this.wline.middle.x = this.thumbs.left.x + wd
 				this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
-				console.log(" zoom1 -->",this.thumbs.left.x,this.thumbs.right.x)
+				//console.log(" zoom1 -->",this.thumbs.left.x,this.thumbs.right.x)
 				this.gds(this.thumbs.left.x, this.thumbs.right.x)
 			} 
 
@@ -67,14 +67,14 @@ export function Slide(axis,pos,height,thumbs,wline,cross,fs) {
 				this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
 				this.wline.middle.x = this.thumbs.left.x + wd
 				this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
-				console.log(" zoom2 -->",this.thumbs.left.x,this.thumbs.right.x)
+				//console.log(" zoom2 -->",this.thumbs.left.x,this.thumbs.right.x)
 				this.gds(this.thumbs.left.x, this.thumbs.right.x)
 			} else {
 				this.thumbs.left.x = this.axis.x.x1 -wd
 				this.wline.left.x2 = (this.thumbs.left.x < this.axis.x.x1) ?  this.wline.left.x1: this.thumbs.left.x
 				this.wline.middle.x = this.thumbs.left.x + wd
 				this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
-				console.log(" zoom3 -->",this.thumbs.left.x,this.thumbs.right.x)
+				//console.log(" zoom3 -->",this.thumbs.left.x,this.thumbs.right.x)
 				this.gds(this.thumbs.left.x, this.thumbs.right.x)
 
 			}
@@ -87,9 +87,9 @@ export function Slide(axis,pos,height,thumbs,wline,cross,fs) {
 
 		} else if ((leftDrug && draggingLeft) || this.wline.left.active){
 			let offset = (this.thumbs.left.off)? this.thumbs.left.off:wd
-			console.log("thumbY offset---->",offset, " lmt=",lmt,  "thumbs.step>>>>>>",thumbs.step)
-			console.log("left cond=",this.pos.value.x - offset+wd>axis.x.x1," a.x1 ",axis.x.x1)
-			console.log(" right cond ",this.thumbs.right.x -this.pos.value.x - offset>lmt)
+			//console.log("thumbY offset---->",offset, " lmt=",lmt,  "thumbs.step>>>>>>",thumbs.step)
+			//console.log("left cond=",this.pos.value.x - offset+wd>axis.x.x1," a.x1 ",axis.x.x1)
+			//console.log(" right cond ",this.thumbs.right.x -this.pos.value.x - offset>lmt)
 
 			if ( (this.pos.value.x - offset+wd) > this.axis.x.x1  && (this.thumbs.right.x -this.pos.value.x - offset)>lmt  ) {
 				this.thumbs.left.x = this.pos.value.x - offset
@@ -97,7 +97,7 @@ export function Slide(axis,pos,height,thumbs,wline,cross,fs) {
 				this.wline.middle.x = this.thumbs.left.x + wd
 				this.wline.middle.w = this.thumbs.right.x - this.thumbs.left.x-wd
 				this.gds(this.thumbs.left.x, this.thumbs.right.x)
-				console.log("drug left---->",this.thumbs.left.x, this.pos.value.x, offset)
+				//console.log("drug left---->",this.thumbs.left.x, this.pos.value.x, offset)
 			} 
 		}
 		this.wline.left.active = false
@@ -174,7 +174,7 @@ export function Slide(axis,pos,height,thumbs,wline,cross,fs) {
 		rightDrug = false
 		moveDrug = false;
 		draggingCenter=false;
-		console.log("stopDrag **********************",)
+		//console.log("stopDrag **********************",)
 		if (this.pos.value.x<this.axis.x.x2 && this.pos.value.x>this.axis.x.x1 && this.pos.value.y>this.axis.y.y2 && this.pos.value.y<this.axis.y.y1 ) {
 			console.log("stopDrag **********************",)
 			this.cross.cursor='cursor: default;'

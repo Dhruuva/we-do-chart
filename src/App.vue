@@ -1,11 +1,17 @@
 <script setup>
-import { ref,computed,useTemplateRef,watch} from 'vue'  
+import { ref,computed,useTemplateRef,watch, onMounted} from 'vue'  
 import WeDoChartDev from './components/WeDoChartDev.vue'
 import {Bank} from './components/bank.js'
-const  bank1 = new Bank(), chart= ref(null),tky1= ref(2),scl= ref(0.7);
+const  bank1 = new Bank(), chart= ref(null),tky1= ref(2),scl= ref(0.7), rows= ref(new Array());
 const data= computed(() => bank1.getData("sto"));
 const fdate = ref(new Intl.DateTimeFormat("ru-RU", { day:"2-digit",  timeZone: "MET" }));
 //const chartRef = useTemplateRef('chart')
+onMounted( async () => {
+  Array.prototype.push.apply(rows.value, bank1.getData("sto"));
+  console.log(rows.value[0]?.data[0] )
+  console.log(rows.value[0]?.data.length,"==rows.value.length" )
+})
+
 const reload =()=>{
   tky1.value=5;
  // chart.value.f(343);
@@ -35,7 +41,7 @@ const change=(v )=>{
     <button @click="change(2)"> Japan</button>
     <input type="range" id="scl" name="scl" min="0" max="1" step="0.01" v-model="scl"></input>
   </header>
-  <WeDoChartDev ref="chart" :ds="{width:600,height:400}" :tky="tky1" :points="data" :timefotmat="fdate" :limit=17 theme="berry" :scl="scl" />
+  <WeDoChartDev ref="chart" :ds="{width:600,height:400}" :tky="tky1" :points="rows" :timefotmat="fdate" :limit=17 theme="berry" :scl="scl" />
 </template>
 
 <style scoped>
