@@ -1,15 +1,18 @@
 <script setup>
-import { ref,computed,useTemplateRef,watch, onMounted} from 'vue'  
+import { ref,computed,useTemplateRef,watch, onMounted,reactive} from 'vue'  
 import WeDoChartDev from './components/WeDoChartDev.vue'
 import {Bank} from './components/bank.js'
-const  bank1 = new Bank(), chart= ref(null),tky1= ref(2),scl= ref(0.7), rows= ref(new Array());
+const  bank1 = new Bank(), chart= ref(null),tky1= ref(2),scl= ref(0.7);
 const data= computed(() => bank1.getData("sto"));
 const fdate = ref(new Intl.DateTimeFormat("ru-RU", { day:"2-digit",  timeZone: "MET" }));
 //const chartRef = useTemplateRef('chart')
+const rows= reactive(new Array());
 onMounted( async () => {
-  Array.prototype.push.apply(rows.value, bank1.getData("sto"));
-  console.log(rows.value[0]?.data[0] )
-  console.log(rows.value[0]?.data.length,"==rows.value.length" )
+  Array.prototype.push.apply(rows, bank1.getData("sto"));
+  // console.log(rows.value[0]?.data[0] )
+  // console.log(rows.value[0]?.data.length,"==rows.value.length" )
+  console.log(rows[0]?.data[0] )
+  console.log(rows[0]?.data.length,"==rows.value.length" )
 })
 
 const reload =()=>{
