@@ -61,7 +61,6 @@ const isXtb= computed(() => bank1.getData("mins")[0].data.length);
 
 
 onMounted( async () => {
-  let rows= bank1.getData("mins")[0].data;
   slider.leftDrug = true
   slider.draggingLeft =true
   xmapData();
@@ -109,28 +108,18 @@ watch(() => pos,  (newValue, oldValue) => {
 watch(() => p.timefotmat,  (newValue, oldValue) => {
     //console.log( " timefotmat --->",newValue.value);
     loadChart();
-
 }, { deep: true });
 
 watch(() => p.shapes,  (newValue, oldValue) => {
     //console.log( " timefotmat --->",newValue.value);
     loadChart();
-
 }, { deep: true });
 
 watch(() => p.tsz,  (newValue, oldValue) => {
     //console.log( " timefotmat --->",newValue.value);
     loadChart();
-
 }, { deep: true });
 
-watch(() => pos,  (newValue, oldValue) => {
-    //console.log( " pos --->",newValue.value.x);
-    crossMove();
-    slider.thumbYY();
-    slider.thumbY();
-
-}, { deep: true });
 
 const xmapData=()=>{
 	let sz = (p.points.length>0)? p.points[0].data.length:0;

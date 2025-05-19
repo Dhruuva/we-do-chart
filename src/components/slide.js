@@ -14,7 +14,7 @@ export function Slide(axis,pos,height,thumbs,wline,cross,fs) {
 		this.svg=svg.value;
 		this.pointYX=pointYX;
 		this.limitSize=limitSize?.value;
-		console.log("pointYX---$$$$$$$$$$$$$$$",pointYX, "limitSize init ",limitSize)
+		//console.log("pointYX---$$$$$$$$$$$$$$$",pointYX, "limitSize init ",limitSize)
 		this.pos.value.x =  this.axis.x.x1 
 		let hf =  (this.h-(this.axis.y.y1 + this.fs*1.18))/2 + (scl*40)/2
 		let y = this.h-hf
@@ -108,7 +108,7 @@ export function Slide(axis,pos,height,thumbs,wline,cross,fs) {
 		if (draggingCenter && !rightDrug && !leftDrug && moveDrug ){
 			moveChartRight(wd)
 		} else if (rightDrug && draggingRight || this.wline.right.active){
-			console.log("thumbYY offset---->",offset, " lmt=",lmt,  "thumbs.step>>>>>>",thumbs.step);
+			//console.log("thumbYY offset---->",offset, " lmt=",lmt,  "thumbs.step>>>>>>",thumbs.step);
 			if( this.pos.value.x  < this.axis.x.x2+wd && (this.pos.value.x - offset -this.thumbs.left.x)>lmt ) {
 				this.thumbs.right.x = this.pos.value.x - offset
 				this.wline.right.x1 = (this.pos.value.x > this.axis.x.x2 - wd ) ?  this.wline.right.x2:this.thumbs.right.x+wd

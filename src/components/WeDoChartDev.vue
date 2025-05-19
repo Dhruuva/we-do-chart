@@ -105,12 +105,9 @@ const pointsAsPolyline= computed( ()=> {
   return pointYX.map((p) => `${p.x} ${p.y}`).join(' ');
 })
 
-watchEffect(() => {
-  // runs only once before 3.5
-  // re-runs when the "foo" prop changes in 3.5+
-   console.log("watchEffect ds.",p.ds)
-})
+
 watch([p.showGrid,p.fs,p.off,p.limit,p.scl,p.tky], ([newX, newY]) => {
+  console.log("watch ALL.",p.off);
   loadChart();
 })
 watch([() => p.points,() => p.timefotmat],  (newValue, oldValue) => {
@@ -289,7 +286,12 @@ const canDrug=()=>{
 
 defineExpose({loadChart,f});
 
-
+watchEffect(() => {
+  // runs only once before 3.5
+  // re-runs when the "foo" prop changes in 3.5+
+  console.log("watchEffect ds.",p.off)
+  loadChart();
+})
 
 
 </script>
