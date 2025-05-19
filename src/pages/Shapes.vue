@@ -8,7 +8,7 @@ import WeDoChart from '../components/WeDoChart.vue';
 import Navi from '../web/Header.vue';
 const fdate = ref(new Intl.DateTimeFormat("ja-JP", { month: "short", day:"2-digit",timeZone: "Asia/Tokyo" }));
 import {Bank} from '../components/bank.js';
-const act = ref(null), rows=reactive(new Array(1,1));
+const act = ref(null), rows=reactive(null);
 const  bank1 = new Bank(),hlight=ref(null), chart=ref(null);
 const data= computed(() => bank1.getData("sto")),upi =ref(0) ;
 
