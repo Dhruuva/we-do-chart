@@ -46,7 +46,7 @@ const change=(v )=>{
     <input type="range" id="scl" name="scl" min="0" max="1" step="0.01" v-model="scl"></input>
     <input type="range" id="off" name="off" min="5" max="35" step="1" v-model="off"></input>
   </header>
-  <WeDoChartDev ref="chart" :ds="{width:600,height:400}" :tky="tky1" :points="data" :timefotmat="fdate" limit=17 theme="berry" :scl="scl" :off="off"/>
+  <WeDoChartDev ref="chart" :ds="{width:600,height:400}" :tky="tky1" :points="data" :timefotmat="fdate"  theme="berry" :scl="scl" :off="off"/>
 </template>
 
 <style scoped>

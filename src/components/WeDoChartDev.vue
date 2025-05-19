@@ -150,22 +150,16 @@ watch(() => p.tky,  (newValue, oldValue) => {
 
 }, { deep: true });
 
-// watch(() => p.tsz,  (newValue, oldValue) => {
-//     console.log( " tsz --->",newValue.value.size);
-//     crossMove();
-//     slider.thumbYY();
-//     slider.thumbY();
 
-// }, { deep: true });
 
 
 const xmapData=()=>{
 	let sz = (p.points.length>0)? p.points[0].data.length:0;
   limitSize.value =(sz<=15 && sz>0)? sz: (sz/100)*p.limit;
   const axi = axis.fn();
-  console.log(" axis.x.x2 ",axi.x);
+ // console.log(" axis.x.x2 ",axi.x);
   let step = (axi.x.x2-axi.x.x1)/(sz-1);
-  console.log(" step ",step);
+ // console.log(" step ",step);
   thumbs.value.step = step  // this need for slider to display last point easy
   let i = axi.x.x1;
   if (p.points.length>0){
@@ -191,10 +185,10 @@ const getDisplayData=(first,end)=> {
     Array.prototype.push.apply(ticksY,doAxes.ticksY().map(a=>a));
     ticksX.splice(0,ticksX.length);
     Array.prototype.push.apply(ticksX,doAxes.ticksX().map(a=>a));
-    console.log("ticksX =",ticksX)
+    //console.log("ticksX =",ticksX)
     if (p.timefotmat) doAxes.formatTicksX(ticksX,p.timefotmat);
     pointYX.length=0;
-    console.log("pointYX.legth =",pointYX.length)
+   // console.log("pointYX.legth =",pointYX.length)
     Array.prototype.push.apply(pointYX,doAxes.pointYX().map(a=>a));
     zero.value=doAxes.zero();
     shape.length=0;
@@ -203,7 +197,7 @@ const getDisplayData=(first,end)=> {
   //} else  return 'no';
 }
 const loadChart=()=> {
-  console.log( "p.tky loadChart --->",p.tky);
+  //console.log( "p.tky loadChart --->",p.tky);
   const axi = axis.fn(); 
   xmapData()
   let arr =(p.points.length>0)? p.points[0].data.filter(a=>  a.id >=  pointsID.value.x1 &&  a.id <=  pointsID.value.x2 ):[] 
@@ -289,7 +283,7 @@ defineExpose({loadChart,f});
 watchEffect(() => {
   // runs only once before 3.5
   // re-runs when the "foo" prop changes in 3.5+
-  console.log("watchEffect ds.",p.off)
+  //console.log("watchEffect ds.",p.off)
   loadChart();
 })
 
