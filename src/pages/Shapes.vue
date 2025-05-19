@@ -6,39 +6,40 @@ import 'highlight.js/styles/atom-one-dark.min.css';
 import hljsVuePlugin from "@highlightjs/vue-plugin";
 import WeDoChart from '../components/WeDoChart.vue';
 import Navi from '../web/Header.vue';
-const fdate = ref(new Intl.DateTimeFormat("ja-JP", { month: "short", day:"2-digit",timeZone: "Asia/Tokyo" }));
+const fdate = ref(new Intl.DateTimeFormat("sv-SE", { dateStyle: "short", timeZone: "MET" }));
 import {Bank} from '../components/bank.js';
-const act = ref(null), rows=reactive(null);
+const act = ref({type:'dot',x:0,y:0,price:-65,tm:"2018-04-24"})
+, rows=reactive(new Array()), ds=reactive(new Array())
+, sp=reactive(new Array());
 const  bank1 = new Bank(),hlight=ref(null), chart=ref(null);
 const data= computed(() => bank1.getData("sto")),upi =ref(0) ;
 
 onMounted( async () => {
-	Array.prototype.push.apply(rows , bank1.getData("sto"));
-	console.log( " s-->",rows)
+	rows.length=0;
+	ds.length=0;
 	document.querySelectorAll('pre code').forEach((el) => {
 		hljs.highlightElement(el);
 	});
+	Array.prototype.push.apply(ds , bank1.getData("sto")[0].data);
+	Array.prototype.push.apply(rows , bank1.getData("sto"));
+	console.log( " s-->",rows, rows[0]?.data.length);
+	chart.value.loadChart();
 	
 })
 
-// active game click
-// const gact = async (t,p)=>{
-// 	busy.value=true;
-// 	const ff = store.gameData.find(a=>a.class=='active');
-// 	const fff = store.gameData.find(a=>a.class=='edit');
-// 	if (ff) ff.class="";
-// 	if (fff) fff.class="";
-// 	const f = store.gameData.find(a=>a.qid==qid);
-// 	qID.value=qid;
-// 	store.qID=qid;
-// 	// console.log(' gact:', f);
-// 	f.class="active";
-// 	let qq = await getQuestion(qid).catch(e=>e);
-// 	error.value=null;
-// 	busy.value=false;
-// }
+//active game click
+const gact = async (t,p)=>{
+	const ff = ds.find(a=>a.class=='active');
+	//console.log(' -------ff:', ff);
+	if (ff) ff.class="";
+	const f = ds.find(a=>a.tm==t && a.price==p);
+	act.value=f;
+	sp.push({type:'dot',price:act.value.price,tm:act.value.tm});
+	f.class="active";
+	//console.log(t,p,' gact:', f);
+}
 const hljsText=computed( ()=> { 
-	let str =`const fdate = ref(new Intl.DateTimeFormat${act.value});`
+	let str =`const sp = [{type:'dot',x:0,y:0,price:${act.value.price},tm:${act.value.tm}},];`
 	return hljs.highlight(str,  {language: 'js'}).value;
 })
 
@@ -47,7 +48,7 @@ const hljsText=computed( ()=> {
 
 <template lang="pug">
 header
-	Navi(id="mynav" active="4")
+	Navi(id="mynav" active="5")
 body
 	main
 	.my-grid
@@ -67,15 +68,15 @@ body
 								th tm
 								th price
 					.tbl-content
-						table.fx-tb(cellpadding='0' cellspacing='0' border='0' )
+						table.fx-tb(cellpadding='1' cellspacing='1' border='1' )
 							tbody
-								tr(v-for="c in data[0].data")
+								tr(v-for="c in ds" @click="gact(c.tm,c.price)" :class="c.class")
 									td {{c.tm}}
 									td {{c.price}}
 				pre
 					code(class="language-js" v-html="hljsText")
 		.right-side
-			WeDoChart( ref="chart" tky="7" fs="12" :ds="{width:600,height:400}" :points="rows" :timefotmat="fdate")
+			WeDoChart( ref="chart" tky="6" fs="12" :ds="{width:600,height:400}" :points="rows" :timefotmat="fdate" :limit="12" :shapes="sp")
 			pre
 				code(class="language-js" v-html="hljsText")
 			

@@ -7,7 +7,9 @@ import Navi from '../web/Header.vue';
 import hChart from '../web/hLightChart.vue';
 const fdate = ref(new Intl.DateTimeFormat("ja-JP", { month: "short", day:"2-digit",timeZone: "Asia/Tokyo" }));
 import {Bank} from '../components/bank.js';
-const act = ref(null);
+const act = ref(null), rows=reactive(new Array());
+
+
 const  bank1 = new Bank(),hlight=ref(null), chart=ref(null),fts =reactive(new Array(
 		 new Intl.DateTimeFormat("ar-EG", { month: "short", day:"numeric", timeZone: "Asia/Dubai"})
 		,new Intl.DateTimeFormat("ko-KR", { month: "short", day:"numeric", timeZone: "Asia/Seoul" })
