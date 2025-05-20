@@ -23,10 +23,10 @@ const p = defineProps({
 });
 
 
-const pos = ref({x:0, y:0}), bank1 = new Bank()
+const debug = {}, pos = ref({x:0, y:0}), bank1 = new Bank()
 ,svg = useTemplateRef('sheet')
 ,thumbs = ref({ left:{x:0, y:0}, right:{x:0, y:0, priceDigits:0 },step:0.0001 })
-,pointsID = ref({x1:0,x2:15})
+,pointsID = ref({x1:0,x2:Number.MAX_VALUE})
 ,pSize = ref(0) // data in  display
 ,limitSize= ref(0)   // data count it's use in limit calculation
 ,zero= ref(null) 
@@ -40,13 +40,15 @@ const axis= computed( ()=> {
   , lfBox= calcOffsetX(p.timefotmat,p.points,p.fs)
   , hbox = calcMiniBottomHight(p.tsz,p.fs,p.scl,h)
   , tbox = calcMiniTopHight(p.tsz,p.fs);
- // console.log( " wbox =" ,wbox," lfBox =" ,lfBox, "hbox==",hbox, "tbox=",tbox);
+  //console.log( " wbox =" ,wbox," lfBox =" ,lfBox, "hbox==",hbox, "tbox=",tbox);
+  debug.box={"wbox":wbox,"lfBox":lfBox,"hbo":hbox,"tbo":tbox};
   let x = (off) < lfBox/3 ? lfBox/3:off;
   if (x < p.scl*31) x=p.scl*31+(p.scl*31/2.5);
   let y = (off) < hbox ? hbox:off;
   let y2 = (tbox > off ) ? tbox:off;
   let x2 = (off) < wbox/1.5 ? wbox/1.5:off;
- // console.log( " x =" ,x," y =" ,y, "y2==",y2, "x2=",x2);
+  //console.log( " x =" ,x," y =" ,y, "y2==",y2, "x2=",x2);
+  debug.xy={ " x " :x," y " :y, "y2":y2, "x2":x2};
   return {
     y: {y1: h-y, y2:y2, x1: w-x2, x2: w-x2},
     x: {y1: h-y, y2:h-y, x1:x, x2: w-x2},
@@ -54,7 +56,7 @@ const axis= computed( ()=> {
 });
 
 
-const doAxes = new DoAxes(), slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,cross,p.fs,limitSize);
+const doAxes = new DoAxes(), slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,cross,p.fs);
 
 
 const isXtb= computed(() => bank1.getData("mins")[0].data.length);
@@ -106,11 +108,18 @@ const pointsAsPolyline= computed( ()=> {
 })
 
 
-watch([p.showGrid,p.fs,p.off,p.limit,p.scl,p.tky], ([newX, newY]) => {
-  console.log("watch ALL.",p.off);
-  loadChart();
-})
-watch([() => p.points,() => p.timefotmat],  (newValue, oldValue) => {
+// watch([p.showGrid,p.fs,p.off,p.limit,p.scl,p.tky], ([newX, newY]) => {
+//   console.log("watch ALL.",p.off);
+//   loadChart();
+// })
+// watch([() => p.limit,() => p.off],  (newValue, oldValue) => {
+//     //console.log( " timefotmat --->",newValue.value);
+//   console.log("watch ALL.",p.off);
+//     loadChart();
+// }, { deep: true });
+
+watch([() => p.points,() => p.timefotmat,() => p.limit,() => p.off,() => p.tky,() => p.fs,() => p.scl,() => p.showGrid]
+  ,  (newValue, oldValue) => {
     //console.log( " timefotmat --->",newValue.value);
     loadChart();
 }, { deep: true });
@@ -174,11 +183,11 @@ const getDisplayData=(first,end)=> {
   doAxes.shapes=p.shapes;
   let n=thumbs.value.step*0.01;
   let arr =(p.points.length>0)? p.points[0].data.filter(a=> a.x >= first &&  a.x <= end+n ) :[];
-  // console.log( 'arr.length=' ,arr.length)
+  console.log( 'arr.length=' ,arr.length, "first ", first,"end ", end)
   pointsID.value.x1= (arr.length>0)? arr[0].id:pointsID.value.x1;
   pointsID.value.x2= (arr.length>0)? arr.slice(-1)[0].id:pointsID.value.x2;
   //console.log( 'arr.length=' ,arr.length)
-  //if (pSize.value != arr.length){
+  if (pSize.value != arr.length){
     pSize.value = arr.length;
     doAxes.formulaY(arr, axi, p.tky, calcOffsetX(p.timefotmat,p.points,p.fs), p.decimals, p.timefotmat)
     ticksY.splice(0,ticksY.length);
@@ -194,7 +203,7 @@ const getDisplayData=(first,end)=> {
     shape.length=0;
     Array.prototype.push.apply(shape,doAxes.shapes);
     return 'ok'
-  //} else  return 'no';
+  } else  return 'no';
 }
 const loadChart=()=> {
   //console.log( "p.tky loadChart --->",p.tky);
@@ -210,6 +219,7 @@ const loadChart=()=> {
   getDisplayData(x1,x2)
   slider.scl=p.scl;
   const rtn=slider.init( getDisplayData,svg,pointYX,limitSize);
+  console.log("moveSlider x2===",x2, "arr ", arr.length);
   slider.moveSlider(x1,x2)
 }
 
@@ -283,8 +293,8 @@ defineExpose({loadChart,f});
 watchEffect(() => {
   // runs only once before 3.5
   // re-runs when the "foo" prop changes in 3.5+
-  //console.log("watchEffect ds.",p.off)
-  loadChart();
+  //console.log("watchEffect p.off",p.off," p.points[0].data==" , p.points[0]?.data.length)
+  //loadChart();
 })
 
 
@@ -299,11 +309,17 @@ main
       h4 p.scl {{ p.scl }}
       h4 pointYX {{pointYX.length}}
       h4 ticksX {{ticksX.length}}
+      h5 thumbs.step {{thumbs.step}}
+      tr(v-for="([key, val]) in Object.entries(debug.box)")
+        td {{key}}:
+        td {{val}}
+      tr(v-for="([key, val]) in Object.entries(debug.xy)")
+        td {{key}}:
+        td {{val}}  
 
     .central  
       h5  thumbs left.x={{f(thumbs.left.x)}} left.y={{f(thumbs.left.y)}}  right.x={{f(thumbs.right.x)}} right.y={{f(thumbs.right.y)}}
       h5 wline.middle :x {{f(wline.middle.x)}} :y {{f(wline.middle.y)}} :width {{f(wline.middle.w)}} :height {{f(wline.middle.h)}}
-      
       svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @mousedown="slider.startDrag($event)" @mousemove="mousemove($event,pos)" @wheel="zoom" @mouseleave="slider.stopDrag")
         rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height" :style="cross.cursor" @mouseup="slider.stopDrag" )
         circle.titlesDot( :cx="axis.x.x1" :cy="axis.y.y2-1-fs/3" :r="fs/3" )
@@ -344,6 +360,7 @@ main
       h4.for draggingCenter {{slider.draggingCenter}}
       h4.one draggingRight {{slider.draggingRight}}
       h4.two moveDrug {{slider.moveDrug}}
+      h5 w {{p.ds.width}} h {{p.ds.height}}
 
 </template>
 
