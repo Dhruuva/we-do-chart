@@ -26,7 +26,7 @@ const p = defineProps({
 const pos = ref({x:0, y:0}), bank1 = new Bank()
 ,svg = useTemplateRef('sheet')
 ,thumbs = ref({ left:{x:0, y:0}, right:{x:0, y:0, priceDigits:0 },step:0.0001 })
-,pointsID = ref({x1:0,x2:15})
+,pointsID = ref({x1:0,x2:Number.MAX_VALUE})
 ,pSize = ref(0) // data in  display
 ,limitSize= ref(0)   // data count it's use in limit calculation
 ,zero= ref(null) 
@@ -61,7 +61,6 @@ const isXtb= computed(() => bank1.getData("mins")[0].data.length);
 
 
 onMounted( async () => {
-  let rows= bank1.getData("mins")[0].data;
   slider.leftDrug = true
   slider.draggingLeft =true
   xmapData();
@@ -95,9 +94,11 @@ const pointsAsPolyline= computed( ()=> {
   return pointYX.map((p) => `${p.x} ${p.y}`).join(' ');
 })
 
-watch([p.showGrid,p.fs,p.off,p.limit,p.scl,p.tky], ([newX, newY]) => {
-  loadChart();
-})
+watch([() => p.points,() => p.timefotmat,() => p.limit,() => p.off,() => p.tky,() => p.fs,() => p.scl,() => p.showGrid]
+  ,  (newValue, oldValue) => {
+    //console.log( " timefotmat --->",newValue.value);
+    loadChart();
+}, { deep: true });
 watch(() => pos,  (newValue, oldValue) => {
    if ( p.points && p.points.length > 0 && p.points[0]?.data.length>0){
     crossMove();
@@ -109,28 +110,18 @@ watch(() => pos,  (newValue, oldValue) => {
 watch(() => p.timefotmat,  (newValue, oldValue) => {
     //console.log( " timefotmat --->",newValue.value);
     loadChart();
-
 }, { deep: true });
 
 watch(() => p.shapes,  (newValue, oldValue) => {
     //console.log( " timefotmat --->",newValue.value);
     loadChart();
-
 }, { deep: true });
 
 watch(() => p.tsz,  (newValue, oldValue) => {
     //console.log( " timefotmat --->",newValue.value);
     loadChart();
-
 }, { deep: true });
 
-watch(() => pos,  (newValue, oldValue) => {
-    //console.log( " pos --->",newValue.value.x);
-    crossMove();
-    slider.thumbYY();
-    slider.thumbY();
-
-}, { deep: true });
 
 const xmapData=()=>{
 	let sz = (p.points.length>0)? p.points[0].data.length:0;
