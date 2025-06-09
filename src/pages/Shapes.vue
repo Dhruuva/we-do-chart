@@ -34,13 +34,32 @@ const gact = async (t,p)=>{
 	if (ff) ff.class="";
 	const f = ds.find(a=>a.tm==t && a.price==p);
 	act.value=f;
-	sp.push({type:'dot',price:act.value.price,tm:act.value.tm});
+	if (!sp.find(a=>a.tm==t && a.price==p)){
+		sp.push({type:'dot',price:act.value.price,tm:act.value.tm});
+	}
+	
 	f.class="active";
 	//console.log(t,p,' gact:', f);
 }
 const hljsText=computed( ()=> { 
-	let str =`const sp = [{type:'dot',x:0,y:0,price:${act.value.price},tm:${act.value.tm}},];`
+	let str="";
+	sp.forEach((a,i)=>{
+     if (i==0){
+     	str = `const sp = [{type:'dot',x:0,y:0,price:${a.price},tm:${a.tm}}`
+     } else {
+     	str+=`,{type:'dot',x:0,y:0,price:${a.price},tm:${a.tm}}`
+     }
+    
+	});
+	str+=(sp.length>0)?"];":" Click on any row in table"
+	//let str =`const sp = [{type:'dot',x:0,y:0,price:${act.value.price},tm:${act.value.tm}},];`
 	return hljs.highlight(str,  {language: 'js'}).value;
+})
+
+const hljsText3=computed( ()=> { 
+	console.log( " hljsText3 ------------------->", hljsText3);
+	let str =`<WeDoChart(ref="chart"  :ds="{width:700,height:500}" :points="data" :timefotmat="fdate" :shapes="sp")/>`
+	return hljs.highlight(str,  {language:'js'}).value;
 })
 
 
@@ -57,9 +76,9 @@ body
 				h4 :shapes
 				.box
 					p
-						|In case time series data this property change format x-axis labels. It represent the  
+						| You can easy mark any point of the chart providing array of the special data points in  format like
 						code {type:'dot',x:0,y:0,price:-65,tm:"2018-04-24"}
-						|  object. You can use any language in date and time formatting also using different time zones for displaying.
+						|  currently supported type is dot.
 			.mini-grid
 				.tbl-header
 					table.fx-tb
@@ -75,10 +94,11 @@ body
 									td {{c.price}}
 				pre
 					code(class="language-js" v-html="hljsText")
+						
 		.right-side
-			WeDoChart( ref="chart" tky="6" fs="12" :ds="{width:600,height:400}" :points="rows" :timefotmat="fdate" :limit="12" :shapes="sp")
+			WeDoChart( ref="chart" tky="5" fs="12" :ds="{width:600,height:400}" :points="rows" :timefotmat="fdate" :limit="12" :shapes="sp")
 			pre
-				code(class="language-js" v-html="hljsText")
+				code(class="language-js" v-html="hljsText3")
 			
 			
 
