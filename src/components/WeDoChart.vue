@@ -112,10 +112,10 @@ watch(() => p.timefotmat,  (newValue, oldValue) => {
     loadChart();
 }, { deep: true });
 
-watch(() => p.shapes,  (newValue, oldValue) => {
-    //console.log( " timefotmat --->",newValue.value);
-    loadChart();
-}, { deep: true });
+// watch(() => p.shapes,  (newValue, oldValue) => {
+//     //console.log( " timefotmat --->",newValue.value);
+//     loadChart();
+// }, { deep: true });
 
 watch(() => p.tsz,  (newValue, oldValue) => {
     //console.log( " timefotmat --->",newValue.value);

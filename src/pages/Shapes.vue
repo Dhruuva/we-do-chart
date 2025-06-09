@@ -6,7 +6,7 @@ import 'highlight.js/styles/atom-one-dark.min.css';
 import hljsVuePlugin from "@highlightjs/vue-plugin";
 import WeDoChart from '../components/WeDoChart.vue';
 import Navi from '../web/Header.vue';
-const fdate = ref(new Intl.DateTimeFormat("sv-SE", { dateStyle: "short", timeZone: "MET" }));
+const fdate = ref(new Intl.DateTimeFormat("sv-SE", { month: "short", day:"numeric", timeZone: "MET" }));
 import {Bank} from '../components/bank.js';
 const act = ref({type:'dot',x:0,y:0,price:-65,tm:"2018-04-24"})
 , rows=reactive(new Array()), ds=reactive(new Array())
