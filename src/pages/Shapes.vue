@@ -78,7 +78,7 @@ body
 					p
 						| You can easy mark any point of the chart providing array of the special data points in  format like
 						code {type:'dot',x:0,y:0,price:-65,tm:"2018-04-24"}
-						|  currently supported type is dot.
+						|  currently supported type is dot. Appearance like colors customize by css class named shape.
 			.mini-grid
 				.tbl-header
 					table.fx-tb
