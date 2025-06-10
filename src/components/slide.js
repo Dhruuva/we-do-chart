@@ -269,8 +269,10 @@ export function Slide(axis,pos,height,thumbs,wline,cross,fs) {
 
 	}
 	const stopThumb=()=> {
-		if ( this.leftDrug  )  this.leftDrug = false;
-		if ( this.rightDrug  )  this.rightDrug = false;
+		//console.log("  stopThumb " ,this.rightDrug);
+		if ( this.leftDrug  && !this.draggingLeft)  this.leftDrug = false;
+		if ( this.rightDrug && !this.draggingRight )  this.rightDrug = false;
+		return 'ok'
 	}
 
 
