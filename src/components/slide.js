@@ -2,6 +2,7 @@ export function Slide(axis,pos,height,thumbs,wline,cross,fs) {
 	const farPoints =new Array(); // dev
 	this.axis=axis;
 	this.pos=pos;
+
 	this.h=height;
 	this.thumbs=thumbs.value;
 	this.wline=wline.value;
@@ -16,6 +17,7 @@ export function Slide(axis,pos,height,thumbs,wline,cross,fs) {
 		this.limitSize=limitSize?.value;
 		//console.log("pointYX---$$$$$$$$$$$$$$$",pointYX, "limitSize init ",limitSize)
 		this.pos.value.x =  this.axis.x.x1 
+		//console.log("  this.pos --->",pos.value.x);
 		let hf =  (this.h-(this.axis.y.y1 + this.fs*1.18))/2 + (scl*40)/2
 		let y = this.h-hf
 		//console.log("hf ",hf, "this.h ",this.h)
@@ -144,6 +146,8 @@ export function Slide(axis,pos,height,thumbs,wline,cross,fs) {
 	const moveChartRight=(wd)=>{
 		let xp = this.thumbs.right.mp+this.pos.value.x ,lx = this.pos.value.x-this.thumbs.left.mp
 		if (lx >= this.axis.x.x1-wd) this.gds(this.thumbs.left.x, xp)
+		//console.log("moveChartRight---->","lx ", lx , ' xp ',xp, " thumbs.left.mp "
+		//	,this.thumbs.left.mp," this.pos.value.x ", this.pos.value.x);	
 		if (xp <= this.axis.x.x2 && lx >= this.axis.x.x1-wd) { 
 			this.thumbs.right.x = xp
 			this.wline.right.x1 = (xp+wd > this.axis.x.x2)? this.axis.x.x2: xp+wd

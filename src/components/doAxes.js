@@ -73,15 +73,18 @@ export function DoAxes() {
 
 		let out=[]
 		shape.forEach((a,i)=>{
-			let pct = ((a.price-scale.low)*100)/hl
-			a.y = (off.y.y1)-pPct*pct
-			let j = ds.map(a=>a.tm).indexOf(a.tm)
-			if ( j<0 ) out.push(i);
-			a.x = (j*stepx)+xtm
-			// console.log(" y = ", a.price,a.y, " j ", j, " x =",a.x)
+			let pct = ((a.price-scale.low)*100)/hl;
+			a.y = (off.y.y1)-pPct*pct;
+			let j = ds.map(a=>a.tm).indexOf(a.tm);
+			a.x = (j*stepx)+xtm;
+			if ( j>=0 ){ 
+				out.push(a);
+				a.visiable=1;
+			} else a.visiable=-1;
+			//console.log(" y = ", a.price,a.y, " j ", j, " x =",a.x, " visiable ",a.visiable)
 		})
-		out.forEach(a=> {shape.splice(a,1);});
-		
+		//out.forEach(a=> {shape.splice(a,1);});
+		//console.log(" out ===",out.length, "Shapes==", shape.length);
 		const o=fmt.resolvedOptions();
 		const mmm =new Intl.DateTimeFormat(o.locale,{ month: "short",  timeZone: o.locale.timeZone});
 		const yyyy =new Intl.DateTimeFormat(o.locale,{ year: "numeric",  timeZone: o.locale.timeZone});

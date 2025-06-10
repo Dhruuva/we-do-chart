@@ -112,10 +112,10 @@ watch(() => p.timefotmat,  (newValue, oldValue) => {
     loadChart();
 }, { deep: true });
 
-watch(() => p.shapes,  (newValue, oldValue) => {
-    //console.log( " timefotmat --->",newValue.value);
-    loadChart();
-}, { deep: true });
+// watch(() => p.shapes,  (newValue, oldValue) => {
+//     //console.log( " timefotmat --->",newValue.value);
+//     loadChart();
+// }, { deep: true });
 
 watch(() => p.tsz,  (newValue, oldValue) => {
     //console.log( " timefotmat --->",newValue.value);
@@ -262,7 +262,7 @@ svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @
   g(v-if="zero>0")
     line.zero(:x1="axis.x.x1" :x2="axis.x.x2" :y1="zero" :y2="zero" )
   g(v-for="r in shape" :key="r.y")
-    circle.shape( :cx="r.x" :cy="r.y" :r="fs/5" )
+    circle.shape(v-if="r.visiable>0" :cx="r.x" :cy="r.y" :r="fs/5" )
   g.ticksY(v-for="r in ticksY" :key="r.y")
     line.grids(v-if="showGrid" :x1="axis.x.x1" :x2="axis.x.x2" :y1="r.y" :y2="r.y")
     line.ticks( :x1="axis.y.x1" :x2="axis.y.x1+tsz.size" :y1="r.y" :y2="r.y" )
