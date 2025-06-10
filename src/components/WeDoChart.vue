@@ -112,10 +112,6 @@ watch(() => p.timefotmat,  (newValue, oldValue) => {
     loadChart();
 }, { deep: true });
 
-// watch(() => p.shapes,  (newValue, oldValue) => {
-//     //console.log( " timefotmat --->",newValue.value);
-//     loadChart();
-// }, { deep: true });
 
 watch(() => p.tsz,  (newValue, oldValue) => {
     //console.log( " timefotmat --->",newValue.value);
@@ -236,14 +232,6 @@ const f=(d)=>{
   return +d.toFixed(2)
 }
 
-const canDrug=()=>{
-	if (!slider.draggingLeft && !slider.draggingRight  && !slider.draggingCenter ){
-		return true;
-	}
-  else {
-   	return false;
-  }
-}
 
 defineExpose({loadChart,f});
 </script>
@@ -272,11 +260,11 @@ svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @
     line.ticks( :x1="n.x" :x2="n.x" :y1="axis.x.y1" :y2="axis.x.y1+tsz.size")
     text.axislabelx( :x="n.x" :y="axis.x.y1+tsz.size+tsz.off+fs/2" :font-size='fs') {{n.tm}}
   polyline.plot(v-bind:points='pointsAsPolyline')
-  g.leftThumb( :transform="'translate('+thumbs.left.x+','+thumbs.left.y+') scale('+p.scl+')'" @mouseenter="slider.leftDrug= true" @mouseup="slider.stopDrag")
+  g.leftThumb( :transform="'translate('+thumbs.left.x+','+thumbs.left.y+') scale('+p.scl+')'" @mouseenter="if(!slider.draggingCenter) slider.leftDrug= true;" @mouseup="slider.stopDrag" @mouseleave="slider.stopThumb")
     polyline(points="10,40 0,30 0,10 10,0 31,0 31,40 " )
   line.wline(:x1="wline.left.x1" :x2="wline.left.x2" :y1="wline.left.y1" :y2="wline.left.y2" :stroke-width='wline.left.sSize' @click="slider.wlineLeftClick")
   rect.mbody(@mouseup="slider.stopDrag" :x="wline.middle.x" :y="wline.middle.y" :width="wline.middle.w" :height="wline.middle.h" @mousedown="slider.draggingCenter=true;slider.startDrag($event);")
-  g.rightThumb(@mouseup="slider.stopDrag" :transform="'translate('+thumbs.right.x+','+thumbs.right.y+')scale('+p.scl+')'" @mouseenter="slider.rightDrug = true" )
+  g.rightThumb(@mouseup="slider.stopDrag" :transform="'translate('+thumbs.right.x+','+thumbs.right.y+')scale('+p.scl+')'" @mouseenter="if(!slider.draggingCenter) slider.rightDrug = true;" @mouseleave="slider.stopThumb")
     polyline(points="0,0 0,40 21,40 30,30 30,10 21,0 " )
   line.wline(:x1="wline.right.x1" :x2="wline.right.x2" :y1="wline.right.y1" :y2="wline.right.y2" :stroke-width='wline.right.sSize' @click="slider.wlineRightClick" )
 </template>
