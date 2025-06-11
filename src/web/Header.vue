@@ -22,6 +22,7 @@ header#mynav
 		{id:3,page:"props.html", name:"Props", ico:"ic:sharp-barcode"},
 		{id:4,page:"format.html", name:"Format", ico:"ic:round-compost"},
 		{id:5,page:"shapes.html", name:"Shapes", ico:"ix:boundary-signals"},
+		{id:6,page:"respo.html", name:"Responsive", ico:"fluent:slide-size-24-regular"},
 	));
 
 	onMounted( async () => {
