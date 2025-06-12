@@ -33,7 +33,7 @@ const pos = ref({x:0, y:0}), bank1 = new Bank()
 ,wline= ref( { left:{x1:0, x2:0, y1:0, y2:0 }, middle:{x:0,y:0, w:0,h:0}, right:{x1:0, x2:0, y1:0, y2:0 }})
 ,cross= ref({ v:{x1:0, y1:0, x2:0, y2:0 }, h:{x1:0, y1:0, x2:0, y2:0 }, hide:false, txt:"",cursor:'cursor: crosshair;'})
 ,ticksY=reactive(new Array()), ticksX=reactive(new Array()), pointYX=reactive(new Array())
-,shape=reactive(new Array());
+,shape=reactive(new Array()) ,Observer=ref(null);
 const axis= computed( ()=> {
   let h=p.ds.height,w =p.ds.width ,off = h*p.off/100
   , wbox = calcOffsetY(p.decimals,p.points,p.tsz,p.fs)
@@ -70,8 +70,16 @@ onMounted( async () => {
   slider.scl=p.scl;
   const rtn=slider.init( getDisplayData,svg,pointYX,limitSize);
   let pt = svg.value.createSVGPoint();
-  slider.leftDrug = false
-  slider.draggingLeft =false
+  slider.leftDrug = false;
+  slider.draggingLeft =false;
+  console.log( "  p.ds.width ---", p.ds.width," p.ds.height ",p.ds.height);
+  let elem = svg.value.parentElement;
+  console.log( " svg ---width=",elem.clientWidth);
+  p.ds.width=elem.clientWidth
+  p.ds.height=elem.clientHeight
+  console.log( " svg ---height=",elem.clientHeight);
+ // loadChart();
+  initObserver();
   
 })
 
@@ -114,6 +122,11 @@ watch(() => p.timefotmat,  (newValue, oldValue) => {
 
 
 watch(() => p.tsz,  (newValue, oldValue) => {
+    //console.log( " timefotmat --->",newValue.value);
+    loadChart();
+}, { deep: true });
+
+watch(() => p.ds,  (newValue, oldValue) => {
     //console.log( " timefotmat --->",newValue.value);
     loadChart();
 }, { deep: true });
@@ -232,6 +245,29 @@ const f=(d)=>{
   return +d.toFixed(2)
 }
 
+const initObserver=()=> {
+  let  config = { attributes: true };
+  // create the observer
+  let elem = svg.value.parentElement
+  p.ds.width=elem.clientWidth
+  p.ds.height=elem.clientHeight
+  const observer = new MutationObserver(function(mutations) {
+    
+    mutations.forEach(function(mutation) {          
+      if (mutation.type === "attributes") {
+        let width=elem.style.width, height=elem.style.height
+        width=elem.clientWidth
+        height=elem.clientHeight
+        p.ds.height=(height)? height:p.ds.height;
+        p.ds.width= (width)?  width:p.ds.width;
+        console.log(" observ--->");
+        loadChart()
+      }
+    }); 
+  });
+  observer.observe(elem, config);
+  Observer.value = observer;
+}
 
 defineExpose({loadChart,f});
 </script>

@@ -40,19 +40,19 @@ const update=()=>{
 }
 
 const hljsText=computed( ()=> { 
-		console.log( " hljsText ------------------->", hljsText);
+		//console.log( " hljsText ------------------->", hljsText);
 	let str =`< WeDoChart :ds="{width:800,height:500}" :points="data" tky="${p.tky}" limit="${p.limit}"
 	 scl="${p.scl}"  off="${p.off}" fs="${p.fs}" showGrid="${p.showGrid}" tsz="{size:${p.tsz.size}, off:${p.tsz.off}}" />`
 	return hljs.highlight(str,  {language: 'js'}).value;
 })
 const hljsText2=computed( ()=> { 
-		console.log( " hljsText2 ------------------->", hljsText2);
+		//console.log( " hljsText2 ------------------->", hljsText2);
 	let str =`< WeDoChart :ds="{width:800,height:500}" :points="data" theme="${p.theme}" />`
 	return hljs.highlight(str,  {language: 'js'}).value;
 })
 
 const hljsText3=computed( ()=> { 
-	console.log( " hljsText3 ------------------->", hljsText3);
+	//console.log( " hljsText3 ------------------->", hljsText3);
 	let str =`< WeDoChart(ref="chart" tky="7" fs="16" :ds="{width:700,height:500}" :points="data" :timefotmat="fdate")/>`
 	return hljs.highlight(str,  {language:'js'}).value;
 })

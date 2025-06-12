@@ -4,7 +4,9 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/an-old-hope.min.css';
 import WeDoChart from '../components/WeDoChart.vue';
 import Navi from '../web/Header.vue';
-
+import {Bank} from '../components/bank.js';
+const  bank1 = new Bank();
+const fdate = ref(new Intl.DateTimeFormat("sv-SE", { month: "short", day:"numeric", timeZone: "MET" }));
 const  rightDrug=ref(false),moveDrug=ref(false),upDrug=ref(false),upDrugMove=ref(false),
 		leftX=ref(50),leftY=ref(50),top=ref(0),topp=ref(1)
 		, offx = ref(0), offy = ref(0)
@@ -15,7 +17,7 @@ onMounted( async () => {
 	init();
 	
 })
-
+const data= computed(() => bank1.getData("sto")),upi =ref(0) ;
 const  init=()=>{
 	setTimeout(()=>{
 		initLayout();
@@ -30,14 +32,14 @@ const reSize=()=>{
 
 const initLayout=()=>{
 	
-	console.log( " initLayout " ,top.value);
+	//console.log( " initLayout " ,top.value);
 	let top0= document.getElementById('mainLook_root').getBoundingClientRect().top;
-	console.log( " initLayout " ,top0);
+	//console.log( " initLayout " ,top0);
 	wh.width = window.innerWidth
 	wh.height = window.innerHeight
 	top.value = top0;
 	topp.value =(top0)*100/window.innerHeight;
-	console.log( " top ",top0 );
+	//console.log( " top ",top0 );
 	let upDiv = document.getElementsByClassName('split upper left border')
 	divHeight.upDiv=upDiv[0].getBoundingClientRect();
 	let dwDiv = document.getElementsByClassName('split down left border')
@@ -69,16 +71,16 @@ const leftStyle= computed( ()=> {
 	return " width: "+leftX.value + "%;height: "+(leftY.value-topp.value) + "%;"
 })
 const rightStyle= computed( ()=>{
-	return " width: "+ (98-leftX.value) + "%;height: "+(leftY.value-topp.value) + "%;"
+	return " width: "+ (80-leftX.value) + "%;height: "+(leftY.value-topp.value) + "%;"
 })
 const upStyle= computed( ()=>{
 	return " height: "+leftY.value + "%;"
 })
 const downStyle= computed( ()=>{
-	return " top: "+ (leftY.value) + "%;width: "+leftX.value + "%;height: "+(98-(leftY.value+topp.value*0.1) ) + "%;"
+	return " top: "+ (leftY.value) + "%;width: "+leftX.value + "%;height: "+(80-(leftY.value-topp.value*0.3) ) + "%;"
 })
 const downRightStyle= computed( ()=>{
-	return " top: "+ (leftY.value) + "%;width: "+(98-leftX.value) + "%;height: "+(98-(leftY.value+topp.value*0.1) ) + "%;"
+	return " top: "+ (leftY.value) + "%;width: "+(80-leftX.value) + "%;height: "+(80-(leftY.value-topp.value*0.3) ) + "%;"
 })
 
 const startLeftDrug = () => {
@@ -131,7 +133,7 @@ body
 			p downStyle {{downStyle}}
 			p downRightStyle {{downRightStyle}}
 		.split.down.right.border(:style='downRightStyle')
-			p divHeight {{divHeight}}
+			WeDoChart( ref="chart" tky="7" fs="12" :ds="{width:300,height:250}" :points="data" :timefotmat="fdate")
 </template>
 
 <style lang ="stylus">
@@ -155,6 +157,10 @@ border-radius(n)
 #mainLook_root
 	padding 0rem 1rem
 	max-width 1280px
+	&::before,
+	&::after 
+		padding 2rem 1rem
+		width 1280px
 .split
 	width 50%
 	height  90%
@@ -172,9 +178,9 @@ border-radius(n)
 		height 1	
 		background-color transparent	 	
 	&.left
-		left 1%
+		left 10%
 	&.right
-		right 1%
+		right 10%
 	&.border	
 		border-style groove
 		border-color $colorBorder
