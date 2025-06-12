@@ -9,7 +9,7 @@ const  bank1 = new Bank();
 const fdate = ref(new Intl.DateTimeFormat("sv-SE", { month: "short", day:"numeric", timeZone: "MET" }));
 const  rightDrug=ref(false),moveDrug=ref(false),upDrug=ref(false),upDrugMove=ref(false),
 		leftX=ref(50),leftY=ref(50),top=ref(0),topp=ref(1)
-		, offx = ref(0), offy = ref(0)
+		, offx = ref(0), offy = ref(0),fs =ref(10), chart=ref(null)
 		, wh=reactive({width:0,height :0 }),divHeight=reactive({upDiv:0,dwDiv:0}),xy=reactive(new Array());
 
 onMounted( async () => {
@@ -66,6 +66,11 @@ watch(() => xy,  (newValue, oldValue) => {
 	//console.log( " xy --->",newValue);
 	 
 }, { deep: true });
+
+watch(fs, (v) => {
+  //console.log( " fs --->",v, fs);
+  //chart.value.loadChart();
+});
 
 const leftStyle= computed( ()=> {
 	return " width: "+leftX.value + "%;height: "+(leftY.value-topp.value) + "%;"
@@ -124,6 +129,7 @@ body
 		.split.upper.left.border(:style='leftStyle')
 			p topp {{topp}}
 			p top {{top}}
+			input( type="range" id="fs" name="fs" min="8" max="14" v-model="fs")
 			.thumb(@mousedown='startLeftDrug()' @mouseenter='rightDrug=!rightDrug' @mouseleave='rightDrug=!rightDrug')
 		.split.upper.right.border(:style='rightStyle')
 			p rightStyle {{rightStyle}}
@@ -133,7 +139,7 @@ body
 			p downStyle {{downStyle}}
 			p downRightStyle {{downRightStyle}}
 		.split.down.right.border(:style='downRightStyle')
-			WeDoChart( ref="chart" tky="7" fs="12" :ds="{width:300,height:250}" :points="data" :timefotmat="fdate")
+			WeDoChart( ref="chart" tky="7" :fs="fs" :ds="{width:300,height:250}" :points="data" :timefotmat="fdate")
 </template>
 
 <style lang ="stylus">
