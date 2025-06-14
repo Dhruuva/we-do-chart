@@ -1,14 +1,14 @@
-export function Slide(axis,pos,thumbs,wline,cross,fs) {
+export function Slide(thumbs,wline,cross,fs) {
 	const farPoints =new Array(); // dev
-	this.axis=axis;
-	this.pos=pos;
+	//this.axis=axis;
+	//this.pos=pos;
 	//this.h=height;
 	this.thumbs=thumbs.value;
 	this.wline=wline.value;
 	this.cross=cross.value;
 	this.fs=fs;
-	let scl=0.41,h=100;	
-	let leftDrug=false,draggingLeft=false,rightDrug=false,draggingRight=false,draggingCenter=false,moveDrug=false;
+	let scl=0.41,h=100,axis= null,pos=null
+	, leftDrug=false,draggingLeft=false,rightDrug=false,draggingRight=false,draggingCenter=false,moveDrug=false;
 	const init=(gds,svg,pointYX,limitSize)=> {
 		this.gds=gds;
 		this.svg=svg.value;
@@ -17,9 +17,9 @@ export function Slide(axis,pos,thumbs,wline,cross,fs) {
 		//console.log("pointYX---$$$$$$$$$$$$$$$",pointYX, "limitSize init ",limitSize)
 		this.pos.value.x =  this.axis.x.x1 
 		//console.log("  this.pos --->",pos.value.x);
-		let hf =  (this.h-(this.axis.y.y1 + this.fs*1.18))/2 + (scl*40)/2
-		let y = this.h-hf
-		console.log("hf ",hf, "this.h ",this.h)
+		let hf =  (h-(this.axis.y.y1 + this.fs*1.18))/2 + (scl*40)/2
+		let y = h-hf
+		console.log("hf ",hf, "this.h ",h)
 
 		this.thumbs.left.x = this.axis.x.x1 - scl*31
 		this.thumbs.left.y = y
@@ -337,5 +337,11 @@ export function Slide(axis,pos,thumbs,wline,cross,fs) {
 			return h;
 		},
 		set(val) {h=val;},
+	});
+	Object.defineProperty(this, 'pos', {
+		get : function() {
+			return pos;
+		},
+		set(val) {pos=val;},
 	});
 }

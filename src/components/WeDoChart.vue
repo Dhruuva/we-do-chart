@@ -1,5 +1,5 @@
 <script setup>
-import { ref,onMounted ,reactive,computed,watch,watchEffect ,useTemplateRef} from 'vue'
+import { ref,onMounted,onUpdated ,reactive,computed,watch,watchEffect ,useTemplateRef} from 'vue'
 import {Bank} from '../components/bank.js'
 //import {startDrag,mousemove} from '../components/mouse.js'
 import {calcOffsetX,calcOffsetY,calcMiniBottomHight,calcMiniTopHight} from '../components/offset.js'
@@ -7,7 +7,7 @@ import {DoAxes} from '../components/doAxes.js'
 import {Slide} from '../components/slide.js'
 
 const p = defineProps({
-  ds: {type:Object, default:() =>( {width:1250, height:300})}
+  ds: {type:Object, default:() =>( {width:300, height:200})}
   ,points: {   type:Array,  default: () =>new Array()}
   ,limit:{ type:[Number],  default: () =>(10)  }
   ,scl:{type:[Number,String], default: () =>(0.45)  }   // For slider
@@ -33,7 +33,7 @@ const pos = ref({x:0, y:0}), bank1 = new Bank()
 ,wline= ref( { left:{x1:0, x2:0, y1:0, y2:0 }, middle:{x:0,y:0, w:0,h:0}, right:{x1:0, x2:0, y1:0, y2:0 }})
 ,cross= ref({ v:{x1:0, y1:0, x2:0, y2:0 }, h:{x1:0, y1:0, x2:0, y2:0 }, hide:false, txt:"",cursor:'cursor: crosshair;'})
 ,ticksY=reactive(new Array()), ticksX=reactive(new Array()), pointYX=reactive(new Array())
-,shape=reactive(new Array()) ,Observer=ref(null);
+,shape=reactive(new Array()) ,observer=ref(null),xv=ref(-1),yv=ref(0);
 const axis= computed( ()=> {
   let h=p.ds.height,w =p.ds.width ,off = h*p.off/100
   , wbox = calcOffsetY(p.decimals,p.points,p.tsz,p.fs)
@@ -46,7 +46,8 @@ const axis= computed( ()=> {
   let y = (off) < hbox ? hbox:off;
   let y2 = (tbox > off ) ? tbox:off;
   let x2 = (off) < wbox/1.5 ? wbox/1.5:off;
- // console.log( " x =" ,x," y =" ,y, "y2==",y2, "x2=",x2);
+  //console.log( " x =" ,x," y =" ,y, "y2==",y2, "x2=",x2);
+  //console.log( "w- x2 ", w-x2)
   return {
     y: {y1: h-y, y2:y2, x1: w-x2, x2: w-x2},
     x: {y1: h-y, y2:h-y, x1:x, x2: w-x2},
@@ -54,39 +55,53 @@ const axis= computed( ()=> {
 });
 
 
-const slider=new Slide( axis.fn(),pos,thumbs,wline,cross,p.fs,limitSize);
+const slider=new Slide(thumbs,wline,cross,p.fs);
 
 const isXtb= computed(() => bank1.getData("mins")[0].data.length);
 
 
 
 onMounted( async () => {
+  window.addEventListener('resize', reSize);
   console.log( "  p.ds.width ---", p.ds.width," p.ds.height ",p.ds.height);
   const elem = svg.value.parentElement;
   p.ds.width=elem.clientWidth;
   p.ds.height=elem.clientHeight;
+  observer.value=elem;
+  xv.value=2;
+  viewBoxSet.fn();
   console.log(" svg ---width=",elem.clientWidth, " svg ---height=",elem.clientHeight, "p.h==",p.ds.height);
-
   slider.leftDrug = true
   slider.draggingLeft =true
   xmapData();
   cross.value.txt=' ';
   const axi = axis.fn();
-  getDisplayData(axi.x.x1,axi.x.x2);
-  slider.axis=axis.fn();
+  slider.axis=axi;
   slider.scl=p.scl;
   slider.h=p.ds.height;
+  slider.pos=pos;
+  getDisplayData(axi.x.x1,axi.x.x2);
   console.log(' p.ds.height ==>',p.ds.height)
   const rtn=slider.init( getDisplayData,svg,pointYX,limitSize);
   let pt = svg.value.createSVGPoint();
   slider.leftDrug = false;
   slider.draggingLeft =false;
-  // loadChart();
+   loadChart();
+  xv.value=0; 
   //initObserver();
   
 })
 
-const viewBoxSet= computed( ()=> `0 0 ${p.ds.width } ${p.ds.height }`);
+onUpdated( async () => {
+
+})
+
+
+
+const viewBoxSet= computed( ()=> {
+  let w =p.ds.width,h =p.ds.height;
+  return   `${xv.value} 0 ${w} ${h}`;
+});
 const chartName= computed( ()=>{
   return   (p.points[0])?  (p.points[0].name)? p.points[0].name:'':''
 })
@@ -134,7 +149,31 @@ watch(() => p.ds,  (newValue, oldValue) => {
     loadChart();
 }, { deep: true });
 
+watch(() => observer,  (newValue, oldValue) => {
 
+   console.log( "width--->",oldValue.value);
+   
+}, { deep: true });
+
+// watchEffect(() => {
+//   if (svg.value){
+//     const elem = svg.value.parentElement;
+//     p.ds.width=elem.clientWidth;
+//     p.ds.height=elem.clientHeight;
+//     observer.value=elem;
+
+//     console.log( "watchEffect--->",elem.clientWidth,elem.clientHeight);
+//   }
+// })
+
+const reSize=()=>{
+  setTimeout(()=>{
+   // console.log( "reSize-ds.height->",p.ds.height, " w= ", p.ds.width," viewBoxSet=",viewBoxSet );
+    xv.value=-1;
+    loadChart();
+
+  },25);
+}
 const xmapData=()=>{
 	let sz = (p.points.length>0)? p.points[0].data.length:0;
   limitSize.value =(sz<=15 && sz>0)? sz: (sz/100)*p.limit;
@@ -180,11 +219,17 @@ const getDisplayData=(first,end)=> {
   } else  return 'no';
 }
 const loadChart=()=> {
-  const elem = svg.value.parentElement;
-  p.ds.width=elem.clientWidth;
-  p.ds.height=elem.clientHeight;
-
-  const axi = axis.fn(); 
+  if (svg.value){
+    const elem = svg.value.parentElement;
+    p.ds.width=elem.clientWidth;
+    p.ds.height=elem.clientHeight;
+  }
+  xv.value=0;
+  const axi = axis.fn();
+  slider.scl=p.scl;
+  slider.axis=axi;
+  slider.h=p.ds.height;
+  slider.pos=pos;
   xmapData()
   let arr =(p.points.length>0)? p.points[0].data.filter(a=>  a.id >=  pointsID.value.x1 &&  a.id <=  pointsID.value.x2 ):[] 
   let x1 = (arr.length>0)? arr[0].x:axi.x.x1
@@ -194,9 +239,6 @@ const loadChart=()=> {
   pSize.value=1
   //doAxis.shapes=this.shapes
   getDisplayData(x1,x2)
-  slider.scl=p.scl;
-  slider.axis=axis.fn();
-  slider.h=p.ds.height;
   const rtn=slider.init( getDisplayData,svg,pointYX,limitSize);
   slider.moveSlider(x1,x2)
 }
@@ -254,6 +296,10 @@ const crossMove=()=>{
 const f=(d)=>{
   return +d.toFixed(2)
 }
+const update=()=>{
+  p.limit+=(p.limit>10)?-1:1;
+  return  p.limit;
+}
 
 // const initObserver=()=> {
 //   const  config = { attributes: true };
@@ -279,7 +325,7 @@ const f=(d)=>{
 //   Observer.value = observer;
 // }
 
-defineExpose({loadChart,f});
+defineExpose({loadChart,update});
 </script>
 
 <template lang ="pug">

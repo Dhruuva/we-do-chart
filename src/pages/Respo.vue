@@ -9,7 +9,7 @@ const  bank1 = new Bank();
 const fdate = ref(new Intl.DateTimeFormat("sv-SE", { month: "short", day:"numeric", timeZone: "MET" }));
 const  rightDrug=ref(false),moveDrug=ref(false),upDrug=ref(false),upDrugMove=ref(false),
 		leftX=ref(50),leftY=ref(50),top=ref(0),topp=ref(1)
-		, offx = ref(0), offy = ref(0),fs =ref(10), chart=ref(null)
+		, offx = ref(0), offy = ref(0),fs =ref(10), chart=ref(null),lmt=ref(10)
 		, wh=reactive({width:0,height :0 }),divHeight=reactive({upDiv:0,dwDiv:0}),xy=reactive(new Array());
 
 onMounted( async () => {
@@ -27,6 +27,11 @@ const  init=()=>{
 const reSize=()=>{
 	setTimeout(()=>{
 		init();
+		lmt.value+=(lmt.value>10)?-1:1;
+		console.log( " loadChart #####>", lmt.value);
+		chart.value.update();
+		chart.value.loadChart();
+
 	},20);
 }
 
@@ -118,6 +123,7 @@ const	movePanelUp= () => {
 const stopDrag= () =>  {
 	moveDrug.value = false;
 	upDrugMove.value = false;
+	lmt.value+=(lmt.value>10)?-1:1;
 }
 </script>
 
@@ -139,7 +145,7 @@ body
 			p downStyle {{downStyle}}
 			p downRightStyle {{downRightStyle}}
 		.split.down.right.border(:style='downRightStyle')
-			WeDoChart( ref="chart" tky="7" :fs="fs" :ds="{width:300,height:250}" :points="data" :timefotmat="fdate")
+			WeDoChart( ref="chart" :limit="lmt" :fs="fs" :ds="{width:300,height:250}" :points="data" :timefotmat="fdate")
 </template>
 
 <style lang ="stylus">
