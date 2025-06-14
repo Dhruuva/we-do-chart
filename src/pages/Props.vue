@@ -78,7 +78,7 @@ body
               h4 :showGrid 
               p Property (boolean) hide/show  chart grid.
               input(v-model="grid" type="checkbox" id="grid" name="grid" :checked="grid")
-      .tide          
+      .tide
         WeDoChart(ref="chart" :ds="{width:600,height:300}" :points="data" :timefotmat="fdate" :limit="+limit" theme="berry" :tky="tky" :fs="fs" :tsz="tsz" :scl="scl" :off="off" :showGrid="grid")
       hChart(ref="hlight" :tky="tky" :fs="fs" :tsz="tsz" :scl="scl" :off="off" :showGrid="grid" :limit="+limit")  
     .right-side

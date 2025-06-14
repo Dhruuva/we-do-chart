@@ -1,5 +1,5 @@
 <script setup>
-import { ref,onMounted,onUpdated ,reactive,computed,watch,watchEffect ,useTemplateRef} from 'vue'
+import { ref,onMounted,onUpdated ,reactive,computed,watch,watchEffect ,useTemplateRef,onBeforeMount} from 'vue'
 import {Bank} from '../components/bank.js'
 //import {startDrag,mousemove} from '../components/mouse.js'
 import {calcOffsetX,calcOffsetY,calcMiniBottomHight,calcMiniTopHight} from '../components/offset.js'
@@ -58,21 +58,33 @@ const axis= computed( ()=> {
 const slider=new Slide(thumbs,wline,cross,p.fs);
 
 const isXtb= computed(() => bank1.getData("mins")[0].data.length);
+onBeforeMount( async () => {
+  window.addEventListener('resize', reSize);
+  let top0= document.getElementById('sheet');
+  console.log( "  p.ds.width==", p.ds.width," p.ds.height=== ",p.ds.height, " top0 ",top0);
+  
+ 
 
-
+})
 
 onMounted( async () => {
-  window.addEventListener('resize', reSize);
-  console.log( "  p.ds.width ---", p.ds.width," p.ds.height ",p.ds.height);
+  
   const elem = svg.value.parentElement;
   p.ds.width=elem.clientWidth;
   p.ds.height=elem.clientHeight;
+  console.log( "  p.ds.width++++", p.ds.width," p.ds.height+++ ",p.ds.height);
+  console.log(" svg ---width=",elem.clientWidth, " svg ---height=",elem.clientHeight, "p.h==",p.ds.height);
   observer.value=elem;
   xv.value=2;
-  viewBoxSet.fn();
-  console.log(" svg ---width=",elem.clientWidth, " svg ---height=",elem.clientHeight, "p.h==",p.ds.height);
+
   slider.leftDrug = true
   slider.draggingLeft =true
+  
+})
+
+onUpdated( async () => {
+  //reFit();
+
   xmapData();
   cross.value.txt=' ';
   const axi = axis.fn();
@@ -86,17 +98,19 @@ onMounted( async () => {
   let pt = svg.value.createSVGPoint();
   slider.leftDrug = false;
   slider.draggingLeft =false;
-   loadChart();
   xv.value=0; 
+  //loadChart();
   //initObserver();
-  
 })
 
-onUpdated( async () => {
-
-})
-
-
+// const reFit=()=>{
+//   xv.value=1; 
+//   setTimeout(()=>{
+//     console.log( " loadChart ****************>");
+//     xv.value=0; 
+//     loadChart();
+//   },20);
+// }
 
 const viewBoxSet= computed( ()=> {
   let w =p.ds.width,h =p.ds.height;

@@ -72,7 +72,8 @@ body
 										code#c4 ("gb-GB", { hour: "2-digit", minute:"2-digit",timeZone:"Pacific/Midway"})
 					
 		.right-side
-			WeDoChart( ref="chart" tky="7" fs="12" :ds="{width:600,height:400}" :points="data" :timefotmat="fdate")
+			.tide
+				WeDoChart( ref="chart" tky="7" fs="12" :ds="{width:600,height:400}" :points="data" :timefotmat="fdate")
 			pre
 				code(class="js" v-html="hljsText")
 			hChart(ref="hlight" :code="fdate" )

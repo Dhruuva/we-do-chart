@@ -8,13 +8,17 @@ import {Bank} from '../components/bank.js';
 const  bank1 = new Bank();
 const fdate = ref(new Intl.DateTimeFormat("sv-SE", { month: "short", day:"numeric", timeZone: "MET" }));
 const  rightDrug=ref(false),moveDrug=ref(false),upDrug=ref(false),upDrugMove=ref(false),
-		leftX=ref(50),leftY=ref(50),top=ref(0),topp=ref(1)
+		leftX=ref(50),leftY=ref(50),top=ref(0),topp=ref(1),w1=ref(null),h1=ref(null)
 		, offx = ref(0), offy = ref(0),fs =ref(10), chart=ref(null),lmt=ref(10)
 		, wh=reactive({width:0,height :0 }),divHeight=reactive({upDiv:0,dwDiv:0}),xy=reactive(new Array());
 
 onMounted( async () => {
+
 	window.addEventListener('resize', reSize);	
 	init();
+	let dwDiv = document.getElementsByClassName('split down right border');
+	w1.value=dwDiv[0].getBoundingClientRect().width;
+	h1.value=dwDiv[0].getBoundingClientRect().height;
 	
 })
 const data= computed(() => bank1.getData("sto")),upi =ref(0) ;
@@ -124,6 +128,12 @@ const stopDrag= () =>  {
 	moveDrug.value = false;
 	upDrugMove.value = false;
 	lmt.value+=(lmt.value>10)?-1:1;
+	let dwDiv = document.getElementsByClassName('split down right border');
+	w1.value=dwDiv[0].getBoundingClientRect().width;
+	h1.value=dwDiv[0].getBoundingClientRect().height;
+
+  console.log("stopDrag--> ",w1.value,h1.value);
+
 }
 </script>
 
