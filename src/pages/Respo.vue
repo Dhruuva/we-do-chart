@@ -135,6 +135,11 @@ const stopDrag= () =>  {
   console.log("stopDrag--> ",w1.value,h1.value);
 
 }
+
+const dset= computed( ()=> {
+	console.log("dset--> ",w1.value,h1.value);
+  return {width:w1.value,height:h1.value};
+});
 </script>
 
 <template lang="pug">
@@ -155,7 +160,7 @@ body
 			p downStyle {{downStyle}}
 			p downRightStyle {{downRightStyle}}
 		.split.down.right.border(:style='downRightStyle')
-			WeDoChart( ref="chart" :limit="lmt" :fs="fs" :ds="{width:300,height:250}" :points="data" :timefotmat="fdate")
+			WeDoChart( ref="chart" :limit="lmt" :fs="fs" :ds="dset" :points="data" :timefotmat="fdate")
 </template>
 
 <style lang ="stylus">

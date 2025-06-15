@@ -56,6 +56,8 @@ const axis= computed( ()=> {
 
 
 const slider=new Slide(thumbs,wline,cross,p.fs);
+const  doAxes = new DoAxes();
+doAxes.shapes=p.shapes;
 
 const isXtb= computed(() => bank1.getData("mins")[0].data.length);
 onBeforeMount( async () => {
@@ -79,13 +81,7 @@ onMounted( async () => {
 
   slider.leftDrug = true
   slider.draggingLeft =true
-  
-})
-
-onUpdated( async () => {
-  //reFit();
-
-  xmapData();
+   xmapData();
   cross.value.txt=' ';
   const axi = axis.fn();
   slider.axis=axi;
@@ -101,6 +97,13 @@ onUpdated( async () => {
   xv.value=0; 
   //loadChart();
   //initObserver();
+  
+})
+
+onUpdated( async () => {
+  //reFit();
+
+ 
 })
 
 // const reFit=()=>{
@@ -205,9 +208,7 @@ const xmapData=()=>{
   } 
 }
 const getDisplayData=(first,end)=> {
-  const  doAxes = new DoAxes();
-  const  axi = axis.fn();
-  doAxes.shapes=p.shapes;
+  const axi = axis.fn();
   let n=thumbs.value.step*0.01;
   let arr =(p.points.length>0)? p.points[0].data.filter(a=> a.x >= first &&  a.x <= end+n ) :[];
   // console.log( 'arr.length=' ,arr.length)
@@ -311,7 +312,12 @@ const f=(d)=>{
   return +d.toFixed(2)
 }
 const update=()=>{
-  p.limit+=(p.limit>10)?-1:1;
+    if (svg.value){
+      const elem = svg.value.parentElement;
+      p.ds.width=elem.clientWidth;
+      p.ds.height=elem.clientHeight;
+    }
+  xv.value=0;
   return  p.limit;
 }
 
