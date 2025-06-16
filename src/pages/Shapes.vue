@@ -44,12 +44,12 @@ const gact = async (t,p)=>{
 const hljsText=computed( ()=> { 
 	let str="";
 	sp.forEach((a,i)=>{
-     if (i==0){
-     	str = `const sp = [{type:'dot',x:0,y:0,price:${a.price},tm:${a.tm}}`
-     } else {
-     	str+=`,{type:'dot',x:0,y:0,price:${a.price},tm:${a.tm}}`
-     }
-    
+	 if (i==0){
+		str = `const sp = [{type:'dot',x:0,y:0,price:${a.price},tm:${a.tm}}`
+	 } else {
+		str+=`,{type:'dot',x:0,y:0,price:${a.price},tm:${a.tm}}`
+	 }
+	
 	});
 	str+=(sp.length>0)?"];":" Click on any row in table"
 	//let str =`const sp = [{type:'dot',x:0,y:0,price:${act.value.price},tm:${act.value.tm}},];`
@@ -69,7 +69,6 @@ const hljsText3=computed( ()=> {
 header
 	Navi(id="mynav" active="5")
 body
-	main
 	.my-grid
 		.left-side
 			article
@@ -140,6 +139,9 @@ code
 		margin 0.1em 0.1em
 		max-height 30vh		
 .my-grid
+	overflow: auto;
+	-webkit-overflow: auto;
+	height 80vh
 	margin 0.1em 0.1em
 	display grid
 	width 100%
@@ -158,10 +160,11 @@ code
 	padding 0.1em 1em
 	height auto
 	min-width 600px
-	max-height 80vh
 	overflow-y scroll 
 	white-space nowrap
 	background-color #F0F0F0
+	region-overflow:auto;
+	overflow:visible;
 .tide
 	line-height 0.1em
 	padding 0.1em

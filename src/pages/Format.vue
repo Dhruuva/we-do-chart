@@ -110,6 +110,7 @@ code
 	width 100%
 	grid-template-columns 1fr 1fr;
 .right-side
+	overflow hidden
 	margin 0.2em 0.1em
 	padding 0.1em 1em
 	background-color #feeffe
@@ -119,12 +120,12 @@ code
 	min-width 600px
 	background-color #efde
 .left-side
+	overflow hidden
 	margin 0.2em 0.1em
 	padding 0.1em 1em
 	height auto
 	min-width 600px
 	max-height 80vh
-	overflow-y scroll 
 	white-space nowrap
 	background-color #F0F0F0
 .tide

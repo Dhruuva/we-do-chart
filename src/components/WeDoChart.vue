@@ -11,7 +11,7 @@ const p = defineProps({
   ,points: {   type:Array,  default: () =>new Array()}
   ,limit:{ type:[Number],  default: () =>(10)  }
   ,scl:{type:[Number,String], default: () =>(0.45)  }   // For slider
-  ,shapes: { type:Array, default: () =>( new Array({type:'dot',x:0,y:0,price:5,tm:"2018-02-05"})) }
+  ,shapes: { type:Array, default: () =>( new Array()) }
   ,tky:{   type:[Number,String], default: () =>(7) }// Axis y ticks numbers
   ,decimals:{      type:[String],     default: () =>('0.01')  } //For price scale
   ,tsz: { type:Object,   default: () =>( {size:5, off:5}) }  // the label ticks options off should be greater off
@@ -33,7 +33,7 @@ const pos = ref({x:0, y:0}), bank1 = new Bank()
 ,wline= ref( { left:{x1:0, x2:0, y1:0, y2:0 }, middle:{x:0,y:0, w:0,h:0}, right:{x1:0, x2:0, y1:0, y2:0 }})
 ,cross= ref({ v:{x1:0, y1:0, x2:0, y2:0 }, h:{x1:0, y1:0, x2:0, y2:0 }, hide:false, txt:"",cursor:'cursor: crosshair;'})
 ,ticksY=reactive(new Array()), ticksX=reactive(new Array()), pointYX=reactive(new Array())
-,shape=reactive(new Array()) ,observer=ref(null),xv=ref(-1),yv=ref(0);
+,shape=reactive(new Array()) ;
 const axis= computed( ()=> {
   let h=p.ds.height,w =p.ds.width ,off = h*p.off/100
   , wbox = calcOffsetY(p.decimals,p.points,p.tsz,p.fs)
@@ -63,22 +63,10 @@ const isXtb= computed(() => bank1.getData("mins")[0].data.length);
 onBeforeMount( async () => {
   window.addEventListener('resize', reSize);
   let top0= document.getElementById('sheet');
-  console.log( "  p.ds.width==", p.ds.width," p.ds.height=== ",p.ds.height, " top0 ",top0);
   
- 
-
 })
 
 onMounted( async () => {
-  
-  const elem = svg.value.parentElement;
-  p.ds.width=elem.clientWidth;
-  p.ds.height=elem.clientHeight;
-  console.log( "  p.ds.width++++", p.ds.width," p.ds.height+++ ",p.ds.height);
-  console.log(" svg ---width=",elem.clientWidth, " svg ---height=",elem.clientHeight, "p.h==",p.ds.height);
-  observer.value=elem;
-  xv.value=2;
-
   slider.leftDrug = true
   slider.draggingLeft =true
    xmapData();
@@ -89,35 +77,18 @@ onMounted( async () => {
   slider.h=p.ds.height;
   slider.pos=pos;
   getDisplayData(axi.x.x1,axi.x.x2);
-  console.log(' p.ds.height ==>',p.ds.height)
   const rtn=slider.init( getDisplayData,svg,pointYX,limitSize);
   let pt = svg.value.createSVGPoint();
   slider.leftDrug = false;
   slider.draggingLeft =false;
-  xv.value=0; 
-  //loadChart();
-  //initObserver();
+
   
 })
 
-onUpdated( async () => {
-  //reFit();
-
- 
-})
-
-// const reFit=()=>{
-//   xv.value=1; 
-//   setTimeout(()=>{
-//     console.log( " loadChart ****************>");
-//     xv.value=0; 
-//     loadChart();
-//   },20);
-// }
 
 const viewBoxSet= computed( ()=> {
   let w =p.ds.width,h =p.ds.height;
-  return   `${xv.value} 0 ${w} ${h}`;
+  return   `0 0 ${w} ${h}`;
 });
 const chartName= computed( ()=>{
   return   (p.points[0])?  (p.points[0].name)? p.points[0].name:'':''
@@ -166,29 +137,12 @@ watch(() => p.ds,  (newValue, oldValue) => {
     loadChart();
 }, { deep: true });
 
-watch(() => observer,  (newValue, oldValue) => {
 
-   console.log( "width--->",oldValue.value);
-   
-}, { deep: true });
-
-// watchEffect(() => {
-//   if (svg.value){
-//     const elem = svg.value.parentElement;
-//     p.ds.width=elem.clientWidth;
-//     p.ds.height=elem.clientHeight;
-//     observer.value=elem;
-
-//     console.log( "watchEffect--->",elem.clientWidth,elem.clientHeight);
-//   }
-// })
 
 const reSize=()=>{
   setTimeout(()=>{
    // console.log( "reSize-ds.height->",p.ds.height, " w= ", p.ds.width," viewBoxSet=",viewBoxSet );
-    xv.value=-1;
     loadChart();
-
   },25);
 }
 const xmapData=()=>{
@@ -208,6 +162,7 @@ const xmapData=()=>{
   } 
 }
 const getDisplayData=(first,end)=> {
+  doAxes.shapes=p.shapes;
   const axi = axis.fn();
   let n=thumbs.value.step*0.01;
   let arr =(p.points.length>0)? p.points[0].data.filter(a=> a.x >= first &&  a.x <= end+n ) :[];
@@ -234,12 +189,6 @@ const getDisplayData=(first,end)=> {
   } else  return 'no';
 }
 const loadChart=()=> {
-  if (svg.value){
-    const elem = svg.value.parentElement;
-    p.ds.width=elem.clientWidth;
-    p.ds.height=elem.clientHeight;
-  }
-  xv.value=0;
   const axi = axis.fn();
   slider.scl=p.scl;
   slider.axis=axi;
@@ -321,29 +270,7 @@ const update=()=>{
   return  p.limit;
 }
 
-// const initObserver=()=> {
-//   const  config = { attributes: true };
-//   // create the observer
-//   const elem = svg.value.parentElement
-//   p.ds.width=elem.clientWidth
-//   p.ds.height=elem.clientHeight
-//   const observer = new MutationObserver(function(mutations) {
-    
-//     mutations.forEach(function(mutation) {          
-//       if (mutation.type === "attributes") {
-//         let width=elem.style.width, height=elem.style.height
-//         width=elem.clientWidth
-//         height=elem.clientHeight
-//         // p.ds.height=(height)? height:p.ds.height;
-//         // p.ds.width= (width)?  width:p.ds.width;
-//         console.log(" observ--->h=", height," p.ds.height ",p.ds.height);
-//         loadChart()
-//       }
-//     }); 
-//   });
-//   observer.observe(elem, config);
-//   Observer.value = observer;
-// }
+
 
 defineExpose({loadChart,update});
 </script>

@@ -14,13 +14,11 @@ export function Slide(thumbs,wline,cross,fs) {
 		this.svg=svg.value;
 		this.pointYX=pointYX;
 		this.limitSize=limitSize?.value;
-		//console.log("pointYX---$$$$$$$$$$$$$$$",pointYX, "limitSize init ",limitSize)
-		this.pos.value.x =  this.axis.x.x1 
-		//console.log("  this.pos --->",pos.value.x);
+  	this.pos.value.x =  this.axis.x.x1 
+
 		let hf =  (h-(this.axis.y.y1 + this.fs*1.18))/2 + (scl*40)/2
 		let y = h-hf
-		console.log("hf ",hf, "this.h ",h)
-
+		
 		this.thumbs.left.x = this.axis.x.x1 - scl*31
 		this.thumbs.left.y = y
 		this.wline.left.x1 = this.axis.x.x1

@@ -20,7 +20,7 @@ header {
    padding: 0.1em 0.1em;
    box-shadow: 1px 2px 8px 3px darkslategray;
    border-radius: 13px;
-   display: flex;
+   display:flex;
    justify-content: space-between;
    align-items: center;
    transition: all 0.4s ease-in-out;
