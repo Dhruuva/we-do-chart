@@ -172,7 +172,7 @@ const dset = computed( () => ( {width:w1.value,height:h1.value} ) );
 header
 	Navi(id="mynav" active="6")
 body
-	#mainLook_root(ref="root" @mousemove='getLocation' style='height:50%;' @mouseup="stopDrag")
+	#mainLook_root(ref="root" @mousemove='getLocation'  @mouseup="stopDrag")
 		.split.upper.left.border(:style='leftStyle')
 			.thumb(@mousedown='startLeftDrug()' @mouseenter='rightDrug=!rightDrug' @mouseleave='rightDrug=!rightDrug')
 			article
@@ -243,13 +243,13 @@ pre
 	padding 1rem
 
 #mainLook_root
-	display flex
 	padding 0rem 1rem
-	width 100%
+	display grid
+	width auto
+	grid-template-columns 1fr
 	&::before,
 	&::after 
 		padding 2rem 1rem
-		width 1280px
 .split
 	width 50%
 	height  90%
