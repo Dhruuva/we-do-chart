@@ -2,7 +2,7 @@
 import { ref,computed,watch} from 'vue'  
 import Navi from './web/Header.vue'
 import Home from './web/Home.vue'
-
+import Start from './pages/Start.vue'
 
 
 </script>
@@ -12,8 +12,8 @@ import Home from './web/Home.vue'
     <Navi id="mynav" active="1"/>
   </header> 
   <body>
-    <Home>
-         </Home>
+    <Start>
+         </Start>
   </body>
 
 
