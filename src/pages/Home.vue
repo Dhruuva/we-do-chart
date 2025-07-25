@@ -1,4 +1,6 @@
 <template lang="pug">
+header
+	Navi(id="mynav" active="1")
 body
 	main
 	.my-grid
@@ -32,6 +34,8 @@ body
 	import WeDoChart from '../components/WeDoChart.vue';
     import Styler from '../web/Styler.vue';
     import hChart from '../web/hLightChart.vue'
+    import Navi from '../web/Header.vue';
+
 
 	const  bank1 = new Bank(),styler1=ref(null), aStyle=ref("visibility: hidden;") ,txt=ref("no");
 	const data= computed(() => bank1.getData("sto"));

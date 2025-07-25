@@ -17,7 +17,7 @@ header#mynav
 		active: { type: String, default: "1" },
 	})
 	,stuff=reactive(new Array(
-		{id:1,page:"index.html",isActive:true, name:"Home", ico:"ic:baseline-account-balance"},
+		{id:1,page:"home.html",isActive:true, name:"Home", ico:"ic:baseline-account-balance"},
 		{id:2,page:"inputData.html", name:"Data source", ico:"ic:baseline-contact-support"},
 		{id:3,page:"props.html", name:"Props", ico:"ic:sharp-barcode"},
 		{id:4,page:"format.html", name:"Format", ico:"ic:round-compost"},

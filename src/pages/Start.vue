@@ -11,22 +11,34 @@ onMounted( async () => {
 </script>
 
 <template lang="pug">
-body
-	main
-		.my-grid
-			.left-side
-			.right-side
-
+.my-grid
+	.left-vue
+		.wraper
+			.cbox
+				img(alt="Vue logo"  src="../assets/vue1.svg" )
+			h1 Vue 2
+			a(href="home.html") Go
+	.right-vue
+		.wraper
+			.cbox
+				img(alt="Vue logo" src="../assets/vue1.svg" )
+			h1 Vue 3 +
+			a(href="home.html") Go.. 
 </template>
 
 <style lang ="stylus">
-@import '../assets/theme.styl'
-@import '../assets/select-my.styl'
-@import '../assets/fxtable.styl'			
-$colorPlot = #0074d9
-$colorAxis = #0074d9
-code
-	white-space:normal;
+$colorPlot = #646cffaa
+$colorLink = #42b883aa
+.logo 
+  display block
+ 	margin-left 10em
+ 	margin-top -1em
+  will-change: filter;
+  transition: filter 100ms;
+.wraper
+	display flex
+	place-items flex-start
+	flex-wrap wrap
 .fly
 	float: right;
 	padding 0.1em 1em
@@ -42,44 +54,32 @@ code
 		border 1px solid rgba(0,0,0,0.3)
 		border-style groove
 		box-shadow: 0.3em 0.3em  rgb(10, 38, 46) groove;
-.mini-grid
-	margin 0.1em 0.1em
-	display grid
-	width 100%
-	grid-template-columns 1fr 1fr;
-	&.left
-		margin 0.1em 0.1em
-		max-height 50vh
-	&.right
-		margin 0.1em 0.1em
-		max-height 30vh		
 .my-grid
 	overflow: auto;
 	-webkit-overflow: auto;
-	height 80vh
-	margin 0.1em 0.1em
+	height 100vh
 	display grid
 	width 100%
 	grid-template-columns 1fr 1fr;
-.right-side
-	margin 0.2em 0.1em
+.right-vue
 	padding 0.1em 1em
 	background-color #feeffe
-	max-height 90vh
-	text-align left
+	filter drop-shadow(0em 0em 2em #646cffaa)
+	align-content center
+	color  #42b883aa
 .central
 	min-width 600px
 	background-color #efde
-.left-side
-	margin 0.2em 0.1em
+.left-vue
+	filter drop-shadow(0em 0em 2em #42b883aa)
 	padding 0.1em 1em
 	height auto
-	min-width 600px
 	overflow-y scroll 
 	white-space nowrap
 	background-color #F0F0F0
-	region-overflow:auto;
-	overflow:visible;
+	text-align center
+	align-content center
+	color  #42b883aa
 .tide
 	line-height 0.1em
 	padding 0.1em
@@ -97,7 +97,14 @@ code
 	white-space: pre-line;
 h5,h4,h3,p,button,pre,code
 	margin 0.2em 0.1em
-	
+h1 
+	text-align center
+a
+	text-align center
+	font-size 1.8em
+	font-weight 700
+	margin 1em
+	color $colorPlot
 .tide2
 	line-height 0.8em
 	padding 0.1em 1.5em
@@ -105,10 +112,45 @@ h5,h4,h3,p,button,pre,code
 	font-size 0.9em 
 	border: 1px solid #eee;
 .cbox 
-	border: 1px solid #1111eee;
-	padding 0.1em 0.1em
-	background-color #111
-	width auto
-	height auto
+	margin-left 10em
+	margin-top -1em
+	will-change: filter;
+	transition: filter 100ms;
+	width 10em
+	height 10em
+	
+
+	
+	
+@media (max-width: 1200px)
+	.logo
+		margin-left 1em
+	.cbox
+		margin-left 1em	
+		width 7em
+		height 7em
+@media (max-width: 900px)
+	.cbox
+		margin-top -0.1em
+		margin-left 0.1em	
+		width 5em
+		height 5em
+	h1
+		font-size 1.9em			
+@media (max-width: 600px)
+	.logo
+		margin-left 0em
+	a
+		font-size 1.5em
+		font-weight 500
+@media (max-width: 700px)
+	a
+		font-size 0.9em
+		font-weight 400
+		margin 0.5em
+	h1
+		font-size 1.3em
+	.cbox
+		 margin-top -0.3em				
 
 </style>

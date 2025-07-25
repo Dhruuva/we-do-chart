@@ -1,23 +1,15 @@
 <script setup>
 import { ref,computed,watch} from 'vue'  
-import Navi from './web/Header.vue'
-import Home from './web/Home.vue'
 import Start from './pages/Start.vue'
 
 
 </script>
 
 <template>
-  <header>
-    <Navi id="mynav" active="1"/>
-  </header> 
   <body>
     <Start>
          </Start>
   </body>
-
-
-
   
 </template>
 
