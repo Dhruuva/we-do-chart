@@ -17,7 +17,7 @@ onMounted( async () => {
 			.cbox
 				img(alt="Vue logo"  src="../assets/vue1.svg" )
 			h1 Vue 2
-			a(href="home.html") Go
+			a(href="./v2/index.html") Go
 	.right-vue
 		.wraper
 			.cbox
