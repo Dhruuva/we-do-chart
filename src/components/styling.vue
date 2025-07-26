@@ -103,7 +103,7 @@ export default {
     },
     mounted() {
         let textToCopy = this.$refs.textToCopy
-        this.txt = textToCopy.innerHTML
+        this.txt = textToCopy.value
     },
     data () {
         return {

@@ -156,7 +156,7 @@ export default {
 		right 0
 		color #FFF
 		text-align center
-		font-family "lato", sans-serif
+		font-family 'Avenir', Helvetica, Arial, sans-serif
 		font-weight 300
 		font-size 50px
 		letter-spacing 10px
