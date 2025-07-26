@@ -21,27 +21,35 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
+//console.log(" path  ",__dirname);
 
 export default defineConfig({
   plugins: [vue()],
+  // root:resolve(__dirname, 'src'),
+  //envDir: resolve(__dirname, '.'),
+  //base: '/',
+  publicDir: './public',
+  appType: 'mpa',
   build: {
-    lib: {
-      entry: resolve(__dirname, 'src/components/HelloWorld.vue'),
-      name: 'MyLib',
-      // the proper extensions will be added
-      fileName: 'my-lib',
-    },
+    "outDir": 'docs',
+    emptyOutDir: true,
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
-      external: ['vue'],
-      output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
-        globals: {
-          vue: 'Vue',
-        },
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        home: resolve(__dirname, 'home.html'),
+        props: resolve(__dirname, 'props.html'),
+        format: resolve(__dirname, 'format.html'),
+        respo: resolve(__dirname, 'respo.html'),
+        shapes: resolve(__dirname, 'shapes.html'),
+        inputData: resolve(__dirname, 'inputData.html'),
+
       },
+    },
+  },
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+      
     },
   },
 })
