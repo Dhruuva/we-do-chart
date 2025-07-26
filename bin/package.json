@@ -23,5 +23,15 @@
   "bugs": {
     "url": "https://github.com/Dhruuva/we-do-chart/issues"
   },
-  "homepage": "https://dhruuva.github.io/we-do-chart"
+  "homepage": "https://dhruuva.github.io/we-do-chart",
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
