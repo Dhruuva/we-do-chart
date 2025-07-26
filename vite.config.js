@@ -44,6 +44,9 @@ export default defineConfig({
         inputData: resolve(__dirname, 'inputData.html'),
 
       },
+      output: {
+        "sanitizeFileName": "false",
+      },
     },
   },
   resolve: {
