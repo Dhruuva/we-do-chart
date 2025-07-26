@@ -65,8 +65,8 @@
     ]
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions",
+    "> 10%",
+    "last10 versions",
     "not dead"
   ]
 }
