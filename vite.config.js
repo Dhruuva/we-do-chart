@@ -27,7 +27,7 @@ export default defineConfig({
   plugins: [vue()],
   // root:resolve(__dirname, 'src'),
   //envDir: resolve(__dirname, '.'),
-  //base: '/',
+  base: '/we-do-chart/',
   publicDir: './public',
   appType: 'mpa',
   build: {
