@@ -8,10 +8,10 @@
   <style>
     <![CDATA[
       text{
-        dominant-baseline: hanging;
-        font: bold 6rem Franklin Gothic,Cookie,  cursive;
+        dominant-baseline: mathematical;
+        font: bold 5rem Georgia, serif;
         fill:red;
-        stroke-width 5.5;
+        stroke-width 4.5;
         stroke-fill tomato;
       }
     ]]>

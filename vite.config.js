@@ -34,7 +34,9 @@ export default defineConfig({
   build: {
     "outDir": 'docs',
     emptyOutDir: true,
+    //cssCodeSplit: false, bad view
     rollupOptions: {
+      experimentalMinChunkSize: Infinity,
       input: {
         main: resolve(__dirname, 'index.html'),
         home: resolve(__dirname, 'home.html'),
@@ -46,7 +48,33 @@ export default defineConfig({
 
       },
       output: {
-        "sanitizeFileName": "false",
+        hashCharacters: "hex",
+        sanitizeFileName: "false",
+        assetFileNames: ({ name }) => {
+          //console.log(name)
+          return "assets/[name]-[hash][extname]"
+        },
+        chunkFileNames: ({ name }) => {
+          //console.log(name);
+          let nm ="a"+[name];
+          return `assets/[name]-[hash].js`
+        },
+        manualChunks(id) {
+          const match = /_plugin-vue_export-helper/.exec(id);
+        
+          if (id.includes('@vue') ) {
+            return 'oa';
+          } else if (id.includes('vue.runtime')) {
+            return 'oa';
+          } else if (id.includes('vue-plugin')) {
+            console.log("id++++++",id);
+            return 'oaa';
+           } else if (id.includes('export')) {
+            console.log("id=======",id);
+            return 'oa';
+          }
+        },
+
       },
     },
   },
