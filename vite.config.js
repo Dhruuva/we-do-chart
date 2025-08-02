@@ -67,10 +67,8 @@ export default defineConfig({
           } else if (id.includes('vue.runtime')) {
             return 'oa';
           } else if (id.includes('vue-plugin')) {
-            console.log("id++++++",id);
             return 'oaa';
            } else if (id.includes('export')) {
-            console.log("id=======",id);
             return 'oa';
           }
         },
