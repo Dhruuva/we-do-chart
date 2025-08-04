@@ -1,22 +1,66 @@
-# Vue 3 + Vite
+![npm](https://img.shields.io/npm/v/we-do-chart?color=green)
+![npm](https://img.shields.io/npm/dw/we-do-chart)
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
-
-# https://vite.dev/guide/build.html#library-mode
-
-below link to template
-## https://github.com/vitejs/awesome-vite?tab=readme-ov-file#templates   
+#  we-do-chart
+A we-do-chart Vue component for plotting time series line chart, with crosshair, zooming and slider features. Compatible with Vue 2.x and at last with Vue 3.
+Vue 2 is legacy now (according to Vue documentation). Vue 3 version have a lot of enhancements and new features, so it is pretty diffrent from Vue 2 version. And all new versions begging with 1.0.9 will not be supported Vue 2 projects. For using it in Vue 2 feel free and follow v2 branch of this repo.
+All below instructions is for Vue 3 projects.
+For more info about features, demonstration , customization options please see the [project pages](https://dhruuva.github.io/we-do-chart/)
 
 
-below building tool
-## https://rollupjs.org/command-line-interface/#configuration-files
+##  Fast start up 
+In vue app  just do it.
+```
+npm install we-do-chart --save
+```
+and in your vue page locally used without component registration ( at my view it most easy  way in Vue 3)
 
-CSS Pre-processors vite native support
-## https://vite.dev/guide/features.html#css-pre-processors
+``` html
 
-## npm add -D vite-plugin-pug   && npm add -D stylus
+<div id="your_page">
+	<p>My Chart</p>
+	<div style="margin: auto; padding: 1em;">
+		<WeDoChart ref="chart" :ds="{width:600,height:400}" :points="rows" theme="berry"/>
+	</div>
+</div>
+<script setup>
+import {ref,reactive} from 'vue'
+import WeDoChart from "we-do-chart"
+const rows = reactive([                                        
+	    { name:"Chart1" , data:[             
+	        {tm: '2025-08-14', price: 48.61}, 
+	        {tm: '2025-08-15', price: 60.61}, 
+	        {tm: '2025-08-16', price: 60.91}
+	    ]},
+    ])                          
+</script>
+```
+## Or use directly  In-browser
+``` html
+<script src="https://unpkg.com/vue"></script>
+<link rel="stylesheet" href="https://unpkg.com/we-do-chart/we-do-chart.css">
+<script src="https://unpkg.com/we-do-chart"></script>
 
+<div id="your_page">
+	<p>My Chart</p>
+	<div style="margin: auto;">
+		<we-do-chart :ds="{width:600,height:400}" :points="rows" theme="berry"></we-do-chart>
+	</div>
+</div>
+<script>
+  const app = Vue.createApp({});
+  app.use(WeDoChart); // component will be available as 'we-do-chart'
+</script>
 
+```
+# try it
+Go [we-do-chart](https://codepen.io/dhruuva/pen/VwjNyjG) by Aleksey Bazhenov
+  ([@dhruuva](https://codepen.io/dhruuva)) on [CodePen](https://codepen.io).
 
+# Contributing
+pull requests for Fix bugs, new features,new style themes  ... welcome
+
+## License
+
+Copyright (c) 2025
+Licensed under the [MIT license](https://github.com/Dhruuva/we-do-chart?tab=MIT-1-ov-file#readme).

@@ -54,7 +54,7 @@ export function DoAxes() {
 		this.movMin =minMove
 		let proxy = [...data];
 		while (proxy.length > 0) ds.push(proxy.pop());
-		//ds = data.slice();  // shallow copy
+		
 		ds.reverse();
 		let mini = Math.min(...ds.map(a=>a.price));
 		let maxi = Math.max.apply(null,ds.map(a=>a.price));
@@ -64,7 +64,7 @@ export function DoAxes() {
 		let hl = scale.high - scale.low
 		while (scale.y.length > 0) ticksY.push(scale.y.pop());
 		
-		// For  AxisX  & xy calc .........................
+		
 		let w = off.x.x2 - off.x.x1
 		let stepx = w/(ds.length-1);
 		let xtm  = off.x.x1
@@ -81,10 +81,9 @@ export function DoAxes() {
 				out.push(a);
 				a.visiable=1;
 			} else a.visiable=-1;
-			//console.log(" y = ", a.price,a.y, " j ", j, " x =",a.x, " visiable ",a.visiable)
+			
 		})
-		//out.forEach(a=> {shape.splice(a,1);});
-		//console.log(" out ===",out.length, "Shapes==", shape.length);
+		
 		const o=fmt.resolvedOptions();
 		const mmm =new Intl.DateTimeFormat(o.locale,{ month: "short",  timeZone: o.locale.timeZone});
 		const yyyy =new Intl.DateTimeFormat(o.locale,{ year: "numeric",  timeZone: o.locale.timeZone});
@@ -176,9 +175,8 @@ export function DoAxes() {
 		},
 		set(arr) {
 			shape.length=0;
-			//console.log(" set shape")
 			Array.prototype.push.apply(shape,arr);
-			//console.log(" =",shape)
+			
 		},
 	});
 	

@@ -38,13 +38,11 @@ const axis= computed( ()=> {
   , lfBox= calcOffsetX(p.timefotmat,p.points,p.fs)
   , hbox = calcMiniBottomHight(p.tsz,p.fs,p.scl,h)
   , tbox = calcMiniTopHight(p.tsz,p.fs);
- // console.log( " wbox =" ,wbox," lfBox =" ,lfBox, "hbox==",hbox, "tbox=",tbox);
   let x = (off) < lfBox/3 ? lfBox/3:off;
   if (x < p.scl*31) x=p.scl*31+(p.scl*31/2.5);
   let y = (off) < hbox ? hbox:off;
   let y2 = (tbox > off ) ? tbox:off;
   let x2 = (off) < wbox/1.5 ? wbox/1.5:off;
- // console.log( " x =" ,x," y =" ,y, "y2==",y2, "x2=",x2);
   return {
     y: {y1: h-y, y2:y2, x1: w-x2, x2: w-x2},
     x: {y1: h-y, y2:h-y, x1:x, x2: w-x2},
@@ -94,7 +92,6 @@ const pointsAsPolyline= computed( ()=> {
 
 watch([() => p.points,() => p.timefotmat,() => p.limit,() => p.off,() => p.tky,() => p.fs,() => p.scl,() => p.showGrid]
   ,  (newValue, oldValue) => {
-    //console.log( " timefotmat --->",newValue.value);
     loadChart();
 }, { deep: true });
 watch(() => pos,  (newValue, oldValue) => {
@@ -106,14 +103,12 @@ watch(() => pos,  (newValue, oldValue) => {
 }, { deep: true });
 
 watch(() => p.timefotmat,  (newValue, oldValue) => {
-    //console.log( " timefotmat --->",newValue.value);
     loadChart();
 }, { deep: true });
 
 
 watch(() => p.tsz,  (newValue, oldValue) => {
-    //console.log( " timefotmat --->",newValue.value);
-    loadChart();
+      loadChart();
 }, { deep: true });
 
 
@@ -121,9 +116,9 @@ const xmapData=()=>{
 	let sz = (p.points.length>0)? p.points[0].data.length:0;
   limitSize.value =(sz<=15 && sz>0)? sz: (sz/100)*p.limit;
   const axi = axis.fn();
- // console.log(" axis.x.x2 ",axi.x);
+
   let step = (axi.x.x2-axi.x.x1)/(sz-1);
- // console.log(" step ",step);
+
   thumbs.value.step = step  // this need for slider to display last point easy
   let i = axi.x.x1;
   if (p.points.length>0){
@@ -138,10 +133,10 @@ const getDisplayData=(first,end)=> {
   doAxes.shapes=p.shapes;
   let n=thumbs.value.step*0.01;
   let arr =(p.points.length>0)? p.points[0].data.filter(a=> a.x >= first &&  a.x <= end+n ) :[];
-  // console.log( 'arr.length=' ,arr.length)
+ 
   pointsID.value.x1= (arr.length>0)? arr[0].id:pointsID.value.x1;
   pointsID.value.x2= (arr.length>0)? arr.slice(-1)[0].id:pointsID.value.x2;
-  //console.log( 'arr.length=' ,arr.length)
+  
   if (pSize.value != arr.length){
     pSize.value = arr.length;
     doAxes.formulaY(arr, axi, p.tky, calcOffsetX(p.timefotmat,p.points,p.fs), p.decimals, p.timefotmat)
@@ -149,10 +144,10 @@ const getDisplayData=(first,end)=> {
     Array.prototype.push.apply(ticksY,doAxes.ticksY().map(a=>a));
     ticksX.splice(0,ticksX.length);
     Array.prototype.push.apply(ticksX,doAxes.ticksX().map(a=>a));
-    //console.log("ticksX =",ticksX)
+    
     if (p.timefotmat) doAxes.formatTicksX(ticksX,p.timefotmat);
     pointYX.length=0;
-    //console.log("pointYX.legth =",pointYX.length)
+    
     Array.prototype.push.apply(pointYX,doAxes.pointYX().map(a=>a));
     zero.value=doAxes.zero();
     shape.length=0;
@@ -169,7 +164,6 @@ const loadChart=()=> {
   let p1 = arr.slice(-1)[0]
   cross.value.txt = (p1)? p1.price + " " + p1.tm:'';
   pSize.value=1
-  //doAxis.shapes=this.shapes
   getDisplayData(x1,x2)
   slider.scl=p.scl;
   const rtn=slider.init( getDisplayData,svg,pointYX,limitSize);
@@ -194,7 +188,7 @@ const zoom=(event)=>{
 const crossMove=()=>{
   const axi = axis.fn(),farPoints= new Array();
   if (pos.value.x<axi.x.x2 && pos.value.x>axi.x.x1 && pos.value.y>axi.y.y2 && pos.value.y<axi.y.y1) {
-  	//console.log(" cross.value.cursor ",cross.value.cursor)
+  
     if ( !slider.draggingCenter){//cross.value.cursor!=='cursor: grabbing;'
       cross.value.hide=false;
       cross.value.cursor='cursor: default;'
@@ -204,8 +198,7 @@ const crossMove=()=>{
       Array.prototype.push.apply(farPoints, far);
       let p = (far.length>0) ? far[0] : null
       if (p ){
-      	//console.log(" +++++++++++++++++++++++++++++++++++++++++ cros far match")
-        cross.value.v.x1=p.x
+      	cross.value.v.x1=p.x
         cross.value.v.x2=p.x
         cross.value.v.y1=axi.y.y1
         cross.value.v.y2=axi.y.y2
@@ -219,8 +212,6 @@ const crossMove=()=>{
       }
     } 
   } else {
- // console.log("cursor: default; ___________________________________________________")
-  //slider.stopDrag();
   cross.value.cursor='cursor: default;'
   cross.value.hide=true;
   }

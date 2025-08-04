@@ -1,7 +1,7 @@
 <script setup>
 import { ref,computed,useTemplateRef,watch, onMounted,reactive} from 'vue'  
-import WeDoChartDev from './components/WeDoChartDev.vue'
-//import WeDoChartDev from './components/WeDoChart.vue'
+//import WeDoChartDev from './components/WeDoChartDev.vue'
+import WeDoChartDev from './components/WeDoChart.vue'
 import {Bank} from './components/bank.js'
 const  bank1 = new Bank(), chart= ref(null),tky1= ref(2),scl= ref(0.7),off= ref(5);
 const data= computed(() => bank1.getData("sto"));

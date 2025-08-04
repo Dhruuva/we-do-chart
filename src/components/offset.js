@@ -1,6 +1,5 @@
 export function calcOffsetX(f,points,fs){
 	if (!points) return  3*fs;
-	//console.log(points," --boxWidth ");
 	const maxTimeLabel= Math.max.apply(null,points[0]?.data.map(a=> (f.format(new Date(a.tm))).length  ));
 	const boxWidth = (maxTimeLabel)? maxTimeLabel*fs:3*fs;
 
@@ -9,14 +8,11 @@ export function calcOffsetX(f,points,fs){
 
 export function	calcOffsetY(decimals,points,tsz,fs){
 	let f = (decimals.length<2)? 2 : decimals.length;
-	//console.log(f," --f ")
 	let maxInteger = (points && points.length>0 ) ? Math.max.apply(null,points[0].data.map(a=> (''+a.price).indexOf(".") ) ):1;
-	//console.log(maxInteger," --maxInteger ")
 	if (maxInteger<0) maxInteger= Math.max.apply(null,points[0].data.map(a=> (''+a.price).length  ))
 	let mxl = maxInteger + f - 1 ;
 	if (points && points.length == 0) mxl=6
 	let boxWidth = mxl*fs+tsz.off
-	//console.log(boxWidth," --calcOffsetY ",tsz.off, fs)
 	return  boxWidth;
 }
 
