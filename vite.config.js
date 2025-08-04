@@ -25,11 +25,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 export default defineConfig({
   plugins: [vue()],
   build: {
+    emptyOutDir:true,
+    copyPublicDir:false,
     lib: {
-      entry: resolve(__dirname, 'src/components/HelloWorld.vue'),
-      name: 'MyLib',
+      entry: resolve(__dirname, 'src/components/WeDoChart.vue'),
+      name: 'we-do-chart',
       // the proper extensions will be added
-      fileName: 'my-lib',
+      fileName: 'we-do-chart',
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

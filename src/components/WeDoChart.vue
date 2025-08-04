@@ -1,7 +1,5 @@
 <script setup>
 import { ref,onMounted ,reactive,computed,watch,watchEffect ,useTemplateRef} from 'vue'
-import {Bank} from '../components/bank.js'
-//import {startDrag,mousemove} from '../components/mouse.js'
 import {calcOffsetX,calcOffsetY,calcMiniBottomHight,calcMiniTopHight} from '../components/offset.js'
 import {DoAxes} from '../components/doAxes.js'
 import {Slide} from '../components/slide.js'
@@ -23,7 +21,7 @@ const p = defineProps({
 });
 
 
-const pos = ref({x:0, y:0}), bank1 = new Bank()
+const pos = ref({x:0, y:0})
 ,svg = useTemplateRef('sheet')
 ,thumbs = ref({ left:{x:0, y:0}, right:{x:0, y:0, priceDigits:0 },step:0.0001 })
 ,pointsID = ref({x1:0,x2:Number.MAX_VALUE})
@@ -56,7 +54,7 @@ const axis= computed( ()=> {
 
 const doAxes = new DoAxes(),slider=new Slide(axis.fn(),pos,p.ds.height,thumbs,wline,cross,p.fs,limitSize);
 
-const isXtb= computed(() => bank1.getData("mins")[0].data.length);
+
 
 
 
@@ -269,7 +267,7 @@ svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @
   line.wline(:x1="wline.right.x1" :x2="wline.right.x2" :y1="wline.right.y1" :y2="wline.right.y2" :stroke-width='wline.right.sSize' @click="slider.wlineRightClick" )
 </template>
 
-<style lang ="stylus" >
+<style scoped lang ="stylus" >
 @import '../assets/theme.styl'	
 $colorPlot = #0074d9
 $colorAxis = #0074d9
