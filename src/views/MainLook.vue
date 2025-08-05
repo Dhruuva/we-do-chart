@@ -1,169 +1,170 @@
 <template lang="pug">
-	div(id="mainLook_root" ref="root" @mousemove='getLocation' style='height:100%;')
-		.split.upper.left.border(:style='leftStyle')
-			v-card
-				v-tabs(v-model='tab' align-with-title color='cyan' dark)
-					v-tabs-slider(color='yellow')
-					v-tab(v-for='item in iTabs' :key='item') {{ item }}
-				v-tabs-items(v-model='tab')
-					v-tab-item 
-						v-card(height="500")
-							v-card-text
-								p.display-1.text--primary.text-left.titleBig we-do-chart 
-									span.float-right
-										v-btn.mx-2(  small color="primary" dark @click="loadData('sto')") Load Data  
+	body
+		div(id="mainLook_root" ref="root" @mousemove='getLocation' style='height:100%;')
+			.split.upper.left.border(:style='leftStyle')
+				v-card
+					v-tabs(v-model='tab' align-with-title color='cyan' dark)
+						v-tabs-slider(color='yellow')
+						v-tab(v-for='item in iTabs' :key='item') {{ item }}
+					v-tabs-items(v-model='tab')
+						v-tab-item 
+							v-card(height="500")
+								v-card-text
+									p.display-1.text--primary.text-left.titleBig we-do-chart 
+										span.float-right
+											v-btn.mx-2(  small color="primary" dark @click="loadData('sto')") Load Data  
+									p.body-1.text-left.pa-2
+										|  This is a brief interactive guide help You in quick its implementation in Web pages with all your requirements.Let's go to load some sample data in the component and look it.
+										| Resize this panel size using thumb or resize browser window. The 
+										span.green--text.font-weight-bold we-do-chart
+										|   will stay in pretty look.	Any screen size you get the pretty looking your data visualizations.
+									
+						v-tab-item
+							v-card(flat )
+								v-toolbar(color="orange" dense)
+									v-btn-toggle(v-model='toggle_none' )
+										v-btn(small color="primary" dark @click="loadData('sto')") 100
+										v-btn(small color="primary" dark @click="loadData('year')") 365
+										v-btn(small color="primary" dark @click="loadData('intra')") Intra
+									v-btn(class="ma-2 white--text" :loading="loading" :disabled="loading" color="blue-grey"  @click="initData('data.json')") Crypto
+									v-select.mt-6(v-if="ishide" color="snow" :items="symbols" label="code" item-value='id' item-text='code' dense  v-model="sid" )
+										template(v-slot:item='{ item }')
+											v-card(fixed dense)
+												table.myTable(v-if="item.id==212")
+													thead
+														tr 
+															th Id
+															th Symbol
+															th Price
+															th Points
+															th Tick size
+												table.myTable(v-if="item.id!=212")
+													tbody
+														tr 
+															td {{item.id}}
+															td {{item.code}}
+															td {{item.price}}
+															td {{item.points}}
+															td {{item.tkz}}
+								v-card.pa-2(height="700")
+									v-row
+										v-col( cols="12" md="6" )
+											h1.text-left  points
+											p.body-1.text-left.pa-2 Chart data represent array of the JSON object rows.								
+												code.grey.lighten-1.mx-2.white--text() price: 
+												|  should be a number otherwise error will rise.
+												code.grey.lighten-1.mx-2.white--text tm: 
+												|    field has no strict types but for a timeseries chart should be  ISO 8601 (YYYY-MM-DD).    Use buttons in upper toolbar to examine different data samples. Crypto button let you examine real-world sample ( crypto-currency ). 
+											p.body-1.text-left.mt-n5.pa-2
+												span 
+													v-icon.pa-2( color="yellow darken-2") mdi-lightbulb
+												| For the best interaction with chart, avoid load heavy sized arrays. I think below 2000 rows performance would be fast.	 	
+										v-col( cols="12" md="6" )
+											CodeSample
+						v-tab-item 
+							v-card.pa-2(height="700") 
+								h1.text-left  decimals	
+								div.d-inline.body-1.text-left.pa-2 Set the number of digits after the decimal point. Use the string mask. Default is 
+								code.grey.mx-2.white--text '0.01'
+								p
+									v-slider( v-model="tkz" :tick-labels="dcml"   max="4" ticks="always" tick-size="4")
+						v-tab-item 
+							v-card.pa-2(height="700") 
+								h1.text-left  fs
+								p.body-1.text-left.pa-2 Use this property to set appropriate font-size for axis labels and chart legend. 
+								v-slider( v-model="fsz" thumb-size="20" thumb-label="always" min="10" max="18" ticks="always" tick-size="4" step="1")
 								p.body-1.text-left.pa-2
-									|  This is a brief interactive guide help You in quick its implementation in Web pages with all your requirements.Let's go to load some sample data in the component and look it.
-									| Resize this panel size using thumb or resize browser window. The 
-									span.green--text.font-weight-bold we-do-chart
-									|   will stay in pretty look.	Any screen size you get the pretty looking your data visualizations.
-								
-					v-tab-item
-						v-card(flat )
-							v-toolbar(color="orange" dense)
-								v-btn-toggle(v-model='toggle_none' )
-									v-btn(small color="primary" dark @click="loadData('sto')") 100
-									v-btn(small color="primary" dark @click="loadData('year')") 365
-									v-btn(small color="primary" dark @click="loadData('intra')") Intra
-								v-btn(class="ma-2 white--text" :loading="loading" :disabled="loading" color="blue-grey"  @click="initData('data.json')") Crypto
-								v-select.mt-6(v-if="ishide" color="snow" :items="symbols" label="code" item-value='id' item-text='code' dense  v-model="sid" )
-									template(v-slot:item='{ item }')
-										v-card(fixed dense)
-											table.myTable(v-if="item.id==212")
-												thead
-													tr 
-														th Id
-														th Symbol
-														th Price
-														th Points
-														th Tick size
-											table.myTable(v-if="item.id!=212")
-												tbody
-													tr 
-														td {{item.id}}
-														td {{item.code}}
-														td {{item.price}}
-														td {{item.points}}
-														td {{item.tkz}}
+									v-icon.pa-2(  color="red darken-2") mdi-alert
+									span.caption(color="red darken-2") Style font-size always ignored.
+						v-tab-item 
+							v-card.pa-2(height="700") 
+								h1.text-left tky
+								p.body-1.text-left.pa-2 This props control number of ticks on the y-axis.
+								v-slider(v-model="tickYnumber" thumb-size="20"  thumb-label="always" min="3"  max="12" ticks="always" tick-size="4" step="1")
+						v-tab-item 
+							v-card.pa-2(height="700") 
+								h1.text-left off
+								p.body-1.text-left.pa-2 Use it in same cases, you wish to increase charts offset. This property impact top and left chart offset. Default 2 percent of height-width correspondingly.
+								v-slider(v-model="chartOff" thumb-size="20"  thumb-label="always" min="2"  max="16" ticks="always" tick-size="4" step="2")
+						v-tab-item 
 							v-card.pa-2(height="700")
+								h1.text-left tsz
+								p.body-1.text-left.pa-2  This property deal with tick mark on the both axis. You can change size of ticks and labels offset. Property have a type of object.
+									code.grey.mx-2.white--text  { size:5, off:5 }
+								v-slider(label="tsz.size" v-model="tickSize.size" thumb-size="20" thumb-label="always" min="1" max="8" ticks="always" tick-size="4" step="1")
+								v-slider(label="tsz.off" v-model="tickSize.off" thumb-size="20" thumb-label="always" min="5" max="16" ticks="always" tick-size="4" step="1")
+						v-tab-item 
+							v-card.pa-2(height="700") 
+								h1.text-left timefotmat
 								v-row
-									v-col( cols="12" md="6" )
-										h1.text-left  points
-										p.body-1.text-left.pa-2 Chart data represent array of the JSON object rows.								
-											code.grey.lighten-1.mx-2.white--text() price: 
-											|  should be a number otherwise error will rise.
-											code.grey.lighten-1.mx-2.white--text tm: 
-											|    field has no strict types but for a timeseries chart should be  ISO 8601 (YYYY-MM-DD).    Use buttons in upper toolbar to examine different data samples. Crypto button let you examine real-world sample ( crypto-currency ). 
-										p.body-1.text-left.mt-n5.pa-2
-											span 
-												v-icon.pa-2( color="yellow darken-2") mdi-lightbulb
-											| For the best interaction with chart, avoid load heavy sized arrays. I think below 2000 rows performance would be fast.	 	
-									v-col( cols="12" md="6" )
-										CodeSample
-					v-tab-item 
-						v-card.pa-2(height="700") 
-							h1.text-left  decimals	
-							div.d-inline.body-1.text-left.pa-2 Set the number of digits after the decimal point. Use the string mask. Default is 
-							code.grey.mx-2.white--text '0.01'
-							p
-								v-slider( v-model="tkz" :tick-labels="dcml"   max="4" ticks="always" tick-size="4")
-					v-tab-item 
-						v-card.pa-2(height="700") 
-							h1.text-left  fs
-							p.body-1.text-left.pa-2 Use this property to set appropriate font-size for axis labels and chart legend. 
-							v-slider( v-model="fsz" thumb-size="20" thumb-label="always" min="10" max="18" ticks="always" tick-size="4" step="1")
-							p.body-1.text-left.pa-2
-								v-icon.pa-2(  color="red darken-2") mdi-alert
-								span.caption(color="red darken-2") Style font-size always ignored.
-					v-tab-item 
-						v-card.pa-2(height="700") 
-							h1.text-left tky
-							p.body-1.text-left.pa-2 This props control number of ticks on the y-axis.
-							v-slider(v-model="tickYnumber" thumb-size="20"  thumb-label="always" min="3"  max="12" ticks="always" tick-size="4" step="1")
-					v-tab-item 
-						v-card.pa-2(height="700") 
-							h1.text-left off
-							p.body-1.text-left.pa-2 Use it in same cases, you wish to increase charts offset. This property impact top and left chart offset. Default 2 percent of height-width correspondingly.
-							v-slider(v-model="chartOff" thumb-size="20"  thumb-label="always" min="2"  max="16" ticks="always" tick-size="4" step="2")
-					v-tab-item 
-						v-card.pa-2(height="700")
-							h1.text-left tsz
-							p.body-1.text-left.pa-2  This property deal with tick mark on the both axis. You can change size of ticks and labels offset. Property have a type of object.
-								code.grey.mx-2.white--text  { size:5, off:5 }
-							v-slider(label="tsz.size" v-model="tickSize.size" thumb-size="20" thumb-label="always" min="1" max="8" ticks="always" tick-size="4" step="1")
-							v-slider(label="tsz.off" v-model="tickSize.off" thumb-size="20" thumb-label="always" min="5" max="16" ticks="always" tick-size="4" step="1")
-					v-tab-item 
-						v-card.pa-2(height="700") 
-							h1.text-left timefotmat
-							v-row
-								v-col.text-h5( cols="12" sm="8" )
-									p.body-1.text-left.pa-2 In case time series data this property change format x-axis labels. For help take a  reference of the 
-										a(href="https://www.npmjs.com/package/dateformat") |npm dateformat package 
-										| . Default value is null.
-									p.body-1.text-left.pa-2 
-										v-icon.pa-2( color="yellow darken-2") mdi-lightbulb
-										|For more informative view in formats
-										code.grey.mx-2.white--text(color="lighten-5") HH:MM, HH:MM:ss, dd  
-										| would be display month and year on the changing tick-label.	
-								v-col.text-h5( cols="12" sm="4" )
-									v-select(:items="fmts" v-model='timefotmat')
-					v-tab-item 
-						v-card.pa-2(height="700") 
-							h1.text-left scl
-							p.body-1.text-left.pa-2 Use it in same cases, you wish to change size of the slider. Default value
-								code.grey.mx-2.white--text 0.46 
-							v-slider.pa-2(v-model="scl" thumb-size="30"  thumb-label="always" min="0.01"  max="0.99" ticks="always" tick-size="4" step="0.05")
-							p.body-1.text-left.pa-2 
-								v-icon.pa-2( color="yellow darken-2") mdi-lightbulb
-								| If You have no need in slider just set 
-								code.grey.mx-2.white--text(color="lighten-5") 0.01
-					v-tab-item 
-						v-card.pa-2(height="700") 
-							h1.text-left limit
-							p.body-1.text-left.pa-2 Property would be useful when you are need set minimum data points at that decreasing chart become unpossible.
-							v-slider.mx-2(v-model="lmt" thumb-size="20" thumb-label="always" min="10"  max="30" ticks="always" tick-size="4" step="5")
-					v-tab-item 
-						v-card.pa-2(height="700") 
-							h1.text-left showGrid
-							p.body-1.text-left.pa-2 Property (boolean) hide/show  chart grid.
-							v-switch.mx-2(v-model="showGrid")
-					v-tab-item debug
-						v-card.pa-2(height="700")
-							v-card-text(v-text='3')
-							p {{divHeight}}
-							p  topp {{ topp}}	
-			.thumb(@mousedown='startLeftDrug()' @mouseenter='rightDrug=!rightDrug' @mouseleave='rightDrug=!rightDrug')
-		.split.upper.right.border(:style='rightStyle')
-			WeChart(ref="weChart1" :points='data' :decimals='tkzz' :showGrid='showGrid' :timefotmat='timefotmat' :off="chartOff" :tky="tickYnumber" :tsz="tickSize" :scl="scl" :limit="lmt" :fs="fsz" :theme="theme" :shapes="shape")
-		.split.down.left.border(:style='downStyle')
-			.thumbUp(@mousedown='startUpDrug()' @mouseenter='upDrug=!upDrug' @mouseleave='upDrug=!upDrug')
-			v-row
-				v-col.text-h2( cols="12" md="12" )
-					div.scrollTabel(:style="styleScrolLeft")
-						v-data-table.myTable.pa-2(dense :headers='headers', :items='dataTable', :items-per-page='10')
-		.split.down.right.border( :style='downRightStyle')
-			v-card(flat)
-				v-toolbar(color="orange" dense)
-					v-toolbar-title Select theme
-					v-col(cols="12" md="3")
-						v-select.mx-4.mt-6(dense  flat solo :items="themes" v-model='thm')
-				v-row
-					v-fab-transition
-						v-btn(color='#D3D3D3'  absolute middle right fab @click='copyText')
-							v-icon  mdi-content-copy
-					v-col( cols="12" md="6" )
-						h1.text-left Style
-							p.body-1.text-left.pa-2 Default styles maybe overridden in your page style section. You can also create custom style follow example in right panel. Then your style be ready just set its name in theme attribute of
-								span.d-inline.green--text.font-weight-bold   we-do-chart 
-								|  component.
-							p.body-1.text-left.pa-2
-								span.caption  
+									v-col.text-h5( cols="12" sm="8" )
+										p.body-1.text-left.pa-2 In case time series data this property change format x-axis labels. For help take a  reference of the 
+											a(href="https://www.npmjs.com/package/dateformat") |npm dateformat package 
+											| . Default value is null.
+										p.body-1.text-left.pa-2 
+											v-icon.pa-2( color="yellow darken-2") mdi-lightbulb
+											|For more informative view in formats
+											code.grey.mx-2.white--text(color="lighten-5") HH:MM, HH:MM:ss, dd  
+											| would be display month and year on the changing tick-label.	
+									v-col.text-h5( cols="12" sm="4" )
+										v-select(:items="fmts" v-model='timefotmat')
+						v-tab-item 
+							v-card.pa-2(height="700") 
+								h1.text-left scl
+								p.body-1.text-left.pa-2 Use it in same cases, you wish to change size of the slider. Default value
+									code.grey.mx-2.white--text 0.46 
+								v-slider.pa-2(v-model="scl" thumb-size="30"  thumb-label="always" min="0.01"  max="0.99" ticks="always" tick-size="4" step="0.05")
+								p.body-1.text-left.pa-2 
 									v-icon.pa-2( color="yellow darken-2") mdi-lightbulb
-									| Hint- you can explore theme.styl which founded in the component npm folder.
-						v-textarea#aria(:style='visible' no-resize rows='1' :value='txt' ref='aria')
-					v-col( cols="12" md="6" dark)
-						div.meScroll(:style="styleScroll")
-							Styling(ref="StyleBox" )
+									| If You have no need in slider just set 
+									code.grey.mx-2.white--text(color="lighten-5") 0.01
+						v-tab-item 
+							v-card.pa-2(height="700") 
+								h1.text-left limit
+								p.body-1.text-left.pa-2 Property would be useful when you are need set minimum data points at that decreasing chart become unpossible.
+								v-slider.mx-2(v-model="lmt" thumb-size="20" thumb-label="always" min="10"  max="30" ticks="always" tick-size="4" step="5")
+						v-tab-item 
+							v-card.pa-2(height="700") 
+								h1.text-left showGrid
+								p.body-1.text-left.pa-2 Property (boolean) hide/show  chart grid.
+								v-switch.mx-2(v-model="showGrid")
+						v-tab-item debug
+							v-card.pa-2(height="700")
+								v-card-text(v-text='3')
+								p {{divHeight}}
+								p  topp {{ topp}}	
+				.thumb(@mousedown='startLeftDrug()' @mouseenter='rightDrug=!rightDrug' @mouseleave='rightDrug=!rightDrug')
+			.split.upper.right.border(:style='rightStyle')
+				WeChart(ref="weChart1" :points='data' :decimals='tkzz' :showGrid='showGrid' :timefotmat='timefotmat' :off="chartOff" :tky="tickYnumber" :tsz="tickSize" :scl="scl" :limit="lmt" :fs="fsz" :theme="theme" :shapes="shape")
+			.split.down.left.border(:style='downStyle')
+				.thumbUp(@mousedown='startUpDrug()' @mouseenter='upDrug=!upDrug' @mouseleave='upDrug=!upDrug')
+				v-row
+					v-col.text-h2( cols="12" md="12" )
+						div.scrollTabel(:style="styleScrolLeft")
+							v-data-table.myTable.pa-2(dense :headers='headers', :items='dataTable', :items-per-page='10')
+			.split.down.right.border( :style='downRightStyle')
+				v-card(flat)
+					v-toolbar(color="orange" dense)
+						v-toolbar-title Select theme
+						v-col(cols="12" md="3")
+							v-select.mx-4.mt-6(dense  flat solo :items="themes" v-model='thm')
+					v-row
+						v-fab-transition
+							v-btn(color='#D3D3D3'  absolute middle right fab @click='copyText')
+								v-icon  mdi-content-copy
+						v-col( cols="12" md="6" )
+							h1.text-left Style
+								p.body-1.text-left.pa-2 Default styles maybe overridden in your page style section. You can also create custom style follow example in right panel. Then your style be ready just set its name in theme attribute of
+									span.d-inline.green--text.font-weight-bold   we-do-chart 
+									|  component.
+								p.body-1.text-left.pa-2
+									span.caption  
+										v-icon.pa-2( color="yellow darken-2") mdi-lightbulb
+										| Hint- you can explore theme.styl which founded in the component npm folder.
+							v-textarea#aria(:style='visible' no-resize rows='1' :value='txt' ref='aria')
+						v-col( cols="12" md="6" dark)
+							div.meScroll(:style="styleScroll")
+								Styling(ref="StyleBox" )
 
 
 </template>
@@ -471,15 +472,17 @@ export default {
 	}
 }
 </script>
-<style  lang='stylus'>
+<style scoped lang='stylus'>
 	$colorBorder = coral
 	$colorBg = coral
+	body
+		font-family 'Avenir', Helvetica, Arial, sans-serif
 	.titleBig
 		text-shadow: 0 -.1em .2em darkgreen;
-		font-size:3.9em !important
+		font-size:1.9em !important
 		color lime !important
 		font-stretch: expanded
-		font-family Jazz LET, fantasy !important
+		font-family "Jazz LET" !important
 		letter-spacing 10px !important
 		font-weight 900 !important
 	border-radius(n)

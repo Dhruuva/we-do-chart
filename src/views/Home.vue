@@ -90,13 +90,13 @@ export default {
 		background radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%)
 		overflow hidden
 	.titleBig
-		text-shadow: 0 -.1em .2em darkgreen;
-		font-size:1.4em	
-		color lime
+		text-shadow: 0 .1em .2em darkgreen;
+		font-size:1.25em	
+		color #51ee51
 		font-stretch: expanded
 		
 	.titleNormal
-		text-shadow: 0 -.1em .2em #ffbac4;
+		text-shadow: 0 .1em .2em #ffbac4;
 		font-size 1.2em	
 		color lime
 		font-stretch expanded
