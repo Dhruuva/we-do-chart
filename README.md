@@ -4,8 +4,8 @@
 #  we-do-chart
 A we-do-chart Vue component for plotting time series line chart, with crosshair, zooming and slider features. Compatible with Vue 2.x and at last with Vue 3.
 Vue 2 is legacy now (according to Vue documentation). Vue 3 version have a lot of enhancements and new features, so it is pretty diffrent from Vue 2 version. And all new versions begging with 1.0.9 will not be supported Vue 2 projects. For using it in Vue 2 feel free and follow v2 branch of this repo.
-All below instructions is for Vue 3 projects.
-For more info about features, demonstration , customization options please see the [project pages](https://dhruuva.github.io/we-do-chart/)
+All below instructions is for Vue 3 projects only.
+
 
 
 ##  Fast start up 
@@ -53,11 +53,13 @@ const rows = reactive([
 </script>
 
 ```
-# try it
+For more info about features, demonstration , customization options please see the elaborate manual  [project pages](https://dhruuva.github.io/we-do-chart/)
+
+## try it
 Go [we-do-chart](https://codepen.io/dhruuva/pen/VwjNyjG) by Aleksey Bazhenov
   ([@dhruuva](https://codepen.io/dhruuva)) on [CodePen](https://codepen.io).
 
-# Contributing
+## Contributing
 pull requests for Fix bugs, new features,new style themes  ... welcome
 
 ## License
