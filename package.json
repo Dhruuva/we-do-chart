@@ -1,13 +1,56 @@
 {
-  "name": "wechart",
-  "private": true,
-  "version": "0.0.1",
-  "type": "module",
+  "name": "we-do-chart",
+  "version": "1.0.13",
+  "description": "Nice looking and easy customize vue component for plot line-chart.Slider & resizing present.Truly responsive. Slide,resize,zoom,shapes are present ",
+  "main": "we-do-chart.umd.js",
+  "module": "we-do-chart.es.js",
+  "exports": {
+    ".": {
+      "import": "we-do-chart.es.js",
+      "require": "we-do-chart.umd.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dhruuva/we-do-chart.git"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "web-component",
+    "chart",
+    "line-chart",
+    "crosshair",
+    "chart-slider",
+    "charting",
+    "time-series"
+  ],
+  "author": "Aleksey Bazhenov <alekseybazhenov@gmail.com>",
+  "license": "MIT",
+  "prepare": "npm run build",
+  "bugs": {
+    "url": "https://github.com/Dhruuva/we-do-chart/issues"
+  },
+  "homepage": {
+    "url": "https://dhruuva.github.io/we-do-chart"
+  },
+  "peerDependencies": {
+    "vue": "3.x"
+  },
+  "engines": {
+    "node": ">= 18.0.0",
+    "npm": ">= 9.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
   "dependencies": {
     "vue": "latest"
   },
@@ -18,3 +61,6 @@
     "vite-plugin-pug": "latest"
   }
 }
+  
+
+

@@ -34,34 +34,52 @@ const rows = reactive([
     ])                          
 </script>
 ```
-## Or use directly  In-browser
+## Or use directly  In-browser , CDN
 ``` html
-<script src="https://unpkg.com/vue"></script>
-<link rel="stylesheet" href="https://unpkg.com/we-do-chart/we-do-chart.css">
-<script src="https://unpkg.com/we-do-chart"></script>
-
-<div id="your_page">
-	<p>My Chart</p>
-	<div style="margin: auto;">
-		<we-do-chart :ds="{width:600,height:400}" :points="rows" theme="berry"></we-do-chart>
+<title>Vue3 we-do-chart</title>
+  <head>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/we-do-chart"></script>
+    <link rel="stylesheet" href="https://unpkg.com/we-do-chart/we-do-chart.css">
+  </head>
+  <body>
+   <div id="app">
+  		<we-do-chart :ds="{width:300,height:200}" :points="rows" theme="monaco"></we-do-chart>
 	</div>
-</div>
-<script>
-  const app = Vue.createApp({});
-  app.use(WeDoChart); // component will be available as 'we-do-chart'
+  </body>	
+
+ 	<script type="text/javascript"> 
+		const { createApp,computed } = Vue;
+ 	 	const ds =[  { name:"Chart1" , data:[             
+	        {tm: '2025-08-14', price: 48.61}, 
+	        {tm: '2025-08-15', price: 60.61}, 
+	        {tm: '2025-08-16', price: 60.91}
+	    ]},
+    ];
+   const vm = {
+    	components: {
+			'WeDoChart': window["WeDoChart"],
+		},
+    computed: {
+		  rows(){
+		      return ds;
+		  }
+		},
+  }
+  createApp(vm).mount('#app');
 </script>
 
 ```
-For more info about features, demonstration , customization options please see the elaborate manual  [project pages](https://dhruuva.github.io/we-do-chart/)
+## Elaborate manual
+For more info about features, demonstration , customization options please see it here  [project pages](https://dhruuva.github.io/we-do-chart/)
 
-## try it
-Go [we-do-chart](https://codepen.io/dhruuva/pen/VwjNyjG) by Aleksey Bazhenov
+## view demo
+Go [we-do-chart](https://codepen.io/dhruuva/pen/RNWgNLE) by Aleksey Bazhenov
   ([@dhruuva](https://codepen.io/dhruuva)) on [CodePen](https://codepen.io).
 
 ## Contributing
-pull requests for Fix bugs, new features,new style themes  ... welcome
+pull requests for Fix bugs, doc errors, new features,new style themes  ... welcome
 
 ## License
-
 Copyright (c) 2025
 Licensed under the [MIT license](https://github.com/Dhruuva/we-do-chart?tab=MIT-1-ov-file#readme).
