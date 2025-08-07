@@ -1,4 +1,4 @@
-![npm](https://img.shields.io/npm/v1.0.8/we-do-chart?color=green)
+![npm](https://img.shields.io/npm/v/we-do-chart?color=green)
 ![npm](https://img.shields.io/npm/dw/we-do-chart)
 [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
 #  we-do-chart
