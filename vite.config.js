@@ -14,7 +14,7 @@ export default defineConfig({
     target: 'es2015',
     lib: {
       entry: resolve(__dirname, 'src/components/WeDoChart.vue'),
-      name: WeDoChart,
+      name: "WeDoChart",
       // the proper extensions will be added
       fileName: (format) => `we-do-chart.${format}.js`,
     },
