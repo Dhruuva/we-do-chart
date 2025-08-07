@@ -1,12 +1,11 @@
 ![npm](https://img.shields.io/npm/v/we-do-chart?color=green)
 ![npm](https://img.shields.io/npm/dw/we-do-chart)
-
+![min gzipped size](https://img.shields.io/bundlejs/size/we-do-chart)
+![MIT License](https://img.shields.io/github/license/dhruuva/we-do-chart.svg)
 #  we-do-chart
 A we-do-chart Vue component for plotting time series line chart, with crosshair, zooming and slider features. Compatible with Vue 2.x and at last with Vue 3.
-Vue 2 is legacy now (according to Vue documentation). Vue 3 version have a lot of enhancements and new features, so it is pretty diffrent from Vue 2 version. And all new versions begging with 1.0.9 will not be supported Vue 2 projects. For using it in Vue 2 feel free and follow v2 branch of this repo.
+Vue 2 is legacy now (according to Vue documentation). Vue 3 version have a lot of enhancements and new features, so it is pretty diffrent from Vue 2 version. And all new versions begging with 1.0.9 will not be supported Vue 2 projects. For using it in Vue 2 feel free and follow vue2 branch of this repo.
 All below instructions is for Vue 3 projects only.
-
-
 
 ##  Fast start up 
 In vue app  just do it.

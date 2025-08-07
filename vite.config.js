@@ -11,11 +11,12 @@ export default defineConfig({
   build: {
     emptyOutDir:true,
     copyPublicDir:false,
+    target: 'es2015',
     lib: {
       entry: resolve(__dirname, 'src/components/WeDoChart.vue'),
       name: 'we-do-chart',
       // the proper extensions will be added
-      fileName: 'we-do-chart',
+      fileName: (format) => `we-do-chart.${format}.js`,
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
@@ -26,6 +27,13 @@ export default defineConfig({
         // for externalized deps
         globals: {
           vue: 'Vue',
+        },
+        assetFileNames:(chunk)=> {
+          console.log(chunk.name);
+          if (chunk.name === 'wechart.css') {
+            return 'we-do-chart.css'
+          }
+          return chunk.name || ''
         },
       },
     },
