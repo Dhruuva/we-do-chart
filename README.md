@@ -1,6 +1,6 @@
 ![npm](https://img.shields.io/npm/v/we-do-chart?color=green)
 ![npm](https://img.shields.io/npm/dw/we-do-chart)
-![min gzipped size](https://img.shields.io/bundlejs/size/we-do-chart)
+![npm bundle size](https://img.shields.io/bundlephobia/min/we-do-chart)
 ![MIT License](https://img.shields.io/github/license/dhruuva/we-do-chart.svg)
 #  we-do-chart
 A we-do-chart Vue component for plotting time series line chart, with crosshair, zooming and slider features. Compatible with Vue 2.x and at last with Vue 3.
