@@ -1,6 +1,5 @@
 ![npm](https://img.shields.io/npm/v/we-do-chart?color=green)
 ![npm](https://img.shields.io/npm/dw/we-do-chart)
-![npm bundle size](https://img.shields.io/bundlephobia/min/we-do-chart)
 ![NPM Unpacked Size](https://img.shields.io/npm/unpacked-size/we-do-chart)
 ![MIT License](https://img.shields.io/github/license/dhruuva/we-do-chart.svg)
 #  we-do-chart
