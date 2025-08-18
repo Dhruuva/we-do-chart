@@ -2,7 +2,7 @@
 ![npm](https://img.shields.io/npm/dw/we-do-chart)
 [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
 ![GitHub Tag](https://img.shields.io/github/v/tag/dhruuva/we-do-chart?filter=v1.0.8&label=Vue%202&labelColor=green)
-![GitHub Release](https://img.shields.io/github/v/release/dhruuva/we-do-chart?filter=*1.0.8&logoColor=green&label=Vue%202&labelColor=lime)
+
 
 
 
