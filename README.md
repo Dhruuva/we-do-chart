@@ -1,6 +1,11 @@
 ![npm](https://img.shields.io/npm/v/we-do-chart?color=green)
 ![npm](https://img.shields.io/npm/dw/we-do-chart)
 [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
+![GitHub Tag](https://img.shields.io/github/v/tag/dhruuva/we-do-chart?filter=v1.0.8&label=Vue%202&labelColor=green)
+![GitHub Release](https://img.shields.io/github/v/release/dhruuva/we-do-chart?filter=*1.0.8&logoColor=green&label=Vue%202&labelColor=lime)
+
+
+
 #  we-do-chart
 A we-do-chart Vue component. Compatible with Vue 2.x only. Due to Vue 2 has reached End of Life on December 31st, 2023. Old version of the package <=1.0.8 work only Vue 2 projects, versions above 1.0.8 for Vue 3 projects. Please note that all new features and update will be for Vue 3 package versions.
 
