@@ -1,6 +1,7 @@
 ![npm](https://img.shields.io/npm/v/we-do-chart?color=green)
 ![npm](https://img.shields.io/npm/dw/we-do-chart)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/we-do-chart)
+![NPM Unpacked Size](https://img.shields.io/npm/unpacked-size/we-do-chart)
 ![MIT License](https://img.shields.io/github/license/dhruuva/we-do-chart.svg)
 #  we-do-chart
 A we-do-chart Vue component for plotting time series line chart, with crosshair, zooming and slider features. Compatible with Vue 2.x and at last with Vue 3.
@@ -46,7 +47,7 @@ const rows = reactive([
    <div id="app">
   		<we-do-chart :ds="{width:300,height:200}" :points="rows" theme="monaco"></we-do-chart>
 	</div>
-  </body>	
+</body>	
 
  	<script type="text/javascript"> 
 		const { createApp,computed } = Vue;
@@ -71,14 +72,14 @@ const rows = reactive([
 
 ```
 ## Elaborate manual
-For more info about features, demonstration , customization options please see it here  [project pages](https://dhruuva.github.io/we-do-chart/)
+For more info about features, demonstration, customization options please see it here  [project pages](https://dhruuva.github.io/we-do-chart/)
 
 ## view demo
 Go [we-do-chart](https://codepen.io/dhruuva/pen/RNWgNLE) by Aleksey Bazhenov
   ([@dhruuva](https://codepen.io/dhruuva)) on [CodePen](https://codepen.io).
 
 ## Contributing
-pull requests for Fix bugs, doc errors, new features,new style themes  ... welcome
+pull requests for Fix bugs, doc errors, new style themes and also new features, suggestions for improvement write me    ... welcome.
 
 ## License
 Copyright (c) 2025
