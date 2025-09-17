@@ -17,7 +17,11 @@ onMounted( async () => {
   console.log(rows[0]?.data.length,"==rows.value.length" )
   chart.value.loadChart();
 
-  sp.push({type:'dot',x:0,y:0,price:284.22,tm:'2020-02-14'})
+  //sp.push({type:'dot',x:0,y:0,price:284.22,tm:'2020-02-14'});
+  sp.push({type:'dot',x:0.01,y:2,price:175.37,tm:'2020-01-18',class:'dotAlert',title:'alert',size:3});
+  sp.push({type:'&#128545;',x:-18,y:45,price:184.22,tm:'2020-02-14',class:'emoj',title:'fall'});
+  sp.push({type:'&#8679;',x:-8,y:1,price:145.6,tm:'2019-12-12',class:'dwtrg',title:'buy'});
+  sp.push({type:'&#8681;',x:-16,y:7,price:281.94,tm:'2020-02-18',class:'uptrg',title:'sell'});
 
 })
 
@@ -54,7 +58,8 @@ const change=(v )=>{
   <WeDoChartDev ref="chart" :ds="{width:600,height:400}" :tky="tky1" :points="rows" :timefotmat="fdate"  theme="berry" :scl="scl" :off="off" decimals="3" :shapes="sp"/>
 </template>
 
-<style scoped>
+
+<style >
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -67,4 +72,51 @@ const change=(v )=>{
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
+.shape.dwtrg {
+  stroke: #228b22;
+  stroke-width: 1;
+  fill: #008000;
+  color: green;
+  cursor: default;
+  font-size: 18px;
+}
+.shape.uptrg {
+  stroke: #ff7f50;
+  stroke-width: 1;
+  fill: #f00;
+  color: #e60073;
+  cursor: default;
+  font-size: 18px;
+}
+.shape.ltrg {
+  stroke: #3d3d5c;
+  stroke-width: 1;
+  fill: #669;
+  cursor: default;
+}
+.shape.rtrg {
+  stroke: #800080;
+  stroke-width: 1;
+  fill: #660;
+  cursor: default;
+}
+.shape.emoj {
+  font-size: 15px;
+  padding: 1px;
+  cursor: default;
+}
+.tooltip{
+  font-size: inherit;
+}
+foreignObject {
+  width: 25px;
+  height: 25px;
+}
+.shape title {
+  fill: #0f0;
+  color: #f00;
+  background-color: blue;
+}
+
+
 </style>
