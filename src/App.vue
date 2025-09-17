@@ -18,10 +18,15 @@ onMounted( async () => {
   chart.value.loadChart();
 
   //sp.push({type:'dot',x:0,y:0,price:284.22,tm:'2020-02-14'});
-  sp.push({type:'dot',x:0.01,y:2,price:175.37,tm:'2020-01-18',class:'dotAlert',title:'alert',size:3});
-  sp.push({type:'&#128545;',x:-18,y:45,price:184.22,tm:'2020-02-14',class:'emoj',title:'fall'});
-  sp.push({type:'&#8679;',x:-8,y:1,price:145.6,tm:'2019-12-12',class:'dwtrg',title:'buy'});
-  sp.push({type:'&#8681;',x:-16,y:7,price:281.94,tm:'2020-02-18',class:'uptrg',title:'sell'});
+  sp.push({type:'dot',x:0.01,y:-2,price:218.97,tm:'2020-03-01',class:'dotAlert',title:'alert',size:3});
+  sp.push({type:'&#8679;',x:-13,y:1,price:145.6,tm:'2019-12-12',class:'dwtrg',title:'buy'});
+
+  sp.push({type:'&#8681;',x:-13,y:8,price:281.94,tm:'2020-02-18',class:'uptrg',title:'sell'});
+  sp.push({type:'&#128545;',x:-14,y:7.97,price:284.22,tm:'2020-02-14',class:'emoj',title:'fall'});
+
+  
+   sp.push({type:'dwtrg',x:0.03,y:-0.47,price:161.28,tm:'2020-01-25',class:'uptrg',title:'buy' ,size:9});
+  // sp.push({type:'&#8681;',x:-11.13,y:8.47,price:259.89,tm:'2020-02-16',class:'uptrg',title:'sell'});
 
 })
 
@@ -72,7 +77,7 @@ const change=(v )=>{
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
-.shape.dwtrg {
+.dwtrg {
   stroke: #228b22;
   stroke-width: 1;
   fill: #008000;
@@ -80,7 +85,7 @@ const change=(v )=>{
   cursor: default;
   font-size: 18px;
 }
-.shape.uptrg {
+.uptrg {
   stroke: #ff7f50;
   stroke-width: 1;
   fill: #f00;
@@ -88,13 +93,13 @@ const change=(v )=>{
   cursor: default;
   font-size: 18px;
 }
-.shape.ltrg {
+.ltrg {
   stroke: #3d3d5c;
   stroke-width: 1;
   fill: #669;
   cursor: default;
 }
-.shape.rtrg {
+.rtrg {
   stroke: #800080;
   stroke-width: 1;
   fill: #660;
@@ -105,8 +110,15 @@ const change=(v )=>{
   padding: 1px;
   cursor: default;
 }
+.emoj {
+  font-size: 15px;
+  padding: 1px;
+  cursor: default;
+}
 .tooltip{
-  font-size: inherit;
+  font-size: 10px;
+  padding: 2px;
+  margin-left: 2px;
 }
 foreignObject {
   width: 25px;

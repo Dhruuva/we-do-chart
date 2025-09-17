@@ -63,7 +63,8 @@ export function DoAxes() {
 		let scale = yScale(maxi,mini,tky, off )
 		let hl = scale.high - scale.low
 		while (scale.y.length > 0) ticksY.push(scale.y.pop());
-		
+		// console.log( " scale.high ", scale.high, " scale.low=",scale.low);
+		// console.log( " pPct ", pPct, " off.y.y1=",off.y.y1, " hl= ",hl, " off.y.y2=",off.y.y2);
 		// For  AxisX  & xy calc .........................
 		let w = off.x.x2 - off.x.x1
 		let stepx = w/(ds.length-1);
@@ -77,14 +78,15 @@ export function DoAxes() {
 			if (!a.xs) 	a.xs=(!a.x)?0.01:a.x;
 			//if (!a.ys) 	a.ys=a.y;
 			//console.log("a.ys = ", a.ys); 
-			a.y = (off.y.y1)-pPct*pct-(pPct*a.ys);
+			a.y = (off.y.y1)-(pPct*pct)-(pPct*a.ys);
 			let j = ds.map(a=>a.tm).indexOf(a.tm);
 			a.x = (j*stepx)+xtm+a.xs;
 			if ( j>=0 ){ 
 				out.push(a);
 				a.visiable=1;
 			} else a.visiable=-1;
-			//console.log("pct = ", pct, " pPct ", pPct, " off.y.y1=",off.y.y1, " hl= ",hl," scale.low ",scale.low)
+			//console.log("(pPct*pct) ", (pPct*pct), " (pPct*a.ys) ", (pPct*a.ys), " a.y ", a.y, " price ", a.price);
+			//console.log("pct = ", pct, " pPct ", pPct, " off.y.y1=",off.y.y1, " hl= ",hl," scale.low ",scale.low);
 		})
 		//out.forEach(a=> {shape.splice(a,1);});
 		//console.log(" out ===",out.length, "Shapes==", shape.length);

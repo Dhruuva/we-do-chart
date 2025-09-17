@@ -316,8 +316,9 @@ svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @
         title(v-if='r.title') {{r.title}}
       polygon.shape( v-else-if="['dwtrg','uptrg','ltrg','rtrg'].indexOf(r.type)>-1" :points="pointsAsTriangel(r.x,r.y,r.type,r.size)" :class="r.class")
         title(v-if='r.title') {{r.title}}
-      foreignObject.shape(v-else :x="r.x" :y="r.y" :class="r.class" :data-text='r.title' style="overflow: visible;" width="1" height="1")
-        i.tooltip( v-html='r.type' style="text-anchor: middle;" :data-text='r.title')
+      foreignObject.shape(v-else :x="r.x" :y="r.y" :class="r.class" :data-text='r.title' style="overflow: visible;" width="1px" height="1px")
+        .tooltip(:data-text='r.title')
+          i(v-html='r.type' style="text-anchor: middle;" :class="r.class")
   g.ticksY(v-for="r in ticksY" :key="r.y")
     line.grids(v-if="showGrid" :x1="axis.x.x1" :x2="axis.x.x2" :y1="r.y" :y2="r.y")
     line.ticks( :x1="axis.y.x1" :x2="axis.y.x1+tsz.size" :y1="r.y" :y2="r.y" )
@@ -425,30 +426,30 @@ $colorAxis = #0074d9
   stroke green 
   fill $colorPlot
   stroke-width 1.5
-  width 35px
-  height 35px
-  font-size 20px
-.tooltip
-  &:before
-      content attr(data-text)
-      position absolute
-      top 50%
-      transform translateY(-50%)
-      left 60%
-      margin-left 1px
-      min-width 1rem
-      padding .2rem
-      border-radius 0.3rem
-      text-align center
-      display none
-      opacity 0
-      transition 1.3s opacity
-      white-space: normal
-      line-height 1.3rem
-.tooltip
-  &:hover
+  &
+    .tooltip
+      font-size 10px
       &:before
-          display block
-          opacity 0.75      
+        content attr(data-text)
+        position absolute
+        top 50%
+        transform translateY(-50%)
+        left 60%
+        margin-left 1px
+        min-width 1rem
+        padding .2rem
+        border-radius 0.3rem
+        text-align center
+        display none
+        opacity 0
+        transition 1.7s opacity
+        white-space: normal
+        line-height 1.3rem
+  &
+    .tooltip
+      &:hover
+        &:before
+            display block
+            opacity 0.75      
 
 </style>
