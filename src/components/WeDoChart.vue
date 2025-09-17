@@ -423,7 +423,7 @@ $colorAxis = #0074d9
   stroke red 
   stroke-width 0.5
 .shape
-  stroke green 
+  stroke $colorAxis
   fill $colorPlot
   stroke-width 1.5
   &
@@ -437,11 +437,10 @@ $colorAxis = #0074d9
         left 60%
         margin-left 1px
         min-width 1rem
-        padding .2rem
+        padding 0.2rem
         border-radius 0.3rem
         text-align center
         display none
-        opacity 0
         transition 1.7s opacity
         white-space: normal
         line-height 1.3rem
@@ -450,6 +449,7 @@ $colorAxis = #0074d9
       &:hover
         &:before
             display block
-            opacity 0.75      
+            opacity 0.75
+            transition 1.1s opacity      
 
 </style>
