@@ -6,6 +6,7 @@ import {Bank} from './components/bank.js'
 const  bank1 = new Bank(), chart= ref(null),tky1= ref(2),scl= ref(0.7),off= ref(5);
 const data= computed(() => bank1.getData("sto"));
 const fdate = ref(new Intl.DateTimeFormat("ru-RU", { day:"2-digit",  timeZone: "MET" }));
+const sp = new Array();
 //const chartRef = useTemplateRef('chart')
 const rows= reactive(new Array());
 onMounted( async () => {
@@ -15,6 +16,9 @@ onMounted( async () => {
   console.log(rows[0]?.data[0] )
   console.log(rows[0]?.data.length,"==rows.value.length" )
   chart.value.loadChart();
+
+  sp.push({type:'dot',x:0,y:0,price:284.22,tm:'2020-02-14'})
+
 })
 
 const reload =()=>{
@@ -47,7 +51,7 @@ const change=(v )=>{
     <input type="range" id="scl" name="scl" min="0" max="1" step="0.01" v-model="scl"></input>
     <input type="range" id="off" name="off" min="5" max="35" step="1" v-model="off"></input>
   </header>
-  <WeDoChartDev ref="chart" :ds="{width:600,height:400}" :tky="tky1" :points="rows" :timefotmat="fdate"  theme="berry" :scl="scl" :off="off"/>
+  <WeDoChartDev ref="chart" :ds="{width:600,height:400}" :tky="tky1" :points="rows" :timefotmat="fdate"  theme="berry" :scl="scl" :off="off" decimals="3" :shapes="sp"/>
 </template>
 
 <style scoped>
