@@ -262,25 +262,6 @@ svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @
 @import '../assets/theme.styl'	
 $colorPlot = #0074d9
 $colorAxis = #0074d9
-.one
-  color #0035
-.two
-  color #ee012035
-.tre
-  color #524
-.for
-  color #ee3524       
-.my-grid
-  display grid
-  width 100%
-  grid-template-columns 1fr 3fr 1fr;
-.right-side
-   background-color #feeffe
-.central
-  min-width 600px
-  background-color #efde
-.left-side
-  background-color #d2efde 
 
 .leftThumb
   cursor ew-resize
