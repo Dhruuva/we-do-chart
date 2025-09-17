@@ -53,3 +53,7 @@ cp -R ~/apps/2025/v2/* ~/apps/2025/wechart/docs
  rm ~/apps/2025/wechart/docs/info.txt
 and remove info file 
 
+## go to 
+git checkout www
+git checkout --merge pages docs
+git push -u origin www
