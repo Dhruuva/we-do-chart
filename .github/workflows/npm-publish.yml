@@ -42,7 +42,8 @@ jobs:
             dist
       - run: ls
       - run: cd dist
+      - run: ls
       - run: npm version patch
-      - run: npm publish
+      - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
