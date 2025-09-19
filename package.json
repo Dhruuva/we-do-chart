@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build ",
-    "post": "rm ./bin/* && cp ./dist/*.*  ./bin/ && cp ./package.json ./bin  && cp ./LICENSE ./bin && cp ./src/assets/theme.styl ./bin/theme.styl",
+    "post": "cp ./package.json ./dist  && cp ./LICENSE ./dist && cp ./src/assets/theme.styl ./dist/theme.styl",
     "preview": "vite preview"
   },
   "repository": {
@@ -53,7 +53,7 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "vue": "latest"
+    "vue": "3.x"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "latest",
@@ -62,6 +62,3 @@
     "vite-plugin-pug": "latest"
   }
 }
-  
-
-
