@@ -17,6 +17,11 @@ jobs:
       - run: npm run build
       - run: ls
       - run: npm run post
+      - name: Upload dist folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist_pre
+          path: dist
       - run: cd dist && ls
 
   publish-npm:
@@ -28,6 +33,10 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
+      - name: Download dist
+        uses: actions/download-artifact@v5
+        with:
+          name: dist_pre
       - run: ls
       - run: cd dist
       - run: npm version patch
