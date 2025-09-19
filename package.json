@@ -4,6 +4,10 @@
   "description": "Nice looking and easy customize vue component for plot line-chart.Slider & resizing present.Truly responsive. Slide,resize,zoom,shapes are present ",
   "main": "we-do-chart.umd.js",
   "module": "we-do-chart.es.js",
+  "directories": {
+    "bin": "bin",
+    "dist": "dist"
+  },
   "exports": {
     ".": {
       "import": "we-do-chart.es.js",
