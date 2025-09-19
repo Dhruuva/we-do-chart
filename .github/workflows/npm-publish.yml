@@ -41,7 +41,6 @@ jobs:
           path: |
             dist
       - run: ls
-      - run: cd dist && ls
-      - run: npm publish --provenance --access public
+      - run: cd dist && ls && npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
