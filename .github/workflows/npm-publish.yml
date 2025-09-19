@@ -17,6 +17,7 @@ jobs:
       - run: npm run build
       - run: ls
       - run: npm run post
+      - run: cd dist && ls
 
   publish-npm:
     needs: build
