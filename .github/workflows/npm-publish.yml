@@ -21,7 +21,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist_pre
-          path: dist
+          path: |
+            dist
       - run: cd dist && ls
 
   publish-npm:
@@ -37,6 +38,8 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: dist_pre
+          path: |
+            dist
       - run: ls
       - run: cd dist
       - run: npm version patch
