@@ -41,11 +41,12 @@ jobs:
           name: dist_pre
           path: |
             dist
-      - run: ls
+      - run: ls && npm whoami
       - name: Config git metadata
         run: |
           git config --global user.name 'Dhruuva'
           git config --global user.email 'alekseybazhenov@gmail.com'
+          npm whoami
       - run: cd dist && ls && npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
