@@ -12,7 +12,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build ",
+    "post": "rm ./bin/* && cp ./dist/*.*  ./bin/ && cp ./package.json ./bin  && cp ./LICENSE ./bin && cp ./src/assets/theme.styl ./bin/theme.styl",
     "preview": "vite preview"
   },
   "repository": {
