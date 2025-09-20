@@ -1,7 +1,9 @@
-name: Node.js Package
+name: Node.js Package Short
 
 
-on: push    
+on:
+  release:
+    types: [published]   
 
 jobs:
   build:
