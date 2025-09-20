@@ -20,9 +20,10 @@
     "post": "cp ./package.json ./dist  && cp ./LICENSE ./dist && cp ./src/assets/theme.styl ./dist/theme.styl",
     "preview": "vite preview"
   },
-  "files": {
-    "dist"
-  },
+  "files": [
+    "dist",
+    "src/assets/theme.styl"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Dhruuva/we-do-chart.git"
