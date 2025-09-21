@@ -20,7 +20,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo " This token is -->   $TOK   test===> ${{ secrets.MY_TEST_SECRET }}"
-      - run: echo " This secreat token is -->   ${{ secrets.NPM_TOKEN }}"
+      - run: echo " NPM token is -->   ${{ secrets.NPM_TOKEN }}"
       - run: echo " This test token is -->   ${{ secrets.test }}"
       - run: echo "  vars.MYVAR  -->   ${{ vars.MYVAR }}"
       - run: echo " MYVAR -->   $MY_VAR_REPO"
