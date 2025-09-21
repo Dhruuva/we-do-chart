@@ -2,8 +2,8 @@ name: Publish Fast
 
 on:
   push:
-    tags: [ 'v33*.*.*' ]
-    branches: [ "pub222" ]   
+    tags: [ 'v1*.*.*' ]
+    branches: [ "pub" ]   
 
 jobs:
   build:
@@ -27,6 +27,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: env    
       - run: npm ci
-      - run: npm publish --loglevel verbose
+      - run: npm publish --provenance --access public --loglevel verbose
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
