@@ -1,18 +1,18 @@
 name: Debug env
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
-env:
-  TOK: ${{ secrets.NPM_TOKEN }} # Global environment variable accessible to all jobs and steps
 jobs:
-  test_job:
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    outputs:
-      npm-package-author: "${{ env.AUTHOR_NAME }} <${{ env.AUTHOR_EMAIL }}>"
-      npm-package-name: ${{ env.NPM_PACKAGE_NAME }}
-      npm-package-scope: ${{ env.NPM_PACKAGE_SCOPE }}
-      npm-package-version: ${{ env.NPM_PACKAGE_VERSION }}
-      npm-package-tag: ${{ env.NPM_PACKAGE_TAG }}
- 
     steps:
-      - name: Use global environment variable
-      - run: echo "$TOK" 
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v5
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
