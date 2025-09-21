@@ -26,4 +26,8 @@ jobs:
           TEST_SECRET: ${{ secrets.TEST_SECRET }}
         run: |
           echo ${#TEST_GITHUB_TOKEN}
-          echo ${#TEST_SECRET}    
+          echo ${#TEST_SECRET}
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+  
