@@ -19,3 +19,14 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo " This token is -->   $TOK"
       - run: echo " This secreat token is -->   ${{ secrets.NPM_TOKEN }}"
+      - name: Test
+        env:
+          TEST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
+        run: |
+          echo ${#TEST_GITHUB_TOKEN}
+          echo ${#TEST_SECRET}
+      - name: View context    
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
