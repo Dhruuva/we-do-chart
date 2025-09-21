@@ -1,0 +1,14 @@
+name: Debug env
+on: [push]
+env:
+  TOK: ${{ secrets.NPM_TOKEN }} # Global environment variable accessible to all jobs and steps
+  ANAME:  ${{ env.AUTHOR_NAME }}
+  PNAME:  ${{ env.NPM_PACKAGE_NAME }}
+  SCOPE:  ${{ env.NPM_PACKAGE_SCOPE }}
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use global environment variable
+        run: echo TOK # Uses the global environment variable
+
