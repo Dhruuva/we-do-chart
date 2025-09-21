@@ -19,6 +19,8 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo " This token is -->   $TOK"
       - run: echo " This secreat token is -->   ${{ secrets.NPM_TOKEN }}"
+      - run: echo " This test token is -->   ${{ secrets.test }}"
+      - run: echo " This All token is -->   ${{ secrets.* }}"
       - name: Test
         env:
           TEST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
