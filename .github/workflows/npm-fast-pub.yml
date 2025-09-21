@@ -2,8 +2,8 @@ name: Publish Fast
 
 on:
   push:
-    tags: [ 'v*.*.*' ]
-    branches: [ "pub22" ]   
+    tags: [ 'v33*.*.*' ]
+    branches: [ "pub222" ]   
 
 jobs:
   build:
