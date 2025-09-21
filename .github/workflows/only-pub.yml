@@ -3,7 +3,7 @@ name: Publish Only to npmjs
 on:
   push:
     tags: [ 'v999.*.*' ]
-    branches: [ "pub" ]      
+    branches: [ "pub2" ]      
 jobs:
   build:
     runs-on: ubuntu-latest
