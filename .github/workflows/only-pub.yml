@@ -27,6 +27,7 @@ jobs:
         run: |
           echo ${#TEST_GITHUB_TOKEN}
           echo ${#TEST_SECRET}
+      - name: View context    
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
