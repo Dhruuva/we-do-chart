@@ -1,8 +1,9 @@
 name: Publish Only to npmjs
 
 on:
-  release:
-    types: [published]      
+  push:
+    tags: [ 'v999.*.*' ]
+    branches: [ "pub" ]      
 jobs:
   build:
     runs-on: ubuntu-latest

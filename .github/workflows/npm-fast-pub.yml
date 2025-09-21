@@ -1,9 +1,9 @@
-name: Node.js Package Short
-
+name: Publish Fast
 
 on:
-  release:
-    types: [published]   
+  push:
+    tags: [ 'v*.*.*' ]
+    branches: [ "pub" ]   
 
 jobs:
   build:
