@@ -14,5 +14,5 @@ jobs:
  
     steps:
       - name: Use global environment variable
-      - run: |
-          echo "$TOK" 
+      - run: echo "$TOK" 
+      - run: echo "🍏 This job's status is ${{ job.status }}."
