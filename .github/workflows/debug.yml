@@ -28,6 +28,10 @@ jobs:
           echo ${#TEST_GITHUB_TOKEN}
           echo ${#TEST_SECRET}
           echo ${#TEST_NPM}
+      - name: Check vars
+        run: echo "${{ toJson(vars) }}"
+      - name: Check env
+        run: echo "${{ toJson(env) }}"    
       - name: View context    
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
