@@ -2,9 +2,8 @@ name: Debug env
 on: [push]
 env:
   TOK: ${{ secrets.NPM_TOKEN }} # Global environment variable accessible to all jobs and steps
-  AUTHOR_NAME: Aleksey Bazhenov
 jobs:
-  example_job:
+  test_job:
     runs-on: ubuntu-latest
     outputs:
       npm-package-author: "${{ env.AUTHOR_NAME }} <${{ env.AUTHOR_EMAIL }}>"
@@ -12,7 +11,7 @@ jobs:
       npm-package-scope: ${{ env.NPM_PACKAGE_SCOPE }}
       npm-package-version: ${{ env.NPM_PACKAGE_VERSION }}
       npm-package-tag: ${{ env.NPM_PACKAGE_TAG }}
-
+ 
     steps:
       - name: Use global environment variable
         run: echo $TOK # Uses the global environment variable
