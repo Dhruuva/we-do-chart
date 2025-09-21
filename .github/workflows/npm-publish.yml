@@ -6,7 +6,7 @@ name: npm publish OLD
 on:
   push:
     tags: [ 'v999.*.*' ]
-    branches: [ "pub" ]
+    branches: [ "pub23" ]
 
 jobs:
   build:
