@@ -15,4 +15,4 @@ jobs:
     steps:
       - name: Use global environment variable
       - run: |
-          echo $TOK 
+          echo "$TOK" 
