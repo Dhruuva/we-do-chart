@@ -14,6 +14,6 @@ jobs:
  
     steps:
       - name: Use global environment variable
-        run: echo $TOK # Uses the global environment variable
-        run: echo $npm-package-scope # Uses the global environment variable
+      -  run: echo $TOK # Uses the global environment variable
+      -  run: echo $npm-package-scope # Uses the global environment variable
 
