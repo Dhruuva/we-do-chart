@@ -1,7 +1,8 @@
 name: Publish Only to npmjs
 
-release:
-  types: [published]      
+on:
+  release:
+    types: [published]      
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,3 +20,10 @@ jobs:
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Test
+        env:
+          TEST_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
+        run: |
+          echo ${#TEST_GITHUB_TOKEN}
+          echo ${#TEST_SECRET}    
