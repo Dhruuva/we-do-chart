@@ -9,7 +9,7 @@ on:
       - pub
     tags:
       - v2
-      - v1.*
+      - v3.*
 
 jobs:
   build:
