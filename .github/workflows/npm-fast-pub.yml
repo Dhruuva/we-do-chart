@@ -2,8 +2,10 @@ name: Publish Fast
 
 on:
   push:
-    tags: [ 'v1*.*.*' ]
-    branches: [ "pub2" ]   
+    tags:
+      - 'release-*'
+    branches:
+      - staging   
 
 jobs:
   build:

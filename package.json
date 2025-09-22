@@ -17,12 +17,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build ",
-    "post": "cp ./src/assets/theme.styl ./dist/theme.styl",
+    "post": "cp ./src/assets/theme.styl ./theme.styl",
     "preview": "vite preview"
   },
-  "files": [
-    "dist"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Dhruuva/we-do-chart.git"
