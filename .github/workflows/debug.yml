@@ -1,6 +1,9 @@
 name: Debug env
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+on:
+  push:
+    tags: [ 'v1*.*.*' ]
+    branches: [ "pub2" ]
 env:
   TOK: ${{ secrets.NPM_TOKEN }}
 jobs:
@@ -41,3 +44,7 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+      - name: Config git metadata
+        run: |
+          git config --global user.name 'albazhenov'
+          git config --global user.email 'me@gmail.com'

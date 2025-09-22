@@ -17,12 +17,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build ",
-    "post": "cp ./package.json ./dist  && cp ./LICENSE ./dist && cp ./src/assets/theme.styl ./dist/theme.styl",
+    "post": "cp ./src/assets/theme.styl ./dist/theme.styl",
     "preview": "vite preview"
   },
   "files": [
-    "dist",
-    "src/assets/theme.styl"
+    "dist"
   ],
   "repository": {
     "type": "git",

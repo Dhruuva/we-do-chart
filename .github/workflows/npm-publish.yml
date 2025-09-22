@@ -5,9 +5,8 @@ name: npm publish OLD
 
 on:
   push:
-    tags: [ 'v999.*.*' ]
-    branches: [ "pub23" ]
-
+    tags:
+      - v1.**
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,6 +30,9 @@ jobs:
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -45,10 +47,6 @@ jobs:
           path: |
             dist
       - run: ls
-      - name: Config git metadata
-        run: |
-          git config --global user.name 'albazhenov'
-          git config --global user.email 'alekseybazhenov@gmail.com'
-      - run: cd dist && ls && npm ci && npm publish --provenance --access public
+      - run: npm publish --provenance --access public --loglevel verbose
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
