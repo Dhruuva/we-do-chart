@@ -5,11 +5,11 @@ on:
       days:
         description: 'Days-worth of runs to keep for each workflow'
         required: true
-        default: '30'
+        default: '1'
       minimum_runs:
         description: 'Minimum runs to keep for each workflow'
         required: true
-        default: '6'
+        default: '3'
       delete_workflow_pattern:
         description: 'Name or filename of the workflow (if not set, all workflows are targeted)'
         required: false
