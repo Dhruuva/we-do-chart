@@ -3,7 +3,7 @@ name: Publish Fast
 on:
   push:
     tags: [ 'v1*.*.*' ]
-    branches: [ "pub" ]   
+    branches: [ "pub2" ]   
 
 jobs:
   build:
