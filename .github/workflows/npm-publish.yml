@@ -5,9 +5,12 @@ name: npm publish OLD
 
 on:
   push:
-    branches: [ "pub" ]
+    branches:
+      - pub
     tags:
-      - v1.**
+      - v2
+      - v1.*
+
 jobs:
   build:
     runs-on: ubuntu-latest
