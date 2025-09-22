@@ -5,6 +5,7 @@ name: npm publish OLD
 
 on:
   push:
+    branches: [ "pub" ]
     tags:
       - v1.**
 jobs:
