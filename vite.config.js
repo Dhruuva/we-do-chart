@@ -1,4 +1,4 @@
-
+/// <reference types="vitest/config" />
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
@@ -38,4 +38,15 @@ export default defineConfig({
       },
     },
   },
+  test: {
+    browser: {
+      enabled: true,
+      provider: 'playwright',
+      headless: true,
+      instances: [
+        { browser: 'chromium' },
+      ],
+    },
+  },
+
 })

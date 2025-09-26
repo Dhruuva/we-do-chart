@@ -18,7 +18,9 @@
     "dev": "vite",
     "build": "vite build ",
     "post": "cp ./package.json ./dist  && cp ./LICENSE ./dist && cp ./src/assets/theme.styl ./dist/theme.styl && cp ./README.md ./dist/README.md",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
@@ -61,8 +63,13 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "latest",
+    "@vitest/browser": "^3.2.4",
+    "@vue/test-utils": "^2.4.6",
+    "playwright": "^1.55.1",
     "stylus": "latest",
     "vite": "latest",
-    "vite-plugin-pug": "latest"
+    "vite-plugin-pug": "latest",
+    "vitest": "^3.2.4",
+    "vitest-browser-vue": "^1.1.0"
   }
 }
