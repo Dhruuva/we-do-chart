@@ -6,11 +6,23 @@ import {Bank} from '../src/components/bank.js'
 const bank1 = new Bank()
 const rows =bank1.getData("sto");
 
+describe('chart axis', () => {
 
-test('renders title on plot aria', async () => {
   const { getByText, getByRole } = render(WeDoChart, {
     props: { ds:{width:300,height:300} ,points:rows, theme:"default" },
   });
+
+  test('renders title on plot aria', async () => {
+     await expect.element(getByText('sto')).toBeInTheDocument()
+ 
+  })
+
+
+
+})  
+
+test('renders title on plot aria', async () => {
+  
 
   await expect.element(getByText('sto')).toBeInTheDocument()
   //await expect.page(getByText('sto')).toBeInTheDocument()
