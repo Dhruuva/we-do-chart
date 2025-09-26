@@ -4,9 +4,10 @@ import { render } from 'vitest-browser-vue'
 import WeDoChart from '../src/components/WeDoChart.vue'
 import {Bank} from '../src/components/bank.js'
 const bank1 = new Bank()
+const rows =bank1.getData("sto");
+
 
 test('renders title on plot aria', async () => {
-  const rows =bank1.getData("sto");
   const { getByText, getByRole } = render(WeDoChart, {
     props: { ds:{width:300,height:300} ,points:rows, theme:"default" },
   });
@@ -19,8 +20,6 @@ test('renders title on plot aria', async () => {
   // ).toBeVisible()
 
   //await getByRole('text', { name: 'sto' }).click()
-
-  
 })
 
 test('change theme', async () => {
