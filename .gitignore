@@ -14,6 +14,7 @@ info
 dist
 bin
 dist-ssr
+__screenshots__
 *.local
 
 # Editor directories and files
