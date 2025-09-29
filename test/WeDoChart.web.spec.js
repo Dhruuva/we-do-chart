@@ -169,7 +169,7 @@ describe('Chart props ', () => {
     const to =page.getByTestId('rightThumb')
     const from =page.getByTestId('leftThumb')
    
-    await userEvent.dragAndDrop(from, to);q
+    await userEvent.dragAndDrop(from, to);
 
     await to.hover();
   })
