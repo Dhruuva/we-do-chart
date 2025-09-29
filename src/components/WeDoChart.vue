@@ -298,8 +298,8 @@ defineExpose({loadChart,update});
 </script>
 
 <template lang ="pug">
-svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @mousedown="slider.startDrag($event)" @mousemove="mousemove($event,pos)" @wheel="zoom" @mouseleave="slider.stopDrag")
-  rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height" :style="cross.cursor" @mouseup="slider.stopDrag" )
+svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @mousedown="slider.startDrag($event)" @mousemove="mousemove($event,pos)" @wheel="zoom" @mouseleave="slider.stopDrag" data-testid="sheet")
+  rect.chartSheet(ref="chartSheet" x="0" y="0" :width="ds.width" :height="ds.height" :style="cross.cursor" @mouseup="slider.stopDrag" data-testid="chart-sheet")
   circle.titlesDot( :cx="axis.x.x1" :cy="axis.y.y2-1-fs/3" :r="fs/3" )
   text.legend(id="legend" ref="titles" :x="axis.x.x1+1+fs/3" :y="axis.y.y2-1" :font-size="fs" data-testid="legend-up") {{cross.txt}}
   text.titles(id="title"  :x="axis.x.x1+(axis.x.x2-axis.x.x1)/2+1+fs/3" :y="axis.y.y2-1" :font-size="fs*1.2" data-testid="title-name" ) {{chartName}}  
@@ -309,30 +309,30 @@ svg#sheet(ref="sheet" :viewBox="viewBoxSet" xmlns="http://www.w3.org/2000/svg" @
     line.cross(:x1="cross.v.x1" :x2="cross.v.x2" :y1="cross.v.y1" :y2="cross.v.y2")
     line.cross(:x1="cross.h.x1" :x2="cross.h.x2" :y1="cross.h.y1" :y2="cross.h.y2")
   g(v-if="zero>0")
-    line.zero(:x1="axis.x.x1" :x2="axis.x.x2" :y1="zero" :y2="zero" )
+    line.zero(:x1="axis.x.x1" :x2="axis.x.x2" :y1="zero" :y2="zero" data-testid="zero")
   g(v-for="r in shape" :key="r.y")
     g(v-if="r.visiable>0")
       circle.shape( v-if="r.type=='dot'" :cx="r.x" :cy="r.y" :r="r.size" :class="r.class")
         title(v-if='r.title') {{r.title}}
       polygon.shape( v-else-if="['dwtrg','uptrg','ltrg','rtrg'].indexOf(r.type)>-1" :points="pointsAsTriangel(r.x,r.y,r.type,r.size)" :class="r.class")
         title(v-if='r.title') {{r.title}}
-      foreignObject.shape(v-else :x="r.x" :y="r.y" :class="r.class" :data-text='r.title' style="overflow: visible;" width="1px" height="1px")
+      foreignObject.shape(v-else :x="r.x" :y="r.y" :class="r.class" :data-text='r.title' style="overflow: visible;" width="1px" height="1px" data-testid="foreigno")
         .tooltip(:data-text='r.title')
           i(v-html='r.type' style="text-anchor: middle;" :class="r.class")
-  g.ticksY(v-for="r in ticksY" :key="r.y")
-    line.grids(v-if="showGrid" :x1="axis.x.x1" :x2="axis.x.x2" :y1="r.y" :y2="r.y")
+  g.ticksY(v-for="r in ticksY" :key="r.y" data-testid="ticksY")
+    line.grids(v-if="showGrid" :x1="axis.x.x1" :x2="axis.x.x2" :y1="r.y" :y2="r.y" data-testid="grid-X")
     line.ticks( :x1="axis.y.x1" :x2="axis.y.x1+tsz.size" :y1="r.y" :y2="r.y" )
-    text.axislabely( :x="axis.y.x1+tsz.off" :y="r.y+fs/3" :font-size='fs') {{r.price}}
-  g.ticksX(v-for="n in ticksX" :key="n.y")
-    line.grids(v-if="showGrid" :x1="n.x" :x2="n.x" :y1="axis.y.y1" :y2="axis.y.y2")
+    text.axislabely( :x="axis.y.x1+tsz.off" :y="r.y+fs/3" :font-size='fs' data-testid="lbl-X") {{r.price}}
+  g.ticksX(v-for="n in ticksX" :key="n.y"  data-testid="ticksX")
+    line.grids(v-if="showGrid" :x1="n.x" :x2="n.x" :y1="axis.y.y1" :y2="axis.y.y2" data-testid="grid-Y")
     line.ticks( :x1="n.x" :x2="n.x" :y1="axis.x.y1" :y2="axis.x.y1+tsz.size")
-    text.axislabelx( :x="n.x" :y="axis.x.y1+tsz.size+tsz.off+fs/2" :font-size='fs') {{n.tm}}
+    text.axislabelx( :x="n.x" :y="axis.x.y1+tsz.size+tsz.off+fs/2" :font-size='fs' data-testid="lbl-X") {{n.tm}}
   polyline.plot(v-bind:points='pointsAsPolyline')
   g.leftThumb( :transform="'translate('+thumbs.left.x+','+thumbs.left.y+') scale('+p.scl+')'" @mouseenter="if(!slider.draggingCenter) slider.leftDrug= true;" @mouseup="slider.stopDrag" @mouseleave="slider.stopThumb")
-    polyline(points="10,40 0,30 0,10 10,0 31,0 31,40 " )
-  line.wline(:x1="wline.left.x1" :x2="wline.left.x2" :y1="wline.left.y1" :y2="wline.left.y2" :stroke-width='wline.left.sSize' @click="slider.wlineLeftClick")
+    polyline(points="10,40 0,30 0,10 10,0 31,0 31,40 " data-testid="leftThumb")
+  line.wline(:x1="wline.left.x1" :x2="wline.left.x2" :y1="wline.left.y1" :y2="wline.left.y2" :stroke-width='wline.left.sSize' @click="slider.wlineLeftClick" data-testid="wline")
   rect.mbody(@mouseup="slider.stopDrag" :x="wline.middle.x" :y="wline.middle.y" :width="wline.middle.w" :height="wline.middle.h" @mousedown="slider.draggingCenter=true;slider.startDrag($event);")
-  g.rightThumb(@mouseup="slider.stopDrag" :transform="'translate('+thumbs.right.x+','+thumbs.right.y+')scale('+p.scl+')'" @mouseenter="if(!slider.draggingCenter) slider.rightDrug = true;" @mouseleave="slider.stopThumb")
+  g.rightThumb(@mouseup="slider.stopDrag" :transform="'translate('+thumbs.right.x+','+thumbs.right.y+')scale('+p.scl+')'" @mouseenter="if(!slider.draggingCenter) slider.rightDrug = true;" @mouseleave="slider.stopThumb" data-testid="rightThumb")
     polyline(points="0,0 0,40 21,40 30,30 30,10 21,0 " )
   line.wline(:x1="wline.right.x1" :x2="wline.right.x2" :y1="wline.right.y1" :y2="wline.right.y2" :stroke-width='wline.right.sSize' @click="slider.wlineRightClick" )
 </template>
