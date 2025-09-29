@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 20
       - run: npm ci
-      - run: npx playwright install 
+      - run: npx playwright install-deps --dry-run 
       - run: npm test
       - run: npm run build
       - run: ls
